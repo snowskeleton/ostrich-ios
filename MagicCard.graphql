@@ -1,0 +1,121 @@
+query magicCard($id: String!) {
+  magicCard(id: $id) {
+    id
+    colors
+    convertedManaCost
+    faces {
+      artistCredit
+      colors
+      convertedManaCost
+      flavorText
+      thumbnailImageUrl
+      fullImageUrl
+      manaCost
+      name
+      oracleText
+      power
+      toughness
+      types
+      subtypes
+      supertypes
+    }
+    isMultiFace
+    legalities {
+      cardId
+      format {
+        id
+        name
+        blurb
+      }
+      legalStatus
+    }
+    loyalty
+    manaCost
+    name
+    oracleText
+    power
+    printings {
+      id
+      artistCredit
+      collectorNumber
+      colors
+      convertedManaCost
+      manaCost
+      name
+      power
+      toughness
+      rarity
+      thumbnailImageUrl
+      fullImageUrl
+      printedText
+      printedFlavorText
+      set {
+        id
+        name
+        abbreviation
+        releaseDate
+      }
+      legalities {
+        cardId
+        format {
+          id
+          name
+          blurb
+        }
+        legalStatus
+      }
+      watermark
+      supertypes
+      types
+      subtypes
+      languageCode
+    }
+    latestPrinting {
+      id
+      artistCredit
+      collectorNumber
+      colors
+      convertedManaCost
+      manaCost
+      name
+      power
+      toughness
+      rarity
+      thumbnailImageUrl
+      fullImageUrl
+      printedText
+      printedFlavorText
+      set {
+        id
+        name
+        abbreviation
+        releaseDate
+      }
+      legalities {
+        cardId
+        format {
+          id
+          name
+          blurb
+        }
+        legalStatus
+      }
+      watermark
+      supertypes
+      types
+      subtypes
+      languageCode
+    }
+    rulings {
+      id
+      magicCardId
+      publicationDate
+      text
+    }
+    subtypes
+    supertypes
+    toughness
+    types
+  }
+}
+

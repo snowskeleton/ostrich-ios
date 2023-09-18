@@ -1,0 +1,3 @@
+mutation joinEventWithShortCode($shortCode: String!) {
+    joinEventWithShortCode(shortCode: $shortCode)
+}

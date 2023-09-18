@@ -1,0 +1,439 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		803AECF02AA26B2200CF03EB /* Betrayer_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECEF2AA26B2200CF03EB /* Betrayer_AppApp.swift */; };
+		803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECF12AA26B2200CF03EB /* ContentView.swift */; };
+		803AECF42AA26B2300CF03EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803AECF32AA26B2300CF03EB /* Assets.xcassets */; };
+		803AECF72AA26B2300CF03EB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803AECF62AA26B2300CF03EB /* Preview Assets.xcassets */; };
+		803AECF92AA26B2300CF03EB /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECF82AA26B2300CF03EB /* Persistence.swift */; };
+		803AECFC2AA26B2300CF03EB /* Betrayer_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 803AECFA2AA26B2300CF03EB /* Betrayer_App.xcdatamodeld */; };
+		8046EA492AA64E8B00578539 /* Network Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA482AA64E8B00578539 /* Network Manager.swift */; };
+		8046EA4B2AA6A60500578539 /* ResponseTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA4A2AA6A60500578539 /* ResponseTypes.swift */; };
+		80A1C0A02AA7C83400B4FDB8 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 80A1C09F2AA7C83400B4FDB8 /* schema.json */; };
+		80A1C0A42AA7C84800B4FDB8 /* gamestateschema.json in Resources */ = {isa = PBXBuildFile; fileRef = 80A1C0A22AA7C84800B4FDB8 /* gamestateschema.json */; };
+		80B8E1192AAA319A00845ECC /* apollo-codegen-config.json in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E1182AAA319A00845ECC /* apollo-codegen-config.json */; };
+		80B8E1202AAA31BB00845ECC /* MagicCard.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E11A2AAA31BB00845ECC /* MagicCard.graphql */; };
+		80B8E1212AAA31BB00845ECC /* MagicCardPrintings.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E11B2AAA31BB00845ECC /* MagicCardPrintings.graphql */; };
+		80B8E1232AAA31BB00845ECC /* MagicCards.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E11D2AAA31BB00845ECC /* MagicCards.graphql */; };
+		80B8E1242AAA31BB00845ECC /* MagicCardSets.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E11E2AAA31BB00845ECC /* MagicCardSets.graphql */; };
+		80B8E1252AAA31BB00845ECC /* MagicCardOracleSubTypes.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E11F2AAA31BB00845ECC /* MagicCardOracleSubTypes.graphql */; };
+		80B8E1272AAA31F500845ECC /* GameState.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E1262AAA31F500845ECC /* GameState.graphql */; };
+		80B8E12C2AB665F500845ECC /* hsnm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E12B2AB665F500845ECC /* hsnm.swift */; };
+		80B8E1302AB66E3300845ECC /* joinEventWithShortCode.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E12F2AB66E3300845ECC /* joinEventWithShortCode.query */; };
+		80B8E1312AB6AC1A00845ECC /* myActiveEvents.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E12D2AB6680E00845ECC /* myActiveEvents.query */; };
+		80B8E1332AB7D47300845ECC /* ErrorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1322AB7D47300845ECC /* ErrorTypes.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		803AECEC2AA26B2200CF03EB /* Betrayer App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Betrayer App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		803AECEF2AA26B2200CF03EB /* Betrayer_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Betrayer_AppApp.swift; sourceTree = "<group>"; };
+		803AECF12AA26B2200CF03EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		803AECF32AA26B2300CF03EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		803AECF62AA26B2300CF03EB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		803AECF82AA26B2300CF03EB /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		803AECFB2AA26B2300CF03EB /* Betrayer_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Betrayer_App.xcdatamodel; sourceTree = "<group>"; };
+		8046EA482AA64E8B00578539 /* Network Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network Manager.swift"; sourceTree = "<group>"; };
+		8046EA4A2AA6A60500578539 /* ResponseTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseTypes.swift; sourceTree = "<group>"; };
+		80A1C09F2AA7C83400B4FDB8 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		80A1C0A22AA7C84800B4FDB8 /* gamestateschema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gamestateschema.json; sourceTree = "<group>"; };
+		80B8E1182AAA319A00845ECC /* apollo-codegen-config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "apollo-codegen-config.json"; sourceTree = "<group>"; };
+		80B8E11A2AAA31BB00845ECC /* MagicCard.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MagicCard.graphql; sourceTree = "<group>"; };
+		80B8E11B2AAA31BB00845ECC /* MagicCardPrintings.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MagicCardPrintings.graphql; sourceTree = "<group>"; };
+		80B8E11C2AAA31BB00845ECC /* GameState.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GameState.graphql; path = ../../../../../../Applications/Companion.app/Wrapper/HTO.app/GameState.graphql; sourceTree = "<group>"; };
+		80B8E11D2AAA31BB00845ECC /* MagicCards.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MagicCards.graphql; sourceTree = "<group>"; };
+		80B8E11E2AAA31BB00845ECC /* MagicCardSets.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MagicCardSets.graphql; sourceTree = "<group>"; };
+		80B8E11F2AAA31BB00845ECC /* MagicCardOracleSubTypes.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MagicCardOracleSubTypes.graphql; sourceTree = "<group>"; };
+		80B8E1262AAA31F500845ECC /* GameState.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GameState.graphql; sourceTree = "<group>"; };
+		80B8E12B2AB665F500845ECC /* hsnm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hsnm.swift; sourceTree = "<group>"; };
+		80B8E12D2AB6680E00845ECC /* myActiveEvents.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = myActiveEvents.query; sourceTree = "<group>"; };
+		80B8E12F2AB66E3300845ECC /* joinEventWithShortCode.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = joinEventWithShortCode.query; sourceTree = "<group>"; };
+		80B8E1322AB7D47300845ECC /* ErrorTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTypes.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		803AECE92AA26B2200CF03EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		803AECE32AA26B2200CF03EB = {
+			isa = PBXGroup;
+			children = (
+				80B8E12A2AB665B400845ECC /* queries */,
+				80B8E1262AAA31F500845ECC /* GameState.graphql */,
+				80B8E11A2AAA31BB00845ECC /* MagicCard.graphql */,
+				80B8E11F2AAA31BB00845ECC /* MagicCardOracleSubTypes.graphql */,
+				80B8E11B2AAA31BB00845ECC /* MagicCardPrintings.graphql */,
+				80B8E11D2AAA31BB00845ECC /* MagicCards.graphql */,
+				80B8E11E2AAA31BB00845ECC /* MagicCardSets.graphql */,
+				80B8E1182AAA319A00845ECC /* apollo-codegen-config.json */,
+				80A1C0A22AA7C84800B4FDB8 /* gamestateschema.json */,
+				80A1C09F2AA7C83400B4FDB8 /* schema.json */,
+				803AECEE2AA26B2200CF03EB /* Betrayer App */,
+				803AECED2AA26B2200CF03EB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		803AECED2AA26B2200CF03EB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				803AECEC2AA26B2200CF03EB /* Betrayer App.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		803AECEE2AA26B2200CF03EB /* Betrayer App */ = {
+			isa = PBXGroup;
+			children = (
+				803AECEF2AA26B2200CF03EB /* Betrayer_AppApp.swift */,
+				803AECF12AA26B2200CF03EB /* ContentView.swift */,
+				803AECF32AA26B2300CF03EB /* Assets.xcassets */,
+				803AECF82AA26B2300CF03EB /* Persistence.swift */,
+				80B8E11C2AAA31BB00845ECC /* GameState.graphql */,
+				803AECFA2AA26B2300CF03EB /* Betrayer_App.xcdatamodeld */,
+				803AECF52AA26B2300CF03EB /* Preview Content */,
+				8046EA482AA64E8B00578539 /* Network Manager.swift */,
+				80B8E12B2AB665F500845ECC /* hsnm.swift */,
+				8046EA4A2AA6A60500578539 /* ResponseTypes.swift */,
+				80B8E1322AB7D47300845ECC /* ErrorTypes.swift */,
+			);
+			path = "Betrayer App";
+			sourceTree = "<group>";
+		};
+		803AECF52AA26B2300CF03EB /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				803AECF62AA26B2300CF03EB /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		80B8E12A2AB665B400845ECC /* queries */ = {
+			isa = PBXGroup;
+			children = (
+				80B8E12D2AB6680E00845ECC /* myActiveEvents.query */,
+				80B8E12F2AB66E3300845ECC /* joinEventWithShortCode.query */,
+			);
+			path = queries;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		803AECEB2AA26B2200CF03EB /* Betrayer App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 803AECFF2AA26B2300CF03EB /* Build configuration list for PBXNativeTarget "Betrayer App" */;
+			buildPhases = (
+				803AECE82AA26B2200CF03EB /* Sources */,
+				803AECE92AA26B2200CF03EB /* Frameworks */,
+				803AECEA2AA26B2200CF03EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Betrayer App";
+			packageProductDependencies = (
+			);
+			productName = "Betrayer App";
+			productReference = 803AECEC2AA26B2200CF03EB /* Betrayer App.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		803AECE42AA26B2200CF03EB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					803AECEB2AA26B2200CF03EB = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 803AECE72AA26B2200CF03EB /* Build configuration list for PBXProject "Betrayer App" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 803AECE32AA26B2200CF03EB;
+			packageReferences = (
+			);
+			productRefGroup = 803AECED2AA26B2200CF03EB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				803AECEB2AA26B2200CF03EB /* Betrayer App */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		803AECEA2AA26B2200CF03EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80B8E1312AB6AC1A00845ECC /* myActiveEvents.query in Resources */,
+				80B8E1252AAA31BB00845ECC /* MagicCardOracleSubTypes.graphql in Resources */,
+				80B8E1212AAA31BB00845ECC /* MagicCardPrintings.graphql in Resources */,
+				80B8E1192AAA319A00845ECC /* apollo-codegen-config.json in Resources */,
+				803AECF72AA26B2300CF03EB /* Preview Assets.xcassets in Resources */,
+				80B8E1272AAA31F500845ECC /* GameState.graphql in Resources */,
+				80B8E1302AB66E3300845ECC /* joinEventWithShortCode.query in Resources */,
+				80B8E1232AAA31BB00845ECC /* MagicCards.graphql in Resources */,
+				80A1C0A02AA7C83400B4FDB8 /* schema.json in Resources */,
+				80B8E1202AAA31BB00845ECC /* MagicCard.graphql in Resources */,
+				80B8E1242AAA31BB00845ECC /* MagicCardSets.graphql in Resources */,
+				80A1C0A42AA7C84800B4FDB8 /* gamestateschema.json in Resources */,
+				803AECF42AA26B2300CF03EB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		803AECE82AA26B2200CF03EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				803AECF92AA26B2300CF03EB /* Persistence.swift in Sources */,
+				8046EA492AA64E8B00578539 /* Network Manager.swift in Sources */,
+				80B8E1332AB7D47300845ECC /* ErrorTypes.swift in Sources */,
+				80B8E12C2AB665F500845ECC /* hsnm.swift in Sources */,
+				803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */,
+				803AECF02AA26B2200CF03EB /* Betrayer_AppApp.swift in Sources */,
+				8046EA4B2AA6A60500578539 /* ResponseTypes.swift in Sources */,
+				803AECFC2AA26B2300CF03EB /* Betrayer_App.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		803AECFD2AA26B2300CF03EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		803AECFE2AA26B2300CF03EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		803AED002AA26B2300CF03EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Betrayer App/Preview Content\"";
+				DEVELOPMENT_TEAM = PK7HCG46US;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.snowskeleton.Betrayer-App";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		803AED012AA26B2300CF03EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Betrayer App/Preview Content\"";
+				DEVELOPMENT_TEAM = PK7HCG46US;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.snowskeleton.Betrayer-App";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		803AECE72AA26B2200CF03EB /* Build configuration list for PBXProject "Betrayer App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				803AECFD2AA26B2300CF03EB /* Debug */,
+				803AECFE2AA26B2300CF03EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		803AECFF2AA26B2300CF03EB /* Build configuration list for PBXNativeTarget "Betrayer App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				803AED002AA26B2300CF03EB /* Debug */,
+				803AED012AA26B2300CF03EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		803AECFA2AA26B2300CF03EB /* Betrayer_App.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				803AECFB2AA26B2300CF03EB /* Betrayer_App.xcdatamodel */,
+			);
+			currentVersion = 803AECFB2AA26B2300CF03EB /* Betrayer_App.xcdatamodel */;
+			path = Betrayer_App.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 803AECE42AA26B2200CF03EB /* Project object */;
+}

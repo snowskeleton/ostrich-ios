@@ -1,0 +1,720 @@
+query loadEvent($eventId: ID!) {
+  event(id: $eventId) {
+    ...EventDetails
+    __typename
+  }
+}
+
+query getRegisteredPlayersList($eventId: ID!) {
+  event(id: $eventId) {
+    id
+    registeredPlayers {
+      ...RegistrationDetails
+      __typename
+    }
+  }
+}
+
+query getPlayerStatus($eventId: ID!) {
+  playerStatus(eventId: $eventId)
+}
+
+query getEventStatus($eventId: ID!) {
+  event(id: $eventId) {
+    id
+    status
+  }
+}
+
+query getGameStateV2AtRound($eventId: ID!, $round: Int!) {
+  gameStateV2AtRound(eventId: $eventId, round: $round) {
+    ...GameStateDetailsV2
+    __typename
+  }
+}
+
+mutation startEventV2($startPhaseInput: StartPhaseInputV2!) {
+  startEventV2(input: $startPhaseInput) {
+    ...GameStateDetailsV2
+    __typename
+  }
+}
+
+mutation createNextRoundV2($startPhaseInput: StartPhaseInputV2!) {
+  createNextRoundV2(input: $startPhaseInput) {
+    ...GameStateDetailsV2
+    __typename
+  }
+}
+
+mutation certifyRoundV2($eventId: ID!, $results: [TeamResultInputV2!]!) {
+  certifyRoundV2(eventId: $eventId, results: $results) {
+    ...GameStateDetailsV2
+    __typename
+  }
+}
+
+mutation endEventV2($eventId: ID!) {
+  endEventV2(eventId: $eventId)
+}
+
+mutation dropTeamV2($eventId: ID!, $teamId: ID!) {
+  dropTeamV2(eventId: $eventId, teamId: $teamId)
+}
+
+mutation dropTeamsV2($eventId: ID!, $teamId: [ID!]!) {
+  dropTeamsV2(eventId: $eventId, teamIds: $teamId)
+}
+
+mutation recordMatchResultV2($eventId: ID!, $results: [TeamResultInputV2!]!) {
+  recordMatchResultV2(eventId: $eventId, results: $results)
+}
+
+mutation endEvent($eventId: ID!) {
+  endEvent(id: $eventId) {
+    ...EventDetails
+    __typename
+  }
+}
+
+mutation certifyRound($input: [MatchResultInput!]!) {
+  certifyRound(input: $input) {
+    event {
+      ...EventDetails
+      __typename
+    }
+  }
+}
+
+mutation submitMatch($input: MatchResultInput!) {
+  recordMatchResult(input: $input) {
+    ...GameStateMinDataDetails
+    __typename
+  }
+}
+
+mutation registerAnonymousPlayer(
+  $eventId: ID!
+  $firstName: String!
+  $lastName: String!
+) {
+  registerGuestPlayer(
+    eventId: $eventId
+    firstName: $firstName
+    lastName: $lastName
+  ) {
+    ...RegisterPlayer
+    __typename
+  }
+}
+
+mutation registerInterestedPlayer($eventId: ID!, $personaId: ID!) {
+  registerInterestedPlayer(eventId: $eventId, personaId: $personaId) {
+    ...RegisterPlayer
+    __typename
+  }
+}
+
+mutation unRegisterPlayer($eventId: ID!, $registrationId: ID!) {
+  removeRegisteredPlayer(eventId: $eventId, id: $registrationId) {
+    id
+  }
+}
+
+mutation startNextRound($eventId: ID!, $timerId: ID) {
+  createNextRound(id: $eventId, timerID: $timerId) {
+    id
+  }
+}
+
+subscription timerUpdated($id: ID!) {
+  timerUpdated(id: $id) {
+    ...TimerDetails
+    __typename
+  }
+}
+
+query getTimer($id: ID!) {
+  timer(id: $id) {
+    ...TimerDetails
+    __typename
+  }
+}
+
+query getEventFormats {
+  eventFormats {
+    ...EventFormatDetails
+    __typename
+  }
+}
+
+mutation dropTeams($eventId: ID!, $teamIds: [ID!]!) {
+  dropTeams(eventId: $eventId, teamIds: $teamIds) {
+    id
+  }
+}
+
+mutation dropSelf($eventId: ID!) {
+  dropSelf(eventId: $eventId) {
+    id
+  }
+}
+
+query myActiveEvents {
+  myActiveEvents {
+    ...EventDetailsMyActive
+    __typename
+  }
+}
+
+mutation createPrivateEvent($input: CreatePrivateEventInput!) {
+  createPrivateEvent(input: $input) {
+    id
+  }
+}
+
+mutation startPrivateEvent($input: StartEventInput!) {
+  startEvent(input: $input) {
+    ...EventDetailsNoTeamsData
+    __typename
+  }
+}
+
+subscription playerRegistered($eventId: ID!) {
+  playerRegistered(eventId: $eventId) {
+    eventId
+    addedPlayer {
+      ...RegistrationDetails
+      __typename
+    }
+  }
+}
+
+subscription gameResultReported($eventId: ID!) {
+  gameResultReported(eventId: $eventId) {
+    eventId
+    sender {
+      ...UserDetails
+      __typename
+    }
+  }
+}
+
+mutation joinEventWithShortCode($shortCode: String!) {
+  joinEventWithShortCode(shortCode: $shortCode)
+}
+
+mutation createTeam($eventId: ID!, $players: [TeamPlayerInput]) {
+  createTeam(eventId: $eventId, players: $players) {
+    ...TeamFields
+    __typename
+  }
+}
+
+mutation joinTeam(
+  $eventId: ID!
+  $teamCode: String!
+  $teamPlayer: TeamPlayerInput!
+) {
+  addTeamMember(
+    eventId: $eventId
+    teamCode: $teamCode
+    teamPlayer: $teamPlayer
+  ) {
+    ...TeamFields
+    __typename
+  }
+}
+
+mutation getTeamByCode($eventID: ID!, $teamCode: String!) {
+  getTeamByCode(eventId: $eventID, teamCode: $teamCode) {
+    ...TeamFields
+    __typename
+  }
+}
+
+mutation removeTeamMember(
+  $eventId: ID!
+  $teamCode: String!
+  $teamPlayer: TeamPlayerInput!
+) {
+  removeTeamMember(
+    eventId: $eventId
+    teamCode: $teamCode
+    teamPlayer: $teamPlayer
+  ) {
+    ...TeamFields
+    __typename
+  }
+}
+
+mutation lockTeam($eventId: ID!, $teamCode: String!) {
+  lockTeam(eventId: $eventId, teamCode: $teamCode) {
+    ...TeamFields
+    __typename
+  }
+}
+
+mutation unlockTeam($eventId: ID!, $teamCode: String!) {
+  unlockTeam(eventId: $eventId, teamCode: $teamCode) {
+    ...TeamFields
+    __typename
+  }
+}
+
+mutation deleteTeam($eventId: ID!, $teamCode: String!) {
+  deleteTeam(eventId: $eventId, teamCode: $teamCode)
+}
+
+fragment GameStateDetailsV2 on GameStateV2 {
+  eventId
+  minRounds
+  draft {
+    ...DraftPod
+    __typename
+  }
+  top8Draft {
+    ...DraftPod
+    __typename
+  }
+  deckConstruction {
+    ...DeckConstructionDetails
+    __typename
+  }
+  currentRoundNumber
+  rounds {
+    ...RoundDetailsV2
+    __typename
+  }
+  teams {
+    ...TeamDetailsV2
+    __typename
+  }
+  drops {
+    ...DropDetailsV2
+    __typename
+  }
+  podPairingType
+  gamesToWin
+}
+
+fragment DropDetailsV2 on DropV2 {
+  teamId
+  roundNumber
+}
+
+fragment TeamDetailsV2 on TeamV2 {
+  teamId
+  teamName
+  players {
+    ...UserDetails
+    __typename
+  }
+}
+
+fragment RoundDetailsV2 on RoundV2 {
+  roundId
+  roundNumber
+  isFinalRound
+  isPlayoff
+  isCertified
+  matches {
+    ...MatchesDetailsV2
+    __typename
+  }
+  pairingStrategy
+  canRollback
+  timerId
+  standings {
+    ...TeamStandingsDetailsV2
+    __typename
+  }
+}
+
+fragment TeamStandingsDetailsV2 on TeamStandingV2 {
+  teamId
+  rank
+  wins
+  losses
+  draws
+  matchPoints
+  gameWinPercent
+  opponentGameWinPercent
+  opponentMatchWinPercent
+}
+
+fragment MatchesDetailsV2 on MatchV2 {
+  matchId
+  isBye
+  teamIds
+  results {
+    ...TeamResultDetailsV2
+    __typename
+  }
+  tableNumber
+}
+
+fragment TeamResultDetailsV2 on TeamResultV2 {
+  matchId
+  submitter
+  isBye
+  wins
+  losses
+  draws
+  teamId
+}
+
+fragment DraftPod on DraftV2 {
+  pods {
+    ...PodDetailsV2
+    __typename
+  }
+  timerId
+}
+
+fragment DeckConstructionDetails on DeckConstructionV2 {
+  timerId
+  seats {
+    ...SeatDetailsV2
+    __typename
+  }
+}
+
+fragment PodDetailsV2 on PodV2 {
+  podNumber
+  seats {
+    ...SeatDetailsV2
+    __typename
+  }
+}
+
+fragment SeatDetailsV2 on SeatV2 {
+  seatNumber
+  teamId
+}
+
+fragment TeamFields on TeamPayload {
+  id
+  eventId
+  teamCode
+  isLocked
+  isRegistered
+  registrations {
+    ...RegistrationDetails
+    __typename
+  }
+  reservations {
+    ...ReservationDetails
+    __typename
+  }
+}
+
+fragment TimerDetails on Timer {
+  id
+  state
+  durationMs
+  durationStartTime
+  serverTime
+}
+
+fragment EventFormatDetails on EventFormat {
+  id
+  name
+  includesDraft
+  includesDeckbuilding
+}
+
+fragment RegistrationDetails on Registration {
+  id
+  status
+  personaId
+  displayName
+  firstName
+  lastName
+}
+
+fragment ReservationDetails on Registration {
+  personaId
+  displayName
+  firstName
+  lastName
+}
+
+fragment SeatDetails on Seat {
+  number
+  personaId
+  displayName
+  firstName
+  lastName
+  team {
+    ...TeamDetails
+    __typename
+  }
+}
+
+fragment ResultDetails on TeamResult {
+  draws
+  isPlayoffResult
+  submitter
+  isFinal
+  isTO
+  isBye
+  wins
+  losses
+  teamId
+}
+
+fragment UserDetails on User {
+  personaId
+  displayName
+  firstName
+  lastName
+}
+
+fragment TeamDetails on Team {
+  id
+  name
+  players {
+    ...UserDetails
+    __typename
+  }
+  results {
+    ...ResultDetails
+    __typename
+  }
+}
+
+fragment MatchDetails on Match {
+  id
+  isBye
+  teams {
+    ...TeamDetails
+    __typename
+  }
+  leftTeamWins
+  rightTeamWins
+  tableNumber
+}
+
+fragment RoundDetails on Round {
+  id
+  number
+  isFinalRound
+  isCertified
+  matches {
+    ...MatchDetails
+    __typename
+  }
+  canRollback
+  timerID
+}
+
+fragment StandingsDetails on TeamStanding {
+  team {
+    ...TeamDetails
+    __typename
+  }
+  rank
+  wins
+  losses
+  draws
+  byes
+  matchPoints
+  gameWinPercent
+  opponentGameWinPercent
+  opponentMatchWinPercent
+}
+
+fragment DropDetails on Drop {
+  teamId
+  roundNumber
+}
+
+fragment PodDetails on Pod {
+  number
+  seats {
+    ...SeatDetails
+    __typename
+  }
+}
+
+fragment GameStateMinDataDetails on GameState {
+  id
+}
+
+fragment GameStateDetails on GameState {
+  id
+  minRounds
+  pods {
+    ...PodDetails
+    __typename
+  }
+  top8Pods {
+    ...PodDetails
+    __typename
+  }
+  constructedSeats {
+    ...SeatDetails
+    __typename
+  }
+  currentRoundNumber
+  currentRound {
+    ...RoundDetails
+    __typename
+  }
+  rounds {
+    ...RoundDetails
+    __typename
+  }
+  standings {
+    ...StandingsDetails
+    __typename
+  }
+  drops {
+    ...DropDetails
+    __typename
+  }
+  draftTimerID
+  constructDraftTimerID
+  top8DraftTimerID
+  gamesToWin
+}
+
+fragment RegisterPlayer on Event {
+  id
+  registeredPlayers {
+    ...RegistrationDetails
+    __typename
+  }
+}
+
+fragment EventDetails on Event {
+  id
+  title
+  pairingType
+  status
+  shortCode
+  isOnline
+  createdBy
+  requiredTeamSize
+  eventFormat {
+    ...EventFormatDetails
+    __typename
+  }
+  registeredPlayers {
+    ...RegistrationDetails
+    __typename
+  }
+  gameStateAtRound(round: 0) {
+    ...GameStateDetails
+    __typename
+  }
+  teams {
+    ...TeamFields
+    __typename
+  }
+}
+
+fragment EventV2 on Event {
+  id
+  title
+  pairingType
+  status
+  shortCode
+  isOnline
+  createdBy
+  requiredTeamSize
+  eventFormat {
+    ...EventFormatDetails
+    __typename
+  }
+  teams {
+    ...TeamFields
+    __typename
+  }
+}
+
+fragment EventDetailsNoTeamsData on Event {
+  eventFormat {
+    ...EventFormatDetails
+    __typename
+  }
+  gameStateAtRound(round: 0) {
+    ...GameStateDetails
+    __typename
+  }
+}
+
+fragment EventDetailsMyActive on Event {
+  id
+  shortCode
+  createdBy
+  title
+  eventFormat {
+    ...EventFormatDetails
+    __typename
+  }
+  scheduledStartTime
+  actualStartTime
+}
+
+query searchEvents($searchEvents: EventSearchQuery!) {
+  searchEvents(query: $searchEvents) {
+    pageInfo {
+      page
+      pageSize
+      totalResults
+    }
+    hasMoreResults
+    events {
+      id
+      organization {
+        ...OrganizationDetails
+        __typename
+      }
+      title
+      entryFee {
+        amount
+        currency
+      }
+      scheduledStartTime
+      actualStartTime
+      estimatedEndTime
+      actualEndTime
+      status
+      capacity
+      numberOfPlayers
+      tags
+      description
+      latitude
+      longitude
+      address
+    }
+  }
+}
+
+query storeByLocation($location: StoreByLocationInput!) {
+  storesByLocation(input: $location) {
+    pageInfo {
+      pageSize
+      page
+      totalResults
+    }
+    hasMoreResults
+    stores {
+      ...OrganizationDetails
+      __typename
+    }
+  }
+}
+
+fragment OrganizationDetails on Organization {
+  id
+  name
+  latitude
+  longitude
+  phoneNumber
+  isPremium
+  postalAddress
+  website
+}
