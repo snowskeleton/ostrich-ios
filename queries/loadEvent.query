@@ -1,0 +1,208 @@
+  query loadEvent($eventId: ID!) {
+  event(id: $eventId) {
+    __typename
+    ...EventDetails
+  }
+}
+fragment EventDetails on Event {
+  __typename
+  id
+  title
+  pairingType
+  status
+  shortCode
+  isOnline
+  createdBy
+  requiredTeamSize
+  eventFormat {
+    __typename
+    ...EventFormatDetails
+  }
+  registeredPlayers {
+    __typename
+    ...RegistrationDetails
+  }
+  gameStateAtRound(round: 0) {
+    __typename
+    ...GameStateDetails
+  }
+  teams {
+    __typename
+    ...TeamFields
+  }
+}
+fragment EventFormatDetails on EventFormat {
+  __typename
+  id
+  name
+  includesDraft
+  includesDeckbuilding
+}
+fragment RegistrationDetails on Registration {
+  __typename
+  id
+  status
+  personaId
+  displayName
+  firstName
+  lastName
+}
+fragment GameStateDetails on GameState {
+  __typename
+  id
+  minRounds
+  pods {
+    __typename
+    ...PodDetails
+  }
+  top8Pods {
+    __typename
+    ...PodDetails
+  }
+  constructedSeats {
+    __typename
+    ...SeatDetails
+  }
+  currentRoundNumber
+  currentRound {
+    __typename
+    ...RoundDetails
+  }
+  rounds {
+    __typename
+    ...RoundDetails
+  }
+  standings {
+    __typename
+    ...StandingsDetails
+  }
+  drops {
+    __typename
+    ...DropDetails
+  }
+  draftTimerID
+  constructDraftTimerID
+  top8DraftTimerID
+  gamesToWin
+}
+fragment PodDetails on Pod {
+  __typename
+  number
+  seats {
+    __typename
+    ...SeatDetails
+  }
+}
+fragment SeatDetails on Seat {
+  __typename
+  number
+  personaId
+  displayName
+  firstName
+  lastName
+  team {
+    __typename
+    ...TeamDetails
+  }
+}
+fragment TeamDetails on Team {
+  __typename
+  id
+  name
+  players {
+    __typename
+    ...UserDetails
+  }
+  results {
+    __typename
+    ...ResultDetails
+  }
+}
+fragment UserDetails on User {
+  __typename
+  personaId
+  displayName
+  firstName
+  lastName
+}
+fragment ResultDetails on TeamResult {
+  __typename
+  draws
+  isPlayoffResult
+  submitter
+  isFinal
+  isTO
+  isBye
+  wins
+  losses
+  teamId
+}
+fragment RoundDetails on Round {
+  __typename
+  id
+  number
+  isFinalRound
+  isCertified
+  matches {
+    __typename
+    ...MatchDetails
+  }
+  canRollback
+  timerID
+}
+fragment MatchDetails on Match {
+  __typename
+  id
+  isBye
+  teams {
+    __typename
+    ...TeamDetails
+  }
+  leftTeamWins
+  rightTeamWins
+  tableNumber
+}
+fragment StandingsDetails on TeamStanding {
+  __typename
+  team {
+    __typename
+    ...TeamDetails
+  }
+  rank
+  wins
+  losses
+  draws
+  byes
+  matchPoints
+  gameWinPercent
+  opponentGameWinPercent
+  opponentMatchWinPercent
+}
+fragment DropDetails on Drop {
+  __typename
+  teamId
+  roundNumber
+}
+fragment TeamFields on TeamPayload {
+  __typename
+  id
+  eventId
+  teamCode
+  isLocked
+  isRegistered
+  registrations {
+    __typename
+    ...RegistrationDetails
+  }
+  reservations {
+    __typename
+    ...ReservationDetails
+  }
+}
+fragment ReservationDetails on Registration {
+  __typename
+  personaId
+  displayName
+  firstName
+  lastName
+}

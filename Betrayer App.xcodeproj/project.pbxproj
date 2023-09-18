@@ -28,6 +28,9 @@
 		80B8E1302AB66E3300845ECC /* joinEventWithShortCode.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E12F2AB66E3300845ECC /* joinEventWithShortCode.query */; };
 		80B8E1312AB6AC1A00845ECC /* myActiveEvents.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E12D2AB6680E00845ECC /* myActiveEvents.query */; };
 		80B8E1332AB7D47300845ECC /* ErrorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1322AB7D47300845ECC /* ErrorTypes.swift */; };
+		80B8E1352AB7EA1500845ECC /* loadEvent.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E1342AB7EA1500845ECC /* loadEvent.query */; };
+		80B8E1372AB7EF0700845ECC /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1362AB7EF0700845ECC /* EventView.swift */; };
+		80B8E1392AB7F34900845ECC /* EventTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1382AB7F34900845ECC /* EventTypes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +57,9 @@
 		80B8E12D2AB6680E00845ECC /* myActiveEvents.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = myActiveEvents.query; sourceTree = "<group>"; };
 		80B8E12F2AB66E3300845ECC /* joinEventWithShortCode.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = joinEventWithShortCode.query; sourceTree = "<group>"; };
 		80B8E1322AB7D47300845ECC /* ErrorTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTypes.swift; sourceTree = "<group>"; };
+		80B8E1342AB7EA1500845ECC /* loadEvent.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = loadEvent.query; sourceTree = "<group>"; };
+		80B8E1362AB7EF0700845ECC /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
+		80B8E1382AB7F34900845ECC /* EventTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +112,9 @@
 				8046EA482AA64E8B00578539 /* Network Manager.swift */,
 				80B8E12B2AB665F500845ECC /* hsnm.swift */,
 				8046EA4A2AA6A60500578539 /* ResponseTypes.swift */,
+				80B8E1382AB7F34900845ECC /* EventTypes.swift */,
 				80B8E1322AB7D47300845ECC /* ErrorTypes.swift */,
+				80B8E1362AB7EF0700845ECC /* EventView.swift */,
 			);
 			path = "Betrayer App";
 			sourceTree = "<group>";
@@ -124,6 +132,7 @@
 			children = (
 				80B8E12D2AB6680E00845ECC /* myActiveEvents.query */,
 				80B8E12F2AB66E3300845ECC /* joinEventWithShortCode.query */,
+				80B8E1342AB7EA1500845ECC /* loadEvent.query */,
 			);
 			path = queries;
 			sourceTree = "<group>";
@@ -190,13 +199,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80B8E1302AB66E3300845ECC /* joinEventWithShortCode.query in Resources */,
 				80B8E1312AB6AC1A00845ECC /* myActiveEvents.query in Resources */,
+				80B8E1352AB7EA1500845ECC /* loadEvent.query in Resources */,
 				80B8E1252AAA31BB00845ECC /* MagicCardOracleSubTypes.graphql in Resources */,
 				80B8E1212AAA31BB00845ECC /* MagicCardPrintings.graphql in Resources */,
 				80B8E1192AAA319A00845ECC /* apollo-codegen-config.json in Resources */,
 				803AECF72AA26B2300CF03EB /* Preview Assets.xcassets in Resources */,
 				80B8E1272AAA31F500845ECC /* GameState.graphql in Resources */,
-				80B8E1302AB66E3300845ECC /* joinEventWithShortCode.query in Resources */,
 				80B8E1232AAA31BB00845ECC /* MagicCards.graphql in Resources */,
 				80A1C0A02AA7C83400B4FDB8 /* schema.json in Resources */,
 				80B8E1202AAA31BB00845ECC /* MagicCard.graphql in Resources */,
@@ -216,8 +226,10 @@
 				803AECF92AA26B2300CF03EB /* Persistence.swift in Sources */,
 				8046EA492AA64E8B00578539 /* Network Manager.swift in Sources */,
 				80B8E1332AB7D47300845ECC /* ErrorTypes.swift in Sources */,
+				80B8E1372AB7EF0700845ECC /* EventView.swift in Sources */,
 				80B8E12C2AB665F500845ECC /* hsnm.swift in Sources */,
 				803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */,
+				80B8E1392AB7F34900845ECC /* EventTypes.swift in Sources */,
 				803AECF02AA26B2200CF03EB /* Betrayer_AppApp.swift in Sources */,
 				8046EA4B2AA6A60500578539 /* ResponseTypes.swift in Sources */,
 				803AECFC2AA26B2300CF03EB /* Betrayer_App.xcdatamodeld in Sources */,

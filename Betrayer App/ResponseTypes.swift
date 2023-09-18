@@ -27,9 +27,10 @@ extension Query {
 
 
 struct AuthCredentials: Query {
-    let grant_type: String
-    let username: String
-    let password: String
+    var grant_type: String
+    var username: String?
+    var password: String?
+    var refresh_token: String?
     
     struct Response: Codable {
         let access_token: String
@@ -104,6 +105,20 @@ struct Event: Codable, Hashable {
     let scheduledStartTime: String
     let actualStartTime: String?
     let eventFormat: EventFormat
+    
+    let pairingType: String?
+    let status: String?
+    let isOnline: Bool?
+    let requiredTeamSize: Int?
+    let registeredPlayers: [Registration]?
+    let gameStateAtRound: GameState?
+    let rounds: [Round]?
+    let standings: [TeamStanding]?
+    let drops: [String]?
+    let draftTimerID: String?
+    let constructDraftTimerID: String?
+    let top8DraftTimerID: String?
+    let gamesToWin: Int?
 }
 struct EventFormat: Codable, Hashable {
     static func == (lhs: EventFormat, rhs: EventFormat) -> Bool {
@@ -138,3 +153,93 @@ struct joinEventWithShortCodeData: Codable {
         let joinEventWithShortCode: String
 }
 
+struct loadEvent: GraphQLQuery {
+    var operationName: String
+    var query: String
+    var variables: [String: String] = [:]
+    init(eventId: String) {
+        self.operationName = String("\(type(of: self))".split(separator: ".").last!)
+        self.query = try! String(contentsOfFile: Bundle.main.path(forResource: self.operationName, ofType: "query")!)
+        self.variables = [ "eventId": eventId ]
+    }
+    struct Response: Codable { let data: joinEventWithShortCodeData }
+}
+
+struct Registration: Codable {
+    let id: String
+    let status: String
+    let personaId: String
+    let displayName: String
+    let firstName: String
+    let lastName: String
+}
+
+struct GameState: Codable {
+    let id: String
+    let minRounds: Int
+    let pods: String? // Replace with the actual data type if available
+    let top8Pods: String? // Replace with the actual data type if available
+    let constructedSeats: String? // Replace with the actual data type if available
+    let currentRoundNumber: Int
+    let currentRound: Round
+    let canRollback: Bool
+    let timerID: String
+}
+
+struct Round: Codable {
+    let id: String
+    let number: Int
+    let isFinalRound: Bool
+    let isCertified: Bool
+    let matches: [Match]
+    let canRollback: Bool
+    let timerID: String
+}
+
+struct Match: Codable {
+    let id: String
+    let isBye: Bool
+    let teams: [Team]
+    let leftTeamWins: Int
+    let rightTeamWins: Int
+    let tableNumber: Int?
+}
+
+struct Team: Codable {
+    let id: String
+    let name: String
+    let players: [User]
+    let results: [TeamResult]?
+}
+
+struct User: Codable {
+    let personaId: String
+    let displayName: String
+    let firstName: String
+    let lastName: String
+}
+
+struct TeamResult: Codable {
+    let draws: Int
+    let isPlayoffResult: Bool
+    let submitter: String
+    let isFinal: Bool
+    let isTO: Bool
+    let isBye: Bool
+    let wins: Int
+    let losses: Int
+    let teamId: String
+}
+
+struct TeamStanding: Codable {
+    let team: Team
+    let rank: Int
+    let wins: Int
+    let losses: Int
+    let draws: Int
+    let byes: Int
+    let matchPoints: Int
+    let gameWinPercent: Double
+    let opponentGameWinPercent: Double
+    let opponentMatchWinPercent: Double
+}
