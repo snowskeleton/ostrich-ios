@@ -68,7 +68,7 @@ class HTTPClient{
         urlSession.resume()
     }
     func gqlRequest<T: Query>(
-        requestType: T,
+        _ requestType: T,
         httpMethod: HttpMethod = .post,
         completion: @escaping (Result<T.Response, Error>) -> Void
     ) {
@@ -108,13 +108,13 @@ class HTTPClient{
             guard let data = data else { return }
             do {
                 let decodedData = try T.decodeResponse(data)
-                print(decodedData)
+//                print(decodedData)
                 completionOnMain(.success(decodedData))
             } catch {
                 let decodedError = try? JSONDecoder().decode([GraphQLError].self, from: data)
-//                print(NSString(data: data, encoding: NSUTF8StringEncoding)!)
+                print(NSString(data: data, encoding: NSUTF8StringEncoding)!)
 //                debugPrint("Could not translate the data to the requested type. Reason: \(String(describing: error))")
-                debugPrint(decodedError)
+                debugPrint(decodedError as Any)
                 completionOnMain(.failure(error))
             }
         }
@@ -124,8 +124,7 @@ class HTTPClient{
 }
     
 public func joinEvent(with eventCode: String) {
-    HTTPClient.shared.gqlRequest(
-        requestType: joinEventWithShortCode(code: eventCode)
+    HTTPClient.shared.gqlRequest(joinEventWithShortCode(code: eventCode)
     ) { (result: Result<joinEventWithShortCode.Response, Error>) in
         switch result {
         case .success(let response):

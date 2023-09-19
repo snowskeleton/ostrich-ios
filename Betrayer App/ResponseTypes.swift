@@ -7,6 +7,15 @@
 
 import Foundation
 
+//class WrappedStruct<T>: ObservableObject {
+//    @Published var item: T
+//
+//    init(withItem item:T) {
+//        self.item = item
+//    }
+//}
+
+
 protocol Query: Codable {
     /// The format of the response to expect from the GraphQL request
     associatedtype Response: Decodable
@@ -27,7 +36,7 @@ extension Query {
 
 
 struct AuthCredentials: Query {
-    var grant_type: String
+    var grant_type: String?
     var username: String?
     var password: String?
     var refresh_token: String?
@@ -63,13 +72,12 @@ extension GraphQLQuery {
         let finalAnswer = try! String(contentsOfFile: bundle)
         return finalAnswer
     }
-    
 }
 
 
-struct APIResponse<T: Decodable>: Decodable {
-    let data: T
-}
+//struct APIResponse<T: Decodable>: Decodable {
+//    let data: T
+//}
 
 struct myActiveEvents: GraphQLQuery {
     var operationName: String
@@ -84,7 +92,7 @@ struct myActiveEvents: GraphQLQuery {
 struct myActiveEventsData: Codable {
     let myActiveEvents: [Event]
 }
-struct Event: Codable, Hashable {
+struct Event: Codable, Hashable, Identifiable {
     static func == (lhs: Event, rhs: Event) -> Bool {
         return lhs.id == rhs.id
     }
@@ -98,19 +106,19 @@ struct Event: Codable, Hashable {
         hasher.combine(eventFormat)
     }
     
-    let id: String
-    let shortCode: String
-    let createdBy: String
-    let title: String
-    let scheduledStartTime: String
+    let id: String?
+    let shortCode: String?
+    let createdBy: String?
+    let title: String?
+    let scheduledStartTime: String?
     let actualStartTime: String?
-    let eventFormat: EventFormat
+    let eventFormat: EventFormat?
     
     let pairingType: String?
     let status: String?
     let isOnline: Bool?
     let requiredTeamSize: Int?
-    let registeredPlayers: [Registration]?
+    var registeredPlayers: [Registration]? = []
     let gameStateAtRound: GameState?
     let rounds: [Round]?
     let standings: [TeamStanding]?
@@ -153,6 +161,36 @@ struct joinEventWithShortCodeData: Codable {
         let joinEventWithShortCode: String
 }
 
+struct dropSelf: GraphQLQuery {
+    var operationName: String
+    var query: String
+    var variables: [String: String] = [:]
+    init(eventId: String) {
+        self.operationName = String("\(type(of: self))".split(separator: ".").last!)
+        self.query = try! String(contentsOfFile: Bundle.main.path(forResource: self.operationName, ofType: "query")!)
+        self.variables = [ "eventId": eventId ]
+    }
+    struct Response: Codable { let data: dropSelfData }
+}
+struct dropSelfData: Codable {
+    let dropSelf: String
+}
+
+struct dropTeamV2: GraphQLQuery {
+    var operationName: String
+    var query: String
+    var variables: [String: String] = [:]
+    init(eventId: String, teamId: String) {
+        self.operationName = String("\(type(of: self))".split(separator: ".").last!)
+        self.query = try! String(contentsOfFile: Bundle.main.path(forResource: self.operationName, ofType: "query")!)
+        self.variables = [ "eventId": eventId , "teamId": teamId]
+    }
+    struct Response: Codable { let data: dropTeamV2Data }
+}
+struct dropTeamV2Data: Codable {
+    let dropTeam: String
+}
+
 struct loadEvent: GraphQLQuery {
     var operationName: String
     var query: String
@@ -162,10 +200,14 @@ struct loadEvent: GraphQLQuery {
         self.query = try! String(contentsOfFile: Bundle.main.path(forResource: self.operationName, ofType: "query")!)
         self.variables = [ "eventId": eventId ]
     }
-    struct Response: Codable { let data: joinEventWithShortCodeData }
+    struct Response: Codable { let data: loadEventData }
 }
 
-struct Registration: Codable {
+struct loadEventData: Codable {
+    let event: Event
+}
+
+struct Registration: Codable, Hashable {
     let id: String
     let status: String
     let personaId: String
@@ -180,10 +222,10 @@ struct GameState: Codable {
     let pods: String? // Replace with the actual data type if available
     let top8Pods: String? // Replace with the actual data type if available
     let constructedSeats: String? // Replace with the actual data type if available
-    let currentRoundNumber: Int
-    let currentRound: Round
-    let canRollback: Bool
-    let timerID: String
+    let currentRoundNumber: Int?
+    let currentRound: Round?
+    let canRollback: Bool?
+    let timerID: String?
 }
 
 struct Round: Codable {
@@ -192,8 +234,8 @@ struct Round: Codable {
     let isFinalRound: Bool
     let isCertified: Bool
     let matches: [Match]
-    let canRollback: Bool
-    let timerID: String
+    let canRollback: Bool?
+    let timerID: String?
 }
 
 struct Match: Codable {
@@ -207,7 +249,7 @@ struct Match: Codable {
 
 struct Team: Codable {
     let id: String
-    let name: String
+    let name: String?
     let players: [User]
     let results: [TeamResult]?
 }

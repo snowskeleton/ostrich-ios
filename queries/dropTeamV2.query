@@ -1,0 +1,3 @@
+mutation dropTeamV2($eventId: ID!, $teamId: ID!) {
+  dropTeamV2(eventId: $eventId, teamId: $teamId)
+}
