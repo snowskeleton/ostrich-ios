@@ -86,26 +86,21 @@ class HTTPClient{
         request.httpBody = try! JSONEncoder().encode(requestType)
         
         // credentials
-        let defaults = UserDefaults.standard
-        if let savedAuth = defaults.object(forKey: "savedAuth") as? Data {
-            let decoder = JSONDecoder()
-            if let credentials = try? decoder.decode(AuthCredentials.Response.self, from: savedAuth) {
+        if let savedAuth = UserDefaults.standard.object(forKey: "savedAuth") as? Data {
+            if let credentials = try? JSONDecoder().decode(AuthCredentials.Response.self, from: savedAuth) {
                 request.setValue("Bearer \(credentials.access_token)", forHTTPHeaderField: "Authorization")
             }
         } else { return }
         
         let urlSession = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                completionOnMain(.failure(error))
-                return
-            }
-            
-            guard let urlResponse = response as? HTTPURLResponse else { return completionOnMain(.failure(ManagerErrors.invalidResponse)) }
+                return completionOnMain(.failure(error)) }
+            guard let urlResponse = response as? HTTPURLResponse else {
+                return completionOnMain(.failure(ManagerErrors.invalidResponse)) }
             if !(200..<300).contains(urlResponse.statusCode) {
-                return completionOnMain(.failure(ManagerErrors.invalidStatusCode(urlResponse.statusCode)))
-            }
-            
+                return completionOnMain(.failure(ManagerErrors.invalidStatusCode(urlResponse.statusCode))) }
             guard let data = data else { return }
+            
             do {
                 let decodedData = try T.decodeResponse(data)
 //                print(decodedData)
@@ -134,35 +129,3 @@ public func joinEvent(with eventCode: String) {
         }
     }
 }
-
-//public func getEvents() {
-//    HTTPClient.shared.gqlRequest(
-//        requestType: myActiveEvents()
-//    ) { (result: Result<myActiveEvents.Response, Error>) in
-//        switch result {
-//        case .success(let response):
-//            print("We got these events:\n \(response.data.myActiveEvents) \n")
-//        case .failure(let error):
-//            print("The error we got was: \(String(describing: error))")
-//        }
-//    }
-//}
-
-//public func login(with username: String, and password: String) {
-//    HTTPClient.shared.httpRequest(
-//        requestType: AuthCredentials(grant_type: "password", username: username, password: password)
-//    ) { (result: Result<AuthCredentials.Response, Error>) in
-//        switch result {
-//        case .success(let credentials):
-//            print("We got these credentials:\n \(credentials) \n")
-//            let encoder = JSONEncoder()
-//            if let encoded = try? encoder.encode(credentials) {
-//                let defaults = UserDefaults.standard
-//                defaults.set(encoded, forKey: "savedAuth")
-//            }
-//        case .failure(let error):
-//            print("The error we got was: \(String(describing: error))")
-//        }
-//    }
-//}
-
