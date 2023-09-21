@@ -19,7 +19,7 @@ struct ContentView: View {
     @State var events: [Event] = []
     
     init(showJoinEvent: Bool = false,
-         userIsLoggedIn: Bool,
+         userIsLoggedIn: Bool = false,
          showAccountScreen: Bool = false,
          timerIsRunning: Bool = false,
          events: [Event] = []
@@ -35,9 +35,11 @@ struct ContentView: View {
         NavigationView {
             List {
                 Button(action: {
-                    showAccountScreen = true
+                    if let loginExpieryDate = UserDefaults.standard.double(forKey: "access_token_expiry") as? Double {
+                        UserDefaults.standard.set(loginExpieryDate - 900, forKey: "access_token_expiry")
+                    }
                 },label: {
-                    Text("Login")
+                    Text("Expire Login")
                 })
                 Button(action: {
                     HTTPClient.shared.gqlRequest(myActiveEvents()
@@ -72,6 +74,30 @@ struct ContentView: View {
             LoginView()
                 .environment(\.managedObjectContext, viewContext)
         }
+
+        .toolbar {
+            ToolbarItemGroup(placement: .bottomBar) {
+                Button(
+                    action: { showJoinEvent = true },
+                    label:  {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(Color.secondary)
+                    }
+                ).accessibilityLabel(("New Event"))
+            }
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                Button(
+                    action: { showAccountScreen = true },
+                    label:  {
+                        Image(systemName: "person.crop.circle")
+                            .font(.largeTitle)
+                            .foregroundColor(Color.secondary)
+                    }
+                ).accessibilityLabel(("Login/Logout"))
+            }
+        }
+            
         }
         .onAppear {
             refreshMainPage()
@@ -86,37 +112,23 @@ struct ContentView: View {
             }
         })
         .navigationViewStyle(StackNavigationViewStyle())
-        .toolbar {
-            ToolbarItemGroup(placement: .bottomBar) {
-                Button(
-                    action: { showJoinEvent = true },
-                    label:  {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.largeTitle)
-                            .foregroundColor(Color.secondary)
-                    }
-                ).accessibilityLabel(("New Event"))
-            }
-            ToolbarItemGroup(placement: .destructiveAction) {
-                Button(
-                    action: { showAccountScreen = true },
-                    label:  {
-                        Image(systemName: "person.crop.circle")
-                            .font(.largeTitle)
-                            .foregroundColor(Color.secondary)
-                    }
-                ).accessibilityLabel(("Login/Logout"))
-            }
-        }
     }
     fileprivate func refreshMainPage() {
         // refresh authentication
-        if let loginExpieryDate = UserDefaults.standard.double(forKey: "access_token_expiry") as? Double {
-            if let savedAuth = UserDefaults.standard.object(forKey: "savedAuth") as? Data {
-                if let credentials = try? JSONDecoder().decode(AuthCredentials.Response.self, from: savedAuth) {
-                    let currentTimestamp = Date().timeIntervalSince1970
-                    if currentTimestamp > loginExpieryDate - 10.0 { //seconds
-                        login(refreshToken: credentials.refresh_token)
+        Task {
+            if let loginExpieryDate = UserDefaults.standard.double(forKey: "access_token_expiry") as? Double {
+                if let savedAuth = UserDefaults.standard.object(forKey: "savedAuth") as? Data {
+                    if let credentials = try? JSONDecoder().decode(AuthCredentials.Response.self, from: savedAuth) {
+                        let currentTimestamp = Date().timeIntervalSince1970
+                        if currentTimestamp > loginExpieryDate - 10.0 { //seconds
+                            let result = await AuthenticationService().refreshLogin(credentials.refresh_token)
+                            switch result {
+                            case .success(let creds):
+                                pickleAuthentication(creds)
+                            case .failure(let error):
+                                print(error)
+                            }
+                        }
                     }
                 }
             }

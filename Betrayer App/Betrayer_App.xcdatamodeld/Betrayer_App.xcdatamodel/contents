@@ -1,18 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F82" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="LocalEvent" representedClassName="LocalEvent" syncable="YES" codeGenerationType="class">
-        <attribute name="actualStartTime" optional="YES" attributeType="String"/>
-        <attribute name="createdBy" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="scheduledStartTime" optional="YES" attributeType="String"/>
-        <attribute name="shortCode" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="format" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalEventFormat"/>
-    </entity>
-    <entity name="LocalEventFormat" representedClassName="LocalEventFormat" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="includesDeckbuilding" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="includesDraft" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-    </entity>
-</model>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F82" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier=""/>

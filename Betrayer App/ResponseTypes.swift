@@ -34,6 +34,34 @@ extension Query {
     }
 }
 
+struct NewAccount: Query {
+    let displayName: String
+    let dateOfBirth: String
+    let firstName: String
+    let email: String
+    let password: String
+    let country: String
+    let lastName: String
+    var acceptedTC = true
+    var dataShareOptIn = true
+    var emailOptIn = false
+    
+    struct Response: Codable {
+        let accountID: String
+        let email: String
+        let displayName: String
+        let domainID: String
+        let externalID: String
+        let tokens: AuthCredentials.Response
+        let persona: Persona
+    }
+}
+struct Persona: Codable {
+    let personaID: String
+    let accountID: String
+    let gameID: String
+    let domainID: String
+}
 
 struct AuthCredentials: Query {
     var grant_type: String?
@@ -78,6 +106,23 @@ extension GraphQLQuery {
 //struct APIResponse<T: Decodable>: Decodable {
 //    let data: T
 //}
+
+struct loadEvent: GraphQLQuery {
+    var operationName: String
+    var query: String
+    var variables: [String: String] = [:]
+    init(eventId: String) {
+        self.operationName = String("\(type(of: self))".split(separator: ".").last!)
+        self.query = try! String(contentsOfFile: Bundle.main.path(forResource: self.operationName, ofType: "query")!)
+        self.variables = [ "eventId": eventId ]
+    }
+    struct Response: Codable { let data: loadEventData }
+}
+
+struct loadEventData: Codable {
+    let event: Event
+}
+
 
 struct myActiveEvents: GraphQLQuery {
     var operationName: String
@@ -189,22 +234,6 @@ struct dropTeamV2: GraphQLQuery {
 }
 struct dropTeamV2Data: Codable {
     let dropTeam: String
-}
-
-struct loadEvent: GraphQLQuery {
-    var operationName: String
-    var query: String
-    var variables: [String: String] = [:]
-    init(eventId: String) {
-        self.operationName = String("\(type(of: self))".split(separator: ".").last!)
-        self.query = try! String(contentsOfFile: Bundle.main.path(forResource: self.operationName, ofType: "query")!)
-        self.variables = [ "eventId": eventId ]
-    }
-    struct Response: Codable { let data: loadEventData }
-}
-
-struct loadEventData: Codable {
-    let event: Event
 }
 
 struct Registration: Codable, Hashable {
