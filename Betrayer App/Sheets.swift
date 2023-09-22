@@ -24,57 +24,42 @@ struct LoginView: View {
                 Text("Create New Account")
             }
             if showRegistration {
-                DatePicker("Birth Date",
-                           selection: $birthday,
-                           displayedComponents: .date)
+                DatePicker("Birth Date", selection: $birthday, displayedComponents: .date)
                 TextField("Display Name", text: $displayName)
                 TextField("First Name", text: $firstName)
                 TextField("Last Name", text: $lastName)
             }
-                TextField("Email", text: $email)
-                SecureField("Password", text: $password)
-            Button(action: {
-                if !showRegistration && ![email, password].contains("") {
-                    login(with: email, and: password)
-                } else if ![displayName, firstName, lastName, email, password].contains("") {
-                    if showRegistration {
-                        Task {
-//                            let some = try await register(displayName, firstName, lastName, email, password)
-                            dismiss()
-                        }
-                    }
-                }
-                dismiss()
-            },label: {
-                Text(showRegistration ? "Create" : "Login")
-            })
+            TextField("Email", text: $email)
+            SecureField("Password", text: $password)
+            Button(action: { login() }, label: { Text(showRegistration ? "Create" : "Login") })
         }
     }
-//    fileprivate func register(_ displayName: String,
-//                              _ firstName: String,
-//                              _ lastName: String,
-//                              _ email: String,
-//                              _ password: String) async throws -> NewAccount.Response{
-//        HTTPClient.shared.httpRequest(
-//            requestType: NewAccount(
-//                displayName: displayName,
-//                dateOfBirth: birthday.ISO8601Format().replacingOccurrences(of: "T.*Z", with: "", options: .regularExpression),
-//                firstName: firstName,
-//                email: email,
-//                password: password,
-//                country: "US",
-//                lastName: lastName),
-//            url: "https://api.platform.wizards.com/accounts/register"
-//        ) { (result: Result<NewAccount.Response, Error>) in
-//            switch result {
-//            case .success(let credentials):
-//                pickleAuthentication(credentials.tokens)
-////                print(credentials)
-//            case .failure(let error):
-//                print("The error we got was: \(String(describing: error))")
-//            }
-//        }
-//    }
+    fileprivate func login() {
+        Task {
+            if !showRegistration && ![email, password].contains("") {
+                let authTokens = await AuthenticationService().login(email, password)
+                switch authTokens {
+                case .success(let creds):
+                    pickleAuthentication(creds)
+                    dismiss()
+                case .failure(let error):
+                    print(error)
+                }
+            } else if ![displayName, firstName, lastName, email, password].contains("") {
+                if showRegistration {
+                    let newAccount = await AuthenticationService().register(displayName: displayName, firstName: firstName, lastName: lastName, email: email, password: password, birthday: birthday)
+                    switch newAccount {
+                    case .success(let creds):
+                        pickleAuthentication(creds.tokens)
+                        dismiss()
+                    case .failure(let error):
+                        print("We failed somehow")
+                        print(error)
+                    }
+                }
+            }
+        }
+    }
 }
 
 struct JoinEventView: View {
@@ -84,8 +69,15 @@ struct JoinEventView: View {
         List {
             TextField("Event Code", text: $eventCode)
             Button(action: {
-                joinEvent(with: eventCode)
-                dismiss()
+                Task {
+                    let result = await AuthenticationService().joinEvent(eventCode)
+                    switch result {
+                    case .success(_):
+                        dismiss()
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
             },label: {
                 Text("Join event")
             })

@@ -20,34 +20,33 @@ import Foundation
 //    }
 //}
 
-public func login(with username: String = "", and password: String = "", refreshToken: String = "") {
-    if username == "" && password == "" && refreshToken == "" {
-        fatalError("Supply either refreshToken or username and password.")
-    }
-    
-    var creds = AuthCredentials()
-    if username != "" && password != "" {
-        creds.grant_type = "password"
-        creds.username = username
-        creds.password = password
-    } else if refreshToken != "" {
-        creds.grant_type = "refresh_token"
-        creds.refresh_token = refreshToken
-    }
-    HTTPClient.shared.httpRequest(
-        requestType: creds
-    ) { (result: Result<AuthCredentials.Response, Error>) in
-        switch result {
-        case .success(let credentials):
-            pickleAuthentication(credentials)
-        case .failure(let error):
-            print("The error we got was: \(String(describing: error))")
-        }
-    }
-}
+//public func login(with username: String = "", and password: String = "", refreshToken: String = "") {
+//    if username == "" && password == "" && refreshToken == "" {
+//        fatalError("Supply either refreshToken or username and password.")
+//    }
+//
+//    var creds = AuthCredentials()
+//    if username != "" && password != "" {
+//        creds.grant_type = "password"
+//        creds.username = username
+//        creds.password = password
+//    } else if refreshToken != "" {
+//        creds.grant_type = "refresh_token"
+//        creds.refresh_token = refreshToken
+//    }
+//    HTTPClient.shared.httpRequest(
+//        requestType: creds
+//    ) { (result: Result<AuthCredentials.Response, Error>) in
+//        switch result {
+//        case .success(let credentials):
+//            pickleAuthentication(credentials)
+//        case .failure(let error):
+//            print("The error we got was: \(String(describing: error))")
+//        }
+//    }
+//}
 
 func pickleAuthentication(_ creds: AuthCredentials.Response) {
-    print(creds)
     if let encoded = try? JSONEncoder().encode(creds) {
         UserDefaults.standard.set(encoded, forKey: "savedAuth")
         UserDefaults.standard.set(true, forKey: "loggedIn")

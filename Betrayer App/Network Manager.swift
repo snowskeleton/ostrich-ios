@@ -108,9 +108,16 @@ enum AuthenticationEndpoint {
     case login(email: String, password: String)
     case refreshLogin(refreshToken: String)
     case register(displayName: String, firstName: String, lastName: String, email: String, password: String, birthday: Date)
+    
     case getMyEvents
+    case joinEventWithShortCode(code: String)
 }
+
 extension AuthenticationEndpoint: Endpoint {
+//    var opName: String {
+//        return String("\(type(of: self))".split(separator: ".").last!)
+//    }
+//    let query = try! String(contentsOfFile: Bundle.main.path(forResource: opName, ofType: "query")!)
     var path: String {
         switch self {
         case .login, .refreshLogin:
@@ -185,20 +192,42 @@ extension AuthenticationEndpoint: Endpoint {
                 "emailOptIn": false,
                 "dataShareOptIn": true
             ]
-        case .getMyEvents:
-            return [:]
+        case .joinEventWithShortCode(let shortcode):
+            return [
+                "operationName": self.operationName,
+                "query": self.query!,
+                "variables": ["shortCode": shortcode]
+            ]
+        default:
+            return [
+                "operationName": self.operationName,
+                "query": self.query!,
+                "variables": [:] as [String: String]
+            ]
         }
+    }
+    var operationName: String {
+        return String("\(self)".split(separator: "(").first!)
+    }
+    var query: String? {
+        print(self.operationName)
+        return try! String(contentsOfFile: Bundle.main.path(forResource: self.operationName, ofType: "query")!)
     }
 }
 protocol AuthenticationServiceable {
     func login(_ email: String, _ password: String) async -> Result<AuthCredentials.Response, RequestError>
     func refreshLogin(_ refreshToken: String) async -> Result<AuthCredentials.Response, RequestError>
-    func register(displayName: String, firstName: String, lastName: String, email: String, password: String, birthday: Date) async -> Result<AuthCredentials.Response, RequestError>
+    func register(displayName: String, firstName: String, lastName: String, email: String, password: String, birthday: Date) async -> Result<NewAccount.Response, RequestError>
+    func joinEvent(_ shortcode: String) async -> Result<joinEventWithShortCode.Response, RequestError>
     
 }
 
 struct AuthenticationService: NHTTPClient, AuthenticationServiceable {
-    func register(displayName: String, firstName: String, lastName: String, email: String, password: String, birthday: Date) async -> Result<AuthCredentials.Response, RequestError> {
+    func joinEvent(_ shortcode: String) async -> Result<joinEventWithShortCode.Response, RequestError> {
+        return await sendRequest(endpoint: AuthenticationEndpoint.joinEventWithShortCode(code: shortcode), responseModel: joinEventWithShortCode.Response.self)
+    }
+    
+    func register(displayName: String, firstName: String, lastName: String, email: String, password: String, birthday: Date) async -> Result<NewAccount.Response, RequestError> {
         return await sendRequest(
             endpoint: AuthenticationEndpoint.register(
                 displayName: displayName,
@@ -207,8 +236,7 @@ struct AuthenticationService: NHTTPClient, AuthenticationServiceable {
                 email: email,
                 password: password,
                 birthday: birthday),
-            responseModel: AuthCredentials.Response.self
-        )
+            responseModel: NewAccount.Response.self)
     }
     
     func login(_ email: String, _ password: String) async -> Result<AuthCredentials.Response, RequestError> {

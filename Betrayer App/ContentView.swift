@@ -34,27 +34,27 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                Button(action: {
-                    if let loginExpieryDate = UserDefaults.standard.double(forKey: "access_token_expiry") as? Double {
-                        UserDefaults.standard.set(loginExpieryDate - 900, forKey: "access_token_expiry")
-                    }
-                },label: {
-                    Text("Expire Login")
-                })
-                Button(action: {
-                    HTTPClient.shared.gqlRequest(myActiveEvents()
-                    ) { (result: Result<myActiveEvents.Response, Error>) in
-                        switch result {
-                        case .success(let response):
-                            //                print("We got these events:\n \(response.data.myActiveEvents) \n")
-                            events = response.data.myActiveEvents
-                        case .failure(let error):
-                            print("The error we got was: \(String(describing: error))")
-                        }
-                    }
-                },label: {
-                    Text("Get events")
-                })
+//                Button(action: {
+//                    if let loginExpieryDate = UserDefaults.standard.double(forKey: "access_token_expiry") as? Double {
+//                        UserDefaults.standard.set(loginExpieryDate - 900, forKey: "access_token_expiry")
+//                    }
+//                },label: {
+//                    Text("Expire Login")
+//                })
+//                Button(action: {
+//                    HTTPClient.shared.gqlRequest(myActiveEvents()
+//                    ) { (result: Result<myActiveEvents.Response, Error>) in
+//                        switch result {
+//                        case .success(let response):
+//                            //                print("We got these events:\n \(response.data.myActiveEvents) \n")
+//                            events = response.data.myActiveEvents
+//                        case .failure(let error):
+//                            print("The error we got was: \(String(describing: error))")
+//                        }
+//                    }
+//                },label: {
+//                    Text("Get events")
+//                })
                 
                 Section {
                     ForEach($events, id: \.self) { event in
@@ -106,7 +106,7 @@ struct ContentView: View {
         .onDisappear {
             timerIsRunning = false
         }
-        .onReceive(Timer.publish(every: 10, on: .main, in: .common).autoconnect(), perform: { _ in
+        .onReceive(Timer.publish(every: 5, on: .main, in: .common).autoconnect(), perform: { _ in
             if timerIsRunning {
                 refreshMainPage()
             }
