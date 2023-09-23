@@ -55,6 +55,7 @@ struct NewAccount: Query {
         let tokens: AuthCredentials.Response
         let persona: Persona
     }
+    
 }
 struct Persona: Codable {
     let personaID: String
@@ -80,6 +81,23 @@ struct AuthCredentials: Query {
         let persona_id: String
         let refresh_token: String
         let token_type: String
+    }
+}
+
+struct ChangeName: Query {
+    var firstName: String
+    var lastName: String
+    var displayName: String
+    
+    struct Response: Codable {
+        let ccpaProtectData: Bool
+        let dataOptIn: Bool
+        let displayName: String
+        let emailOptIn: Bool
+        let emailVerified: Bool
+        let firstName: String
+        let lastName: String
+        let targetedAnalyticsOptOut: Bool
     }
 }
 

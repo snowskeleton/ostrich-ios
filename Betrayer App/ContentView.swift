@@ -73,22 +73,15 @@ struct ContentView: View {
         .onDisappear {
             timerIsRunning = false
         }
-        .onReceive(Timer.publish(every: 5, on: .main, in: .common).autoconnect(), perform: { _ in
+        .onReceive(Timer.publish(every: 30, on: .main, in: .common).autoconnect(), perform: { _ in
             if timerIsRunning { refreshMainPage() }
         })
         .navigationViewStyle(StackNavigationViewStyle())
     }
     fileprivate func refreshMainPage() {
         Task {
-            if let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") {
-                if Date().timeIntervalSince1970 > UserDefaults.standard.double(forKey: "access_token_expiry") - 10.0 { //seconds
-                    switch await HTOService().refreshLogin(refreshToken) {
-                    case .success(let creds):
-                        pickleAuthentication(creds)
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
+            if Date().timeIntervalSince1970 > UserDefaults.standard.double(forKey: "access_token_expiry") - 40.0 { //seconds
+                refreshLogin()
             }
             switch await HTOService().getActiveEvents() {
             case .success(let response):

@@ -100,7 +100,7 @@ extension HTTPClient {
                     switch error.error {
                     case "EMAIL ADDRESS IN USE":
                         return .failure(.emailInUse)
-                    case "AGE RESTRICTION":
+                    case "AGE REQUIREMENT":
                         return .failure(.ageRestriction)
                     default:
                         print("Unknown error case: \(error)")

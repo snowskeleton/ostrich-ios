@@ -8,6 +8,19 @@
 import Foundation
 
 
+func refreshLogin() {
+    Task {
+        if let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") {
+            switch await HTOService().refreshLogin(refreshToken) {
+            case .success(let creds):
+                pickleAuthentication(creds)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}
+
 func pickleAuthentication(_ creds: AuthCredentials.Response) {
 //        UserDefaults.standard.set(encoded, forKey: "savedAuth")
     UserDefaults.standard.removeObject(forKey: "savedAuth")

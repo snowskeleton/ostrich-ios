@@ -7,21 +7,44 @@
 
 import SwiftUI
 
+struct MatchesViwe: View {
+    var matches: [Match]
+    var personaId = UserDefaults.standard.string(forKey: "personaId")
+    
+    var body: some View {
+        List {
+            ForEach(matches, id: \.tableNumber) { match in
+                if match.isBye {
+                    Text("Name: \(match.teams[0].players[0].firstName) – Bye" )
+                } else {
+                    if match.teams[0].players[0].personaId == personaId || match.teams[1].players[0].personaId == personaId {
+                        Text(String(describing: match))
+                        Text(match.teams[0].players[0].displayName)
+                        Text(match.teams[0].players[0].firstName)
+                        Text(match.teams[0].players[0].lastName)
+                    }
+                }
+            }
+        }
+    }
+}
 struct EventView: View {
     @State var someEvent: Event
     @State private var event: Event?
-    @State private var someValue: String?
     
-    init(someEvent: Event) {
-        _someEvent = State(initialValue: someEvent)
-    }
     var body: some View {
         Text(event?.shortCode ?? "")
-        Form {
+        Text(event?.status ?? "")
+        List {
+            NavigationLink {
+                if let matches = event?.gameStateAtRound?.currentRound?.matches {
+                    MatchesViwe(matches: matches)
+                }
+            } label: {
+                Text("Matches")
+            }
             ForEach((event?.registeredPlayers) ?? [], id: \.self) { player in
-                Button(action: {
-                    //                    dropTeam(eventId: event.id!, teamId: player.id)
-                }) {
+                VStack {
                     Text(player.displayName)
                     Text(player.firstName)
                     Text(player.lastName)
@@ -32,61 +55,41 @@ struct EventView: View {
             }
             Section {
                 Button(role: .destructive, action: {
-//                    dropSelfFromEvent(eventId: event.id!)
-                    
+                    dropSelfFromEvent(eventId: someEvent.id)
                 }, label: {
                     Text("Drop")
                 })
             }
         }
         .onAppear {
-            Task { await getEvent() }
+            getEvent()
         }
-//        .onReceive(Timer.publish(every: 10, on: .main, in: .common).autoconnect(), perform: { _ in
-//            Task { await getEvent() }
-//        })
+        //        .onReceive(Timer.publish(every: 10, on: .main, in: .common).autoconnect(), perform: { _ in
+        //            Task { await getEvent() }
+        //        })
         .navigationTitle(Text(event?.title ?? ""))
     }
-    func getEvent() async {
-        switch await HTOService().getEvent(eventID: someEvent.id) {
-        case .success(let response):
-            event = response.data.event
-            print(response.data.event)
-        case .failure(let error):
-            print(error.localizedDescription)
+    func getEvent() {
+        Task {
+            switch await HTOService().getEvent(eventId: someEvent.id) {
+            case .success(let response):
+                event = response.data.event
+                print(response.data.event)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
     
-//    func dropSelfFromEvent(eventId: String) {
-//        HTTPClient.shared.gqlRequest(dropSelf(eventId: eventId)
-//        ) { (result: Result<dropSelf.Response, Error>) in
-//            switch result {
-//            case .success(let response):
-////                freshEvent = response.data
-//                print("Drop self:\n \(response.data) \n")
-//            case .failure(let error):
-//                print("The error we got was: \(String(describing: error))")
-//            }
-//        }
-//
-//    }
-//    func dropTeam(eventId: String, teamId: String) {
-//        HTTPClient.shared.gqlRequest(dropTeamV2(eventId: eventId, teamId: teamId)
-//        ) { (result: Result<dropTeamV2.Response, Error>) in
-//            switch result {
-//            case .success(let response):
-////                freshEvent = response.data
-//                print("Drop self:\n \(response.data) \n")
-//            case .failure(let error):
-//                print("The error we got was: \(String(describing: error))")
-//            }
-//        }
-//
-//    }
+    fileprivate func dropSelfFromEvent(eventId: String) {
+        Task {
+            switch await HTOService().dropEvent(eventId: eventId) {
+            case .success(let response):
+                print(response)
+            case .failure(let error):
+                print("The error we got was: \(String(describing: error))")
+            }
+        }
+        
+    }
 }
-
-//struct EventView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EventView()
-//    }
-//}
