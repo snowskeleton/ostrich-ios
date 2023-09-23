@@ -55,13 +55,11 @@ extension HTOEndpoint: Endpoint {
             ]
         default:
             var headers: [String: String] = [:]
-            if let savedAuth = UserDefaults.standard.object(forKey: "savedAuth") as? Data {
-                if let credentials = try? JSONDecoder().decode(AuthCredentials.Response.self, from: savedAuth) {
-                    headers = [
-                        "Authorization": "Bearer \(credentials.access_token)",
-                        "Content-Type": "application/json"
-                    ]
-                }
+            if let accessToken = UserDefaults.standard.string(forKey: "accessToken") {
+                headers = [
+                    "Authorization": "Bearer \(accessToken)",
+                    "Content-Type": "application/json"
+                ]
             }
             return headers
         }

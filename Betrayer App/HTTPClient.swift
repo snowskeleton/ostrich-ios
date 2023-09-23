@@ -38,6 +38,9 @@ enum RequestError: Error {
     case unexpectedStatusCode
     case unknown
     
+    case emailInUse
+    case ageRestriction
+    
     var customMessage: String {
         switch self {
         case .decode:
@@ -92,7 +95,23 @@ extension HTTPClient {
             case 401:
                 return .failure(.unauthorized)
             default:
-                return .failure(.unexpectedStatusCode)
+                do {
+                    let error =  try JSONDecoder().decode(HTTPError.self, from: data)
+                    switch error.error {
+                    case "EMAIL ADDRESS IN USE":
+                        return .failure(.emailInUse)
+                    case "AGE RESTRICTION":
+                        return .failure(.ageRestriction)
+                    default:
+                        print("Unknown error case: \(error)")
+                        return .failure(.unknown)
+                    }
+                } catch {
+                    print(error)
+                    let serverError = try JSONSerialization.jsonObject(with: data, options: [])
+                    print("Error decoding error: \(serverError)")
+                    return .failure(.unknown)
+                }
             }
         } catch {
             return .failure(.unknown)

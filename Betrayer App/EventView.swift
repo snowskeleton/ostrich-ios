@@ -25,6 +25,9 @@ struct EventView: View {
                     Text(player.displayName)
                     Text(player.firstName)
                     Text(player.lastName)
+                    if player.personaId == UserDefaults.standard.string(forKey: "personaId") {
+                        Text("This is YOU")
+                    }
                 }
             }
             Section {

@@ -22,3 +22,9 @@ struct GraphQLError: Decodable, Error {
         let code: String
     }
 }
+
+struct HTTPError: Decodable, Error {
+    let code: Int
+    let error: String
+    let grpcCode: String
+}

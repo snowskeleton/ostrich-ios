@@ -19,23 +19,22 @@ struct LoginView: View {
     @State var birthday = Date()
     
     var body: some View {
-        if let savedAuth = UserDefaults.standard.object(forKey: "savedAuth") as? Data {
-            if let credentials = try? JSONDecoder().decode(AuthCredentials.Response.self, from: savedAuth) {
-                Text("Logged in as \(credentials.display_name ?? "")")
-            }
+        if let displayName = UserDefaults.standard.string(forKey: "displayName") {
+            Text("Logged in as \(displayName)")
         }
         List {
+            TextField("Email", text: $email)
+            SecureField("Password", text: $password)
             Toggle(isOn: $showRegistration) {
                 Text("Create New Account")
             }
             if showRegistration {
-                DatePicker("Birth Date", selection: $birthday, displayedComponents: .date)
                 TextField("Display Name", text: $displayName)
                 TextField("First Name", text: $firstName)
                 TextField("Last Name", text: $lastName)
+                DatePicker("Birth Date", selection: $birthday, displayedComponents: .date)
+                Text("By creating an account with Wizards of the Coast, you agree to abide by their [Terms and Conditions](https://company.wizards.com/en/legal/terms), [Code of Conduct](https://company.wizards.com/en/legal/code-conduct), and [Privacy Policy](https://company.wizards.com/en/legal/wizards-coasts-privacy-policy).")
             }
-            TextField("Email", text: $email)
-            SecureField("Password", text: $password)
             Button(action: { login() }, label: { Text(showRegistration ? "Create" : "Login") })
         }
     }

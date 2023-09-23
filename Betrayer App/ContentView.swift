@@ -26,7 +26,7 @@ struct ContentView: View {
                     TextField("Event Code", text: $joinEventCode)
                     Button("Join Event", action: {
                         Task {
-                            await HTOService().joinEvent(joinEventCode)
+                            let _ = await HTOService().joinEvent(joinEventCode)
                             refreshMainPage()
                         }
                     })
@@ -80,15 +80,13 @@ struct ContentView: View {
     }
     fileprivate func refreshMainPage() {
         Task {
-            if let savedAuth = UserDefaults.standard.object(forKey: "savedAuth") as? Data {
-                if let credentials = try? JSONDecoder().decode(AuthCredentials.Response.self, from: savedAuth) {
-                    if Date().timeIntervalSince1970 > UserDefaults.standard.double(forKey: "access_token_expiry") - 10.0 { //seconds
-                        switch await HTOService().refreshLogin(credentials.refresh_token) {
-                        case .success(let creds):
-                            pickleAuthentication(creds)
-                        case .failure(let error):
-                            print(error)
-                        }
+            if let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") {
+                if Date().timeIntervalSince1970 > UserDefaults.standard.double(forKey: "access_token_expiry") - 10.0 { //seconds
+                    switch await HTOService().refreshLogin(refreshToken) {
+                    case .success(let creds):
+                        pickleAuthentication(creds)
+                    case .failure(let error):
+                        print(error)
                     }
                 }
             }
