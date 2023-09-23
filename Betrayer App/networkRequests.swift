@@ -28,6 +28,19 @@ func pickleAuthentication(_ creds: AuthCredentials.Response) {
     UserDefaults.standard.set(creds.refresh_token, forKey: "refreshToken")
     UserDefaults.standard.set(creds.access_token, forKey: "accessToken")
     UserDefaults.standard.set(creds.display_name, forKey: "displayName")
+    Task {
+        switch await HTOService().getProfile() {
+        case .success(let profile):
+            UserDefaults.standard.set(profile.firstName, forKey: "firstName")
+            UserDefaults.standard.set(profile.lastName, forKey: "lastName")
+            print(String(describing: profile))
+            print(profile)
+        case .failure(let failure):
+            print(String(describing: failure))
+//            print(failure)
+        }
+        
+    }
     if let futureDate = Calendar.current.date(byAdding: DateComponents(second: creds.expires_in), to: Date()) {
         UserDefaults.standard.set(futureDate.timeIntervalSince1970, forKey: "access_token_expiry")
     }

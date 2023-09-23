@@ -13,6 +13,7 @@ enum HTOEndpoint {
     case refreshLogin(refreshToken: String)
     case register(displayName: String, firstName: String, lastName: String, email: String, password: String, birthday: Date)
     case changeName(firstName: String, lastName: String)
+    case getProfile
     
     case myActiveEvents
     case loadEvent(eventId: String)
@@ -25,7 +26,7 @@ extension HTOEndpoint: Endpoint {
         switch self {
         case .login, .refreshLogin:
             return "/auth/oauth/token"
-        case .changeName:
+        case .changeName, .getProfile:
             return "/profile"
         case .register:
             return "/accounts/register"
@@ -36,7 +37,7 @@ extension HTOEndpoint: Endpoint {
     
     var host: String {
         switch self {
-        case .login, .refreshLogin, .register, .changeName:
+        case .login, .refreshLogin, .register, .changeName, .getProfile:
             return "api.platform.wizards.com"
         default:
             return "api.tabletop.wizards.com"
@@ -45,6 +46,8 @@ extension HTOEndpoint: Endpoint {
     
     var method: RequestMethod {
         switch self {
+        case .getProfile:
+            return .get
         case .changeName:
             return .put
         default:
@@ -139,7 +142,8 @@ protocol HTOServiceable {
     func login(_ email: String, _ password: String) async -> Result<AuthCredentials.Response, RequestError>
     func refreshLogin(_ refreshToken: String) async -> Result<AuthCredentials.Response, RequestError>
     func register(displayName: String, firstName: String, lastName: String, email: String, password: String, birthday: Date) async -> Result<NewAccount.Response, RequestError>
-    func changeName(firstName: String, lastName: String) async -> Result<ChangeName.Response, RequestError>
+    func changeName(firstName: String, lastName: String) async -> Result<Profile.Response, RequestError>
+    func getProfile() async -> Result<Profile.Response, RequestError>
     
     func joinEvent(_ shortcode: String) async -> Result<joinEventWithShortCode.Response, RequestError>
     
@@ -150,8 +154,12 @@ protocol HTOServiceable {
 }
 
 struct HTOService: HTTPClient, HTOServiceable {
-    func changeName(firstName: String, lastName: String) async -> Result<ChangeName.Response, RequestError> {
-        return await sendRequest(endpoint: HTOEndpoint.changeName(firstName: firstName, lastName: lastName), responseModel: ChangeName.Response.self)
+    func getProfile() async -> Result<Profile.Response, RequestError> {
+        return await sendRequest(endpoint: HTOEndpoint.getProfile, responseModel: Profile.Response.self)
+    }
+    
+    func changeName(firstName: String, lastName: String) async -> Result<Profile.Response, RequestError> {
+        return await sendRequest(endpoint: HTOEndpoint.changeName(firstName: firstName, lastName: lastName), responseModel: Profile.Response.self)
     }
     
     func dropEvent(eventId: String) async -> Result<dropSelf.Response, RequestError> {

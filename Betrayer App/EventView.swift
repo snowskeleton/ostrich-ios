@@ -74,7 +74,7 @@ struct EventView: View {
             switch await HTOService().getEvent(eventId: someEvent.id) {
             case .success(let response):
                 event = response.data.event
-                print(response.data.event)
+//                print(response.data.event)
             case .failure(let error):
                 print(error.localizedDescription)
             }

@@ -75,8 +75,10 @@ extension HTTPClient {
         request.httpMethod = endpoint.method.rawValue
         request.allHTTPHeaderFields = endpoint.header
         
-        if let body = endpoint.body {
-            request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+        if endpoint.method != .get {
+            if let body = endpoint.body {
+                request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+            }
         }
         
         do {
@@ -114,6 +116,7 @@ extension HTTPClient {
                 }
             }
         } catch {
+            print(String(describing: error))
             return .failure(.unknown)
         }
     }

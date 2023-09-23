@@ -12,9 +12,9 @@ struct LoginView: View {
     @Environment(\.dismiss) private var dismiss
     @State var email: String = ""
     @State var password: String = ""
-    @State var firstName: String = ""
-    @State var lastName: String = ""
-    @State var displayName: String = ""
+    @State var firstName: String = UserDefaults.standard.string(forKey: "firstName") ?? ""
+    @State var lastName: String = UserDefaults.standard.string(forKey: "lastName") ?? ""
+    @State var displayName: String = UserDefaults.standard.string(forKey: "displayName") ?? ""
     @State var showRegistration: Bool = false
     @State var birthday = Date()
     @State var someStatus: Image?
@@ -39,20 +39,7 @@ struct LoginView: View {
                 }
                 Button(showRegistration ? "Create" : "Login") { login() }
                 HStack {
-                    Button("Refresh Login") {
-                        someStatus = Image(systemName: "circle.dotted")
-                        Task {
-                            if let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") {
-                                switch await HTOService().refreshLogin(refreshToken) {
-                                case .success(let creds):
-                                    pickleAuthentication(creds)
-                                    someStatus = Image(systemName: "checkmark.circle")
-                                case .failure:
-                                    someStatus = Image(systemName: "circle.slash")
-                                }
-                            }
-                        }
-                    }
+                    Button("Refresh Login") { relogin() }
                     if someStatus != nil { someStatus }
                 }
             }
@@ -63,7 +50,20 @@ struct LoginView: View {
             }
         }
     }
-    
+    fileprivate func relogin() {
+        someStatus = Image(systemName: "circle.dotted")
+        Task {
+            if let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") {
+                switch await HTOService().refreshLogin(refreshToken) {
+                case .success(let creds):
+                    pickleAuthentication(creds)
+                    someStatus = Image(systemName: "checkmark.circle")
+                case .failure:
+                    someStatus = Image(systemName: "circle.slash")
+                }
+            }
+        }
+    }
     fileprivate func login() {
         Task {
             if !showRegistration && ![email, password].contains("") {
@@ -83,7 +83,7 @@ struct LoginView: View {
                         pickleAuthentication(creds.tokens)
                         dismiss()
                     case .failure(let error):
-                        print("We failed somehow")
+                        print("Couldn't create account")
                         print(error)
                     }
                 }

@@ -84,7 +84,7 @@ struct AuthCredentials: Query {
     }
 }
 
-struct ChangeName: Query {
+struct Profile: Query {
     var firstName: String
     var lastName: String
     var displayName: String
