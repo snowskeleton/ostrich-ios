@@ -151,8 +151,8 @@ struct Event: Codable, Hashable, Identifiable {
         hasher.combine(eventFormat)
     }
     
-    let id: String?
-    let shortCode: String?
+    let id: String
+    let shortCode: String
     let createdBy: String?
     let title: String?
     let scheduledStartTime: String?
@@ -253,9 +253,19 @@ struct GameState: Codable {
     let constructedSeats: String? // Replace with the actual data type if available
     let currentRoundNumber: Int?
     let currentRound: Round?
+    let rounds: [Round]?
+    let standings: [Standing]?
+    let drops: [Drop]?
+    let draftTimerId: String?
+    let constructDraftTimerID: String?
+    let top8DraftTimerID: String?
+    let gamesToWin: Int?
     let canRollback: Bool?
     let timerID: String?
 }
+
+struct Standing: Codable { }
+struct Drop: Codable { }
 
 struct Round: Codable {
     let id: String
@@ -271,8 +281,8 @@ struct Match: Codable {
     let id: String
     let isBye: Bool
     let teams: [Team]
-    let leftTeamWins: Int
-    let rightTeamWins: Int
+    let leftTeamWins: Int?
+    let rightTeamWins: Int?
     let tableNumber: Int?
 }
 

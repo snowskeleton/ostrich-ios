@@ -19,6 +19,11 @@ struct LoginView: View {
     @State var birthday = Date()
     
     var body: some View {
+        if let savedAuth = UserDefaults.standard.object(forKey: "savedAuth") as? Data {
+            if let credentials = try? JSONDecoder().decode(AuthCredentials.Response.self, from: savedAuth) {
+                Text("Logged in as \(credentials.display_name ?? "")")
+            }
+        }
         List {
             Toggle(isOn: $showRegistration) {
                 Text("Create New Account")
@@ -37,7 +42,7 @@ struct LoginView: View {
     fileprivate func login() {
         Task {
             if !showRegistration && ![email, password].contains("") {
-                let authTokens = await AuthenticationService().login(email, password)
+                let authTokens = await HTOService().login(email, password)
                 switch authTokens {
                 case .success(let creds):
                     pickleAuthentication(creds)
@@ -47,7 +52,7 @@ struct LoginView: View {
                 }
             } else if ![displayName, firstName, lastName, email, password].contains("") {
                 if showRegistration {
-                    let newAccount = await AuthenticationService().register(displayName: displayName, firstName: firstName, lastName: lastName, email: email, password: password, birthday: birthday)
+                    let newAccount = await HTOService().register(displayName: displayName, firstName: firstName, lastName: lastName, email: email, password: password, birthday: birthday)
                     switch newAccount {
                     case .success(let creds):
                         pickleAuthentication(creds.tokens)
@@ -58,29 +63,6 @@ struct LoginView: View {
                     }
                 }
             }
-        }
-    }
-}
-
-struct JoinEventView: View {
-    @Environment(\.dismiss) private var dismiss
-    @State var eventCode: String = ""
-    var body: some View {
-        List {
-            TextField("Event Code", text: $eventCode)
-            Button(action: {
-                Task {
-                    let result = await AuthenticationService().joinEvent(eventCode)
-                    switch result {
-                    case .success(_):
-                        dismiss()
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-            },label: {
-                Text("Join event")
-            })
         }
     }
 }

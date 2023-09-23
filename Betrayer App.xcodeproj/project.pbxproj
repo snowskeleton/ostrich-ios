@@ -33,8 +33,8 @@
 		80B8E13D2AB8C24300845ECC /* dropSelf.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E13C2AB8C24300845ECC /* dropSelf.query */; };
 		80B8E13F2AB8C5D300845ECC /* dropTeamV2.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E13E2AB8C5D300845ECC /* dropTeamV2.query */; };
 		80B8E1412ABA23F000845ECC /* Sheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1402ABA23F000845ECC /* Sheets.swift */; };
-		80B8E1432ABA241800845ECC /* Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1422ABA241800845ECC /* Stubs.swift */; };
 		80B8E1452ABA245600845ECC /* networkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1442ABA245600845ECC /* networkRequests.swift */; };
+		80EBC24C2ABE5FE0005817AD /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,8 +66,8 @@
 		80B8E13C2AB8C24300845ECC /* dropSelf.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = dropSelf.query; sourceTree = "<group>"; };
 		80B8E13E2AB8C5D300845ECC /* dropTeamV2.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = dropTeamV2.query; sourceTree = "<group>"; };
 		80B8E1402ABA23F000845ECC /* Sheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheets.swift; sourceTree = "<group>"; };
-		80B8E1422ABA241800845ECC /* Stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stubs.swift; sourceTree = "<group>"; };
 		80B8E1442ABA245600845ECC /* networkRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = networkRequests.swift; sourceTree = "<group>"; };
+		80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,10 +110,10 @@
 		803AECEE2AA26B2200CF03EB /* Betrayer App */ = {
 			isa = PBXGroup;
 			children = (
+				80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */,
 				803AECEF2AA26B2200CF03EB /* Betrayer_AppApp.swift */,
 				803AECF12AA26B2200CF03EB /* ContentView.swift */,
 				80B8E1442ABA245600845ECC /* networkRequests.swift */,
-				80B8E1422ABA241800845ECC /* Stubs.swift */,
 				80B8E1402ABA23F000845ECC /* Sheets.swift */,
 				803AECF32AA26B2300CF03EB /* Assets.xcassets */,
 				803AECF82AA26B2300CF03EB /* Persistence.swift */,
@@ -179,7 +179,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					803AECEB2AA26B2200CF03EB = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -239,12 +239,12 @@
 			files = (
 				803AECF92AA26B2300CF03EB /* Persistence.swift in Sources */,
 				8046EA492AA64E8B00578539 /* Network Manager.swift in Sources */,
+				80EBC24C2ABE5FE0005817AD /* HTTPClient.swift in Sources */,
 				80B8E1452ABA245600845ECC /* networkRequests.swift in Sources */,
 				80B8E1332AB7D47300845ECC /* ErrorTypes.swift in Sources */,
 				80B8E1372AB7EF0700845ECC /* EventView.swift in Sources */,
 				80B8E12C2AB665F500845ECC /* hsnm.swift in Sources */,
 				803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */,
-				80B8E1432ABA241800845ECC /* Stubs.swift in Sources */,
 				803AECF02AA26B2200CF03EB /* Betrayer_AppApp.swift in Sources */,
 				80B8E1412ABA23F000845ECC /* Sheets.swift in Sources */,
 				8046EA4B2AA6A60500578539 /* ResponseTypes.swift in Sources */,
@@ -291,6 +291,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -351,6 +352,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

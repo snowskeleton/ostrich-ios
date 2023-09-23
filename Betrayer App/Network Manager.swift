@@ -8,116 +8,17 @@
 import Foundation
 
 
-protocol Endpoint {
-    var scheme: String { get }
-    var host: String { get }
-    var path: String { get }
-    var method: RequestMethod { get }
-    var header: [String: String]? { get }
-    var body: [String: Any]? { get }
-}
-
-extension Endpoint {
-    var scheme: String {
-        return "https"
-    }
-    
-    var host: String {
-        return "api.tabletop.wizards.com"
-    }
-}
-
-enum RequestMethod: String {
-    case delete = "DELETE"
-    case get = "GET"
-    case patch = "PATCH"
-    case post = "POST"
-    case put = "PUT"
-}
-
-enum RequestError: Error {
-    case decode
-    case invalidURL
-    case noResponse
-    case unauthorized
-    case unexpectedStatusCode
-    case unknown
-    
-    var customMessage: String {
-        switch self {
-        case .decode:
-            return "Decode error"
-        case .unauthorized:
-            return "Session expired"
-        default:
-            return "Unknown error"
-        }
-    }
-}
-
-protocol NHTTPClient {
-    func sendRequest<T: Decodable>(endpoint: Endpoint, responseModel: T.Type) async -> Result<T, RequestError>
-}
-
-extension NHTTPClient {
-    func sendRequest<T: Decodable>(
-        endpoint: Endpoint,
-        responseModel: T.Type
-    ) async -> Result<T, RequestError> {
-        var urlComponents = URLComponents()
-        urlComponents.scheme = endpoint.scheme
-        urlComponents.host = endpoint.host
-        urlComponents.path = endpoint.path
-        
-        guard let url = urlComponents.url else {
-            return .failure(.invalidURL)
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = endpoint.method.rawValue
-        request.allHTTPHeaderFields = endpoint.header
-        
-        if let body = endpoint.body {
-            request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
-        }
-        
-        do {
-            let (data, response) = try await URLSession.shared.data(for: request, delegate: nil)
-            guard let response = response as? HTTPURLResponse else {
-                return .failure(.noResponse)
-            }
-            switch response.statusCode {
-            case 200...299:
-                guard let decodedResponse = try? JSONDecoder().decode(responseModel, from: data) else {
-                    return .failure(.decode)
-                }
-                return .success(decodedResponse)
-            case 401:
-                return .failure(.unauthorized)
-            default:
-                return .failure(.unexpectedStatusCode)
-            }
-        } catch {
-            return .failure(.unknown)
-        }
-    }
-}
-
-
-enum AuthenticationEndpoint {
+enum HTOEndpoint {
     case login(email: String, password: String)
     case refreshLogin(refreshToken: String)
     case register(displayName: String, firstName: String, lastName: String, email: String, password: String, birthday: Date)
     
-    case getMyEvents
+    case myActiveEvents
+    case loadEvent(eventID: String)
     case joinEventWithShortCode(code: String)
 }
 
-extension AuthenticationEndpoint: Endpoint {
-//    var opName: String {
-//        return String("\(type(of: self))".split(separator: ".").last!)
-//    }
-//    let query = try! String(contentsOfFile: Bundle.main.path(forResource: opName, ofType: "query")!)
+extension HTOEndpoint: Endpoint {
     var path: String {
         switch self {
         case .login, .refreshLogin:
@@ -181,7 +82,7 @@ extension AuthenticationEndpoint: Endpoint {
             ]
         case .register(let displayName, let firstName, let lastName, let email, let password, let birthday):
             return [
-                "dateOfBirth": birthday.ISO8601Format().replacingOccurrences(of: "T.*Z", with: "", options: .regularExpression),
+                "dateOfBirth": birthday.ISO8601Format().replacingOccurrences(of: "T.*Z", with: "", options: .regularExpression), // yyyy-MM-dd
                 "displayName": displayName,
                 "email": email,
                 "firstName": firstName,
@@ -191,6 +92,12 @@ extension AuthenticationEndpoint: Endpoint {
                 "acceptedTC": true,
                 "emailOptIn": false,
                 "dataShareOptIn": true
+            ]
+        case .loadEvent(let eventID):
+            return [
+                "operationName": self.operationName,
+                "query": self.query!,
+                "variables": ["eventId": eventID]
             ]
         case .joinEventWithShortCode(let shortcode):
             return [
@@ -210,26 +117,37 @@ extension AuthenticationEndpoint: Endpoint {
         return String("\(self)".split(separator: "(").first!)
     }
     var query: String? {
-        print(self.operationName)
         return try! String(contentsOfFile: Bundle.main.path(forResource: self.operationName, ofType: "query")!)
     }
 }
-protocol AuthenticationServiceable {
+protocol HTOServiceable {
     func login(_ email: String, _ password: String) async -> Result<AuthCredentials.Response, RequestError>
     func refreshLogin(_ refreshToken: String) async -> Result<AuthCredentials.Response, RequestError>
     func register(displayName: String, firstName: String, lastName: String, email: String, password: String, birthday: Date) async -> Result<NewAccount.Response, RequestError>
+    
     func joinEvent(_ shortcode: String) async -> Result<joinEventWithShortCode.Response, RequestError>
+    
+    func getActiveEvents() async -> Result<myActiveEvents.Response, RequestError>
+    func getEvent(eventID: String) async -> Result<loadEvent.Response, RequestError>
     
 }
 
-struct AuthenticationService: NHTTPClient, AuthenticationServiceable {
+struct HTOService: HTTPClient, HTOServiceable {
+    func getEvent(eventID: String) async -> Result<loadEvent.Response, RequestError> {
+        return await sendRequest(endpoint: HTOEndpoint.loadEvent(eventID: eventID), responseModel: loadEvent.Response.self)
+    }
+    
+    func getActiveEvents() async -> Result<myActiveEvents.Response, RequestError> {
+        return await sendRequest(endpoint: HTOEndpoint.myActiveEvents, responseModel: myActiveEvents.Response.self)
+    }
+    
     func joinEvent(_ shortcode: String) async -> Result<joinEventWithShortCode.Response, RequestError> {
-        return await sendRequest(endpoint: AuthenticationEndpoint.joinEventWithShortCode(code: shortcode), responseModel: joinEventWithShortCode.Response.self)
+        return await sendRequest(endpoint: HTOEndpoint.joinEventWithShortCode(code: shortcode), responseModel: joinEventWithShortCode.Response.self)
     }
     
     func register(displayName: String, firstName: String, lastName: String, email: String, password: String, birthday: Date) async -> Result<NewAccount.Response, RequestError> {
         return await sendRequest(
-            endpoint: AuthenticationEndpoint.register(
+            endpoint: HTOEndpoint.register(
                 displayName: displayName,
                 firstName: firstName,
                 lastName: lastName,
@@ -240,125 +158,13 @@ struct AuthenticationService: NHTTPClient, AuthenticationServiceable {
     }
     
     func login(_ email: String, _ password: String) async -> Result<AuthCredentials.Response, RequestError> {
-        return await sendRequest(endpoint: AuthenticationEndpoint.login(email: email, password: password), responseModel: AuthCredentials.Response.self)
+        return await sendRequest(endpoint: HTOEndpoint.login(email: email, password: password), responseModel: AuthCredentials.Response.self)
     }
     
     func refreshLogin(_ refreshToken: String) async -> Result<AuthCredentials.Response, RequestError> {
-        return await sendRequest(endpoint: AuthenticationEndpoint.refreshLogin(refreshToken: refreshToken), responseModel: AuthCredentials.Response.self)
+        return await sendRequest(endpoint: HTOEndpoint.refreshLogin(refreshToken: refreshToken), responseModel: AuthCredentials.Response.self)
     }
 }
 
 let basicCredentials = "REDACTED"
 let basicCredentialsBase64 = "REDACTED"
-
-enum HttpMethod: String {
-    case get
-    case post
-    
-    var asString: String { rawValue.uppercased() }
-}
-enum ManagerErrors: Error {
-    case invalidResponse
-    case invalidStatusCode(Int)
-}
-
-class HTTPClient{
-    static let shared = HTTPClient()
-    
-    func httpRequest<T: Query>(
-        requestType: T,
-        url: String? = nil,
-        completion: @escaping (Result<T.Response, Error>) -> Void
-    ) {
-        // Because URLSession returns on the queue it creates for the request, we need to make sure we return on one and the same queue.
-        // You can do this by either create a queue in your class (NetworkManager) which you return on, or return on the main queue.
-        let completionOnMain: (Result<T.Response, Error>) -> Void = { result in
-            DispatchQueue.main.async {
-                completion(result)
-            }
-        }
-        
-        var useThisURL = "https://api.platform.wizards.com/auth/oauth/token"
-        if url != nil {
-            useThisURL = url!
-        }
-        var request = URLRequest(url: URL(string: useThisURL)!)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Basic \(basicCredentialsBase64)", forHTTPHeaderField: "Authorization")
-        request.httpMethod = HttpMethod.post.asString
-        request.httpBody = try! JSONEncoder().encode(requestType)
-        
-        let urlSession = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completionOnMain(.failure(error))
-                return
-            }
-            
-            guard let urlResponse = response as? HTTPURLResponse else { return completionOnMain(.failure(ManagerErrors.invalidResponse)) }
-            if !(200..<300).contains(urlResponse.statusCode) {
-                return completionOnMain(.failure(ManagerErrors.invalidStatusCode(urlResponse.statusCode)))
-            }
-            
-            guard let data = data else { return }
-            do {
-                let decodedData = try T.decodeResponse(data)
-                completionOnMain(.success(decodedData))
-            } catch {
-                print(NSString(data: data, encoding: NSUTF8StringEncoding)!)
-                debugPrint("Could not translate the data to the requested type. Reason: \(String(describing: error))")
-                completionOnMain(.failure(error))
-            }
-        }
-        
-        urlSession.resume()
-    }
-    func gqlRequest<T: Query>(
-        _ requestType: T,
-        httpMethod: HttpMethod = .post,
-        completion: @escaping (Result<T.Response, Error>) -> Void
-    ) {
-        // Because URLSession returns on the queue it creates for the request, we need to make sure we return on one and the same queue.
-        // You can do this by either create a queue in your class (NetworkManager) which you return on, or return on the main queue.
-        let completionOnMain: (Result<T.Response, Error>) -> Void = { result in
-            DispatchQueue.main.async {
-                completion(result)
-            }
-        }
-        
-        var request = URLRequest(url: URL(string: "https://api.tabletop.wizards.com/silverbeak-griffin-service/graphql")!)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type" )
-        request.httpMethod = httpMethod.asString
-        request.httpBody = try! JSONEncoder().encode(requestType)
-        
-        // credentials
-        if let savedAuth = UserDefaults.standard.object(forKey: "savedAuth") as? Data {
-            if let credentials = try? JSONDecoder().decode(AuthCredentials.Response.self, from: savedAuth) {
-                request.setValue("Bearer \(credentials.access_token)", forHTTPHeaderField: "Authorization")
-            }
-        } else { return }
-        
-        let urlSession = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                return completionOnMain(.failure(error)) }
-            guard let urlResponse = response as? HTTPURLResponse else {
-                return completionOnMain(.failure(ManagerErrors.invalidResponse)) }
-            if !(200..<300).contains(urlResponse.statusCode) {
-                return completionOnMain(.failure(ManagerErrors.invalidStatusCode(urlResponse.statusCode))) }
-            guard let data = data else { return }
-            
-            do {
-                let decodedData = try T.decodeResponse(data)
-//                print(decodedData)
-                completionOnMain(.success(decodedData))
-            } catch {
-                let decodedError = try? JSONDecoder().decode([GraphQLError].self, from: data)
-                print(NSString(data: data, encoding: NSUTF8StringEncoding)!)
-//                debugPrint("Could not translate the data to the requested type. Reason: \(String(describing: error))")
-                debugPrint(decodedError as Any)
-                completionOnMain(.failure(error))
-            }
-        }
-        
-        urlSession.resume()
-    }
-}
