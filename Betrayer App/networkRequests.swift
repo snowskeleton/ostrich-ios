@@ -22,7 +22,6 @@ func refreshLogin() {
 }
 
 func pickleAuthentication(_ creds: AuthCredentials.Response) {
-//        UserDefaults.standard.set(encoded, forKey: "savedAuth")
     UserDefaults.standard.removeObject(forKey: "savedAuth")
     UserDefaults.standard.set(creds.persona_id, forKey: "personaId")
     UserDefaults.standard.set(creds.refresh_token, forKey: "refreshToken")
@@ -33,11 +32,8 @@ func pickleAuthentication(_ creds: AuthCredentials.Response) {
         case .success(let profile):
             UserDefaults.standard.set(profile.firstName, forKey: "firstName")
             UserDefaults.standard.set(profile.lastName, forKey: "lastName")
-            print(String(describing: profile))
-            print(profile)
         case .failure(let failure):
             print(String(describing: failure))
-//            print(failure)
         }
         
     }
