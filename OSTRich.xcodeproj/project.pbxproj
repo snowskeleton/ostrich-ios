@@ -38,7 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		803AECEC2AA26B2200CF03EB /* Betrayer App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Betrayer App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		803AECEC2AA26B2200CF03EB /* OSTRich.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSTRich.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		803AECEF2AA26B2200CF03EB /* Betrayer_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Betrayer_AppApp.swift; sourceTree = "<group>"; };
 		803AECF12AA26B2200CF03EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		803AECF32AA26B2300CF03EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 		803AECED2AA26B2200CF03EB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				803AECEC2AA26B2200CF03EB /* Betrayer App.app */,
+				803AECEC2AA26B2200CF03EB /* OSTRich.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,9 +152,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		803AECEB2AA26B2200CF03EB /* Betrayer App */ = {
+		803AECEB2AA26B2200CF03EB /* OSTRich */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 803AECFF2AA26B2300CF03EB /* Build configuration list for PBXNativeTarget "Betrayer App" */;
+			buildConfigurationList = 803AECFF2AA26B2300CF03EB /* Build configuration list for PBXNativeTarget "OSTRich" */;
 			buildPhases = (
 				803AECE82AA26B2200CF03EB /* Sources */,
 				803AECE92AA26B2200CF03EB /* Frameworks */,
@@ -164,11 +164,11 @@
 			);
 			dependencies = (
 			);
-			name = "Betrayer App";
+			name = OSTRich;
 			packageProductDependencies = (
 			);
 			productName = "Betrayer App";
-			productReference = 803AECEC2AA26B2200CF03EB /* Betrayer App.app */;
+			productReference = 803AECEC2AA26B2200CF03EB /* OSTRich.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -186,7 +186,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 803AECE72AA26B2200CF03EB /* Build configuration list for PBXProject "Betrayer App" */;
+			buildConfigurationList = 803AECE72AA26B2200CF03EB /* Build configuration list for PBXProject "OSTRich" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -201,7 +201,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				803AECEB2AA26B2200CF03EB /* Betrayer App */,
+				803AECEB2AA26B2200CF03EB /* OSTRich */,
 			);
 		};
 /* End PBXProject section */
@@ -432,7 +432,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		803AECE72AA26B2200CF03EB /* Build configuration list for PBXProject "Betrayer App" */ = {
+		803AECE72AA26B2200CF03EB /* Build configuration list for PBXProject "OSTRich" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				803AECFD2AA26B2300CF03EB /* Debug */,
@@ -441,7 +441,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		803AECFF2AA26B2300CF03EB /* Build configuration list for PBXNativeTarget "Betrayer App" */ = {
+		803AECFF2AA26B2300CF03EB /* Build configuration list for PBXNativeTarget "OSTRich" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				803AED002AA26B2300CF03EB /* Debug */,
