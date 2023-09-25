@@ -1,0 +1,6 @@
+mutation submitMatch($input: MatchResultInput!) {
+  recordMatchResult(input: $input) {
+    ...GameStateMinDataDetails
+    __typename
+  }
+}

@@ -8,19 +8,37 @@
 import SwiftUI
 
 
-fileprivate func playerInMatch(personaId: String, match: Match) -> Bool {
-    return match.teams.contains { team in
-        team.players.contains { player in
-            player.personaId == personaId
-        }
-    }
-}
-
-struct SpecificMatchView: View {
+struct SubmitMatchView: View {
     let match: Match
+    var player1: User { return match.teams[1].players[0] }
+    var player2: User { return match.teams[0].players[0] }
+//    var players: [User] { return [match.teams[0].players[0], match.teams[1].players[0] ]}
+    
+    @State private var p1Wins = 0
+    @State private var p2Wins = 0
     
     var body: some View {
         Text(String(describing: match.tableNumber!)).fontWeight(.bold)
+        Spacer()
+        List {
+            Section("\(player1.firstName) \(player1.lastName)") {
+                Picker(selection: $p1Wins, label: Text("Player 1 wins")) {
+                    Text("0").tag(0)
+                    Text("1").tag(1)
+                    Text("2").tag(2)
+                }.pickerStyle(SegmentedPickerStyle())
+            }
+            Section("\(player2.firstName) \(player2.lastName)") {
+                Picker(selection: $p2Wins, label: Text("Player 2 wins")) {
+                    Text("0").tag(0)
+                    Text("1").tag(1)
+                    Text("2").tag(2)
+                }.pickerStyle(SegmentedPickerStyle())
+            }
+            Button("Submit") {
+                print("Submit")
+            }
+        }
     }
 }
 
@@ -57,7 +75,7 @@ struct MatchesViwe: View {
                 ForEach(matches, id: \.tableNumber) { match in
                     if playerInMatch(personaId: personaId, match: match) {
                         NavigationLink {
-                            SpecificMatchView(match: match)
+                            SubmitMatchView(match: match)
                         } label: {
                              MatchLineItem(match: match)
                         }
@@ -70,6 +88,13 @@ struct MatchesViwe: View {
                         MatchLineItem(match: match)
                     }
                 }
+            }
+        }
+    }
+    fileprivate func playerInMatch(personaId: String, match: Match) -> Bool {
+        return match.teams.contains { team in
+            team.players.contains { player in
+                player.personaId == personaId
             }
         }
     }

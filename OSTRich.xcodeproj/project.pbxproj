@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		802BCBDA2AC215D300E1501F /* submitMatch.query in Resources */ = {isa = PBXBuildFile; fileRef = 802BCBD92AC215D300E1501F /* submitMatch.query */; };
 		803AECF02AA26B2200CF03EB /* OSTRichApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */; };
 		803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECF12AA26B2200CF03EB /* ContentView.swift */; };
 		803AECF42AA26B2300CF03EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803AECF32AA26B2300CF03EB /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		802BCBD92AC215D300E1501F /* submitMatch.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = submitMatch.query; sourceTree = "<group>"; };
 		803AECEC2AA26B2200CF03EB /* OSTRich.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSTRich.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSTRichApp.swift; sourceTree = "<group>"; };
 		803AECF12AA26B2200CF03EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -79,19 +81,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		803AECE32AA26B2200CF03EB = {
+		802BCBDB2AC215F000E1501F /* original gqls */ = {
 			isa = PBXGroup;
 			children = (
-				80B8E12A2AB665B400845ECC /* queries */,
+				80B8E1182AAA319A00845ECC /* apollo-codegen-config.json */,
+				80A1C0A22AA7C84800B4FDB8 /* gamestateschema.json */,
+				80A1C09F2AA7C83400B4FDB8 /* schema.json */,
 				80B8E1262AAA31F500845ECC /* GameState.graphql */,
 				80B8E11A2AAA31BB00845ECC /* MagicCard.graphql */,
 				80B8E11F2AAA31BB00845ECC /* MagicCardOracleSubTypes.graphql */,
 				80B8E11B2AAA31BB00845ECC /* MagicCardPrintings.graphql */,
 				80B8E11D2AAA31BB00845ECC /* MagicCards.graphql */,
 				80B8E11E2AAA31BB00845ECC /* MagicCardSets.graphql */,
-				80B8E1182AAA319A00845ECC /* apollo-codegen-config.json */,
-				80A1C0A22AA7C84800B4FDB8 /* gamestateschema.json */,
-				80A1C09F2AA7C83400B4FDB8 /* schema.json */,
+			);
+			path = "original gqls";
+			sourceTree = "<group>";
+		};
+		803AECE32AA26B2200CF03EB = {
+			isa = PBXGroup;
+			children = (
+				80B8E12A2AB665B400845ECC /* queries */,
+				802BCBDB2AC215F000E1501F /* original gqls */,
 				803AECEE2AA26B2200CF03EB /* OSTRich */,
 				803AECED2AA26B2200CF03EB /* Products */,
 			);
@@ -116,12 +126,12 @@
 				803AECF32AA26B2300CF03EB /* Assets.xcassets */,
 				803AECF82AA26B2300CF03EB /* Persistence.swift */,
 				80B8E11C2AAA31BB00845ECC /* GameState.graphql */,
-				803AECFA2AA26B2300CF03EB /* OSTRich.xcdatamodeld */,
-				803AECF52AA26B2300CF03EB /* Preview Content */,
 				8046EA482AA64E8B00578539 /* Network Manager.swift */,
 				8046EA4A2AA6A60500578539 /* ResponseTypes.swift */,
 				80B8E1322AB7D47300845ECC /* ErrorTypes.swift */,
 				80B8E1362AB7EF0700845ECC /* EventView.swift */,
+				803AECFA2AA26B2300CF03EB /* OSTRich.xcdatamodeld */,
+				803AECF52AA26B2300CF03EB /* Preview Content */,
 			);
 			path = OSTRich;
 			sourceTree = "<group>";
@@ -140,6 +150,7 @@
 				80B8E12D2AB6680E00845ECC /* myActiveEvents.query */,
 				80B8E12F2AB66E3300845ECC /* joinEventWithShortCode.query */,
 				80B8E1342AB7EA1500845ECC /* loadEvent.query */,
+				802BCBD92AC215D300E1501F /* submitMatch.query */,
 				80B8E13C2AB8C24300845ECC /* dropSelf.query */,
 				80B8E13E2AB8C5D300845ECC /* dropTeamV2.query */,
 			);
@@ -215,6 +226,7 @@
 				80B8E13D2AB8C24300845ECC /* dropSelf.query in Resources */,
 				80B8E1212AAA31BB00845ECC /* MagicCardPrintings.graphql in Resources */,
 				80B8E1192AAA319A00845ECC /* apollo-codegen-config.json in Resources */,
+				802BCBDA2AC215D300E1501F /* submitMatch.query in Resources */,
 				803AECF72AA26B2300CF03EB /* Preview Assets.xcassets in Resources */,
 				80B8E13F2AB8C5D300845ECC /* dropTeamV2.query in Resources */,
 				80B8E1272AAA31F500845ECC /* GameState.graphql in Resources */,
