@@ -1,6 +1,6 @@
 //
 //  Persistence.swift
-//  Betrayer App
+//  OSTRich
 //
 //  Created by snow on 9/1/23.
 //
@@ -31,7 +31,7 @@ struct PersistenceController {
     let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "Betrayer_App")
+        container = NSPersistentContainer(name: "OSTRich")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }

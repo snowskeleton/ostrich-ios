@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Betrayer App
+//  OSTRich
 //
 //  Created by snow on 9/1/23.
 //

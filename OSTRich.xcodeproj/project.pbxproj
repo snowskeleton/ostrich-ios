@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		803AECF02AA26B2200CF03EB /* Betrayer_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECEF2AA26B2200CF03EB /* Betrayer_AppApp.swift */; };
+		803AECF02AA26B2200CF03EB /* OSTRichApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */; };
 		803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECF12AA26B2200CF03EB /* ContentView.swift */; };
 		803AECF42AA26B2300CF03EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803AECF32AA26B2300CF03EB /* Assets.xcassets */; };
 		803AECF72AA26B2300CF03EB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803AECF62AA26B2300CF03EB /* Preview Assets.xcassets */; };
 		803AECF92AA26B2300CF03EB /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECF82AA26B2300CF03EB /* Persistence.swift */; };
-		803AECFC2AA26B2300CF03EB /* Betrayer_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 803AECFA2AA26B2300CF03EB /* Betrayer_App.xcdatamodeld */; };
+		803AECFC2AA26B2300CF03EB /* OSTRich.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 803AECFA2AA26B2300CF03EB /* OSTRich.xcdatamodeld */; };
 		8046EA492AA64E8B00578539 /* Network Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA482AA64E8B00578539 /* Network Manager.swift */; };
 		8046EA4B2AA6A60500578539 /* ResponseTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA4A2AA6A60500578539 /* ResponseTypes.swift */; };
 		80A1C0A02AA7C83400B4FDB8 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 80A1C09F2AA7C83400B4FDB8 /* schema.json */; };
@@ -39,7 +39,7 @@
 
 /* Begin PBXFileReference section */
 		803AECEC2AA26B2200CF03EB /* OSTRich.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSTRich.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		803AECEF2AA26B2200CF03EB /* Betrayer_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Betrayer_AppApp.swift; sourceTree = "<group>"; };
+		803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSTRichApp.swift; sourceTree = "<group>"; };
 		803AECF12AA26B2200CF03EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		803AECF32AA26B2300CF03EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		803AECF62AA26B2300CF03EB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 				80B8E1182AAA319A00845ECC /* apollo-codegen-config.json */,
 				80A1C0A22AA7C84800B4FDB8 /* gamestateschema.json */,
 				80A1C09F2AA7C83400B4FDB8 /* schema.json */,
-				803AECEE2AA26B2200CF03EB /* Betrayer App */,
+				803AECEE2AA26B2200CF03EB /* OSTRich */,
 				803AECED2AA26B2200CF03EB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,18 +107,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		803AECEE2AA26B2200CF03EB /* Betrayer App */ = {
+		803AECEE2AA26B2200CF03EB /* OSTRich */ = {
 			isa = PBXGroup;
 			children = (
 				80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */,
-				803AECEF2AA26B2200CF03EB /* Betrayer_AppApp.swift */,
+				803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */,
 				803AECF12AA26B2200CF03EB /* ContentView.swift */,
 				80B8E1442ABA245600845ECC /* networkRequests.swift */,
 				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				803AECF32AA26B2300CF03EB /* Assets.xcassets */,
 				803AECF82AA26B2300CF03EB /* Persistence.swift */,
 				80B8E11C2AAA31BB00845ECC /* GameState.graphql */,
-				803AECFA2AA26B2300CF03EB /* Betrayer_App.xcdatamodeld */,
+				803AECFA2AA26B2300CF03EB /* OSTRich.xcdatamodeld */,
 				803AECF52AA26B2300CF03EB /* Preview Content */,
 				8046EA482AA64E8B00578539 /* Network Manager.swift */,
 				80B8E12B2AB665F500845ECC /* hsnm.swift */,
@@ -126,7 +126,7 @@
 				80B8E1322AB7D47300845ECC /* ErrorTypes.swift */,
 				80B8E1362AB7EF0700845ECC /* EventView.swift */,
 			);
-			path = "Betrayer App";
+			path = OSTRich;
 			sourceTree = "<group>";
 		};
 		803AECF52AA26B2300CF03EB /* Preview Content */ = {
@@ -245,10 +245,10 @@
 				80B8E1372AB7EF0700845ECC /* EventView.swift in Sources */,
 				80B8E12C2AB665F500845ECC /* hsnm.swift in Sources */,
 				803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */,
-				803AECF02AA26B2200CF03EB /* Betrayer_AppApp.swift in Sources */,
+				803AECF02AA26B2200CF03EB /* OSTRichApp.swift in Sources */,
 				80B8E1412ABA23F000845ECC /* LoginView.swift in Sources */,
 				8046EA4B2AA6A60500578539 /* ResponseTypes.swift in Sources */,
-				803AECFC2AA26B2300CF03EB /* Betrayer_App.xcdatamodeld in Sources */,
+				803AECFC2AA26B2300CF03EB /* OSTRich.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,7 +378,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Betrayer App/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"OSTRich/Preview Content\"";
 				DEVELOPMENT_TEAM = PK7HCG46US;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -392,7 +392,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "net.snowskeleton.Betrayer-App";
+				PRODUCT_BUNDLE_IDENTIFIER = net.snowskeleton.ostrich;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -407,7 +407,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Betrayer App/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"OSTRich/Preview Content\"";
 				DEVELOPMENT_TEAM = PK7HCG46US;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -421,7 +421,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "net.snowskeleton.Betrayer-App";
+				PRODUCT_BUNDLE_IDENTIFIER = net.snowskeleton.ostrich;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -453,13 +453,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		803AECFA2AA26B2300CF03EB /* Betrayer_App.xcdatamodeld */ = {
+		803AECFA2AA26B2300CF03EB /* OSTRich.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				803AECFB2AA26B2300CF03EB /* Betrayer_App.xcdatamodel */,
 			);
 			currentVersion = 803AECFB2AA26B2300CF03EB /* Betrayer_App.xcdatamodel */;
-			path = Betrayer_App.xcdatamodeld;
+			path = OSTRich.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

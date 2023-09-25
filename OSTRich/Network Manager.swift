@@ -1,6 +1,6 @@
 //
 //  Network Manager.swift
-//  Betrayer App
+//  OSTRich
 //
 //  Created by snow on 9/4/23.
 //

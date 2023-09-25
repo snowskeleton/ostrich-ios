@@ -1,7 +1,7 @@
 //
 //  hsnm.swift
 //  Handshake Network Manager
-//  Betrayer App
+//  OSTRich
 //
 //  Created by snow on 9/16/23.
 //

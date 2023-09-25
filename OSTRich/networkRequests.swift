@@ -1,6 +1,6 @@
 //
 //  networkRequests.swift
-//  Betrayer App
+//  OSTRich
 //
 //  Created by snow on 9/19/23.
 //

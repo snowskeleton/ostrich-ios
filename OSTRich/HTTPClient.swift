@@ -1,6 +1,6 @@
 //
 //  HTTPClient.swift
-//  Betrayer App
+//  OSTRich
 //
 //  Created by snow on 9/22/23.
 //

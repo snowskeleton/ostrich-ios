@@ -1,6 +1,6 @@
 //
-//  Betrayer_AppApp.swift
-//  Betrayer App
+//  OSTRichApp.swift
+//  OSTRich
 //
 //  Created by snow on 9/1/23.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct Betrayer_AppApp: App {
+struct OSTRichApp: App {
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
