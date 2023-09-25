@@ -24,7 +24,6 @@
 		80B8E1242AAA31BB00845ECC /* MagicCardSets.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E11E2AAA31BB00845ECC /* MagicCardSets.graphql */; };
 		80B8E1252AAA31BB00845ECC /* MagicCardOracleSubTypes.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E11F2AAA31BB00845ECC /* MagicCardOracleSubTypes.graphql */; };
 		80B8E1272AAA31F500845ECC /* GameState.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E1262AAA31F500845ECC /* GameState.graphql */; };
-		80B8E12C2AB665F500845ECC /* hsnm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E12B2AB665F500845ECC /* hsnm.swift */; };
 		80B8E1302AB66E3300845ECC /* joinEventWithShortCode.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E12F2AB66E3300845ECC /* joinEventWithShortCode.query */; };
 		80B8E1312AB6AC1A00845ECC /* myActiveEvents.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E12D2AB6680E00845ECC /* myActiveEvents.query */; };
 		80B8E1332AB7D47300845ECC /* ErrorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1322AB7D47300845ECC /* ErrorTypes.swift */; };
@@ -57,7 +56,6 @@
 		80B8E11E2AAA31BB00845ECC /* MagicCardSets.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MagicCardSets.graphql; sourceTree = "<group>"; };
 		80B8E11F2AAA31BB00845ECC /* MagicCardOracleSubTypes.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MagicCardOracleSubTypes.graphql; sourceTree = "<group>"; };
 		80B8E1262AAA31F500845ECC /* GameState.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GameState.graphql; sourceTree = "<group>"; };
-		80B8E12B2AB665F500845ECC /* hsnm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hsnm.swift; sourceTree = "<group>"; };
 		80B8E12D2AB6680E00845ECC /* myActiveEvents.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = myActiveEvents.query; sourceTree = "<group>"; };
 		80B8E12F2AB66E3300845ECC /* joinEventWithShortCode.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = joinEventWithShortCode.query; sourceTree = "<group>"; };
 		80B8E1322AB7D47300845ECC /* ErrorTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTypes.swift; sourceTree = "<group>"; };
@@ -121,7 +119,6 @@
 				803AECFA2AA26B2300CF03EB /* OSTRich.xcdatamodeld */,
 				803AECF52AA26B2300CF03EB /* Preview Content */,
 				8046EA482AA64E8B00578539 /* Network Manager.swift */,
-				80B8E12B2AB665F500845ECC /* hsnm.swift */,
 				8046EA4A2AA6A60500578539 /* ResponseTypes.swift */,
 				80B8E1322AB7D47300845ECC /* ErrorTypes.swift */,
 				80B8E1362AB7EF0700845ECC /* EventView.swift */,
@@ -243,7 +240,6 @@
 				80B8E1452ABA245600845ECC /* networkRequests.swift in Sources */,
 				80B8E1332AB7D47300845ECC /* ErrorTypes.swift in Sources */,
 				80B8E1372AB7EF0700845ECC /* EventView.swift in Sources */,
-				80B8E12C2AB665F500845ECC /* hsnm.swift in Sources */,
 				803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */,
 				803AECF02AA26B2200CF03EB /* OSTRichApp.swift in Sources */,
 				80B8E1412ABA23F000845ECC /* LoginView.swift in Sources */,
