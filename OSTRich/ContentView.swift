@@ -32,14 +32,14 @@ struct ContentView: View {
                     })
                 }
                 Section {
-                    ForEach(events, id: \.self) { event in
+                    ForEach(events, id: \.scheduledStartTime) { event in
                         NavigationLink {
                             EventView(someEvent: event)
                             .environment(\.managedObjectContext, viewContext)
                         } label: {
                             VStack {
                                 Text("\(event.title ?? "") | \(event.shortCode)")
-                                Text(event.eventFormat!.name)
+                                Text("\(event.eventFormat!.name) | \(event.scheduledStartTime!)")
                             }
                         }
                     }

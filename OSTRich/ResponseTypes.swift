@@ -121,19 +121,10 @@ extension GraphQLQuery {
 }
 
 
-//struct APIResponse<T: Decodable>: Decodable {
-//    let data: T
-//}
-
 struct loadEvent: GraphQLQuery {
     var operationName: String
     var query: String
     var variables: [String: String] = [:]
-    init(eventId: String) {
-        self.operationName = String("\(type(of: self))".split(separator: ".").last!)
-        self.query = try! String(contentsOfFile: Bundle.main.path(forResource: self.operationName, ofType: "query")!)
-        self.variables = [ "eventId": eventId ]
-    }
     struct Response: Codable { let data: loadEventData }
 }
 
@@ -146,16 +137,12 @@ struct myActiveEvents: GraphQLQuery {
     var operationName: String
     var query: String
     var variables: [String: String] = [:]
-    init() {
-        self.operationName = String("\(type(of: self))".split(separator: ".").last!)
-        self.query = try! String(contentsOfFile: Bundle.main.path(forResource: self.operationName, ofType: "query")!)
-    }
     struct Response: Codable { let data: myActiveEventsData }
 }
 struct myActiveEventsData: Codable {
     let myActiveEvents: [Event]
 }
-struct Event: Codable, Hashable, Identifiable {
+class Event: Codable, Hashable, Identifiable {
     static func == (lhs: Event, rhs: Event) -> Bool {
         return lhs.id == rhs.id
     }
@@ -213,11 +200,6 @@ struct joinEventWithShortCode: GraphQLQuery {
     var operationName: String
     var query: String
     var variables: [String: String] = [:]
-    init(code: String) {
-        self.operationName = String("\(type(of: self))".split(separator: ".").last!)
-        self.query = try! String(contentsOfFile: Bundle.main.path(forResource: self.operationName, ofType: "query")!)
-        self.variables = [ "shortCode": code ]
-    }
     struct Response: Codable { let data: joinEventWithShortCodeData }
 }
 struct joinEventWithShortCodeData: Codable {
@@ -228,11 +210,6 @@ struct dropSelf: GraphQLQuery {
     var operationName: String
     var query: String
     var variables: [String: String] = [:]
-    init(eventId: String) {
-        self.operationName = String("\(type(of: self))".split(separator: ".").last!)
-        self.query = try! String(contentsOfFile: Bundle.main.path(forResource: self.operationName, ofType: "query")!)
-        self.variables = [ "eventId": eventId ]
-    }
     struct Response: Codable { let data: dropSelfData }
 }
 struct dropSelfData: Codable {
@@ -254,6 +231,16 @@ struct dropTeamV2Data: Codable {
     let dropTeam: String
 }
 
+struct submitMatch: GraphQLQuery {
+    var operationName: String
+    var query: String
+    var variables: [String: String] = [:]
+    struct Response: Codable { let data: submitMatchData}
+}
+struct submitMatchData: Codable {
+    let recordMatchResult: GameState
+}
+
 struct Registration: Codable, Hashable {
     let id: String
     let status: String
@@ -265,7 +252,7 @@ struct Registration: Codable, Hashable {
 
 struct GameState: Codable {
     let id: String
-    let minRounds: Int
+    let minRounds: Int?
     let pods: String? // Replace with the actual data type if available
     let top8Pods: String? // Replace with the actual data type if available
     let constructedSeats: String? // Replace with the actual data type if available

@@ -8,14 +8,27 @@
 import SwiftUI
 
 
+struct MatchDetails: Codable {
+    let draws: Int
+    let eventId: String
+    let isBye: Bool
+    let leftTeamId: String
+    let leftTeamWins: Int
+    let rightTeamId: String
+    let rightTeamWins: Int
+    let matchId: String
+}
+
 struct SubmitMatchView: View {
     let match: Match
+    let eventId: String
     var player1: User { return match.teams[1].players[0] }
     var player2: User { return match.teams[0].players[0] }
 //    var players: [User] { return [match.teams[0].players[0], match.teams[1].players[0] ]}
     
     @State private var p1Wins = 0
     @State private var p2Wins = 0
+    @State private var draws = "0"
     
     var body: some View {
         Text(String(describing: match.tableNumber!)).fontWeight(.bold)
@@ -35,8 +48,29 @@ struct SubmitMatchView: View {
                     Text("2").tag(2)
                 }.pickerStyle(SegmentedPickerStyle())
             }
-            Button("Submit") {
-                print("Submit")
+            Section("Draws") {
+                TextField("Draws", text: $draws).keyboardType(.numberPad)
+            }
+            Button("Submit") { submitMatch() }
+        }
+    }
+    fileprivate func submitMatch() {
+        Task {
+            let matchToSubmit = MatchDetails(
+                draws: Int(draws) ?? 0,
+                eventId: eventId,
+                isBye: match.isBye,
+                leftTeamId: match.teams[1].id,
+                leftTeamWins: p2Wins,
+                rightTeamId: match.teams[0].id,
+                rightTeamWins: p1Wins,
+                matchId: match.id)
+            
+            switch await HTOService().recordMatchResults(matchDetails: matchToSubmit) {
+            case .success(let success):
+                print(success)
+            case .failure(let error):
+                print(error)
             }
         }
     }
@@ -59,14 +93,17 @@ struct MatchLineItem: View {
             Text(longString)
             Spacer()
             if match.leftTeamWins != nil && match.rightTeamWins != nil {
-                Text("\(match.leftTeamWins!) – \(match.rightTeamWins!)")
+                Text("\(match.rightTeamWins!) – \(match.leftTeamWins!)")
             }
         }
     }
 }
 
-struct MatchesViwe: View {
-    var matches: [Match]
+struct MatchesView: View {
+    @State var event: Event
+    var matches: [Match] {
+        return event.gameStateAtRound!.currentRound!.matches
+    }
     var personaId = UserDefaults.standard.string(forKey: "personaId") ?? ""
     
     var body: some View {
@@ -75,7 +112,7 @@ struct MatchesViwe: View {
                 ForEach(matches, id: \.tableNumber) { match in
                     if playerInMatch(personaId: personaId, match: match) {
                         NavigationLink {
-                            SubmitMatchView(match: match)
+                            SubmitMatchView(match: match, eventId: event.id)
                         } label: {
                              MatchLineItem(match: match)
                         }
@@ -108,8 +145,8 @@ struct EventView: View {
         Text(event?.status ?? "")
         List {
             NavigationLink {
-                if let matches = event?.gameStateAtRound?.currentRound?.matches {
-                    MatchesViwe(matches: matches)
+                if let _ = event?.gameStateAtRound?.currentRound?.matches {
+                    MatchesView(event: event!)
                 }
             } label: {
                 Text("Matches")
@@ -135,9 +172,9 @@ struct EventView: View {
         .onAppear {
             getEvent()
         }
-        //        .onReceive(Timer.publish(every: 10, on: .main, in: .common).autoconnect(), perform: { _ in
-        //            Task { await getEvent() }
-        //        })
+        .onReceive(Timer.publish(every: 10, on: .main, in: .common).autoconnect(), perform: { _ in
+            Task { getEvent() }
+        })
         .navigationTitle(Text(event?.title ?? ""))
     }
     func getEvent() {
@@ -145,7 +182,6 @@ struct EventView: View {
             switch await HTOService().getEvent(eventId: someEvent.id) {
             case .success(let response):
                 event = response.data.event
-//                print(response.data.event)
             case .failure(let error):
                 print(error.localizedDescription)
             }

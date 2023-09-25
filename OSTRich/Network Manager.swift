@@ -19,6 +19,7 @@ enum HTOEndpoint {
     case loadEvent(eventId: String)
     case joinEventWithShortCode(code: String)
     case dropSelf(eventId: String)
+    case submitMatch(matchDetails: MatchDetails)
 }
 
 extension HTOEndpoint: Endpoint {
@@ -123,6 +124,24 @@ extension HTOEndpoint: Endpoint {
                 "query": self.query!,
                 "variables": ["eventId": eventId]
             ]
+        case .submitMatch(let matchDetails):
+            return [
+                
+                "operationName": self.operationName,
+                "query": self.query!,
+                "variables": [
+                    "input": [
+                        "draws": matchDetails.draws,
+                        "eventId": matchDetails.eventId,
+                        "isBye": matchDetails.isBye,
+                        "leftTeamId": matchDetails.leftTeamId,
+                        "leftTeamWins": matchDetails.leftTeamWins,
+                        "matchId": matchDetails.matchId,
+                        "rightTeamId": matchDetails.rightTeamId,
+                        "rightTeamWins": matchDetails.rightTeamWins
+                    ]
+                ]
+            ]
         default:
             return [
                 "operationName": self.operationName,
@@ -150,10 +169,14 @@ protocol HTOServiceable {
     func getActiveEvents() async -> Result<myActiveEvents.Response, RequestError>
     func getEvent(eventId: String) async -> Result<loadEvent.Response, RequestError>
     func dropEvent(eventId: String) async -> Result<dropSelf.Response, RequestError>
-    
+    func recordMatchResults(matchDetails: MatchDetails) async -> Result<submitMatch.Response, RequestError>
 }
 
 struct HTOService: HTTPClient, HTOServiceable {
+    func recordMatchResults(matchDetails: MatchDetails) async -> Result<submitMatch.Response, RequestError> {
+        return await sendRequest(endpoint: HTOEndpoint.submitMatch(matchDetails: matchDetails), responseModel: submitMatch.Response.self)
+    }
+    
     func getProfile() async -> Result<Profile.Response, RequestError> {
         return await sendRequest(endpoint: HTOEndpoint.getProfile, responseModel: Profile.Response.self)
     }

@@ -1,6 +1,10 @@
 mutation submitMatch($input: MatchResultInput!) {
   recordMatchResult(input: $input) {
-    ...GameStateMinDataDetails
-    __typename
+  __typename
+  ...GameStateMinDataDetails
   }
+}
+fragment GameStateMinDataDetails on GameState {
+__typename
+id
 }
