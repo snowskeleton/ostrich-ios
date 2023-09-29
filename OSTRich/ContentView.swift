@@ -9,8 +9,13 @@ import SwiftUI
 import CoreData
 import Foundation
 
+@Observable class EventBook {
+    var events: [Event] = []
+}
+
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext: NSManagedObjectContext
+    @Environment(EventBook.self) private var eventBook
+//    @Environment(EventBook.self) private var eventBook = EventBook()
     
     @State var showJoinEvent = false
     @State var userIsLoggedIn = false
@@ -26,20 +31,36 @@ struct ContentView: View {
                     TextField("Event Code", text: $joinEventCode)
                     Button("Join Event", action: {
                         Task {
-                            let _ = await HTOService().joinEvent(joinEventCode)
-                            refreshMainPage()
+                            switch await HTOService().joinEvent(joinEventCode) {
+                            case .success:
+                                joinEventCode = ""
+                                refreshMainPage()
+                            case .failure(let failure):
+                                print(failure)
+                            }
                         }
                     })
                 }
                 Section {
-                    ForEach(events, id: \.scheduledStartTime) { event in
+                    if !eventBook.events.isEmpty {
                         NavigationLink {
-                            EventView(someEvent: event)
-                            .environment(\.managedObjectContext, viewContext)
+                            EventView(event: eventBook.events[0])
+                            //                            .environment(\.managedObjectContext, viewContext)
                         } label: {
                             VStack {
-                                Text("\(event.title ?? "") | \(event.shortCode)")
-                                Text("\(event.eventFormat!.name) | \(event.scheduledStartTime!)")
+                                Text("\(eventBook.events[0].title ?? "") | \(eventBook.events[0].shortCode ?? "")")
+                                Text("\(eventBook.events[0].eventFormat?.name ?? "") | \(eventBook.events[0].scheduledStartTime ?? "")")
+                            }
+                        }
+                    }
+                    ForEach(eventBook.events, id: \.scheduledStartTime) { event in
+                        NavigationLink {
+                            EventView(event: event)
+//                            .environment(\.managedObjectContext, viewContext)
+                        } label: {
+                            VStack {
+                                Text("\(event.title ?? "") | \(event.shortCode ?? "")")
+                                Text("\(event.eventFormat?.name ?? "") | \(event.scheduledStartTime ?? "")")
                             }
                         }
                     }
@@ -63,7 +84,7 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showAccountScreen) {
             LoginView()
-                .environment(\.managedObjectContext, viewContext)
+//                .environment(\.managedObjectContext, viewContext)
         }
             
         .onAppear {
@@ -85,10 +106,27 @@ struct ContentView: View {
             }
             switch await HTOService().getActiveEvents() {
             case .success(let response):
-                events = response.data.myActiveEvents
+                for event in response.data.myActiveEvents {
+                    if let alreadyHave = eventBook.events.first(where: { $0.id == event.id }) {
+                        print("we expected this")
+                        alreadyHave.updateSelf()
+                    } else {
+                        print("well THAT'S new")
+                        event.updateSelf()
+                        eventBook.events.append(event)
+                    }
+                }
             case .failure(let error):
                 print(error)
             }
+//            for event in events {
+//                switch await HTOService().getEvent(eventId: event.id) {
+//                case .success(let response):
+//                    let someEvent = response.data.event
+//                case .failure(let failure):
+//                    print(failure)
+//                }
+//            }
         }
     }
 }

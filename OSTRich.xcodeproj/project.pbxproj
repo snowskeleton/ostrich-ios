@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		802BCBDA2AC215D300E1501F /* submitMatch.query in Resources */ = {isa = PBXBuildFile; fileRef = 802BCBD92AC215D300E1501F /* submitMatch.query */; };
+		8030DC692AC7613600F775B6 /* HTTPQueryTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */; };
 		803AECF02AA26B2200CF03EB /* OSTRichApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */; };
 		803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECF12AA26B2200CF03EB /* ContentView.swift */; };
 		803AECF42AA26B2300CF03EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803AECF32AA26B2300CF03EB /* Assets.xcassets */; };
@@ -15,7 +16,7 @@
 		803AECF92AA26B2300CF03EB /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECF82AA26B2300CF03EB /* Persistence.swift */; };
 		803AECFC2AA26B2300CF03EB /* OSTRich.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 803AECFA2AA26B2300CF03EB /* OSTRich.xcdatamodeld */; };
 		8046EA492AA64E8B00578539 /* Network Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA482AA64E8B00578539 /* Network Manager.swift */; };
-		8046EA4B2AA6A60500578539 /* ResponseTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA4A2AA6A60500578539 /* ResponseTypes.swift */; };
+		8046EA4B2AA6A60500578539 /* GraphQLQueryTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */; };
 		80A1C0A02AA7C83400B4FDB8 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 80A1C09F2AA7C83400B4FDB8 /* schema.json */; };
 		80A1C0A42AA7C84800B4FDB8 /* gamestateschema.json in Resources */ = {isa = PBXBuildFile; fileRef = 80A1C0A22AA7C84800B4FDB8 /* gamestateschema.json */; };
 		80B8E1192AAA319A00845ECC /* apollo-codegen-config.json in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E1182AAA319A00845ECC /* apollo-codegen-config.json */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		802BCBD92AC215D300E1501F /* submitMatch.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = submitMatch.query; sourceTree = "<group>"; };
+		8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPQueryTypes.swift; sourceTree = "<group>"; };
 		803AECEC2AA26B2200CF03EB /* OSTRich.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSTRich.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSTRichApp.swift; sourceTree = "<group>"; };
 		803AECF12AA26B2200CF03EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -47,7 +49,7 @@
 		803AECF82AA26B2300CF03EB /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		803AECFB2AA26B2300CF03EB /* Betrayer_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Betrayer_App.xcdatamodel; sourceTree = "<group>"; };
 		8046EA482AA64E8B00578539 /* Network Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network Manager.swift"; sourceTree = "<group>"; };
-		8046EA4A2AA6A60500578539 /* ResponseTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseTypes.swift; sourceTree = "<group>"; };
+		8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLQueryTypes.swift; sourceTree = "<group>"; };
 		80A1C09F2AA7C83400B4FDB8 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		80A1C0A22AA7C84800B4FDB8 /* gamestateschema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gamestateschema.json; sourceTree = "<group>"; };
 		80B8E1182AAA319A00845ECC /* apollo-codegen-config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "apollo-codegen-config.json"; sourceTree = "<group>"; };
@@ -119,6 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */,
+				8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */,
+				8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */,
 				803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */,
 				803AECF12AA26B2200CF03EB /* ContentView.swift */,
 				80B8E1442ABA245600845ECC /* networkRequests.swift */,
@@ -127,7 +131,6 @@
 				803AECF82AA26B2300CF03EB /* Persistence.swift */,
 				80B8E11C2AAA31BB00845ECC /* GameState.graphql */,
 				8046EA482AA64E8B00578539 /* Network Manager.swift */,
-				8046EA4A2AA6A60500578539 /* ResponseTypes.swift */,
 				80B8E1322AB7D47300845ECC /* ErrorTypes.swift */,
 				80B8E1362AB7EF0700845ECC /* EventView.swift */,
 				803AECFA2AA26B2300CF03EB /* OSTRich.xcdatamodeld */,
@@ -255,7 +258,8 @@
 				803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */,
 				803AECF02AA26B2200CF03EB /* OSTRichApp.swift in Sources */,
 				80B8E1412ABA23F000845ECC /* LoginView.swift in Sources */,
-				8046EA4B2AA6A60500578539 /* ResponseTypes.swift in Sources */,
+				8046EA4B2AA6A60500578539 /* GraphQLQueryTypes.swift in Sources */,
+				8030DC692AC7613600F775B6 /* HTTPQueryTypes.swift in Sources */,
 				803AECFC2AA26B2300CF03EB /* OSTRich.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,7 +318,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -369,7 +373,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

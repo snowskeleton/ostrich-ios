@@ -112,7 +112,7 @@ struct MatchesView: View {
                 ForEach(matches, id: \.tableNumber) { match in
                     if playerInMatch(personaId: personaId, match: match) {
                         NavigationLink {
-                            SubmitMatchView(match: match, eventId: event.id)
+                            SubmitMatchView(match: match, eventId: event.id!)
                         } label: {
                              MatchLineItem(match: match)
                         }
@@ -137,21 +137,24 @@ struct MatchesView: View {
     }
 }
 struct EventView: View {
-    @State var someEvent: Event
-    @State private var event: Event?
+//    @Environment(EventBook.self) private var eventBook
+//    @State var someEvent: Event
+    @State var event: Event
+//    @Binding var event: Event
     
     var body: some View {
-        Text(event?.shortCode ?? "")
-        Text(event?.status ?? "")
+        Text(event.shortCode ?? "" )
+        Text(event.status ?? "")
         List {
             NavigationLink {
-                if let _ = event?.gameStateAtRound?.currentRound?.matches {
-                    MatchesView(event: event!)
+                if let _ = event.gameStateAtRound?.currentRound?.matches {
+                    MatchesView(event: event)
                 }
             } label: {
                 Text("Matches")
             }
-            ForEach((event?.registeredPlayers) ?? [], id: \.self) { player in
+            Text(String(describing: event.registeredPlayers))
+            ForEach((event.registeredPlayers) ?? [], id: \.id) { player in
                 VStack {
                     HStack {
                         Text("\(player.firstName) \(player.lastName) | \(player.displayName)")
@@ -163,30 +166,40 @@ struct EventView: View {
             }
             Section {
                 Button(role: .destructive, action: {
-                    dropSelfFromEvent(eventId: someEvent.id)
+                    dropSelfFromEvent(eventId: event.id!)
                 }, label: {
                     Text("Drop")
                 })
             }
         }
         .onAppear {
-            getEvent()
+            event.updateSelf()
+//            getEvent()
         }
         .onReceive(Timer.publish(every: 10, on: .main, in: .common).autoconnect(), perform: { _ in
-            Task { getEvent() }
+            event.updateSelf()
+//            getEvent()
         })
-        .navigationTitle(Text(event?.title ?? ""))
+        .navigationTitle(Text(event.title ?? ""))
     }
-    func getEvent() {
-        Task {
-            switch await HTOService().getEvent(eventId: someEvent.id) {
-            case .success(let response):
-                event = response.data.event
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
+//    func getEvent() {
+//        Task(priority: .userInitiated) {
+////            print(String(describing: event))
+//            switch await HTOService().getEvent(eventId: event.id) {
+//            case .success(let response):
+//                if var desiredEvent = eventBook.events.first(where: { $0.id == response.data.event.id }) {
+//                    print(desiredEvent)
+//                    desiredEvent = response.data.event
+//                    print(desiredEvent)
+//                }
+//                //                print(response.data.event)
+////                event = response.data.event
+////                print(event)
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
     
     fileprivate func dropSelfFromEvent(eventId: String) {
         Task {

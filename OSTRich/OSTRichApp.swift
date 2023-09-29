@@ -9,12 +9,14 @@ import SwiftUI
 
 @main
 struct OSTRichApp: App {
-    let persistenceController = PersistenceController.shared
+    @State private var eventBook = EventBook()
+//    let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(eventBook)
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
