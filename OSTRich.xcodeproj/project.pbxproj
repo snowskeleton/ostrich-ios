@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		802BCBDA2AC215D300E1501F /* submitMatch.query in Resources */ = {isa = PBXBuildFile; fileRef = 802BCBD92AC215D300E1501F /* submitMatch.query */; };
 		8030DC692AC7613600F775B6 /* HTTPQueryTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */; };
+		8030DC6B2AC763E900F775B6 /* DataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8030DC6A2AC763E900F775B6 /* DataTypes.swift */; };
 		803AECF02AA26B2200CF03EB /* OSTRichApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */; };
 		803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECF12AA26B2200CF03EB /* ContentView.swift */; };
 		803AECF42AA26B2300CF03EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803AECF32AA26B2300CF03EB /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 /* Begin PBXFileReference section */
 		802BCBD92AC215D300E1501F /* submitMatch.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = submitMatch.query; sourceTree = "<group>"; };
 		8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPQueryTypes.swift; sourceTree = "<group>"; };
+		8030DC6A2AC763E900F775B6 /* DataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypes.swift; sourceTree = "<group>"; };
 		803AECEC2AA26B2200CF03EB /* OSTRich.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSTRich.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSTRichApp.swift; sourceTree = "<group>"; };
 		803AECF12AA26B2200CF03EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */,
 				8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */,
 				8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */,
+				8030DC6A2AC763E900F775B6 /* DataTypes.swift */,
 				803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */,
 				803AECF12AA26B2200CF03EB /* ContentView.swift */,
 				80B8E1442ABA245600845ECC /* networkRequests.swift */,
@@ -255,6 +258,7 @@
 				80B8E1452ABA245600845ECC /* networkRequests.swift in Sources */,
 				80B8E1332AB7D47300845ECC /* ErrorTypes.swift in Sources */,
 				80B8E1372AB7EF0700845ECC /* EventView.swift in Sources */,
+				8030DC6B2AC763E900F775B6 /* DataTypes.swift in Sources */,
 				803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */,
 				803AECF02AA26B2200CF03EB /* OSTRichApp.swift in Sources */,
 				80B8E1412ABA23F000845ECC /* LoginView.swift in Sources */,
