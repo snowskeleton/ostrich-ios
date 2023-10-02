@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol GraphQLQuery: Query {
+protocol GraphQLQuery: HTTPQuery {
     /// Values to use in query
     var variables: [String: String] { get set }
     /// Name of function

@@ -89,9 +89,15 @@ extension HTTPClient {
             switch response.statusCode {
             case 200...299:
                 do {
+                    let success = try JSONSerialization.jsonObject(with: data, options: [])
+                    print("Success: \(success)")
                     return .success(try JSONDecoder().decode(responseModel, from: data))
                 } catch {
                     print("Decoding error: \(error)")
+                    let serverError = try JSONSerialization.jsonObject(with: data, options: [])
+                    print("Error decoding error: \(serverError)")
+//                    print(data)
+//                    print(response)
                     return .failure(.decode)
                 }
             case 401:

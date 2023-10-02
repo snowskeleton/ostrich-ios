@@ -8,7 +8,7 @@
 import Foundation
 
 
-protocol Query: Codable {
+protocol HTTPQuery: Codable {
     /// The format of the response to expect from the GraphQL request
     associatedtype Response: Decodable
     
@@ -20,13 +20,13 @@ protocol Query: Codable {
     static func decodeResponse(_ data: Data) throws -> Response
 }
 
-extension Query {
+extension HTTPQuery {
     static func decodeResponse(_ data: Data) throws -> Response {
         try JSONDecoder().decode(Response.self, from: data)
     }
 }
 
-struct NewAccount: Query {
+struct NewAccount: HTTPQuery {
     let displayName: String
     let dateOfBirth: String
     let firstName: String
@@ -56,7 +56,7 @@ struct Persona: Codable {
     let domainID: String
 }
 
-struct AuthCredentials: Query {
+struct AuthCredentials: HTTPQuery {
     var grant_type: String?
     var username: String?
     var password: String?
@@ -76,7 +76,7 @@ struct AuthCredentials: Query {
     }
 }
 
-struct Profile: Query {
+struct Profile: HTTPQuery {
     var firstName: String
     var lastName: String
     var displayName: String

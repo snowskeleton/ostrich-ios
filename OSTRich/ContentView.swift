@@ -6,22 +6,18 @@
 //
 
 import SwiftUI
-import CoreData
 import Foundation
-
-@Observable class EventBook {
-    var events: [Event] = []
-}
+import SwiftData
+import Observation
 
 struct ContentView: View {
-    @Environment(EventBook.self) private var eventBook
-//    @Environment(EventBook.self) private var eventBook = EventBook()
+    @Environment(\.modelContext) private var context
+    @Query(sort: \Event.id, order: .reverse) private var events: [Event]
     
     @State var showJoinEvent = false
     @State var userIsLoggedIn = false
     @State var showAccountScreen = false
     @State var timerIsRunning = false
-    @State var events: [Event] = []
     @State var joinEventCode: String = ""
     
     var body: some View {
@@ -42,21 +38,9 @@ struct ContentView: View {
                     })
                 }
                 Section {
-                    if !eventBook.events.isEmpty {
-                        NavigationLink {
-                            EventView(event: eventBook.events[0])
-                            //                            .environment(\.managedObjectContext, viewContext)
-                        } label: {
-                            VStack {
-                                Text("\(eventBook.events[0].title ?? "") | \(eventBook.events[0].shortCode ?? "")")
-                                Text("\(eventBook.events[0].eventFormat?.name ?? "") | \(eventBook.events[0].scheduledStartTime ?? "")")
-                            }
-                        }
-                    }
-                    ForEach(eventBook.events, id: \.scheduledStartTime) { event in
+                    ForEach(events, id: \.id) { event in
                         NavigationLink {
                             EventView(event: event)
-//                            .environment(\.managedObjectContext, viewContext)
                         } label: {
                             VStack {
                                 Text("\(event.title ?? "") | \(event.shortCode ?? "")")
@@ -66,6 +50,9 @@ struct ContentView: View {
                     }
                 }
             }
+        .sheet(isPresented: $showAccountScreen) {
+            LoginView()
+        }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarLeading) {
                 Button(
@@ -79,21 +66,12 @@ struct ContentView: View {
             }
         }
         }
-        .refreshable {
-            refreshMainPage()
-        }
-        .sheet(isPresented: $showAccountScreen) {
-            LoginView()
-//                .environment(\.managedObjectContext, viewContext)
-        }
-            
+        .refreshable { refreshMainPage() }
         .onAppear {
             refreshMainPage()
             timerIsRunning = true
         }
-        .onDisappear {
-            timerIsRunning = false
-        }
+        .onDisappear { timerIsRunning = false }
         .onReceive(Timer.publish(every: 30, on: .main, in: .common).autoconnect(), perform: { _ in
             if timerIsRunning { refreshMainPage() }
         })
@@ -107,26 +85,16 @@ struct ContentView: View {
             switch await HTOService().getActiveEvents() {
             case .success(let response):
                 for event in response.data.myActiveEvents {
-                    if let alreadyHave = eventBook.events.first(where: { $0.id == event.id }) {
-                        print("we expected this")
-                        alreadyHave.updateSelf()
+                    if let oldEvent = events.first(where: { $0.id == event.id }) {
+                        oldEvent.updateSelf()
                     } else {
-                        print("well THAT'S new")
+                        context.insert(event)
                         event.updateSelf()
-                        eventBook.events.append(event)
                     }
                 }
             case .failure(let error):
                 print(error)
             }
-//            for event in events {
-//                switch await HTOService().getEvent(eventId: event.id) {
-//                case .success(let response):
-//                    let someEvent = response.data.event
-//                case .failure(let failure):
-//                    print(failure)
-//                }
-//            }
         }
     }
 }

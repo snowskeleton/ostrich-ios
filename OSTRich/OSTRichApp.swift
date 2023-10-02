@@ -6,17 +6,27 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct OSTRichApp: App {
-    @State private var eventBook = EventBook()
-//    let persistenceController = PersistenceController.shared
+    var sharedModelContainer: ModelContainer = {
+        let schema = Schema([
+            Event.self,
+        ])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        
+        do {
+            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+    }()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(eventBook)
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
+        .modelContainer(sharedModelContainer)
     }
 }
