@@ -10,28 +10,53 @@ import SwiftData
 
 
 extension Event {
-    func updateSelf() {
-        Task {
+    func updateSelf() async {
+//        Task {
+//        Task(priority: .high) {
             switch await HTOService().getEvent(eventId: self.id) {
             case .success(let response):
-                self.registeredPlayers = response.data.event.registeredPlayers
-                if let gs = response.data.event.gameStateAtRound {
-                    self.gameStateAtRound = gs
+                Task { @MainActor in
+                    let event = response.data.event
+                    self.registeredPlayers = event.registeredPlayers
+                    //                if let gs = event.gameStateAtRound {
+                    //                    print(gs)
+                    self.gameStateAtRound = event.gameStateAtRound
+                    //                }
+                    
+                    self.shortCode = event.shortCode
+                    self.createdBy = event.createdBy
+                    self.title = event.title
+                    self.scheduledStartTime = event.scheduledStartTime
+                    self.actualStartTime = event.actualStartTime
+                    self.pairingType = event.pairingType
+                    self.status = event.status
+                    self.isOnline = event.isOnline
+                    self.requiredTeamSize = event.requiredTeamSize
+                    self.drops = event.drops
+                    self.draftTimerID = event.draftTimerID
+                    self.constructDraftTimerID = event.constructDraftTimerID
+                    self.top8DraftTimerID = event.top8DraftTimerID
+                    self.gamesToWin = event.gamesToWin
+                    self.eventFormat = event.eventFormat
+                    self.registeredPlayers = event.registeredPlayers
+                    self.gameStateAtRound = event.gameStateAtRound
+                    self.rounds = event.rounds
+                    self.standings = event.standings
                 }
             case .failure(let error):
                 print(error.localizedDescription)
-            }
+//            }
         }
     }
     
     var currentMatches: [Match] {
-        get {
+//        get {
             if let matches = self.gameStateAtRound?.currentRound?.matches {
                 return matches
             }
             return []
-        }
-        set { }
+//        }
+//        set { }
     }
 }
 
@@ -140,78 +165,29 @@ class Event: Codable, Identifiable {
     var draftTimerID: String?
     var drops: [String]?
     var eventFormat: EventFormat?
-    var gameStateAtRound: GameState? = nil
+    var gameStateAtRound: GameState?
     var gamesToWin: Int?
     var isOnline: Bool?
     var pairingType: String?
-    var registeredPlayers: [Registration]? = nil
+    var registeredPlayers: [Registration]?
     var requiredTeamSize: Int?
-    var rounds: [Round]? = []
+    var rounds: [Round]?
     var scheduledStartTime: String?
     var shortCode: String?
-    var standings: [TeamStanding]? = nil
+    var standings: [TeamStanding]?
     var status: String?
     var title: String?
     var top8DraftTimerID: String?
 }
-//@Model
+
 struct EventFormat: Codable {
-//    enum CodingKeys: String, CodingKey {
-//        case id, name, includesDraft, includesDeckbuilding, event
-//    }
-//    func encode(to encoder: Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//        try container.encodeIfPresent(self.id, forKey: .id)
-//        try container.encodeIfPresent(self.name, forKey: .name)
-//        try container.encodeIfPresent(self.includesDraft, forKey: .includesDraft)
-//        try container.encodeIfPresent(self.includesDeckbuilding, forKey: .includesDeckbuilding)
-//    }
-//    
-//    required init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        self.id = try container.decode(String.self, forKey: .id)
-//        self.name = try container.decode(String.self, forKey: .name)
-//        self.includesDraft = try container.decode(Bool.self, forKey: .includesDraft)
-//        self.includesDeckbuilding = try container.decode(Bool.self, forKey: .includesDeckbuilding)
-//        self.event = try container.decode(Event.self, forKey: .event)
-//    }
-//    
-//    @Relationship(deleteRule: .cascade, inverse: \Event.eventFormat)
-//    var event: Event
     let id: String
     let name: String
     let includesDraft: Bool
     let includesDeckbuilding: Bool
 }
 
-//@Model
 struct Registration: Codable {
-//    enum CodingKeys: String, CodingKey {
-//        case id, status, personaId, displayName, firstName, lastName, event
-//    }
-//    func encode(to encoder: Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//        try container.encodeIfPresent(self.id, forKey: .id)
-//        try container.encodeIfPresent(self.firstName, forKey: .firstName)
-//        try container.encodeIfPresent(self.lastName, forKey: .lastName)
-//        try container.encodeIfPresent(self.displayName, forKey: .displayName)
-//        try container.encodeIfPresent(self.status, forKey: .status)
-//        try container.encodeIfPresent(self.personaId, forKey: .personaId)
-//    }
-//    
-//    required init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        self.id = try container.decode(String.self, forKey: .id)
-//        self.firstName = try container.decode(String.self, forKey: .firstName)
-//        self.lastName = try container.decode(String.self, forKey: .lastName)
-//        self.displayName = try container.decode(String.self, forKey: .displayName)
-//        self.status = try container.decode(String.self, forKey: .status)
-//        self.personaId = try container.decode(String.self, forKey: .personaId)
-//        self.event = try container.decode(Event.self, forKey: .event)
-//    }
-//    
-//    @Relationship(deleteRule: .cascade, inverse: \Event.registeredPlayers)
-//    let event: Event
     let id: String
     let status: String
     let personaId: String
@@ -221,55 +197,6 @@ struct Registration: Codable {
 }
 
 struct GameState: Codable {
-//    enum CodingKeys: String, CodingKey {
-//        case id, minRounds, pods, top8Pods, constructedSeats, currentRoundNumber, gamesToWin, canRollback, event
-//        case currentRound, rounds, standings, drops
-//        case draftTimerID, constructDraftTimerID, top8DraftTimerID, timerID
-//    }
-//    func encode(to encoder: Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//        try container.encode(self.id, forKey: .id)
-//        try container.encodeIfPresent(self.minRounds, forKey: .minRounds)
-//        try container.encodeIfPresent(self.pods, forKey: .pods)
-//        try container.encodeIfPresent(self.top8Pods, forKey: .top8Pods)
-//        try container.encodeIfPresent(self.constructedSeats, forKey: .constructedSeats)
-//        try container.encodeIfPresent(self.currentRoundNumber, forKey: .currentRoundNumber)
-//        try container.encodeIfPresent(self.gamesToWin, forKey: .gamesToWin)
-//        try container.encodeIfPresent(self.canRollback, forKey: .canRollback)
-//        try container.encodeIfPresent(self.currentRound, forKey: .currentRound)
-//        try container.encodeIfPresent(self.rounds, forKey: .rounds)
-//        try container.encodeIfPresent(self.standings, forKey: .standings)
-//        try container.encodeIfPresent(self.drops, forKey: .drops)
-//        try container.encodeIfPresent(self.draftTimerID, forKey: .draftTimerID)
-//        try container.encodeIfPresent(self.constructDraftTimerID, forKey: .constructDraftTimerID)
-//        try container.encodeIfPresent(self.top8DraftTimerID, forKey: .top8DraftTimerID)
-//        try container.encodeIfPresent(self.timerID, forKey: .timerID)
-//    }
-//    
-//    required init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        self.id = try container.decode(String.self, forKey: .id)
-//        self.minRounds = try container.decodeIfPresent(Int.self, forKey: .minRounds)
-//        self.pods = try container.decodeIfPresent(String.self, forKey: .pods)
-//        self.top8Pods = try container.decodeIfPresent(String.self, forKey: .top8Pods)
-//        self.constructedSeats = try container.decodeIfPresent(String.self, forKey: .constructedSeats)
-//        self.currentRoundNumber = try container.decodeIfPresent(Int.self, forKey: .currentRoundNumber)
-//        self.currentRound = try container.decodeIfPresent(Round.self, forKey: .currentRound)
-//        self.rounds = try container.decodeIfPresent([Round].self, forKey: .rounds)
-//        self.standings = try container.decodeIfPresent([Standing].self, forKey: .standings)
-//        self.drops = try container.decodeIfPresent([Drop].self, forKey: .drops)
-//        self.draftTimerID = try container.decodeIfPresent(String.self, forKey: .draftTimerID)
-//        self.constructDraftTimerID = try container.decodeIfPresent(String.self, forKey: .constructDraftTimerID)
-//        self.top8DraftTimerID = try container.decodeIfPresent(String.self, forKey: .top8DraftTimerID)
-//        self.gamesToWin = try container.decodeIfPresent(Int.self, forKey: .gamesToWin)
-//        self.canRollback = try container.decodeIfPresent(Bool.self, forKey: .canRollback)
-//        self.timerID = try container.decodeIfPresent(String.self, forKey: .timerID)
-//        self.event = try container.decode(Event.self, forKey: .event)
-//    }
-//    
-//    @Relationship(deleteRule: .cascade, inverse: \Event.gameStateAtRound)
-//    let event: Event
-    
     let id: String
     let minRounds: Int?
     let pods: String? // Replace with the actual data type if available
@@ -301,7 +228,8 @@ struct Round: Codable {
     let timerID: String?
 }
 
-@Observable class Match: Codable {
+struct Match: Codable {
+//@Observable class Match: Codable {
     let id: String
     let isBye: Bool
     let teams: [Team]

@@ -10,7 +10,7 @@ import SwiftData
 
 @main
 struct OSTRichApp: App {
-    var sharedModelContainer: ModelContainer = {
+    @State var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Event.self,
         ])

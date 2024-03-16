@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct LoginView: View {
+    @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     @State var email: String = ""
     @State var password: String = ""
@@ -48,6 +49,7 @@ struct LoginView: View {
                 TextField("Last Name", text: $lastName)
                 Button("Save") { changeName() }
             }
+            Button("Clear event history") { deleteAll() }
         }
     }
     fileprivate func relogin() {
@@ -56,7 +58,7 @@ struct LoginView: View {
             if let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") {
                 switch await HTOService().refreshLogin(refreshToken) {
                 case .success(let creds):
-                    pickleAuthentication(creds)
+                    await pickleAuthentication(creds)
                     someStatus = Image(systemName: "checkmark.circle")
                 case .failure:
                     someStatus = Image(systemName: "circle.slash")
@@ -70,7 +72,7 @@ struct LoginView: View {
                 let authTokens = await HTOService().login(email, password)
                 switch authTokens {
                 case .success(let creds):
-                    pickleAuthentication(creds)
+                    await pickleAuthentication(creds)
                     dismiss()
                 case .failure(let error):
                     print(error)
@@ -80,7 +82,7 @@ struct LoginView: View {
                     let newAccount = await HTOService().register(displayName: displayName, firstName: firstName, lastName: lastName, email: email, password: password, birthday: birthday)
                     switch newAccount {
                     case .success(let creds):
-                        pickleAuthentication(creds.tokens)
+                        await pickleAuthentication(creds.tokens)
                         dismiss()
                     case .failure(let error):
                         print("Couldn't create account")
@@ -88,6 +90,7 @@ struct LoginView: View {
                     }
                 }
             }
+            deleteAll()
         }
     }
     fileprivate func changeName() {
@@ -98,6 +101,14 @@ struct LoginView: View {
             case .failure(let error):
                 print(error)
             }
+        }
+    }
+    private func deleteAll() {
+        do {
+            try context.delete(model: Event.self, includeSubclasses: true)
+            try context.save()
+        } catch {
+            print("error: \(error)")
         }
     }
 }

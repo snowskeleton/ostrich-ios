@@ -47,24 +47,24 @@ struct ContentView: View {
                                 Text("\(event.eventFormat?.name ?? "") | \(event.scheduledStartTime ?? "")")
                             }
                         }
-                    }
+                    }.onDelete(perform: deleteItems)
                 }
             }
-        .sheet(isPresented: $showAccountScreen) {
-            LoginView()
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarLeading) {
-                Button(
-                    action: { showAccountScreen = true },
-                    label:  {
-                        Image(systemName: "person.crop.circle")
-                            .font(.largeTitle)
-                            .foregroundColor(Color.secondary)
-                    }
-                ).accessibilityLabel(("Login/Logout"))
+            .sheet(isPresented: $showAccountScreen) {
+                LoginView()
             }
-        }
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    Button(
+                        action: { showAccountScreen = true },
+                        label:  {
+                            Image(systemName: "person.crop.circle")
+                                .font(.largeTitle)
+                                .foregroundColor(Color.secondary)
+                        }
+                    ).accessibilityLabel(("Login/Logout"))
+                }
+            }
         }
         .refreshable { refreshMainPage() }
         .onAppear {
@@ -80,21 +80,32 @@ struct ContentView: View {
     fileprivate func refreshMainPage() {
         Task {
             if Date().timeIntervalSince1970 > UserDefaults.standard.double(forKey: "access_token_expiry") - 40.0 { //seconds
-                refreshLogin()
+                await refreshLogin()
             }
             switch await HTOService().getActiveEvents() {
             case .success(let response):
                 for event in response.data.myActiveEvents {
-                    if let oldEvent = events.first(where: { $0.id == event.id }) {
-                        oldEvent.updateSelf()
-                    } else {
-                        context.insert(event)
-                        event.updateSelf()
+                    switch await HTOService().getEvent(eventId: event.id) {
+                    case .success(let success):
+                        if let oldEvent = events.first(where: { $0.id == event.id }) {
+                            await oldEvent.updateSelf()
+//                            context.delete(oldEvent)
+//                            try context.save()
+                        } else {
+                            context.insert(success.data.event)
+                        }
+                    case .failure(let failure):
+                        print(failure)
                     }
                 }
             case .failure(let error):
                 print(error)
             }
+        }
+    }
+    fileprivate func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { events[$0] }.forEach(context.delete)
         }
     }
 }

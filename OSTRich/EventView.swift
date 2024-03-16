@@ -20,11 +20,16 @@ struct MatchLineItem: View {
     
     var body: some View {
         HStack {
-            Text(match.tableNumber != nil ? "Table: \(String(describing: match.tableNumber!))" : "Bye:")
-            Text(longString)
-            Spacer()
-            if match.leftTeamWins != nil && match.rightTeamWins != nil {
-                Text("\(match.rightTeamWins!) – \(match.leftTeamWins!)")
+            if match.tableNumber != nil {
+                Text("Table: \(String(describing: match.tableNumber!))")
+                Text(longString)
+                Spacer()
+                if match.leftTeamWins != nil && match.rightTeamWins != nil {
+                    Text("\(match.leftTeamWins!) – \(match.rightTeamWins!)")
+                }
+            } else {
+                Text("Bye:")
+                Text(longString)
             }
         }
     }
@@ -44,7 +49,6 @@ struct MatchesView: View {
             }
         }
     }
-//    var personaId = UserDefaults.standard.string(forKey: "some garbage") ?? ""
     
     var body: some View {
         List {
@@ -73,9 +77,10 @@ struct EventView: View {
     var body: some View {
         Text(event.shortCode ?? "" )
         Text(event.status ?? "")
+        Text(event.actualStartTime ?? "no start time")
         List {
             NavigationLink {
-                if let _ = event.gameStateAtRound?.currentRound?.matches {
+                if !event.currentMatches.isEmpty {
                     MatchesView(event: event)
                 }
             } label: {
@@ -99,12 +104,14 @@ struct EventView: View {
                 })
             }
         }
-        .refreshable { event.updateSelf() }
+        .refreshable { Task { await event.updateSelf() } }
         .onAppear {
-            event.updateSelf()
+        Task.detached { @MainActor in
+             await event.updateSelf() }
+//            Task { await event.updateSelf() }
         }
         .onReceive(Timer.publish(every: 10, on: .main, in: .common).autoconnect(), perform: { _ in
-            event.updateSelf()
+            Task.detached { @MainActor in await event.updateSelf() }
         })
         .navigationTitle(Text(event.title ?? ""))
     }
