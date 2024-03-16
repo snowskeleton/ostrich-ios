@@ -198,7 +198,7 @@ struct HTOService: HTTPClient, HTOServiceable {
     }
     
     func joinEvent(_ shortcode: String) async -> Result<joinEventWithShortCode.Response, RequestError> {
-        return await sendRequest(endpoint: HTOEndpoint.joinEventWithShortCode(code: shortcode), responseModel: joinEventWithShortCode.Response.self)
+        return await sendRequest(endpoint: HTOEndpoint.joinEventWithShortCode(code: shortcode.uppercased()), responseModel: joinEventWithShortCode.Response.self)
     }
     
     func register(displayName: String, firstName: String, lastName: String, email: String, password: String, birthday: Date) async -> Result<NewAccount.Response, RequestError> {
