@@ -38,7 +38,7 @@ struct SubmitMatchView: View {
     
     @State private var leftTeamWins: Int
     @State private var rightTeamWins: Int
-    @State private var ableToSubmitMatch = true
+    @State private var ableToSubmitMatch = false
     
     init(event: Event) {
         self.event = event
@@ -53,7 +53,7 @@ struct SubmitMatchView: View {
         if someMatch.leftTeamWins != nil && someMatch.rightTeamWins != nil {
             _leftTeamWins = State(initialValue: someMatch.leftTeamWins!)
             _rightTeamWins = State(initialValue: someMatch.rightTeamWins!)
-            _ableToSubmitMatch = State(initialValue: false)
+            _ableToSubmitMatch = State(initialValue: true)
         } else {
             _leftTeamWins = State(initialValue: 0)
             _rightTeamWins = State(initialValue: 0)
