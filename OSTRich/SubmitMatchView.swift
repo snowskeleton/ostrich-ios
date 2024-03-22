@@ -33,8 +33,8 @@ struct SubmitMatchView: View {
 //            }
 //        }!
 //    }
-    var player1: User { return match.teams[1].players[0] }
-    var player2: User { return match.teams[0].players[0] }
+    var player1: User { return match.teams[0].players[0] }
+    var player2: User { return match.teams[1].players[0] }
     
     @State private var leftTeamWins: Int
     @State private var rightTeamWins: Int
@@ -91,9 +91,9 @@ struct SubmitMatchView: View {
                 draws: 0,
                 eventId: event.id,
                 isBye: match.isBye,
-                leftTeamId: match.teams[1].id,
+                leftTeamId: match.teams[0].id,
                 leftTeamWins: leftTeamWins,
-                rightTeamId: match.teams[0].id,
+                rightTeamId: match.teams[1].id,
                 rightTeamWins: rightTeamWins,
                 matchId: match.id)
             
