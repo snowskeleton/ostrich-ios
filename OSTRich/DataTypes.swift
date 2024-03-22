@@ -50,13 +50,9 @@ extension Event {
     }
     
     var currentMatches: [Match] {
-//        get {
-            if let matches = self.gameStateAtRound?.currentRound?.matches {
-                return matches
-            }
-            return []
-//        }
-//        set { }
+        guard let gameState = self.gameStateAtRound else { return [] }
+        guard let matches = gameState.currentRound?.matches else { return [] }
+        return matches
     }
 }
 
