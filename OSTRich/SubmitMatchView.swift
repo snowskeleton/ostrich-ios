@@ -40,19 +40,26 @@ struct SubmitMatchView: View {
     @State private var rightTeamWins: Int
     @State private var ableToSubmitMatch = false
     
-    init(event: Event) {
+    init(event: Event, notMyMatch: Match? = nil) {
         self.event = event
-        let someMatch = event.gameStateAtRound!.currentRound!.matches.first { match in
+        var useMeMatch: Match
+        let myMatch = event.gameStateAtRound!.currentRound!.matches.first { match in
             match.teams.contains { team in
                 team.players.contains { player in
                     player.personaId == UserDefaults.standard.string(forKey: "personaId")
                 }
             }
         }!
-        _match = State(initialValue: someMatch)
-        if someMatch.leftTeamWins != nil && someMatch.rightTeamWins != nil {
-            _leftTeamWins = State(initialValue: someMatch.leftTeamWins!)
-            _rightTeamWins = State(initialValue: someMatch.rightTeamWins!)
+        if let anyMatch = notMyMatch {
+            _match = State(initialValue: anyMatch)
+            useMeMatch = anyMatch
+        } else {
+            _match = State(initialValue: myMatch)
+            useMeMatch = myMatch
+        }
+        if useMeMatch.leftTeamWins != nil && useMeMatch.rightTeamWins != nil {
+            _leftTeamWins = State(initialValue: useMeMatch.leftTeamWins!)
+            _rightTeamWins = State(initialValue: useMeMatch.rightTeamWins!)
             _ableToSubmitMatch = State(initialValue: true)
         } else {
             _leftTeamWins = State(initialValue: 0)

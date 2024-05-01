@@ -64,7 +64,11 @@ struct MatchesView: View {
             Section("All Matches") {
                 ForEach(matches, id: \.tableNumber) { match in
                     HStack {
-                        MatchLineItem(match: match)
+                        NavigationLink {
+                            SubmitMatchView(event: event, notMyMatch: match)
+                        } label: {
+                            MatchLineItem(match: match)
+                        }
                     }
                 }
             }
@@ -78,6 +82,7 @@ struct EventView: View {
         Text(event.shortCode ?? "" )
         Text(event.status ?? "")
         Text(event.actualStartTime ?? "no start time")
+        Text(event.gameStateAtRound?.currentRoundNumber?.description ?? "no round number")
         List {
             NavigationLink {
                 if !event.currentMatches.isEmpty {
