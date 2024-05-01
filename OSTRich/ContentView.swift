@@ -17,6 +17,7 @@ struct ContentView: View {
     @State var showJoinEvent = false
     @State var userIsLoggedIn = false
     @State var showAccountScreen = false
+    @State var showSettingsScreen = false
     @State var timerIsRunning = false
     @State var joinEventCode: String = ""
     
@@ -54,7 +55,7 @@ struct ContentView: View {
                 LoginView()
             }
             .toolbar {
-                ToolbarItemGroup(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .topBarLeading) {
                     Button(
                         action: { showAccountScreen = true },
                         label:  {
@@ -63,6 +64,20 @@ struct ContentView: View {
                                 .foregroundColor(Color.secondary)
                         }
                     ).accessibilityLabel(("Login/Logout"))
+                }
+                
+                ToolbarItem {
+                    Spacer()
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        SettingsView()
+                    } label: {
+                        Image(systemName: "gear")
+                            .font(.largeTitle)
+                            .foregroundStyle(Color.secondary)
+                    }
                 }
             }
         }

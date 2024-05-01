@@ -11,8 +11,8 @@ import SwiftUI
 struct LoginView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
-    @State var email: String = ""
-    @State var password: String = ""
+    @State var email: String = UserDefaults.standard.bool(forKey: "saveLoginCreds") ? UserDefaults.standard.string(forKey: "email") ?? "" : ""
+    @State var password: String = UserDefaults.standard.bool(forKey: "saveLoginCreds") ? UserDefaults.standard.string(forKey: "password") ?? "" : ""
     @State var firstName: String = UserDefaults.standard.string(forKey: "firstName") ?? ""
     @State var lastName: String = UserDefaults.standard.string(forKey: "lastName") ?? ""
     @State var displayName: String = UserDefaults.standard.string(forKey: "displayName") ?? ""
@@ -89,6 +89,13 @@ struct LoginView: View {
                         print(error)
                     }
                 }
+            }
+            if UserDefaults.standard.bool(forKey: "saveLoginCreds") {
+                UserDefaults.standard.setValue(email, forKey: "email")
+                UserDefaults.standard.setValue(password, forKey: "password")
+            } else {
+                UserDefaults.standard.setValue("", forKey: "email")
+                UserDefaults.standard.setValue("", forKey: "password")
             }
             deleteAll()
         }
