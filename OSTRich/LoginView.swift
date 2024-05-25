@@ -39,10 +39,12 @@ struct LoginView: View {
                     Text("By creating an account with Wizards of the Coast, you agree to abide by their [Terms and Conditions](https://company.wizards.com/en/legal/terms), [Code of Conduct](https://company.wizards.com/en/legal/code-conduct), and [Privacy Policy](https://company.wizards.com/en/legal/wizards-coasts-privacy-policy).")
                 }
                 Button(showRegistration ? "Create" : "Login") { login() }
+                Button("Login Server") { loginServer() }
                 HStack {
                     Button("Refresh Login") { relogin() }
                     if someStatus != nil { someStatus }
                 }
+                Button("Register for Notifications") { NotificationHandler.shared.getNotificationSettings() }
             }
             Section("Change Name") {
                 TextField("First Name", text: $firstName)
@@ -62,6 +64,26 @@ struct LoginView: View {
                     someStatus = Image(systemName: "checkmark.circle")
                 case .failure:
                     someStatus = Image(systemName: "circle.slash")
+                }
+            }
+        }
+    }
+    fileprivate func loginServer() {
+        Task {
+            if !showRegistration && ![email, password].contains("") {
+                let authTokens = await HTOService().login(email, password)
+                switch authTokens {
+                case .success(let creds):
+                    let ostrichAuthTokens = await HTOService().ostrichLogin(creds.refresh_token)
+                    switch ostrichAuthTokens {
+                    case .success(let ostrichCreds):
+                        await pickleOSTRichAuthentication(ostrichCreds)
+                        dismiss()
+                    case .failure(let error):
+                        print(error)
+                }
+                case .failure(let error):
+                    print(error)
                 }
             }
         }

@@ -14,10 +14,16 @@
 		803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECF12AA26B2200CF03EB /* ContentView.swift */; };
 		803AECF42AA26B2300CF03EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803AECF32AA26B2300CF03EB /* Assets.xcassets */; };
 		803AECF72AA26B2300CF03EB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803AECF62AA26B2300CF03EB /* Preview Assets.xcassets */; };
+		803D6BE12BFE416F00CEB9F2 /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D6BDD2BFE416F00CEB9F2 /* NotificationHandler.swift */; };
+		803D6BE22BFE416F00CEB9F2 /* NotificationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D6BDE2BFE416F00CEB9F2 /* NotificationViewModifier.swift */; };
+		803D6BE32BFE416F00CEB9F2 /* View+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D6BDF2BFE416F00CEB9F2 /* View+Notifications.swift */; };
+		803D6BE52BFE41EA00CEB9F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */; };
 		8046EA492AA64E8B00578539 /* Network Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA482AA64E8B00578539 /* Network Manager.swift */; };
 		8046EA4B2AA6A60500578539 /* GraphQLQueryTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */; };
 		80A1C0A02AA7C83400B4FDB8 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 80A1C09F2AA7C83400B4FDB8 /* schema.json */; };
 		80A1C0A42AA7C84800B4FDB8 /* gamestateschema.json in Resources */ = {isa = PBXBuildFile; fileRef = 80A1C0A22AA7C84800B4FDB8 /* gamestateschema.json */; };
+		80A5722F2BE2C78E00D8D888 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A5722E2BE2C78E00D8D888 /* SettingsView.swift */; };
+		80A572312BE5985B00D8D888 /* getTimer.query in Resources */ = {isa = PBXBuildFile; fileRef = 80A572302BE5985B00D8D888 /* getTimer.query */; };
 		80B8E1192AAA319A00845ECC /* apollo-codegen-config.json in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E1182AAA319A00845ECC /* apollo-codegen-config.json */; };
 		80B8E1202AAA31BB00845ECC /* MagicCard.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E11A2AAA31BB00845ECC /* MagicCard.graphql */; };
 		80B8E1212AAA31BB00845ECC /* MagicCardPrintings.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E11B2AAA31BB00845ECC /* MagicCardPrintings.graphql */; };
@@ -47,10 +53,17 @@
 		803AECF12AA26B2200CF03EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		803AECF32AA26B2300CF03EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		803AECF62AA26B2300CF03EB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		803D6BDD2BFE416F00CEB9F2 /* NotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
+		803D6BDE2BFE416F00CEB9F2 /* NotificationViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewModifier.swift; sourceTree = "<group>"; };
+		803D6BDF2BFE416F00CEB9F2 /* View+Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Notifications.swift"; sourceTree = "<group>"; };
+		803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		803D6BE62BFE497600CEB9F2 /* OSTRich.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OSTRich.entitlements; sourceTree = "<group>"; };
 		8046EA482AA64E8B00578539 /* Network Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network Manager.swift"; sourceTree = "<group>"; };
 		8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLQueryTypes.swift; sourceTree = "<group>"; };
 		80A1C09F2AA7C83400B4FDB8 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		80A1C0A22AA7C84800B4FDB8 /* gamestateschema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gamestateschema.json; sourceTree = "<group>"; };
+		80A5722E2BE2C78E00D8D888 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		80A572302BE5985B00D8D888 /* getTimer.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = getTimer.query; sourceTree = "<group>"; };
 		80B8E1182AAA319A00845ECC /* apollo-codegen-config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "apollo-codegen-config.json"; sourceTree = "<group>"; };
 		80B8E11A2AAA31BB00845ECC /* MagicCard.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MagicCard.graphql; sourceTree = "<group>"; };
 		80B8E11B2AAA31BB00845ECC /* MagicCardPrintings.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MagicCardPrintings.graphql; sourceTree = "<group>"; };
@@ -120,12 +133,16 @@
 		803AECEE2AA26B2200CF03EB /* OSTRich */ = {
 			isa = PBXGroup;
 			children = (
+				803D6BE62BFE497600CEB9F2 /* OSTRich.entitlements */,
+				803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */,
+				803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */,
+				803AECF12AA26B2200CF03EB /* ContentView.swift */,
+				80A5722E2BE2C78E00D8D888 /* SettingsView.swift */,
 				80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */,
 				8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */,
 				8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */,
 				8030DC6A2AC763E900F775B6 /* DataTypes.swift */,
-				803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */,
-				803AECF12AA26B2200CF03EB /* ContentView.swift */,
+				803D6BE02BFE416F00CEB9F2 /* Notifications */,
 				80B8E1442ABA245600845ECC /* networkRequests.swift */,
 				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				8046EA482AA64E8B00578539 /* Network Manager.swift */,
@@ -147,10 +164,21 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		803D6BE02BFE416F00CEB9F2 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				803D6BDD2BFE416F00CEB9F2 /* NotificationHandler.swift */,
+				803D6BDE2BFE416F00CEB9F2 /* NotificationViewModifier.swift */,
+				803D6BDF2BFE416F00CEB9F2 /* View+Notifications.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		80B8E12A2AB665B400845ECC /* queries */ = {
 			isa = PBXGroup;
 			children = (
 				80B8E12D2AB6680E00845ECC /* myActiveEvents.query */,
+				80A572302BE5985B00D8D888 /* getTimer.query */,
 				80B8E12F2AB66E3300845ECC /* joinEventWithShortCode.query */,
 				80B8E1342AB7EA1500845ECC /* loadEvent.query */,
 				802BCBD92AC215D300E1501F /* submitMatch.query */,
@@ -190,7 +218,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					803AECEB2AA26B2200CF03EB = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -237,6 +265,7 @@
 				80A1C0A02AA7C83400B4FDB8 /* schema.json in Resources */,
 				80B8E1202AAA31BB00845ECC /* MagicCard.graphql in Resources */,
 				80B8E1242AAA31BB00845ECC /* MagicCardSets.graphql in Resources */,
+				80A572312BE5985B00D8D888 /* getTimer.query in Resources */,
 				80A1C0A42AA7C84800B4FDB8 /* gamestateschema.json in Resources */,
 				803AECF42AA26B2300CF03EB /* Assets.xcassets in Resources */,
 			);
@@ -251,9 +280,12 @@
 			files = (
 				80D091462ACB7BB600B91257 /* SubmitMatchView.swift in Sources */,
 				8046EA492AA64E8B00578539 /* Network Manager.swift in Sources */,
+				803D6BE12BFE416F00CEB9F2 /* NotificationHandler.swift in Sources */,
 				80EBC24C2ABE5FE0005817AD /* HTTPClient.swift in Sources */,
 				80B8E1452ABA245600845ECC /* networkRequests.swift in Sources */,
 				80B8E1332AB7D47300845ECC /* ErrorTypes.swift in Sources */,
+				803D6BE32BFE416F00CEB9F2 /* View+Notifications.swift in Sources */,
+				803D6BE22BFE416F00CEB9F2 /* NotificationViewModifier.swift in Sources */,
 				80B8E1372AB7EF0700845ECC /* EventView.swift in Sources */,
 				8030DC6B2AC763E900F775B6 /* DataTypes.swift in Sources */,
 				803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */,
@@ -261,6 +293,8 @@
 				80B8E1412ABA23F000845ECC /* LoginView.swift in Sources */,
 				8046EA4B2AA6A60500578539 /* GraphQLQueryTypes.swift in Sources */,
 				8030DC692AC7613600F775B6 /* HTTPQueryTypes.swift in Sources */,
+				803D6BE52BFE41EA00CEB9F2 /* AppDelegate.swift in Sources */,
+				80A5722F2BE2C78E00D8D888 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +305,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -332,6 +367,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -388,6 +424,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OSTRich/OSTRich.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OSTRich/Preview Content\"";
@@ -417,6 +454,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OSTRich/OSTRich.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OSTRich/Preview Content\"";

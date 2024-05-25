@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 enum HTOEndpoint {
@@ -20,6 +21,11 @@ enum HTOEndpoint {
     case joinEventWithShortCode(code: String)
     case dropSelf(eventId: String)
     case submitMatch(matchDetails: MatchDetails)
+    case getTimer(id: String)
+
+    case ostrichLogin(wotcRefreshToken: String)
+    case ostrichRefreshLogin(refreshToken: String)
+    case ostrichRegisterDevice(push_token: String, device_id: String)
 }
 
 extension HTOEndpoint: Endpoint {
@@ -31,6 +37,10 @@ extension HTOEndpoint: Endpoint {
             return "/profile"
         case .register:
             return "/accounts/register"
+        case .ostrichLogin, .ostrichRefreshLogin:
+            return "/token"
+        case .ostrichRegisterDevice:
+            return "/register-device"
         default:
             return "/silverbeak-griffin-service/graphql"
         }
@@ -40,6 +50,8 @@ extension HTOEndpoint: Endpoint {
         switch self {
         case .login, .refreshLogin, .register, .changeName, .getProfile:
             return "api.platform.wizards.com"
+        case .ostrichLogin, .ostrichRefreshLogin, .ostrichRegisterDevice:
+            return "ostrich.snowskeleton.net"
         default:
             return "api.tabletop.wizards.com"
         }
@@ -63,20 +75,47 @@ extension HTOEndpoint: Endpoint {
                 "Authorization": "Basic \(basicCredentialsBase64)",
                 "Content-Type": "application/json"
             ]
-        default:
-            var headers: [String: String] = [:]
-            if let accessToken = UserDefaults.standard.string(forKey: "accessToken") {
-                headers = [
-                    "Authorization": "Bearer \(accessToken)",
-                    "Content-Type": "application/json"
-                ]
+        case .ostrichLogin, .ostrichRefreshLogin:
+            return [
+                "Content-Type": "application/json"
+            ]
+        case .ostrichRegisterDevice:
+            guard let accessToken = UserDefaults.standard.string(forKey: "ostrichAccessToken") else {
+                print("Couldn't find key: ostrichAccessToken in UserDefaults")
+                return [:]
             }
-            return headers
+            return [
+                "Authorization": "Bearer \(accessToken)",
+                "Content-Type": "application/json",
+            ]
+        default:
+            guard let accessToken = UserDefaults.standard.string(forKey: "accessToken") else {
+                print("Couldn't find key: accessToken in UserDefaults")
+                return [:]
+            }
+            return [
+                "Authorization": "Bearer \(accessToken)",
+                "Content-Type": "application/json"
+            ]
+
         }
     }
     
     var body: [String: Any]? {
         switch self {
+        case .ostrichLogin(let token):
+            return [
+                "wotc_login_token": token
+            ]
+        case .ostrichRefreshLogin(let token):
+            return [
+                "refresh_token": token
+            ]
+        case .ostrichRegisterDevice(let token, let device_id):
+            return [
+                "device_id": device_id,
+                "apns_token": token,
+            ]
         case .login(let email, let password):
             return [
                 "grant_type": "password",
@@ -142,6 +181,14 @@ extension HTOEndpoint: Endpoint {
                     ]
                 ]
             ]
+        case .getTimer(let id):
+            return [
+                "operationName": self.operationName,
+                "query": self.query!,
+                "variables": [
+                    "ID": id
+                ]
+            ]
         default:
             return [
                 "operationName": self.operationName,
@@ -190,7 +237,8 @@ struct HTOService: HTTPClient, HTOServiceable {
     }
     
     func getEvent(eventId: String) async -> Result<loadEvent.Response, RequestError> {
-        return await sendRequest(endpoint: HTOEndpoint.loadEvent(eventId: eventId), responseModel: loadEvent.Response.self)
+        let event = await sendRequest(endpoint: HTOEndpoint.loadEvent(eventId: eventId), responseModel: loadEvent.Response.self)
+        return event
     }
     
     func getActiveEvents() async -> Result<myActiveEvents.Response, RequestError> {
@@ -219,6 +267,18 @@ struct HTOService: HTTPClient, HTOServiceable {
     
     func refreshLogin(_ refreshToken: String) async -> Result<AuthCredentials.Response, RequestError> {
         return await sendRequest(endpoint: HTOEndpoint.refreshLogin(refreshToken: refreshToken), responseModel: AuthCredentials.Response.self)
+    }
+    
+    func ostrichLogin(_ wotcRefreshToken: String) async -> Result<OSTRichAuthCredentials.Response, RequestError> {
+        return await sendRequest(endpoint: HTOEndpoint.ostrichLogin(wotcRefreshToken: wotcRefreshToken), responseModel: OSTRichAuthCredentials.Response.self)
+    }
+    
+    func ostrichRefreshLogin(_ refreshToken: String) async -> Result<OSTRichAuthCredentials.Response, RequestError> {
+        return await sendRequest(endpoint: HTOEndpoint.ostrichRefreshLogin(refreshToken: refreshToken), responseModel: OSTRichAuthCredentials.Response.self)
+    }
+    
+    func ostrichRegisterDevice(_ apns_token: String, _ device_id: String) async -> Result<OSTRichRegisterDevice.Response, RequestError> {
+        return await sendRequest(endpoint: HTOEndpoint.ostrichRegisterDevice(push_token: apns_token, device_id: device_id), responseModel: OSTRichRegisterDevice.Response.self)
     }
 }
 

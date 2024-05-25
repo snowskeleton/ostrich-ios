@@ -93,4 +93,19 @@ struct Profile: HTTPQuery {
     }
 }
 
+struct OSTRichAuthCredentials: HTTPQuery {
+    struct Response: Codable {
+        let access_token: String
+        let refresh_token: String
+        let expires_in: Int
+        let token_type: String
+    }
+}
 
+struct OSTRichRegisterDevice: HTTPQuery {
+    let push_token: String
+    let device_id: String
+    struct Response: Codable {
+        let response: String // OK
+    }
+}

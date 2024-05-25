@@ -81,6 +81,15 @@ struct ContentView: View {
                 }
             }
         }
+//        .onLaunchWithNotification { notification in
+//            chatThreadToLaunch = notification.id
+//            launchedWithNotification = true
+//        }
+//        .onForegroundNotification { notification in
+//            print("Notification while in foreground")
+//            print(notification.request.content.userInfo)
+//        }
+
         .refreshable { refreshMainPage() }
         .onAppear {
             refreshMainPage()
@@ -96,6 +105,9 @@ struct ContentView: View {
         Task {
             if Date().timeIntervalSince1970 > UserDefaults.standard.double(forKey: "access_token_expiry") - 40.0 { //seconds
                 await refreshLogin()
+            }
+            if Date().timeIntervalSince1970 > UserDefaults.standard.double(forKey: "ostrichAccessTokenExpiry") - 40 { //seconds
+                await ostrichRefreshLogin()
             }
             switch await HTOService().getActiveEvents() {
             case .success(let response):

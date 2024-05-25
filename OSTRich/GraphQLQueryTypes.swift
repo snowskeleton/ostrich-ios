@@ -84,3 +84,10 @@ struct submitMatch: GraphQLQuery {
 struct submitMatchData: Codable {
     let recordMatchResult: GameState
 }
+
+struct getTimer: GraphQLQuery {
+    var operationName: String
+    var query: String
+    var variables: [String : String] = [:]
+    struct Response: Codable { let data: submitMatchData }
+}

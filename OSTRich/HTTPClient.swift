@@ -107,6 +107,10 @@ extension HTTPClient {
                         return .failure(.emailInUse)
                     case "AGE REQUIREMENT":
                         return .failure(.ageRestriction)
+                    case "INVALID CLIENT CREDENTIALS":
+                        return .failure(.unauthorized)
+                    case "UNAUTHENTICATED":
+                        return .failure(.unauthorized)
                     default:
                         print("Unknown error case: \(error)")
                         return .failure(.unknown)
