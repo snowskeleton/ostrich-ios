@@ -72,7 +72,7 @@ extension HTOEndpoint: Endpoint {
         switch self {
         case .login, .register, .refreshLogin:
             return [
-                "Authorization": "Basic \(basicCredentialsBase64)",
+                "Authorization": "Basic \(WotcCreds.basicCredentialsBase64)",
                 "Content-Type": "application/json"
             ]
         case .ostrichLogin, .ostrichRefreshLogin:
@@ -281,6 +281,3 @@ struct HTOService: HTTPClient, HTOServiceable {
         return await sendRequest(endpoint: HTOEndpoint.ostrichRegisterDevice(push_token: apns_token, device_id: device_id), responseModel: OSTRichRegisterDevice.Response.self)
     }
 }
-
-let basicCredentials = "REDACTED"
-let basicCredentialsBase64 = "REDACTED"
