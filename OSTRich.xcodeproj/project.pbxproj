@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		800F6C732C0258CA00925DA9 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800F6C722C0258CA00925DA9 /* Secrets.swift */; };
 		802BCBDA2AC215D300E1501F /* submitMatch.query in Resources */ = {isa = PBXBuildFile; fileRef = 802BCBD92AC215D300E1501F /* submitMatch.query */; };
 		8030DC692AC7613600F775B6 /* HTTPQueryTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */; };
 		8030DC6B2AC763E900F775B6 /* DataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8030DC6A2AC763E900F775B6 /* DataTypes.swift */; };
@@ -43,10 +42,10 @@
 		80B8E1452ABA245600845ECC /* networkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1442ABA245600845ECC /* networkRequests.swift */; };
 		80D091462ACB7BB600B91257 /* SubmitMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D091452ACB7BB600B91257 /* SubmitMatchView.swift */; };
 		80EBC24C2ABE5FE0005817AD /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */; };
+		80EFCB9A2C02621C004FEF9F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFCB992C02621C004FEF9F /* Secrets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		800F6C722C0258CA00925DA9 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		802BCBD92AC215D300E1501F /* submitMatch.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = submitMatch.query; sourceTree = "<group>"; };
 		8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPQueryTypes.swift; sourceTree = "<group>"; };
 		8030DC6A2AC763E900F775B6 /* DataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypes.swift; sourceTree = "<group>"; };
@@ -85,6 +84,7 @@
 		80B8E1442ABA245600845ECC /* networkRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = networkRequests.swift; sourceTree = "<group>"; };
 		80D091452ACB7BB600B91257 /* SubmitMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitMatchView.swift; sourceTree = "<group>"; };
 		80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		80EFCB992C02621C004FEF9F /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +117,7 @@
 		803AECE32AA26B2200CF03EB = {
 			isa = PBXGroup;
 			children = (
-				800F6C722C0258CA00925DA9 /* Secrets.swift */,
+				80EFCB992C02621C004FEF9F /* Secrets.swift */,
 				80B8E12A2AB665B400845ECC /* queries */,
 				802BCBDB2AC215F000E1501F /* original gqls */,
 				803AECEE2AA26B2200CF03EB /* OSTRich */,
@@ -306,7 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				80D091462ACB7BB600B91257 /* SubmitMatchView.swift in Sources */,
-				800F6C732C0258CA00925DA9 /* Secrets.swift in Sources */,
+				80EFCB9A2C02621C004FEF9F /* Secrets.swift in Sources */,
 				8046EA492AA64E8B00578539 /* Network Manager.swift in Sources */,
 				803D6BE12BFE416F00CEB9F2 /* NotificationHandler.swift in Sources */,
 				80EBC24C2ABE5FE0005817AD /* HTTPClient.swift in Sources */,
