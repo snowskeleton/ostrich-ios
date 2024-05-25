@@ -201,7 +201,6 @@
 				803AECE82AA26B2200CF03EB /* Sources */,
 				803AECE92AA26B2200CF03EB /* Frameworks */,
 				803AECEA2AA26B2200CF03EB /* Resources */,
-				800F6C712C02570200925DA9 /* Add Credentails file */,
 			);
 			buildRules = (
 			);
@@ -276,29 +275,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		800F6C712C02570200925DA9 /* Add Credentails file */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/load_secrets.rb",
-			);
-			name = "Add Credentails file";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Secrets.swift",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ -f ./secrets.sh ]\nthen\nsource ./secrets.sh\nfi\n${SRCROOT}/load_secrets.rb\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		803AECE82AA26B2200CF03EB /* Sources */ = {
