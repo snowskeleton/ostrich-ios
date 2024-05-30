@@ -40,6 +40,8 @@
 		80B8E13F2AB8C5D300845ECC /* dropTeamV2.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E13E2AB8C5D300845ECC /* dropTeamV2.query */; };
 		80B8E1412ABA23F000845ECC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1402ABA23F000845ECC /* LoginView.swift */; };
 		80B8E1452ABA245600845ECC /* networkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1442ABA245600845ECC /* networkRequests.swift */; };
+		80C5D4BB2C09263100503FD9 /* ExampleSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C5D4BA2C09263100503FD9 /* ExampleSecrets.swift */; };
+		80C5D4BD2C0926B800503FD9 /* StandingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C5D4BC2C0926B800503FD9 /* StandingsView.swift */; };
 		80D091462ACB7BB600B91257 /* SubmitMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D091452ACB7BB600B91257 /* SubmitMatchView.swift */; };
 		80EBC24C2ABE5FE0005817AD /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */; };
 		80EFCB9A2C02621C004FEF9F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFCB992C02621C004FEF9F /* Secrets.swift */; };
@@ -95,6 +97,8 @@
 		80B8E13E2AB8C5D300845ECC /* dropTeamV2.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = dropTeamV2.query; sourceTree = "<group>"; };
 		80B8E1402ABA23F000845ECC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		80B8E1442ABA245600845ECC /* networkRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = networkRequests.swift; sourceTree = "<group>"; };
+		80C5D4BA2C09263100503FD9 /* ExampleSecrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSecrets.swift; sourceTree = "<group>"; };
+		80C5D4BC2C0926B800503FD9 /* StandingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsView.swift; sourceTree = "<group>"; };
 		80D091452ACB7BB600B91257 /* SubmitMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitMatchView.swift; sourceTree = "<group>"; };
 		80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		80EFCB992C02621C004FEF9F /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				80EFCB992C02621C004FEF9F /* Secrets.swift */,
+				80C5D4BA2C09263100503FD9 /* ExampleSecrets.swift */,
 				80B8E12A2AB665B400845ECC /* queries */,
 				802BCBDB2AC215F000E1501F /* original gqls */,
 				803AECEE2AA26B2200CF03EB /* OSTRich */,
@@ -154,6 +159,7 @@
 				803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */,
 				803AECF12AA26B2200CF03EB /* ContentView.swift */,
 				80B8E1362AB7EF0700845ECC /* EventView.swift */,
+				80C5D4BC2C0926B800503FD9 /* StandingsView.swift */,
 				80D091452ACB7BB600B91257 /* SubmitMatchView.swift */,
 				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				80A5722E2BE2C78E00D8D888 /* SettingsView.swift */,
@@ -295,11 +301,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80C5D4BD2C0926B800503FD9 /* StandingsView.swift in Sources */,
 				80D091462ACB7BB600B91257 /* SubmitMatchView.swift in Sources */,
 				80EFCB9A2C02621C004FEF9F /* Secrets.swift in Sources */,
 				8046EA492AA64E8B00578539 /* Network Manager.swift in Sources */,
 				803D6BE12BFE416F00CEB9F2 /* NotificationHandler.swift in Sources */,
 				80EBC24C2ABE5FE0005817AD /* HTTPClient.swift in Sources */,
+				80C5D4BB2C09263100503FD9 /* ExampleSecrets.swift in Sources */,
 				80B8E1452ABA245600845ECC /* networkRequests.swift in Sources */,
 				80B8E1332AB7D47300845ECC /* ErrorTypes.swift in Sources */,
 				803D6BE32BFE416F00CEB9F2 /* View+Notifications.swift in Sources */,

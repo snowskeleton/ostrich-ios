@@ -21,9 +21,11 @@ struct EventView: View {
         VStack {
             Picker(selection: $selectedTab, label: Text("")) {
                 Text("Players").tag("Players")
+                
                 if !event.currentMatches.isEmpty {
                     Text("Pairings").tag("Pairings")
                 }
+                
                 if !(event.gameStateAtRound?.standings?.isEmpty ?? true) {
                     Text("Standings").tag("Standings")
                 }
@@ -31,9 +33,11 @@ struct EventView: View {
             
             TabView(selection: $selectedTab) {
                 PlayersView(event: event).tag("Players")
+                
                 if !event.currentMatches.isEmpty {
                     MatchesView(event: event).tag("Pairings")
                 }
+                
                 if !(event.gameStateAtRound?.standings?.isEmpty ?? true) {
                     TeamStandingView(teamStandings: event.gameStateAtRound!.standings!).tag("Standings")
                 }
@@ -204,38 +208,3 @@ struct MatchLineItem: View {
         }
     }
 }
-
-
-struct TeamStandingView: View {
-    let teamStandings: [TeamStanding]
-    
-    var body: some View {
-//        ForEach(teamStandings, id: \.team.id) { teamStanding in
-        List(teamStandings, id: \.team.id) { teamStanding in
-            HStack() {
-                VStack {
-                    HStack {
-                        Text("\(teamStanding.rank).")
-                            .font(.headline)
-                        Spacer()
-                    }
-                    HStack {
-                        Text("\(teamStanding.team.fullName)")
-                            .font(.subheadline)
-                        Spacer()
-                    }
-                }
-                Text("\(teamStanding.wins) - \(teamStanding.losses) - \(teamStanding.draws) - \(teamStanding.byes) = \(teamStanding.matchPoints)")
-                    .font(.footnote)
-                Text("GW:\n\(String(format: "%.2f", teamStanding.gameWinPercent * 100))%")
-                    .font(.footnote)
-                Text("OGW:\n\(String(format: "%.2f", teamStanding.opponentGameWinPercent * 100))%")
-                    .font(.footnote)
-                Text("OMW:\n\(String(format: "%.2f", teamStanding.opponentMatchWinPercent * 100))%")
-                    .font(.footnote)
-            }
-            .padding()
-        }
-    }
-}
-
