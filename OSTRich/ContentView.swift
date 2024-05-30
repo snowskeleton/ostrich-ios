@@ -39,7 +39,7 @@ struct ContentView: View {
                     })
                 }
                 Section {
-                    ForEach(events, id: \.id) { event in
+                    ForEach(events.sorted(by: { $0.scheduledStartTime ?? "" < $1.scheduledStartTime ?? ""}), id: \.id) { event in
                         NavigationLink {
                             EventView(event: event)
                         } label: {

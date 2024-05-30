@@ -201,7 +201,7 @@ struct GameState: Codable {
     let currentRoundNumber: Int?
     let currentRound: Round?
     let rounds: [Round]?
-    let standings: [Standing]?
+    let standings: [TeamStanding]?
     let drops: [Drop]?
     let draftTimerID: String?
     let constructDraftTimerID: String?
@@ -211,7 +211,7 @@ struct GameState: Codable {
     let timerID: String?
 }
 
-struct Standing: Codable { }
+//struct Standing: Codable { }
 struct Drop: Codable { }
 
 struct Round: Codable {
@@ -239,6 +239,28 @@ struct Team: Codable {
     let name: String?
     let players: [User]
     let results: [TeamResult]?
+}
+
+extension Team {
+    var fullName: String {
+        let firstPlayer = self.players[0]
+        let fpName = "\(firstPlayer.firstName) \(firstPlayer.lastName)"
+        if self.players.count == 1 {
+            return fpName
+        }
+        
+        let secondPlayer = self.players[1]
+        let spName = "\(secondPlayer.firstName) \(secondPlayer.lastName)"
+        var combinedName = "\(fpName) \(spName)"
+        if self.players.count == 2 {
+            return combinedName
+        }
+        
+        let thirdPlayer = self.players[2]
+        let tpName = "\(thirdPlayer.firstName) \(thirdPlayer.lastName)"
+        combinedName = "\(fpName), \(spName), and \(tpName)"
+        return combinedName
+    }
 }
 
 struct User: Codable {

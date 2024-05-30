@@ -24,12 +24,18 @@ struct EventView: View {
                 if !event.currentMatches.isEmpty {
                     Text("Pairings").tag("Pairings")
                 }
+                if !(event.gameStateAtRound?.standings?.isEmpty ?? true) {
+                    Text("Standings").tag("Standings")
+                }
             }.pickerStyle(SegmentedPickerStyle())
             
             TabView(selection: $selectedTab) {
                 PlayersView(event: event).tag("Players")
                 if !event.currentMatches.isEmpty {
                     MatchesView(event: event).tag("Pairings")
+                }
+                if !(event.gameStateAtRound?.standings?.isEmpty ?? true) {
+                    TeamStandingView(teamStandings: event.gameStateAtRound!.standings!).tag("Standings")
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
@@ -173,15 +179,12 @@ struct PlayersView: View {
     }
 }
 
+
 struct MatchLineItem: View {
     let match: Match
     var longString: String {
-        let firstPlayer = match.teams[0].players[0]
-        let fpName = "\(firstPlayer.firstName) \(firstPlayer.lastName)"
-        if match.isBye { return "\(fpName)" }
-        let secondPlayer = match.teams[1].players[0]
-        let spName = "\(secondPlayer.firstName) \(secondPlayer.lastName)"
-        return "\(fpName)\nvs.\n\(spName)"
+        if match.isBye { return "\(match.teams[0].fullName)" }
+        return "\(match.teams[0].fullName)\nvs.\n\(match.teams[1].fullName)"
     }
     
     var body: some View {
@@ -198,6 +201,40 @@ struct MatchLineItem: View {
                 Text("Bye:")
                 Text(longString)
             }
+        }
+    }
+}
+
+
+struct TeamStandingView: View {
+    let teamStandings: [TeamStanding]
+    
+    var body: some View {
+//        ForEach(teamStandings, id: \.team.id) { teamStanding in
+        List(teamStandings, id: \.team.id) { teamStanding in
+            HStack() {
+                VStack {
+                    HStack {
+                        Text("\(teamStanding.rank).")
+                            .font(.headline)
+                        Spacer()
+                    }
+                    HStack {
+                        Text("\(teamStanding.team.fullName)")
+                            .font(.subheadline)
+                        Spacer()
+                    }
+                }
+                Text("\(teamStanding.wins) - \(teamStanding.losses) - \(teamStanding.draws) - \(teamStanding.byes) = \(teamStanding.matchPoints)")
+                    .font(.footnote)
+                Text("GW:\n\(String(format: "%.2f", teamStanding.gameWinPercent * 100))%")
+                    .font(.footnote)
+                Text("OGW:\n\(String(format: "%.2f", teamStanding.opponentGameWinPercent * 100))%")
+                    .font(.footnote)
+                Text("OMW:\n\(String(format: "%.2f", teamStanding.opponentMatchWinPercent * 100))%")
+                    .font(.footnote)
+            }
+            .padding()
         }
     }
 }
