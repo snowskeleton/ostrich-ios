@@ -7,104 +7,33 @@
 
 import SwiftUI
 
-struct MatchLineItem: View {
-    let match: Match
-    var longString: String {
-        let firstPlayer = match.teams[0].players[0]
-        let fpName = "\(firstPlayer.firstName) \(firstPlayer.lastName)"
-        if match.isBye { return "\(fpName)" }
-        let secondPlayer = match.teams[1].players[0]
-        let spName = "\(secondPlayer.firstName) \(secondPlayer.lastName)"
-        return "\(fpName)\nvs.\n\(spName)"
-    }
-    
-    var body: some View {
-        HStack {
-            if match.tableNumber != nil {
-                Text("Table: \(String(describing: match.tableNumber!))")
-                Text(longString)
-                Spacer()
-                if match.leftTeamWins != nil && match.rightTeamWins != nil {
-                    // this "-" character makes things look weird. Find something else
-                    Text("\(match.leftTeamWins!)\n–\n\(match.rightTeamWins!)")
-                }
-            } else {
-                Text("Bye:")
-                Text(longString)
-            }
-        }
-    }
-}
-
-struct MatchesView: View {
-    @State var event: Event
-    var matches: [Match] {
-        return event.gameStateAtRound?.currentRound?.matches ?? []
-    }
-    var match: Match? {
-        return event.gameStateAtRound!.currentRound!.matches.first { match in
-            match.teams.contains { team in
-                team.players.contains { player in
-                    player.personaId == UserDefaults.standard.string(forKey: "personaId")
-                }
-            }
-        }
-    }
-    
-    var body: some View {
-        List {
-            if match != nil {
-                Section("My Match") {
-                    NavigationLink {
-                        SubmitMatchView(event: event)
-                    } label: {
-                        MatchLineItem(match: match!)
-                    }
-                }
-            }
-            Section("All Matches") {
-                ForEach(matches, id: \.tableNumber) { match in
-                    HStack {
-                        NavigationLink {
-                            SubmitMatchView(event: event, notMyMatch: match)
-                        } label: {
-                            MatchLineItem(match: match)
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 struct EventView: View {
     @Bindable var event: Event
     @State private var targetDate: Date = Date()
     @State private var timeRemaining: String = ""
+    @State private var selectedTab = "Players"
     
     var body: some View {
         Text(event.shortCode ?? "" )
         Text(event.status ?? "")
         Text(timeRemaining)
-            .onAppear { getTime() }
         Text(event.gameStateAtRound?.currentRoundNumber?.description ?? "no round number")
-        List {
-            NavigationLink {
+        VStack {
+            Picker(selection: $selectedTab, label: Text("")) {
+                Text("Players").tag("Players")
                 if !event.currentMatches.isEmpty {
-                    MatchesView(event: event)
+                    Text("Pairings").tag("Pairings")
                 }
-            } label: {
-                Text("Matches")
-            }
-            ForEach((event.registeredPlayers) ?? [], id: \.id) { player in
-                VStack {
-                    HStack {
-                        Text("\(player.firstName) \(player.lastName) | \(player.displayName)")
-                        if player.personaId == UserDefaults.standard.string(forKey: "personaId") {
-                            Image(systemName: "checkmark")
-                        }
-                    }
+            }.pickerStyle(SegmentedPickerStyle())
+            
+            TabView(selection: $selectedTab) {
+                PlayersView(event: event).tag("Players")
+                if !event.currentMatches.isEmpty {
+                    MatchesView(event: event).tag("Pairings")
                 }
             }
+            .tabViewStyle(.page(indexDisplayMode: .never))
+
             Section {
                 Button(role: .destructive, action: {
                     dropSelfFromEvent(eventId: event.id)
@@ -115,9 +44,10 @@ struct EventView: View {
         }
         .refreshable { Task { await event.updateSelf() } }
         .onAppear {
-        Task.detached { @MainActor in
-             await event.updateSelf() }
-//            Task { await event.updateSelf() }
+            Task.detached { @MainActor in
+                getTime()
+                await event.updateSelf()
+            }
         }
         .onReceive(Timer.publish(every: 10, on: .main, in: .common).autoconnect(), perform: { _ in
             Task.detached { @MainActor in await event.updateSelf() }
@@ -181,3 +111,94 @@ struct EventView: View {
         
     }
 }
+
+struct MatchesView: View {
+    @State var event: Event
+    var matches: [Match] {
+        return event.gameStateAtRound?.currentRound?.matches ?? []
+    }
+    var match: Match? {
+        return event.gameStateAtRound!.currentRound!.matches.first { match in
+            match.teams.contains { team in
+                team.players.contains { player in
+                    player.personaId == UserDefaults.standard.string(forKey: "personaId")
+                }
+            }
+        }
+    }
+    
+    var body: some View {
+        List {
+            if match != nil {
+                Section("My Match") {
+                    NavigationLink {
+                        SubmitMatchView(event: event)
+                    } label: {
+                        MatchLineItem(match: match!)
+                    }
+                }
+            }
+            Section("All Matches") {
+                ForEach(matches, id: \.tableNumber) { match in
+                    HStack {
+                        NavigationLink {
+                            SubmitMatchView(event: event, notMyMatch: match)
+                        } label: {
+                            MatchLineItem(match: match)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct PlayersView: View {
+    @State var event: Event
+    var body: some View {
+        List {
+            Section("Players: \(event.registeredPlayers?.count ?? 0)") {
+                ForEach((event.registeredPlayers) ?? [], id: \.id) { player in
+                    VStack {
+                        HStack {
+                            Text("\(player.firstName) \(player.lastName) | \(player.displayName)")
+                            if player.personaId == UserDefaults.standard.string(forKey: "personaId") {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct MatchLineItem: View {
+    let match: Match
+    var longString: String {
+        let firstPlayer = match.teams[0].players[0]
+        let fpName = "\(firstPlayer.firstName) \(firstPlayer.lastName)"
+        if match.isBye { return "\(fpName)" }
+        let secondPlayer = match.teams[1].players[0]
+        let spName = "\(secondPlayer.firstName) \(secondPlayer.lastName)"
+        return "\(fpName)\nvs.\n\(spName)"
+    }
+    
+    var body: some View {
+        HStack {
+            if match.tableNumber != nil {
+                Text("Table: \(String(describing: match.tableNumber!))")
+                Text(longString)
+                Spacer()
+                if match.leftTeamWins != nil && match.rightTeamWins != nil {
+                    // this "-" character makes things look weird. Find something else
+                    Text("\(match.leftTeamWins!)\n–\n\(match.rightTeamWins!)")
+                }
+            } else {
+                Text("Bye:")
+                Text(longString)
+            }
+        }
+    }
+}
+
