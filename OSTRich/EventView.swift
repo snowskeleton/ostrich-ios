@@ -15,7 +15,7 @@ struct MatchLineItem: View {
         if match.isBye { return "\(fpName)" }
         let secondPlayer = match.teams[1].players[0]
         let spName = "\(secondPlayer.firstName) \(secondPlayer.lastName)"
-        return "\(fpName) vs. \(spName)"
+        return "\(fpName)\nvs.\n\(spName)"
     }
     
     var body: some View {
@@ -25,7 +25,8 @@ struct MatchLineItem: View {
                 Text(longString)
                 Spacer()
                 if match.leftTeamWins != nil && match.rightTeamWins != nil {
-                    Text("\(match.leftTeamWins!) – \(match.rightTeamWins!)")
+                    // this "-" character makes things look weird. Find something else
+                    Text("\(match.leftTeamWins!)\n–\n\(match.rightTeamWins!)")
                 }
             } else {
                 Text("Bye:")
@@ -77,11 +78,14 @@ struct MatchesView: View {
 }
 struct EventView: View {
     @Bindable var event: Event
+    @State private var targetDate: Date = Date()
+    @State private var timeRemaining: String = ""
     
     var body: some View {
         Text(event.shortCode ?? "" )
         Text(event.status ?? "")
-        Text(event.actualStartTime ?? "no start time")
+        Text(timeRemaining)
+            .onAppear { getTime() }
         Text(event.gameStateAtRound?.currentRoundNumber?.description ?? "no round number")
         List {
             NavigationLink {
@@ -118,7 +122,51 @@ struct EventView: View {
         .onReceive(Timer.publish(every: 10, on: .main, in: .common).autoconnect(), perform: { _ in
             Task.detached { @MainActor in await event.updateSelf() }
         })
+        .onReceive(Timer.publish(every: 0.2, on: .main, in: .common).autoconnect(), perform: { _ in
+            Task.detached { @MainActor in
+                let now = Date()
+                let remainingTime = self.targetDate.timeIntervalSince(now)
+                
+                if remainingTime > 0 {
+                    self.timeRemaining = self.formatTimeInterval(remainingTime)
+                } else {
+                    self.timeRemaining = "00:00"
+                }
+            }
+        })
         .navigationTitle(Text(event.title ?? ""))
+    }
+    
+    fileprivate func getTime() {
+        Task { @MainActor in
+            guard let timerId = event.gameStateAtRound?.timerID else {
+                print("can't get a timer ID")
+                return
+            }
+//            switch await HTOService().getTimer("some_timer_id") {
+            switch await HTOService().getTimer(timerId) {
+            case .success(let response):
+                let timer = response.data.timer
+                let isoDate = timer.durationStartTime
+                let dateFormatter = ISO8601DateFormatter()
+                dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                guard var realDate = dateFormatter.date(from: isoDate) else {
+                    return
+                }
+                realDate.addTimeInterval(Double(timer.durationMs) / 1000)
+                self.targetDate = realDate
+
+            case .failure(let error):
+                print("The error we got was: \(String(describing: error))")
+            }
+        }
+    }
+    
+    fileprivate func formatTimeInterval(_ interval: TimeInterval) -> String {
+        let seconds = Int(interval) % 60
+        let minutes = (Int(interval) / 60)
+        return String(format: "%02d:%02d", minutes, seconds)
+//        return "\(minutes):\(seconds)"
     }
     
     fileprivate func dropSelfFromEvent(eventId: String) {

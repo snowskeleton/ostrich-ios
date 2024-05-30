@@ -153,18 +153,18 @@
 				803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */,
 				803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */,
 				803AECF12AA26B2200CF03EB /* ContentView.swift */,
+				80B8E1362AB7EF0700845ECC /* EventView.swift */,
+				80D091452ACB7BB600B91257 /* SubmitMatchView.swift */,
+				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				80A5722E2BE2C78E00D8D888 /* SettingsView.swift */,
 				80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */,
 				8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */,
 				8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */,
-				8030DC6A2AC763E900F775B6 /* DataTypes.swift */,
-				803D6BE02BFE416F00CEB9F2 /* Notifications */,
 				80B8E1442ABA245600845ECC /* networkRequests.swift */,
-				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				8046EA482AA64E8B00578539 /* Network Manager.swift */,
+				8030DC6A2AC763E900F775B6 /* DataTypes.swift */,
 				80B8E1322AB7D47300845ECC /* ErrorTypes.swift */,
-				80B8E1362AB7EF0700845ECC /* EventView.swift */,
-				80D091452ACB7BB600B91257 /* SubmitMatchView.swift */,
+				803D6BE02BFE416F00CEB9F2 /* Notifications */,
 				803AECF32AA26B2300CF03EB /* Assets.xcassets */,
 				80B8E11C2AAA31BB00845ECC /* GameState.graphql */,
 				803AECF52AA26B2300CF03EB /* Preview Content */,
@@ -449,7 +449,6 @@
 				DEVELOPMENT_TEAM = PK7HCG46US;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = OSTRich/Info.plist;
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -481,7 +480,6 @@
 				DEVELOPMENT_TEAM = PK7HCG46US;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = OSTRich/Info.plist;
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

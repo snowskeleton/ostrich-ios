@@ -39,7 +39,8 @@ struct SubmitMatchView: View {
     @State private var leftTeamWins: Int
     @State private var rightTeamWins: Int
     @State private var ableToSubmitMatch = false
-    
+    @State private var showProgressView = false
+
     init(event: Event, notMyMatch: Match? = nil) {
         self.event = event
         var useMeMatch: Match
@@ -72,28 +73,41 @@ struct SubmitMatchView: View {
     }
     
     var body: some View {
-        Text(String(describing: match.tableNumber!)).fontWeight(.bold)
-        Spacer()
-        List {
-            Section("\(player1.firstName) \(player1.lastName)") {
-                Picker(selection: $leftTeamWins, label: Text("Player 1 wins")) {
-                    Text("0").tag(0)
-                    Text("1").tag(1)
-                    Text("2").tag(2)
-                }.pickerStyle(SegmentedPickerStyle())
+        ZStack {
+            VStack {
+                Text("Table " + String(describing: match.tableNumber!)).fontWeight(.bold)
+                List {
+                    Section("\(player1.firstName) \(player1.lastName)") {
+                        Picker(selection: $leftTeamWins, label: Text("Player 1 wins")) {
+                            Text("0").tag(0)
+                            Text("1").tag(1)
+                            Text("2").tag(2)
+                        }.pickerStyle(SegmentedPickerStyle())
+                    }
+                    Section("\(player2.firstName) \(player2.lastName)") {
+                        Picker(selection: $rightTeamWins, label: Text("Player 2 wins")) {
+                            Text("0").tag(0)
+                            Text("1").tag(1)
+                            Text("2").tag(2)
+                        }.pickerStyle(SegmentedPickerStyle())
+                    }
+                    Button("Submit") { submitMatch() }
+                }
             }
-            Section("\(player2.firstName) \(player2.lastName)") {
-                Picker(selection: $rightTeamWins, label: Text("Player 2 wins")) {
-                    Text("0").tag(0)
-                    Text("1").tag(1)
-                    Text("2").tag(2)
-                }.pickerStyle(SegmentedPickerStyle())
+        }
+        .overlay {
+            if showProgressView {
+                ProgressView()
+                    .controlSize(.large)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity) // 1
+                    .background(Color.gray)
+                    .opacity(0.5)
             }
-            Button("Submit") { submitMatch() }.disabled(ableToSubmitMatch)
         }
     }
     fileprivate func submitMatch() {
         Task.detached { @MainActor in
+            showProgressView = true
             let matchToSubmit = MatchDetails(
                 draws: 0,
                 eventId: event.id,
@@ -111,6 +125,7 @@ struct SubmitMatchView: View {
             case .failure(let error):
                 print(error)
             }
+            showProgressView = false
         }
     }
 }

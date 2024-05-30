@@ -272,3 +272,11 @@ struct TeamStanding: Codable {
     let opponentGameWinPercent: Double
     let opponentMatchWinPercent: Double
 }
+
+struct WotcTimer: Codable {
+    let id: String
+    let state: String
+    let durationMs: Int
+    let durationStartTime: String
+    let serverTime: String
+}

@@ -249,6 +249,19 @@ struct HTOService: HTTPClient, HTOServiceable {
         return await sendRequest(endpoint: HTOEndpoint.joinEventWithShortCode(code: shortcode.uppercased()), responseModel: joinEventWithShortCode.Response.self)
     }
     
+    func getTimer(_ timerId: String) async -> Result<getTimer.Response, RequestError> {
+        return await sendRequest(endpoint: HTOEndpoint.getTimer(id: timerId), responseModel: OSTRich.getTimer.Response.self)
+//        let timer = WotcTimer(
+//            id: "some_timer_id",
+//            state: "RUNNING",
+//            durationMs: 6000000,
+//            durationStartTime: "2024-05-26T18:55:20.199Z",
+//            serverTime: "2024-05-26T02:25:56.663Z"
+//        )
+//        return .success(OSTRich.getTimer.Response(data: getTimerData(timer: timer)))
+
+    }
+    
     func register(displayName: String, firstName: String, lastName: String, email: String, password: String, birthday: Date) async -> Result<NewAccount.Response, RequestError> {
         return await sendRequest(
             endpoint: HTOEndpoint.register(

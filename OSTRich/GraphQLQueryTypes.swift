@@ -89,5 +89,8 @@ struct getTimer: GraphQLQuery {
     var operationName: String
     var query: String
     var variables: [String : String] = [:]
-    struct Response: Codable { let data: submitMatchData }
+    struct Response: Codable { let data: getTimerData }
+}
+struct getTimerData: Codable {
+    let timer: WotcTimer
 }
