@@ -9,10 +9,18 @@ import SwiftUI
 import Foundation
 import SwiftData
 import Observation
+import CoreData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var context
-    @Query(sort: \Event.id, order: .reverse) private var events: [Event]
+//    @Environment(\.modelContext) private var context
+    @Environment(\.managedObjectContext) private var context: NSManagedObjectContext
+
+//    @Query(sort: \Event.id, order: .reverse) private var events: [Event]
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Event.id, ascending: true)],
+        animation: .default)
+    private var events: FetchedResults<Event>
+    
     
     @State var showJoinEvent = false
     @State var userIsLoggedIn = false
@@ -112,7 +120,7 @@ struct ContentView: View {
             switch await HTOService().getActiveEvents() {
             case .success(let response):
                 for event in response.data.myActiveEvents {
-                    switch await HTOService().getEvent(eventId: event.id) {
+                    switch await HTOService().getEvent(eventId: event.id.debugDescription) {
                     case .success(let success):
                         if let oldEvent = events.first(where: { $0.id == event.id }) {
                             await oldEvent.updateSelf()

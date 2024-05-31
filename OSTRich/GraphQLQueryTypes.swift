@@ -41,7 +41,7 @@ struct myActiveEvents: GraphQLQuery {
     var variables: [String: String] = [:]
     struct Response: Codable { let data: myActiveEventsData }
 }
-class myActiveEventsData: Codable {
+struct myActiveEventsData: Codable {
     let myActiveEvents: [Event]
 }
 

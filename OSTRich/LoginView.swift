@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import CoreData
 
 
 struct LoginView: View {
-    @Environment(\.modelContext) private var context
+//    @Environment(\.modelContext) private var context
+    @Environment(\.managedObjectContext) private var context: NSManagedObjectContext
     @Environment(\.dismiss) private var dismiss
     @State var email: String = UserDefaults.standard.bool(forKey: "saveLoginCreds") ? UserDefaults.standard.string(forKey: "email") ?? "" : ""
     @State var password: String = UserDefaults.standard.bool(forKey: "saveLoginCreds") ? UserDefaults.standard.string(forKey: "password") ?? "" : ""
@@ -133,11 +135,11 @@ struct LoginView: View {
         }
     }
     private func deleteAll() {
-        do {
-            try context.delete(model: Event.self, includeSubclasses: true)
-            try context.save()
-        } catch {
-            print("error: \(error)")
+        let fetchRequest = Event.fetchRequest()
+        let items = try? context.fetch(fetchRequest)
+        for item in items ?? [] {
+            context.delete(item)
         }
+        try? context.save()
     }
 }

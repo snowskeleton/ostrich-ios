@@ -22,7 +22,7 @@ struct MatchDetails: Codable {
 
 struct SubmitMatchView: View {
     @Environment(\.dismiss) private var dismiss
-    @Bindable var event: Event
+    @ObservedObject var event: Event
     @State var match: Match
 //    var match: Match {
 //        return event.gameStateAtRound!.currentRound!.matches.first { match in

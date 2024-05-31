@@ -42,6 +42,8 @@
 		80B8E1452ABA245600845ECC /* networkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1442ABA245600845ECC /* networkRequests.swift */; };
 		80C5D4BB2C09263100503FD9 /* ExampleSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C5D4BA2C09263100503FD9 /* ExampleSecrets.swift */; };
 		80C5D4BD2C0926B800503FD9 /* StandingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C5D4BC2C0926B800503FD9 /* StandingsView.swift */; };
+		80C5D4C02C0A111000503FD9 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 80C5D4BE2C0A111000503FD9 /* Model.xcdatamodeld */; };
+		80C5D4C22C0A18F200503FD9 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C5D4C12C0A18F200503FD9 /* Persistence.swift */; };
 		80D091462ACB7BB600B91257 /* SubmitMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D091452ACB7BB600B91257 /* SubmitMatchView.swift */; };
 		80EBC24C2ABE5FE0005817AD /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */; };
 		80EFCB9A2C02621C004FEF9F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFCB992C02621C004FEF9F /* Secrets.swift */; };
@@ -99,6 +101,8 @@
 		80B8E1442ABA245600845ECC /* networkRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = networkRequests.swift; sourceTree = "<group>"; };
 		80C5D4BA2C09263100503FD9 /* ExampleSecrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSecrets.swift; sourceTree = "<group>"; };
 		80C5D4BC2C0926B800503FD9 /* StandingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsView.swift; sourceTree = "<group>"; };
+		80C5D4BF2C0A111000503FD9 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		80C5D4C12C0A18F200503FD9 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		80D091452ACB7BB600B91257 /* SubmitMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitMatchView.swift; sourceTree = "<group>"; };
 		80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		80EFCB992C02621C004FEF9F /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
@@ -169,6 +173,8 @@
 				80B8E1442ABA245600845ECC /* networkRequests.swift */,
 				8046EA482AA64E8B00578539 /* Network Manager.swift */,
 				8030DC6A2AC763E900F775B6 /* DataTypes.swift */,
+				80C5D4C12C0A18F200503FD9 /* Persistence.swift */,
+				80C5D4BE2C0A111000503FD9 /* Model.xcdatamodeld */,
 				80B8E1322AB7D47300845ECC /* ErrorTypes.swift */,
 				803D6BE02BFE416F00CEB9F2 /* Notifications */,
 				803AECF32AA26B2300CF03EB /* Assets.xcassets */,
@@ -312,12 +318,14 @@
 				80B8E1332AB7D47300845ECC /* ErrorTypes.swift in Sources */,
 				803D6BE32BFE416F00CEB9F2 /* View+Notifications.swift in Sources */,
 				803D6BE22BFE416F00CEB9F2 /* NotificationViewModifier.swift in Sources */,
+				80C5D4C22C0A18F200503FD9 /* Persistence.swift in Sources */,
 				80B8E1372AB7EF0700845ECC /* EventView.swift in Sources */,
 				8030DC6B2AC763E900F775B6 /* DataTypes.swift in Sources */,
 				803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */,
 				803AECF02AA26B2200CF03EB /* OSTRichApp.swift in Sources */,
 				80B8E1412ABA23F000845ECC /* LoginView.swift in Sources */,
 				8046EA4B2AA6A60500578539 /* GraphQLQueryTypes.swift in Sources */,
+				80C5D4C02C0A111000503FD9 /* Model.xcdatamodeld in Sources */,
 				8030DC692AC7613600F775B6 /* HTTPQueryTypes.swift in Sources */,
 				803D6BE52BFE41EA00CEB9F2 /* AppDelegate.swift in Sources */,
 				80A5722F2BE2C78E00D8D888 /* SettingsView.swift in Sources */,
@@ -529,6 +537,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		80C5D4BE2C0A111000503FD9 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				80C5D4BF2C0A111000503FD9 /* Model.xcdatamodel */,
+			);
+			currentVersion = 80C5D4BF2C0A111000503FD9 /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = /Users/snow/bin/xcode/ostrich/OSTRich/Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 803AECE42AA26B2200CF03EB /* Project object */;
 }

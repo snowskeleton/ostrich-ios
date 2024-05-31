@@ -11,23 +11,27 @@ import SwiftData
 @main
 struct OSTRichApp: App {
     @UIApplicationDelegateAdaptor var appDelegate: AppDelegate
-    @State var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Event.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-        
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+//    @State var sharedModelContainer: ModelContainer = {
+//        let schema = Schema([
+//            Event.self,
+//        ])
+//        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+//        
+//        do {
+//            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+//        } catch {
+//            fatalError("Could not create ModelContainer: \(error)")
+//        }
+//    }()
+    let persistenceController = PersistenceController.shared
+
 
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.managedObjectContext, persistenceController!.container.viewContext)
+
         }
-        .modelContainer(sharedModelContainer)
+//        .modelContainer(sharedModelContainer)
     }
 }

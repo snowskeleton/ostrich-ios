@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EventView: View {
-    @Bindable var event: Event
+    @ObservedObject var event: Event
     @State private var targetDate: Date = Date()
     @State private var timeRemaining: String = ""
     @State private var selectedTab = "Players"
@@ -17,7 +17,7 @@ struct EventView: View {
         Text(event.shortCode ?? "" )
         Text(event.status ?? "")
         Text(timeRemaining)
-        Text(event.gameStateAtRound?.currentRoundNumber?.description ?? "no round number")
+        Text(event.gameStateAtRound?.currentRoundNumber.description ?? "no round number")
         VStack {
             Picker(selection: $selectedTab, label: Text("")) {
                 Text("Players").tag("Players")
@@ -90,7 +90,7 @@ struct EventView: View {
                 let isoDate = timer.durationStartTime
                 let dateFormatter = ISO8601DateFormatter()
                 dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                guard var realDate = dateFormatter.date(from: isoDate) else {
+                guard var realDate = dateFormatter.date(from: isoDate!) else {
                     return
                 }
                 realDate.addTimeInterval(Double(timer.durationMs) / 1000)

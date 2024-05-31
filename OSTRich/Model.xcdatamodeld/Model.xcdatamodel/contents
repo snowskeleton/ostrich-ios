@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Drop" representedClassName="Drop" syncable="YES" codeGenerationType="class"/>
+    <entity name="DropString" representedClassName="DropString" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String"/>
+    </entity>
+    <entity name="Event" representedClassName="Event" syncable="YES" codeGenerationType="category">
+        <attribute name="actualStartTime" optional="YES" attributeType="String"/>
+        <attribute name="constructDraftTimerID" optional="YES" attributeType="String"/>
+        <attribute name="createdBy" optional="YES" attributeType="String"/>
+        <attribute name="draftTimerID" optional="YES" attributeType="String"/>
+        <attribute name="gamesToWin" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="isOnline" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="pairingType" optional="YES" attributeType="String"/>
+        <attribute name="requiredTeamSize" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="scheduledStartTime" optional="YES" attributeType="String"/>
+        <attribute name="shortCode" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="top8DraftTimerID" optional="YES" attributeType="String"/>
+        <relationship name="drops" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DropString"/>
+        <relationship name="eventFormat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EventFormat"/>
+        <relationship name="gameStateAtRound" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GameState"/>
+        <relationship name="registeredPlayers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Registration"/>
+        <relationship name="rounds" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Round"/>
+        <relationship name="standings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamStanding"/>
+    </entity>
+    <entity name="EventFormat" representedClassName="EventFormat" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="includesDeckbuilding" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="includesDraft" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="GameState" representedClassName="GameState" syncable="YES" codeGenerationType="category">
+        <attribute name="canRollback" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="constructDraftTimerID" optional="YES" attributeType="String"/>
+        <attribute name="constructedSeats" optional="YES" attributeType="String"/>
+        <attribute name="currentRoundNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="draftTimerID" optional="YES" attributeType="String"/>
+        <attribute name="gamesToWin" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="minRounds" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="pods" optional="YES" attributeType="String"/>
+        <attribute name="timerID" optional="YES" attributeType="String"/>
+        <attribute name="top8DraftTimerID" optional="YES" attributeType="String"/>
+        <attribute name="top8Pods" optional="YES" attributeType="String"/>
+        <relationship name="currentRound" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Round"/>
+        <relationship name="drops" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Drop"/>
+        <relationship name="rounds" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Round"/>
+        <relationship name="standings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamStanding"/>
+    </entity>
+    <entity name="Match" representedClassName="Match" syncable="YES" codeGenerationType="category">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="isBye" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="leftTeamWins" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="rightTeamWins" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="tableNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Team"/>
+    </entity>
+    <entity name="Registration" representedClassName="Registration" syncable="YES" codeGenerationType="class">
+        <attribute name="displayName" attributeType="String"/>
+        <attribute name="firstName" attributeType="String"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="lastName" attributeType="String"/>
+        <attribute name="personaId" attributeType="String"/>
+        <attribute name="status" attributeType="String"/>
+    </entity>
+    <entity name="Round" representedClassName="Round" syncable="YES" codeGenerationType="class">
+        <attribute name="canRollback" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="isCertified" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isFinalRound" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timerID" optional="YES" attributeType="String"/>
+        <relationship name="matches" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Match"/>
+    </entity>
+    <entity name="Team" representedClassName="Team" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="players" toMany="YES" deletionRule="Nullify" destinationEntity="User"/>
+        <relationship name="results" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamResult"/>
+    </entity>
+    <entity name="TeamResult" representedClassName="TeamResult" syncable="YES" codeGenerationType="class">
+        <attribute name="draws" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isBye" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isFinal" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isPlayoffResult" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isTO" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="losses" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="submitter" attributeType="String"/>
+        <attribute name="teamId" attributeType="String"/>
+        <attribute name="wins" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="TeamStanding" representedClassName="TeamStanding" syncable="YES" codeGenerationType="class">
+        <attribute name="byes" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="draws" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="gameWinPercent" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="losses" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="matchPoints" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="opponentGameWinPercent" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="opponentMatchWinPercent" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="rank" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="wins" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="team" maxCount="1" deletionRule="Nullify" destinationEntity="Team"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
+        <attribute name="displayName" attributeType="String"/>
+        <attribute name="firstName" attributeType="String"/>
+        <attribute name="lastName" attributeType="String"/>
+        <attribute name="personaId" attributeType="String"/>
+    </entity>
+    <entity name="WotcTimer" representedClassName="WotcTimer" syncable="YES" codeGenerationType="category">
+        <attribute name="durationMs" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="durationStartTime" attributeType="String"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="serverTime" attributeType="String"/>
+        <attribute name="state" attributeType="String"/>
+    </entity>
+</model>
