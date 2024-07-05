@@ -11,6 +11,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @AppStorage("saveLoginCreds") var saveLoginCreds = false
+    @State private var showCrashConfirmation = false
     
     var body: some View {
         List {
@@ -18,7 +19,17 @@ struct SettingsView: View {
                 Text("Save email and password to login")
             }
             Button("Crash!") {
-                fatalError()
+                showCrashConfirmation = true
+            }
+            .confirmationDialog(
+                "Crash car into a bridge",
+                isPresented: $showCrashConfirmation) {
+                    Button("Watch and let it burn", role: .destructive) {
+                        fatalError()
+                    }
+            }
+            NavigationLink(destination: NetworkLogView()) {
+                Text("Network Logs")
             }
         }
     }
