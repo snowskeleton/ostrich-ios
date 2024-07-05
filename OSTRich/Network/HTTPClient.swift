@@ -103,17 +103,38 @@ extension HTTPClient {
                     return .success(
                         try JSONDecoder().decode(responseModel, from: data))
                 } catch {
+                    let serverError = try JSONSerialization.jsonObject(with: data, options: [])
+                    print("Error decoding error: \(response)")
                     return .failure(.decode)
                 }
             case 401:
                 return .failure(.unauthorized)
             default:
-                return .failure(.unknown)
+                do {
+                    let error =  try JSONDecoder().decode(HTTPError.self, from: data)
+                    switch error.error {
+                    case "EMAIL ADDRESS IN USE":
+                        return .failure(.emailInUse)
+                    case "AGE REQUIREMENT":
+                        return .failure(.ageRestriction)
+                    case "INVALID CLIENT CREDENTIALS":
+                        return .failure(.unauthorized)
+                    case "UNAUTHENTICATED":
+                        return .failure(.unauthorized)
+                    default:
+                        print("Unknown error case: \(error)")
+                        return .failure(.unknown)
+                    }
+                } catch {
+                    print(error)
+                    let serverError = try JSONSerialization.jsonObject(with: data, options: [])
+                    print("Error decoding error: \(serverError)")
+                    return .failure(.unknown)
+                }
             }
         } catch {
+            print(String(describing: error))
             return .failure(.unknown)
         }
     }
 }
-
-
