@@ -23,10 +23,27 @@ struct OSTRichApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onChange(of: scenePhase) { oldPhase, newPhase in
+                    // crash protection
+                    switch newPhase {
+                    case .active:
+                        let count = UserDefaults.standard.integer(forKey: "timesLaunchedWithoutSafeClose")
+                        if count > 3 {
+                            try? ModelContainer().deleteAllData()
+                        }
+                        UserDefaults.standard.setValue(count + 1, forKey: "timesLaunchedWithoutSafeClose")
+                        NSLog("Crash count: \(count)")
+                    case .inactive:
+                        UserDefaults.standard.setValue(0, forKey: "timesLaunchedWithoutSafeClose")
+                    default:
+                        break
+                    }
+                }
         }
         .modelContainer(sharedModelContainer)
     }

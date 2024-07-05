@@ -17,6 +17,9 @@ struct SettingsView: View {
             Toggle(isOn: $saveLoginCreds) {
                 Text("Save email and password to login")
             }
+            Button("Crash!") {
+                fatalError()
+            }
         }
     }
 }
