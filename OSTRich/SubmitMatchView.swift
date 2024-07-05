@@ -91,7 +91,7 @@ struct SubmitMatchView: View {
                             Text("2").tag(2)
                         }.pickerStyle(SegmentedPickerStyle())
                     }
-                    Button("Submit") { submitMatch() }.disabled(!ableToSubmitMatch)
+                    Button("Submit") { submitMatch() }.disabled(ableToSubmitMatch)
                 }
             }
         }

@@ -37,10 +37,10 @@ enum RequestError: Error {
     case unauthorized
     case unexpectedStatusCode
     case unknown
-    
+
     case emailInUse
     case ageRestriction
-    
+
     var customMessage: String {
         switch self {
         case .decode:
@@ -54,10 +54,12 @@ enum RequestError: Error {
 }
 
 protocol HTTPClient {
-    func sendRequest<T: Decodable>(endpoint: Endpoint, responseModel: T.Type) async -> Result<T, RequestError>
+    func sendRequest<T: Decodable>(endpoint: Endpoint, responseModel: T.Type)
+        async -> Result<T, RequestError>
 }
 
 extension HTTPClient {
+
     func sendRequest<T: Decodable>(
         endpoint: Endpoint,
         responseModel: T.Type
@@ -66,7 +68,7 @@ extension HTTPClient {
         urlComponents.scheme = endpoint.scheme
         urlComponents.host = endpoint.host
         urlComponents.path = endpoint.path
-        
+
         guard let url = urlComponents.url else {
             return .failure(.invalidURL)
         }
@@ -86,12 +88,20 @@ extension HTTPClient {
             guard let response = response as? HTTPURLResponse else {
                 return .failure(.noResponse)
             }
+            let log = NetworkLog(
+                url: url.absoluteString,
+                method: endpoint.method.rawValue,
+                headers: endpoint.header,
+                body: endpoint.body ?? [:],
+                response: String(data: data, encoding: .utf8),
+                statusCode: response.statusCode
+            )
+            NetworkLogger.shared.addLog(log)
             switch response.statusCode {
             case 200...299:
                 do {
-//                    let success = try JSONSerialization.jsonObject(with: data, options: [])
-//                    print("Success: \(success)")
-                    return .success(try JSONDecoder().decode(responseModel, from: data))
+                    return .success(
+                        try JSONDecoder().decode(responseModel, from: data))
                 } catch {
                     let serverError = try JSONSerialization.jsonObject(with: data, options: [])
                     print("Error decoding error: \(response)")

@@ -20,6 +20,8 @@
 		803D6BE52BFE41EA00CEB9F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */; };
 		8046EA492AA64E8B00578539 /* Network Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA482AA64E8B00578539 /* Network Manager.swift */; };
 		8046EA4B2AA6A60500578539 /* GraphQLQueryTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */; };
+		806843142C383AE000264D1A /* NetworkLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843132C383AE000264D1A /* NetworkLogsView.swift */; };
+		806843192C38656600264D1A /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843182C38656400264D1A /* Models.swift */; };
 		80A1C0A02AA7C83400B4FDB8 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 80A1C09F2AA7C83400B4FDB8 /* schema.json */; };
 		80A1C0A42AA7C84800B4FDB8 /* gamestateschema.json in Resources */ = {isa = PBXBuildFile; fileRef = 80A1C0A22AA7C84800B4FDB8 /* gamestateschema.json */; };
 		80A5722F2BE2C78E00D8D888 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A5722E2BE2C78E00D8D888 /* SettingsView.swift */; };
@@ -78,6 +80,8 @@
 		803D6BE62BFE497600CEB9F2 /* OSTRich.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OSTRich.entitlements; sourceTree = "<group>"; };
 		8046EA482AA64E8B00578539 /* Network Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network Manager.swift"; sourceTree = "<group>"; };
 		8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLQueryTypes.swift; sourceTree = "<group>"; };
+		806843132C383AE000264D1A /* NetworkLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogsView.swift; sourceTree = "<group>"; };
+		806843182C38656400264D1A /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		80A1C09F2AA7C83400B4FDB8 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		80A1C0A22AA7C84800B4FDB8 /* gamestateschema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gamestateschema.json; sourceTree = "<group>"; };
 		80A5722E2BE2C78E00D8D888 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -167,15 +171,11 @@
 				80D091452ACB7BB600B91257 /* SubmitMatchView.swift */,
 				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				80A5722E2BE2C78E00D8D888 /* SettingsView.swift */,
-				80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */,
-				8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */,
-				8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */,
-				80B8E1442ABA245600845ECC /* networkRequests.swift */,
-				8046EA482AA64E8B00578539 /* Network Manager.swift */,
 				8030DC6A2AC763E900F775B6 /* DataTypes.swift */,
 				80C5D4C12C0A18F200503FD9 /* Persistence.swift */,
 				80C5D4BE2C0A111000503FD9 /* Model.xcdatamodeld */,
 				80B8E1322AB7D47300845ECC /* ErrorTypes.swift */,
+				806843162C38653D00264D1A /* Network */,
 				803D6BE02BFE416F00CEB9F2 /* Notifications */,
 				803AECF32AA26B2300CF03EB /* Assets.xcassets */,
 				80B8E11C2AAA31BB00845ECC /* GameState.graphql */,
@@ -200,6 +200,28 @@
 				803D6BDF2BFE416F00CEB9F2 /* View+Notifications.swift */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		806843152C38652B00264D1A /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				806843182C38656400264D1A /* Models.swift */,
+				806843132C383AE000264D1A /* NetworkLogsView.swift */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
+		806843162C38653D00264D1A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */,
+				8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */,
+				8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */,
+				80B8E1442ABA245600845ECC /* networkRequests.swift */,
+				8046EA482AA64E8B00578539 /* Network Manager.swift */,
+				806843152C38652B00264D1A /* Logging */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		80B8E12A2AB665B400845ECC /* queries */ = {
@@ -319,6 +341,8 @@
 				803D6BE32BFE416F00CEB9F2 /* View+Notifications.swift in Sources */,
 				803D6BE22BFE416F00CEB9F2 /* NotificationViewModifier.swift in Sources */,
 				80C5D4C22C0A18F200503FD9 /* Persistence.swift in Sources */,
+				806843192C38656600264D1A /* Models.swift in Sources */,
+				806843142C383AE000264D1A /* NetworkLogsView.swift in Sources */,
 				80B8E1372AB7EF0700845ECC /* EventView.swift in Sources */,
 				8030DC6B2AC763E900F775B6 /* DataTypes.swift in Sources */,
 				803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */,

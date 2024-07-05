@@ -201,7 +201,13 @@ extension HTOEndpoint: Endpoint {
         return String("\(self)".split(separator: "(").first!)
     }
     var query: String? {
-        return try! String(contentsOfFile: Bundle.main.path(forResource: self.operationName, ofType: "query")!)
+        let path = Bundle.main.path(forResource: self.operationName, ofType: "query")
+        if path != nil {
+            return try! String(contentsOfFile: path!)
+        } else {
+            return self.operationName
+        }
+//        return try! String(contentsOfFile: Bundle.main.path(forResource: self.operationName, ofType: "query") ?? "")
     }
 }
 protocol HTOServiceable {
