@@ -8,6 +8,7 @@
 import SwiftUI
 import Foundation
 import UserNotifications
+import SwiftData
 
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -15,6 +16,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
+        let count = UserDefaults.standard.integer(
+            forKey: "timesLaunchedWithoutSafeClose"
+        )
+        if count > 1 {
+            try? ModelContainer().deleteAllData()
+        }
+        UserDefaults.standard
+            .setValue(count + 1, forKey: "timesLaunchedWithoutSafeClose")
+        NSLog("Crash count: \(count)")
         UNUserNotificationCenter.current().delegate = self
         
         return true

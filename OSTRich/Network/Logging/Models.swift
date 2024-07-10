@@ -27,7 +27,19 @@ struct NetworkLog: Identifiable {
     let response: String?
     let statusCode: Int?
     
+    var operationName: String? {
+        if let body = body, let operationName = body["operationName"] as? String {
+            return operationName
+        }
+        return nil
+    }
+    
     func getBodyDictionary() -> [String: Any]? {
         return body
+    }
+    func getResponseDictionary() -> [String: Any]? {
+        let jsonData = self.response!.data(using: .utf8)
+        let json = try? JSONSerialization.jsonObject(with: jsonData!, options: []) as? [String: Any]
+        return json
     }
 }

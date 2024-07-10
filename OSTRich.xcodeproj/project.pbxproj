@@ -47,6 +47,7 @@
 		80D091462ACB7BB600B91257 /* SubmitMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D091452ACB7BB600B91257 /* SubmitMatchView.swift */; };
 		80EBC24C2ABE5FE0005817AD /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */; };
 		80EFCB9A2C02621C004FEF9F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFCB992C02621C004FEF9F /* Secrets.swift */; };
+		80FFBDE32C38A1E4005E958D /* getGameStateV2AtRound.query in Resources */ = {isa = PBXBuildFile; fileRef = 80FFBDE22C38A1E4005E958D /* getGameStateV2AtRound.query */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -106,6 +107,7 @@
 		80D091452ACB7BB600B91257 /* SubmitMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitMatchView.swift; sourceTree = "<group>"; };
 		80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		80EFCB992C02621C004FEF9F /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		80FFBDE22C38A1E4005E958D /* getGameStateV2AtRound.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = getGameStateV2AtRound.query; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 				80B8E12D2AB6680E00845ECC /* myActiveEvents.query */,
 				80A572302BE5985B00D8D888 /* getTimer.query */,
 				80B8E12F2AB66E3300845ECC /* joinEventWithShortCode.query */,
+				80FFBDE22C38A1E4005E958D /* getGameStateV2AtRound.query */,
 				80B8E1342AB7EA1500845ECC /* loadEvent.query */,
 				802BCBD92AC215D300E1501F /* submitMatch.query */,
 				80B8E13C2AB8C24300845ECC /* dropSelf.query */,
@@ -308,6 +311,7 @@
 				80B8E1272AAA31F500845ECC /* GameState.graphql in Resources */,
 				80B8E1232AAA31BB00845ECC /* MagicCards.graphql in Resources */,
 				80A1C0A02AA7C83400B4FDB8 /* schema.json in Resources */,
+				80FFBDE32C38A1E4005E958D /* getGameStateV2AtRound.query in Resources */,
 				80B8E1202AAA31BB00845ECC /* MagicCard.graphql in Resources */,
 				80B8E1242AAA31BB00845ECC /* MagicCardSets.graphql in Resources */,
 				80A572312BE5985B00D8D888 /* getTimer.query in Resources */,

@@ -104,7 +104,7 @@ extension HTTPClient {
                         try JSONDecoder().decode(responseModel, from: data))
                 } catch {
                     let serverError = try JSONSerialization.jsonObject(with: data, options: [])
-                    print("Error decoding error: \(response)")
+                    print("Error decoding response: \(serverError)")
                     return .failure(.decode)
                 }
             case 401:

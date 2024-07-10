@@ -11,12 +11,16 @@ import SwiftUI
 
 struct SettingsView: View {
     @AppStorage("saveLoginCreds") var saveLoginCreds = false
+    @AppStorage("useLoadGameStateV2") var useGameStateV2 = true
     @State private var showCrashConfirmation = false
     
     var body: some View {
         List {
             Toggle(isOn: $saveLoginCreds) {
                 Text("Save email and password to login")
+            }
+            Toggle(isOn: $useGameStateV2) {
+                Text("Use new Game State method")
             }
             Button("Crash!") {
                 showCrashConfirmation = true

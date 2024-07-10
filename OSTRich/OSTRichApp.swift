@@ -28,21 +28,24 @@ struct OSTRichApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .onChange(of: scenePhase) { oldPhase, newPhase in
-                    // crash protection
-                    switch newPhase {
-                    case .active:
-                        let count = UserDefaults.standard.integer(forKey: "timesLaunchedWithoutSafeClose")
-                        if count > 3 {
-                            try? ModelContainer().deleteAllData()
-                        }
-                        UserDefaults.standard.setValue(count + 1, forKey: "timesLaunchedWithoutSafeClose")
-                        NSLog("Crash count: \(count)")
-                    case .inactive:
+                .onChange(of: scenePhase) { _, newPhase in
+                    if newPhase == .inactive {
                         UserDefaults.standard.setValue(0, forKey: "timesLaunchedWithoutSafeClose")
-                    default:
-                        break
                     }
+                    // crash protection
+//                    switch newPhase {
+//                    case .active:
+//                        let count = UserDefaults.standard.integer(forKey: "timesLaunchedWithoutSafeClose")
+//                        if count > 3 {
+//                            try? ModelContainer().deleteAllData()
+//                        }
+//                        UserDefaults.standard.setValue(count + 1, forKey: "timesLaunchedWithoutSafeClose")
+//                        NSLog("Crash count: \(count)")
+//                    case .inactive:
+//                        UserDefaults.standard.setValue(0, forKey: "timesLaunchedWithoutSafeClose")
+//                    default:
+//                        break
+//                    }
                 }
         }
         .modelContainer(sharedModelContainer)

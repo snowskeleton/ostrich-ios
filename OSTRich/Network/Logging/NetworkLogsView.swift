@@ -14,9 +14,15 @@ struct NetworkLogView: View {
         List(logger.logs) { log in
             NavigationLink(destination: DetailedLogView(log: log)) {
                 VStack(alignment: .leading) {
+                    if let operationName = log.operationName {
+                        Text(operationName)
+                            .font(.headline)
+                            .foregroundStyle(.primary)
+                    }
+                    
                     Text("\(log.url)")
-                        .font(.headline)
-                        .foregroundStyle(.blue)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
                     
                     HStack {
                         Text("Method: \(log.method)")
@@ -110,17 +116,17 @@ struct DetailedLogView: View {
                     Divider()
                 }
                 
-                if let response = log.response {
+                if let response = log.getResponseDictionary() {
                     VStack {
                         DisclosureGroup("Response") {
                             HStack {
-                                Text(response)
+                                Text(prettyPrintJSON(response))
                                     .font(.subheadline)
                                     .foregroundColor(.primary)
                                     .padding(.leading, 8)
                                     .multilineTextAlignment(.leading)
                                 Spacer()
-                                CopyButton(textToCopy: response)
+                                CopyButton(textToCopy: prettyPrintJSON(response))
                             }
                         }
                     }

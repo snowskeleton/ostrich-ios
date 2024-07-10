@@ -18,6 +18,7 @@ enum HTOEndpoint {
     
     case myActiveEvents
     case loadEvent(eventId: String)
+    case getGameStateV2AtRound(eventId: String, round: Int)
     case joinEventWithShortCode(code: String)
     case dropSelf(eventId: String)
     case submitMatch(matchDetails: MatchDetails)
@@ -151,6 +152,12 @@ extension HTOEndpoint: Endpoint {
                 "query": self.query!,
                 "variables": ["eventId": eventId]
             ]
+        case .getGameStateV2AtRound(let eventId, let roundNumber):
+            return [
+                "operationName": self.operationName,
+                "query": self.query!,
+                "variables": ["eventId": eventId, "round": roundNumber]
+            ]
         case .joinEventWithShortCode(let shortcode):
             return [
                 "operationName": self.operationName,
@@ -221,6 +228,7 @@ protocol HTOServiceable {
     
     func getActiveEvents() async -> Result<myActiveEvents.Response, RequestError>
     func getEvent(eventId: String) async -> Result<loadEvent.Response, RequestError>
+    func loadGameStateV2AtRound(eventId: String, round: Int) async -> Result<getGameStateV2AtRound.Response, RequestError>
     func dropEvent(eventId: String) async -> Result<dropSelf.Response, RequestError>
     func recordMatchResults(matchDetails: MatchDetails) async -> Result<submitMatch.Response, RequestError>
 }
@@ -245,6 +253,32 @@ struct HTOService: HTTPClient, HTOServiceable {
     func getEvent(eventId: String) async -> Result<loadEvent.Response, RequestError> {
         let event = await sendRequest(endpoint: HTOEndpoint.loadEvent(eventId: eventId), responseModel: loadEvent.Response.self)
         return event
+    }
+    
+    func loadGameStateV2AtRound(eventId: String, round: Int) async -> Result<getGameStateV2AtRound.Response, RequestError> {
+        let event = await sendRequest(endpoint: HTOEndpoint.getGameStateV2AtRound(eventId: eventId, round: round), responseModel: getGameStateV2AtRound.Response.self)
+        return event
+    }
+    
+    func dynamicGameStateLoader(eventId: String, round: Int) async -> Event? {
+        if UserDefaults.standard.bool(forKey: "useLoadGameStateV2") {
+            print("using new gamestate method")
+            switch await loadGameStateV2AtRound(eventId: eventId, round: round) {
+            case .success(let response):
+                return response.data.event
+            default:
+                break
+            }
+        } else {
+            switch await getEvent(eventId: eventId) {
+            case .success(let response):
+                print("using old method")
+                return response.data.event
+            default:
+                break
+            }
+        }
+        return nil
     }
     
     func getActiveEvents() async -> Result<myActiveEvents.Response, RequestError> {

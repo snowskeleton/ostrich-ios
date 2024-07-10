@@ -11,41 +11,34 @@ import SwiftData
 
 extension Event {
     func updateSelf() async {
-//        Task {
-//        Task(priority: .high) {
-            switch await HTOService().getEvent(eventId: self.id) {
-            case .success(let response):
-                Task { @MainActor in
-                    let event = response.data.event
-                    self.registeredPlayers = event.registeredPlayers
-                    //                if let gs = event.gameStateAtRound {
-                    //                    print(gs)
-                    self.gameStateAtRound = event.gameStateAtRound
-                    //                }
-                    
-                    self.shortCode = event.shortCode
-                    self.createdBy = event.createdBy
-                    self.title = event.title
-                    self.scheduledStartTime = event.scheduledStartTime
-                    self.actualStartTime = event.actualStartTime
-                    self.pairingType = event.pairingType
-                    self.status = event.status
-                    self.isOnline = event.isOnline
-                    self.requiredTeamSize = event.requiredTeamSize
-                    self.drops = event.drops
-                    self.draftTimerID = event.draftTimerID
-                    self.constructDraftTimerID = event.constructDraftTimerID
-                    self.top8DraftTimerID = event.top8DraftTimerID
-                    self.gamesToWin = event.gamesToWin
-                    self.eventFormat = event.eventFormat
-                    self.registeredPlayers = event.registeredPlayers
-                    self.gameStateAtRound = event.gameStateAtRound
-                    self.rounds = event.rounds
-                    self.standings = event.standings
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-//            }
+        
+        Task { @MainActor in
+            let event = await HTOService().dynamicGameStateLoader(eventId: self.id, round: self.gameStateAtRound?.currentRoundNumber ?? 0)
+            if event != nil {
+                let event = event!
+                self.registeredPlayers = event.registeredPlayers
+                self.gameStateAtRound = event.gameStateAtRound
+                
+                self.shortCode = event.shortCode
+                self.createdBy = event.createdBy
+                self.title = event.title
+                self.scheduledStartTime = event.scheduledStartTime
+                self.actualStartTime = event.actualStartTime
+                self.pairingType = event.pairingType
+                self.status = event.status
+                self.isOnline = event.isOnline
+                self.requiredTeamSize = event.requiredTeamSize
+                self.drops = event.drops
+                self.draftTimerID = event.draftTimerID
+                self.constructDraftTimerID = event.constructDraftTimerID
+                self.top8DraftTimerID = event.top8DraftTimerID
+                self.gamesToWin = event.gamesToWin
+                self.eventFormat = event.eventFormat
+                self.registeredPlayers = event.registeredPlayers
+                self.gameStateAtRound = event.gameStateAtRound
+                self.rounds = event.rounds
+                self.standings = event.standings
+            }
         }
     }
     

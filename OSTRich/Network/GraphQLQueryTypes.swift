@@ -35,6 +35,16 @@ struct loadEventData: Codable {
     let event: Event
 }
 
+struct getGameStateV2AtRound: GraphQLQuery {
+    var operationName: String
+    var query: String
+    var variables: [String: String] = [:]
+    struct Response: Codable { let data:  getGameStateV2AtRoundData }
+}
+struct getGameStateV2AtRoundData: Codable {
+    let event: Event
+}
+
 struct myActiveEvents: GraphQLQuery {
     var operationName: String
     var query: String
