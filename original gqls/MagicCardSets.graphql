@@ -1,7 +1,0 @@
-query magicCardSets {
-  magicCardSets {
-    name
-    abbreviation
-  }
-}
-

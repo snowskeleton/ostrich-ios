@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol GraphQLQuery: HTTPQuery {
+protocol OSTRichGraphQLQuery: HTTPQuery {
     /// Values to use in query
     var variables: [String: String] { get set }
     /// Name of function
@@ -16,7 +16,7 @@ protocol GraphQLQuery: HTTPQuery {
     var query: String { get set }
 }
 
-extension GraphQLQuery {
+extension OSTRichGraphQLQuery {
     var query: String {
         let filename = String("\(type(of: self))".split(separator: ".").last!)
         let bundle = Bundle.main.path(forResource: filename, ofType: "query")!
@@ -25,7 +25,7 @@ extension GraphQLQuery {
     }
 }
 
-struct loadEvent: GraphQLQuery {
+struct loadEvent: OSTRichGraphQLQuery {
     var operationName: String
     var query: String
     var variables: [String: String] = [:]
@@ -35,7 +35,7 @@ struct loadEventData: Codable {
     let event: Event
 }
 
-struct getGameStateV2AtRound: GraphQLQuery {
+struct getGameStateV2AtRound: OSTRichGraphQLQuery {
     var operationName: String
     var query: String
     var variables: [String: String] = [:]
@@ -45,7 +45,7 @@ struct getGameStateV2AtRoundData: Codable {
     let event: Event
 }
 
-struct myActiveEvents: GraphQLQuery {
+struct myActiveEvents: OSTRichGraphQLQuery {
     var operationName: String
     var query: String
     var variables: [String: String] = [:]
@@ -55,7 +55,7 @@ class myActiveEventsData: Codable {
     let myActiveEvents: [Event]
 }
 
-struct joinEventWithShortCode: GraphQLQuery {
+struct joinEventWithShortCode: OSTRichGraphQLQuery {
     var operationName: String
     var query: String
     var variables: [String: String] = [:]
@@ -65,7 +65,7 @@ struct joinEventWithShortCodeData: Codable {
         let joinEventWithShortCode: String
 }
 
-struct dropSelf: GraphQLQuery {
+struct dropSelf: OSTRichGraphQLQuery {
     var operationName: String
     var query: String
     var variables: [String: String] = [:]
@@ -75,7 +75,7 @@ struct dropSelfData: Codable {
     let dropSelf: String
 }
 
-struct dropTeamV2: GraphQLQuery {
+struct dropTeamV2: OSTRichGraphQLQuery {
     var operationName: String
     var query: String
     var variables: [String: String] = [:]
@@ -85,7 +85,7 @@ struct dropTeamV2Data: Codable {
     let dropTeam: String
 }
 
-struct submitMatch: GraphQLQuery {
+struct submitMatch: OSTRichGraphQLQuery {
     var operationName: String
     var query: String
     var variables: [String: String] = [:]
@@ -95,7 +95,7 @@ struct submitMatchData: Codable {
     let recordMatchResult: GameState
 }
 
-struct getTimer: GraphQLQuery {
+struct getTimer: OSTRichGraphQLQuery {
     var operationName: String
     var query: String
     var variables: [String : String] = [:]
