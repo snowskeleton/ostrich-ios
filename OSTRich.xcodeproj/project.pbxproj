@@ -178,6 +178,10 @@
 		80FFBF052C4025A2005E958D /* TeamResultDetailsV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE092C4025A2005E958D /* TeamResultDetailsV2.graphql.swift */; };
 		80FFBF062C4025A2005E958D /* ID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE3D2C4025A2005E958D /* ID.swift */; };
 		80FFBF072C4025A2005E958D /* RegisterPlayer.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDFD2C4025A2005E958D /* RegisterPlayer.graphql.swift */; };
+		80FFBF092C402C67005E958D /* AuthorizationInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBF082C402C67005E958D /* AuthorizationInterceptor.swift */; };
+		80FFBF0B2C402D41005E958D /* KeychainSwiftDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBF0A2C402D41005E958D /* KeychainSwiftDistrib.swift */; };
+		80FFBF0D2C402E79005E958D /* NetworkInterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBF0C2C402E79005E958D /* NetworkInterceptorProvider.swift */; };
+		80FFBF0F2C4030E9005E958D /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBF0E2C4030E9005E958D /* Network.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -367,6 +371,10 @@
 		80FFBE7B2C4025A2005E958D /* SchemaConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemaConfiguration.swift; sourceTree = "<group>"; };
 		80FFBE7C2C4025A2005E958D /* SchemaMetadata.graphql.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemaMetadata.graphql.swift; sourceTree = "<group>"; };
 		80FFBE7E2C4025A2005E958D /* Gamestateschema.graphql.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gamestateschema.graphql.swift; sourceTree = "<group>"; };
+		80FFBF082C402C67005E958D /* AuthorizationInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationInterceptor.swift; sourceTree = "<group>"; };
+		80FFBF0A2C402D41005E958D /* KeychainSwiftDistrib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSwiftDistrib.swift; sourceTree = "<group>"; };
+		80FFBF0C2C402E79005E958D /* NetworkInterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInterceptorProvider.swift; sourceTree = "<group>"; };
+		80FFBF0E2C4030E9005E958D /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -408,6 +416,10 @@
 				803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */,
 				803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */,
 				803AECF12AA26B2200CF03EB /* ContentView.swift */,
+				80FFBF082C402C67005E958D /* AuthorizationInterceptor.swift */,
+				80FFBF0C2C402E79005E958D /* NetworkInterceptorProvider.swift */,
+				80FFBF0E2C4030E9005E958D /* Network.swift */,
+				80FFBF0A2C402D41005E958D /* KeychainSwiftDistrib.swift */,
 				80FFBDE62C401FA8005E958D /* gamestateschema.json */,
 				80B8E1362AB7EF0700845ECC /* EventView.swift */,
 				80FFBDEB2C4020D0005E958D /* GameState.graphql */,
@@ -863,6 +875,7 @@
 				80FFBEB52C4025A2005E958D /* CurrencyCode.swift in Sources */,
 				80FFBEB62C4025A2005E958D /* StoreByLocationInput.graphql.swift in Sources */,
 				80FFBEB72C4025A2005E958D /* Timer.graphql.swift in Sources */,
+				80FFBF0D2C402E79005E958D /* NetworkInterceptorProvider.swift in Sources */,
 				80FFBEB82C4025A2005E958D /* DraftV2.graphql.swift in Sources */,
 				80FFBEB92C4025A2005E958D /* Team.graphql.swift in Sources */,
 				80FFBEBA2C4025A2005E958D /* GameStateV2.graphql.swift in Sources */,
@@ -886,6 +899,7 @@
 				80FFBECC2C4025A2005E958D /* Void.swift in Sources */,
 				80FFBECD2C4025A2005E958D /* StorePage.graphql.swift in Sources */,
 				80FFBECE2C4025A2005E958D /* MatchFoundSubscription.graphql.swift in Sources */,
+				80FFBF0B2C402D41005E958D /* KeychainSwiftDistrib.swift in Sources */,
 				80FFBECF2C4025A2005E958D /* EventDetailsMyActive.graphql.swift in Sources */,
 				80FFBED02C4025A2005E958D /* EventHostV2.graphql.swift in Sources */,
 				80FFBED12C4025A2005E958D /* JoinTeamMutation.graphql.swift in Sources */,
@@ -893,6 +907,7 @@
 				80FFBED32C4025A2005E958D /* SeatV2.graphql.swift in Sources */,
 				80FFBED42C4025A2005E958D /* PodDetails.graphql.swift in Sources */,
 				80FFBED52C4025A2005E958D /* TimerUpdatedSubscription.graphql.swift in Sources */,
+				80FFBF0F2C4030E9005E958D /* Network.swift in Sources */,
 				80FFBED62C4025A2005E958D /* GetPlayerStatusQuery.graphql.swift in Sources */,
 				80FFBED72C4025A2005E958D /* EventJoinV2.graphql.swift in Sources */,
 				80FFBED82C4025A2005E958D /* Registration.graphql.swift in Sources */,
@@ -913,6 +928,7 @@
 				80FFBEE72C4025A2005E958D /* GameStateDetailsV2.graphql.swift in Sources */,
 				80FFBEE82C4025A2005E958D /* EventStatus.graphql.swift in Sources */,
 				80FFBEE92C4025A2005E958D /* CreatePrivateEventInput.graphql.swift in Sources */,
+				80FFBF092C402C67005E958D /* AuthorizationInterceptor.swift in Sources */,
 				80FFBEEA2C4025A2005E958D /* MatchFoundPayload.graphql.swift in Sources */,
 				80FFBEEB2C4025A2005E958D /* ResultDetails.graphql.swift in Sources */,
 				80FFBEEC2C4025A2005E958D /* Query.graphql.swift in Sources */,

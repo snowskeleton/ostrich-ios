@@ -38,6 +38,23 @@ struct ContentView: View {
                         }
                     })
                 }
+                Button("Do the hokey pokey") {
+                        // TODO (Section 13 - https://www.apollographql.com/docs/ios/tutorial/tutorial-subscriptions#use-your-subscription)
+                    Network.shared.apollo.fetch(query: Gamestateschema.MyActiveEventsQuery()) { result in
+                            switch result {
+                            case .success(let graphQLResult):
+                                print("Success! Result: \(graphQLResult.data!.myActiveEvents)")
+                                for event in graphQLResult.data!.myActiveEvents {
+                                    print(event.title)
+                                    print(event.createdBy!)
+                                }
+                            case .failure(let error):
+                                print("Failure! Error: \(error)")
+                                
+                        }
+                    }
+                }
+                
                 Section {
                     ForEach(events.sorted(by: { $0.scheduledStartTime ?? "" < $1.scheduledStartTime ?? ""}), id: \.id) { event in
                         NavigationLink {
@@ -106,9 +123,9 @@ struct ContentView: View {
             if Date().timeIntervalSince1970 > UserDefaults.standard.double(forKey: "access_token_expiry") - 40.0 { //seconds
                 await refreshLogin()
             }
-            if Date().timeIntervalSince1970 > UserDefaults.standard.double(forKey: "ostrichAccessTokenExpiry") - 40 { //seconds
-                await ostrichRefreshLogin()
-            }
+//            if Date().timeIntervalSince1970 > UserDefaults.standard.double(forKey: "ostrichAccessTokenExpiry") - 40 { //seconds
+//                await ostrichRefreshLogin()
+//            }
             switch await HTOService().getActiveEvents() {
             case .success(let response):
                 for event in response.data.myActiveEvents {
