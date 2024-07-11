@@ -1,0 +1,92 @@
+// @generated
+// This file was automatically generated and should not be edited.
+
+@_exported import ApolloAPI
+
+extension Gamestateschema {
+  class PlayerRegisteredSubscription: GraphQLSubscription {
+    static let operationName: String = "playerRegistered"
+    static let operationDocument: ApolloAPI.OperationDocument = .init(
+      definition: .init(
+        #"subscription playerRegistered($eventId: ID!) { playerRegistered(eventId: $eventId) { __typename eventId addedPlayer { ...RegistrationDetails __typename } } }"#,
+        fragments: [RegistrationDetails.self]
+      ))
+
+    public var eventId: ID
+
+    public init(eventId: ID) {
+      self.eventId = eventId
+    }
+
+    public var __variables: Variables? { ["eventId": eventId] }
+
+    struct Data: Gamestateschema.SelectionSet {
+      let __data: DataDict
+      init(_dataDict: DataDict) { __data = _dataDict }
+
+      static var __parentType: any ApolloAPI.ParentType { Gamestateschema.Objects.Subscription }
+      static var __selections: [ApolloAPI.Selection] { [
+        .field("playerRegistered", PlayerRegistered.self, arguments: ["eventId": .variable("eventId")]),
+      ] }
+
+      var playerRegistered: PlayerRegistered { __data["playerRegistered"] }
+
+      /// PlayerRegistered
+      ///
+      /// Parent Type: `PlayerRegisteredPayload`
+      struct PlayerRegistered: Gamestateschema.SelectionSet {
+        let __data: DataDict
+        init(_dataDict: DataDict) { __data = _dataDict }
+
+        static var __parentType: any ApolloAPI.ParentType { Gamestateschema.Objects.PlayerRegisteredPayload }
+        static var __selections: [ApolloAPI.Selection] { [
+          .field("__typename", String.self),
+          .field("eventId", Gamestateschema.ID.self),
+          .field("addedPlayer", AddedPlayer.self),
+        ] }
+
+        /// The ID of the event the player was added.
+        var eventId: Gamestateschema.ID { __data["eventId"] }
+        /// The player that was added.
+        var addedPlayer: AddedPlayer { __data["addedPlayer"] }
+
+        /// PlayerRegistered.AddedPlayer
+        ///
+        /// Parent Type: `Registration`
+        struct AddedPlayer: Gamestateschema.SelectionSet {
+          let __data: DataDict
+          init(_dataDict: DataDict) { __data = _dataDict }
+
+          static var __parentType: any ApolloAPI.ParentType { Gamestateschema.Objects.Registration }
+          static var __selections: [ApolloAPI.Selection] { [
+            .field("__typename", String.self),
+            .fragment(RegistrationDetails.self),
+          ] }
+
+          /// The ID of the registration. BEWARE: the ID of a registration of an interestedPlayer may match
+          /// the ID of a registration of a *different* registeredPlayer. This is expected to be OK because
+          /// we don't provide any mutations that refer to the ID of an interestedPlayer.
+          var id: Gamestateschema.ID { __data["id"] }
+          /// Whether we found a Wizards account matching this registrant, or created a guest account for them.
+          var status: GraphQLEnum<Gamestateschema.PlatformStatus>? { __data["status"] }
+          /// The persona ID of this registrant, if they have a Wizards account; i.e., if their status is FOUND or GUEST.
+          var personaId: Gamestateschema.ID? { __data["personaId"] }
+          /// The registrant's display name as returned from Platform.
+          var displayName: String? { __data["displayName"] }
+          /// The registrant's first name.
+          var firstName: String? { __data["firstName"] }
+          /// The registrant's last name.
+          var lastName: String? { __data["lastName"] }
+
+          struct Fragments: FragmentContainer {
+            let __data: DataDict
+            init(_dataDict: DataDict) { __data = _dataDict }
+
+            var registrationDetails: RegistrationDetails { _toFragment() }
+          }
+        }
+      }
+    }
+  }
+
+}

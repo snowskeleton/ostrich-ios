@@ -1,0 +1,29 @@
+{
+  "schemaNamespace" : "gamestateschema",
+  "input" : {
+    "operationSearchPaths" : [
+      "**/*.graphql"
+    ],
+    "schemaSearchPaths" : [
+      "**/gamestateschema.json"
+    ]
+  },
+  "output" : {
+    "testMocks" : {
+      "none" : {
+      }
+    },
+    "schemaTypes" : {
+      "path" : "./gamestateschema",
+      "moduleType" : {
+        "embeddedInTarget" : {
+          "name" : "OSTRich"
+        }
+      }
+    },
+    "operations" : {
+      "inSchemaModule" : {
+      }
+    }
+  }
+}
