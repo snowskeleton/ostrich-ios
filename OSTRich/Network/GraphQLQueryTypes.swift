@@ -32,7 +32,7 @@ struct loadEvent: OSTRichGraphQLQuery {
     struct Response: Codable { let data: loadEventData }
 }
 struct loadEventData: Codable {
-    let event: Event
+    let event: EventV1
 }
 
 struct getGameStateV2AtRound: OSTRichGraphQLQuery {
@@ -42,7 +42,7 @@ struct getGameStateV2AtRound: OSTRichGraphQLQuery {
     struct Response: Codable { let data:  getGameStateV2AtRoundData }
 }
 struct getGameStateV2AtRoundData: Codable {
-    let event: Event
+    let event: EventV1
 }
 
 struct myActiveEvents: OSTRichGraphQLQuery {
@@ -52,7 +52,7 @@ struct myActiveEvents: OSTRichGraphQLQuery {
     struct Response: Codable { let data: myActiveEventsData }
 }
 class myActiveEventsData: Codable {
-    let myActiveEvents: [Event]
+    let myActiveEvents: [EventV1]
 }
 
 struct joinEventWithShortCode: OSTRichGraphQLQuery {

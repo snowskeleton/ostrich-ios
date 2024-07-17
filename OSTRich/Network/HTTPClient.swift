@@ -30,6 +30,12 @@ enum RequestMethod: String {
     case put = "PUT"
 }
 
+struct HTTPError: Decodable, Error {
+    let code: Int
+    let error: String
+    let grpcCode: String
+}
+
 enum RequestError: Error {
     case decode
     case invalidURL

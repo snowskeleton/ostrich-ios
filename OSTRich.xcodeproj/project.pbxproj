@@ -26,7 +26,6 @@
 		80A572312BE5985B00D8D888 /* getTimer.query in Resources */ = {isa = PBXBuildFile; fileRef = 80A572302BE5985B00D8D888 /* getTimer.query */; };
 		80B8E1302AB66E3300845ECC /* joinEventWithShortCode.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E12F2AB66E3300845ECC /* joinEventWithShortCode.query */; };
 		80B8E1312AB6AC1A00845ECC /* myActiveEvents.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E12D2AB6680E00845ECC /* myActiveEvents.query */; };
-		80B8E1332AB7D47300845ECC /* ErrorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1322AB7D47300845ECC /* ErrorTypes.swift */; };
 		80B8E1352AB7EA1500845ECC /* loadEvent.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E1342AB7EA1500845ECC /* loadEvent.query */; };
 		80B8E1372AB7EF0700845ECC /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1362AB7EF0700845ECC /* EventView.swift */; };
 		80B8E13D2AB8C24300845ECC /* dropSelf.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E13C2AB8C24300845ECC /* dropSelf.query */; };
@@ -182,6 +181,7 @@
 		80FFBF0B2C402D41005E958D /* KeychainSwiftDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBF0A2C402D41005E958D /* KeychainSwiftDistrib.swift */; };
 		80FFBF0D2C402E79005E958D /* NetworkInterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBF0C2C402E79005E958D /* NetworkInterceptorProvider.swift */; };
 		80FFBF0F2C4030E9005E958D /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBF0E2C4030E9005E958D /* Network.swift */; };
+		80FFBF112C416DB9005E958D /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBF102C416DB9005E958D /* EventDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -220,7 +220,6 @@
 		80B8E11C2AAA31BB00845ECC /* GameState.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GameState.graphql; path = ../../../../../../Applications/Companion.app/Wrapper/HTO.app/GameState.graphql; sourceTree = "<group>"; };
 		80B8E12D2AB6680E00845ECC /* myActiveEvents.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = myActiveEvents.query; sourceTree = "<group>"; };
 		80B8E12F2AB66E3300845ECC /* joinEventWithShortCode.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = joinEventWithShortCode.query; sourceTree = "<group>"; };
-		80B8E1322AB7D47300845ECC /* ErrorTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTypes.swift; sourceTree = "<group>"; };
 		80B8E1342AB7EA1500845ECC /* loadEvent.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = loadEvent.query; sourceTree = "<group>"; };
 		80B8E1362AB7EF0700845ECC /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		80B8E13C2AB8C24300845ECC /* dropSelf.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = dropSelf.query; sourceTree = "<group>"; };
@@ -375,6 +374,7 @@
 		80FFBF0A2C402D41005E958D /* KeychainSwiftDistrib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSwiftDistrib.swift; sourceTree = "<group>"; };
 		80FFBF0C2C402E79005E958D /* NetworkInterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInterceptorProvider.swift; sourceTree = "<group>"; };
 		80FFBF0E2C4030E9005E958D /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		80FFBF102C416DB9005E958D /* EventDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -416,19 +416,16 @@
 				803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */,
 				803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */,
 				803AECF12AA26B2200CF03EB /* ContentView.swift */,
-				80FFBF082C402C67005E958D /* AuthorizationInterceptor.swift */,
-				80FFBF0C2C402E79005E958D /* NetworkInterceptorProvider.swift */,
-				80FFBF0E2C4030E9005E958D /* Network.swift */,
-				80FFBF0A2C402D41005E958D /* KeychainSwiftDistrib.swift */,
-				80FFBDE62C401FA8005E958D /* gamestateschema.json */,
+				80FFBF102C416DB9005E958D /* EventDetail.swift */,
 				80B8E1362AB7EF0700845ECC /* EventView.swift */,
-				80FFBDEB2C4020D0005E958D /* GameState.graphql */,
 				80C5D4BC2C0926B800503FD9 /* StandingsView.swift */,
 				80D091452ACB7BB600B91257 /* SubmitMatchView.swift */,
 				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				80A5722E2BE2C78E00D8D888 /* SettingsView.swift */,
 				8030DC6A2AC763E900F775B6 /* DataTypes.swift */,
-				80B8E1322AB7D47300845ECC /* ErrorTypes.swift */,
+				80FFBF0A2C402D41005E958D /* KeychainSwiftDistrib.swift */,
+				80FFBDEB2C4020D0005E958D /* GameState.graphql */,
+				80FFBDE62C401FA8005E958D /* gamestateschema.json */,
 				806843162C38653D00264D1A /* Network */,
 				803D6BE02BFE416F00CEB9F2 /* Notifications */,
 				803AECF32AA26B2300CF03EB /* Assets.xcassets */,
@@ -468,6 +465,9 @@
 		806843162C38653D00264D1A /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				80FFBF082C402C67005E958D /* AuthorizationInterceptor.swift */,
+				80FFBF0C2C402E79005E958D /* NetworkInterceptorProvider.swift */,
+				80FFBF0E2C4030E9005E958D /* Network.swift */,
 				80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */,
 				8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */,
 				8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */,
@@ -808,10 +808,10 @@
 				80EFCB9A2C02621C004FEF9F /* Secrets.swift in Sources */,
 				8046EA492AA64E8B00578539 /* Network Manager.swift in Sources */,
 				803D6BE12BFE416F00CEB9F2 /* NotificationHandler.swift in Sources */,
+				80FFBF112C416DB9005E958D /* EventDetail.swift in Sources */,
 				80EBC24C2ABE5FE0005817AD /* HTTPClient.swift in Sources */,
 				80C5D4BB2C09263100503FD9 /* ExampleSecrets.swift in Sources */,
 				80B8E1452ABA245600845ECC /* networkRequests.swift in Sources */,
-				80B8E1332AB7D47300845ECC /* ErrorTypes.swift in Sources */,
 				803D6BE32BFE416F00CEB9F2 /* View+Notifications.swift in Sources */,
 				803D6BE22BFE416F00CEB9F2 /* NotificationViewModifier.swift in Sources */,
 				806843192C38656600264D1A /* Models.swift in Sources */,

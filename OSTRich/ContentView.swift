@@ -38,32 +38,13 @@ struct ContentView: View {
                         }
                     })
                 }
-                Button("Do the hokey pokey") {
-                        // TODO (Section 13 - https://www.apollographql.com/docs/ios/tutorial/tutorial-subscriptions#use-your-subscription)
-                    Network.shared.apollo.fetch(query: Gamestateschema.MyActiveEventsQuery()) { result in
-                            switch result {
-                            case .success(let graphQLResult):
-                                print("Success! Result: \(graphQLResult.data!.myActiveEvents)")
-                                for event in graphQLResult.data!.myActiveEvents {
-                                    print(event.title)
-                                    print(event.createdBy!)
-                                }
-                            case .failure(let error):
-                                print("Failure! Error: \(error)")
-                                
-                        }
-                    }
-                }
                 
                 Section {
                     ForEach(events.sorted(by: { $0.scheduledStartTime ?? "" < $1.scheduledStartTime ?? ""}), id: \.id) { event in
                         NavigationLink {
                             EventView(event: event)
                         } label: {
-                            VStack {
-                                Text("\(event.title ?? "") | \(event.shortCode ?? "")")
-                                Text("\(event.eventFormat?.name ?? "") | \(event.scheduledStartTime ?? "")")
-                            }
+                            EventRow(event: event)
                         }
                     }.onDelete(perform: deleteItems)
                 }
@@ -126,24 +107,10 @@ struct ContentView: View {
 //            if Date().timeIntervalSince1970 > UserDefaults.standard.double(forKey: "ostrichAccessTokenExpiry") - 40 { //seconds
 //                await ostrichRefreshLogin()
 //            }
-            switch await HTOService().getActiveEvents() {
-            case .success(let response):
-                for event in response.data.myActiveEvents {
-                    switch await HTOService().getEvent(eventId: event.id) {
-                    case .success(let success):
-                        if let oldEvent = events.first(where: { $0.id == event.id }) {
-                            await oldEvent.updateSelf()
-//                            context.delete(oldEvent)
-//                            try context.save()
-                        } else {
-                            context.insert(success.data.event)
-                        }
-                    case .failure(let failure):
-                        print(failure)
-                    }
-                }
-            case .failure(let error):
-                print(error)
+            Network.getEvents(context: context)
+            events.forEach { event in
+                Network.getEvent(event: event)
+                Network.getEvenAsHost(event: event)
             }
         }
     }
@@ -154,9 +121,59 @@ struct ContentView: View {
     }
 }
 
-//
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView().environment(\.managedObjectContext)
-//    }
-//}
+
+struct EventRow: View {
+    var event: Event
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(event.title)
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.primary)
+                
+                if let pairingType = event.pairingType {
+                    Text(pairingType)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+                
+                if let status = event.status {
+                    Text(status)
+                        .font(.subheadline)
+                        .foregroundColor(status == "Active" ? .green : .red)
+                }
+                
+                HStack {
+                    if event.isOnline == true {
+                        Image(systemName: "globe")
+                            .foregroundColor(.blue)
+                    } else {
+                        Image(systemName: "person.2")
+                            .foregroundColor(.gray)
+                    }
+                    
+                    Text(event.createdBy ?? "Unknown")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+            }
+            Spacer()
+            VStack {
+                Text("\(event.requiredTeamSize)")
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                    .padding(8)
+                    .background(Color(.systemBlue))
+                    .clipShape(Circle())
+                    .foregroundColor(.white)
+            }
+        }
+        .padding()
+        .background(Color(.systemGray6))
+        .cornerRadius(10)
+        .shadow(radius: 2)
+        .padding(.horizontal)
+    }
+}
