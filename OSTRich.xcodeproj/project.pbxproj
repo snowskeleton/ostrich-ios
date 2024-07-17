@@ -35,6 +35,24 @@
 		80C5D4BB2C09263100503FD9 /* ExampleSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C5D4BA2C09263100503FD9 /* ExampleSecrets.swift */; };
 		80C5D4BD2C0926B800503FD9 /* StandingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C5D4BC2C0926B800503FD9 /* StandingsView.swift */; };
 		80D091462ACB7BB600B91257 /* SubmitMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D091452ACB7BB600B91257 /* SubmitMatchView.swift */; };
+		80D37EA22C48323A00997C6D /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EA12C48323A00997C6D /* Event.swift */; };
+		80D37EA42C48327800997C6D /* EventFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EA32C48327800997C6D /* EventFormat.swift */; };
+		80D37EA62C48329500997C6D /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EA52C48329500997C6D /* Registration.swift */; };
+		80D37EA82C4832B800997C6D /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EA72C4832B800997C6D /* Reservation.swift */; };
+		80D37EAA2C4832CF00997C6D /* GameStateV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EA92C4832CF00997C6D /* GameStateV2.swift */; };
+		80D37EAC2C4832E300997C6D /* Draft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EAB2C4832E300997C6D /* Draft.swift */; };
+		80D37EAE2C4832F000997C6D /* Top8Draft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EAD2C4832F000997C6D /* Top8Draft.swift */; };
+		80D37EB02C4832FF00997C6D /* DeckConstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EAF2C4832FF00997C6D /* DeckConstruction.swift */; };
+		80D37EB22C48330F00997C6D /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EB12C48330F00997C6D /* Round.swift */; };
+		80D37EB42C48331C00997C6D /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EB32C48331C00997C6D /* Team.swift */; };
+		80D37EB62C48332E00997C6D /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EB52C48332E00997C6D /* Player.swift */; };
+		80D37EB82C48333D00997C6D /* Pod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EB72C48333D00997C6D /* Pod.swift */; };
+		80D37EBA2C48334F00997C6D /* Seat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EB92C48334F00997C6D /* Seat.swift */; };
+		80D37EBC2C48335C00997C6D /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EBB2C48335C00997C6D /* Match.swift */; };
+		80D37EC02C48337000997C6D /* MatchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EBF2C48337000997C6D /* MatchResult.swift */; };
+		80D37EC22C48338600997C6D /* Standing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EC12C48338600997C6D /* Standing.swift */; };
+		80D37EC42C48339600997C6D /* Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EC32C48339600997C6D /* Drop.swift */; };
+		80D37EC62C48340300997C6D /* convenience functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EC52C48340300997C6D /* convenience functions.swift */; };
 		80EBC24C2ABE5FE0005817AD /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */; };
 		80EFCB9A2C02621C004FEF9F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFCB992C02621C004FEF9F /* Secrets.swift */; };
 		80FFBDE32C38A1E4005E958D /* getGameStateV2AtRound.query in Resources */ = {isa = PBXBuildFile; fileRef = 80FFBDE22C38A1E4005E958D /* getGameStateV2AtRound.query */; };
@@ -229,6 +247,24 @@
 		80C5D4BA2C09263100503FD9 /* ExampleSecrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSecrets.swift; sourceTree = "<group>"; };
 		80C5D4BC2C0926B800503FD9 /* StandingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsView.swift; sourceTree = "<group>"; };
 		80D091452ACB7BB600B91257 /* SubmitMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitMatchView.swift; sourceTree = "<group>"; };
+		80D37EA12C48323A00997C6D /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		80D37EA32C48327800997C6D /* EventFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFormat.swift; sourceTree = "<group>"; };
+		80D37EA52C48329500997C6D /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
+		80D37EA72C4832B800997C6D /* Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
+		80D37EA92C4832CF00997C6D /* GameStateV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateV2.swift; sourceTree = "<group>"; };
+		80D37EAB2C4832E300997C6D /* Draft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Draft.swift; sourceTree = "<group>"; };
+		80D37EAD2C4832F000997C6D /* Top8Draft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Top8Draft.swift; sourceTree = "<group>"; };
+		80D37EAF2C4832FF00997C6D /* DeckConstruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckConstruction.swift; sourceTree = "<group>"; };
+		80D37EB12C48330F00997C6D /* Round.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Round.swift; sourceTree = "<group>"; };
+		80D37EB32C48331C00997C6D /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		80D37EB52C48332E00997C6D /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		80D37EB72C48333D00997C6D /* Pod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pod.swift; sourceTree = "<group>"; };
+		80D37EB92C48334F00997C6D /* Seat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seat.swift; sourceTree = "<group>"; };
+		80D37EBB2C48335C00997C6D /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		80D37EBF2C48337000997C6D /* MatchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchResult.swift; sourceTree = "<group>"; };
+		80D37EC12C48338600997C6D /* Standing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Standing.swift; sourceTree = "<group>"; };
+		80D37EC32C48339600997C6D /* Drop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drop.swift; sourceTree = "<group>"; };
+		80D37EC52C48340300997C6D /* convenience functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "convenience functions.swift"; sourceTree = "<group>"; };
 		80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		80EFCB992C02621C004FEF9F /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		80FFBDE22C38A1E4005E958D /* getGameStateV2AtRound.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = getGameStateV2AtRound.query; sourceTree = "<group>"; };
@@ -422,7 +458,7 @@
 				80D091452ACB7BB600B91257 /* SubmitMatchView.swift */,
 				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				80A5722E2BE2C78E00D8D888 /* SettingsView.swift */,
-				8030DC6A2AC763E900F775B6 /* DataTypes.swift */,
+				80D37EA02C48322F00997C6D /* Models */,
 				80FFBF0A2C402D41005E958D /* KeychainSwiftDistrib.swift */,
 				80FFBDEB2C4020D0005E958D /* GameState.graphql */,
 				80FFBDE62C401FA8005E958D /* gamestateschema.json */,
@@ -491,6 +527,32 @@
 				80B8E13E2AB8C5D300845ECC /* dropTeamV2.query */,
 			);
 			path = queries;
+			sourceTree = "<group>";
+		};
+		80D37EA02C48322F00997C6D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8030DC6A2AC763E900F775B6 /* DataTypes.swift */,
+				80D37EA12C48323A00997C6D /* Event.swift */,
+				80D37EA32C48327800997C6D /* EventFormat.swift */,
+				80D37EA52C48329500997C6D /* Registration.swift */,
+				80D37EA72C4832B800997C6D /* Reservation.swift */,
+				80D37EC52C48340300997C6D /* convenience functions.swift */,
+				80D37EA92C4832CF00997C6D /* GameStateV2.swift */,
+				80D37EAB2C4832E300997C6D /* Draft.swift */,
+				80D37EAD2C4832F000997C6D /* Top8Draft.swift */,
+				80D37EAF2C4832FF00997C6D /* DeckConstruction.swift */,
+				80D37EB12C48330F00997C6D /* Round.swift */,
+				80D37EC32C48339600997C6D /* Drop.swift */,
+				80D37EB32C48331C00997C6D /* Team.swift */,
+				80D37EB52C48332E00997C6D /* Player.swift */,
+				80D37EB72C48333D00997C6D /* Pod.swift */,
+				80D37EBF2C48337000997C6D /* MatchResult.swift */,
+				80D37EB92C48334F00997C6D /* Seat.swift */,
+				80D37EC12C48338600997C6D /* Standing.swift */,
+				80D37EBB2C48335C00997C6D /* Match.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		80FFBE0D2C4025A2005E958D /* Fragments */ = {
@@ -810,7 +872,9 @@
 				803D6BE12BFE416F00CEB9F2 /* NotificationHandler.swift in Sources */,
 				80FFBF112C416DB9005E958D /* EventDetail.swift in Sources */,
 				80EBC24C2ABE5FE0005817AD /* HTTPClient.swift in Sources */,
+				80D37EB02C4832FF00997C6D /* DeckConstruction.swift in Sources */,
 				80C5D4BB2C09263100503FD9 /* ExampleSecrets.swift in Sources */,
+				80D37EB82C48333D00997C6D /* Pod.swift in Sources */,
 				80B8E1452ABA245600845ECC /* networkRequests.swift in Sources */,
 				803D6BE32BFE416F00CEB9F2 /* View+Notifications.swift in Sources */,
 				803D6BE22BFE416F00CEB9F2 /* NotificationViewModifier.swift in Sources */,
@@ -820,6 +884,7 @@
 				8030DC6B2AC763E900F775B6 /* DataTypes.swift in Sources */,
 				803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */,
 				80FFBE802C4025A2005E958D /* Money.graphql.swift in Sources */,
+				80D37EBC2C48335C00997C6D /* Match.swift in Sources */,
 				80FFBE812C4025A2005E958D /* GetTimerQuery.graphql.swift in Sources */,
 				80FFBE822C4025A2005E958D /* DropSelfV2Mutation.graphql.swift in Sources */,
 				80FFBE832C4025A2005E958D /* GetEventCreatedByQuery.graphql.swift in Sources */,
@@ -837,6 +902,7 @@
 				80FFBE8F2C4025A2005E958D /* LoadEventJoinV2Query.graphql.swift in Sources */,
 				80FFBE902C4025A2005E958D /* RegisterInterestedPlayerMutation.graphql.swift in Sources */,
 				80FFBE912C4025A2005E958D /* Subscription.graphql.swift in Sources */,
+				80D37EC42C48339600997C6D /* Drop.swift in Sources */,
 				80FFBE922C4025A2005E958D /* MyActiveEventsQuery.graphql.swift in Sources */,
 				80FFBE932C4025A2005E958D /* Match.graphql.swift in Sources */,
 				80FFBE942C4025A2005E958D /* RoundV2.graphql.swift in Sources */,
@@ -850,6 +916,7 @@
 				80FFBE9C2C4025A2005E958D /* DropV2.graphql.swift in Sources */,
 				80FFBE9D2C4025A2005E958D /* MaxMeters_Int_NotNull_min_1.swift in Sources */,
 				80FFBE9E2C4025A2005E958D /* TeamStandingsDetailsV2.graphql.swift in Sources */,
+				80D37EA22C48323A00997C6D /* Event.swift in Sources */,
 				80FFBE9F2C4025A2005E958D /* DropDetailsV2.graphql.swift in Sources */,
 				80FFBEA02C4025A2005E958D /* UserDetails.graphql.swift in Sources */,
 				80FFBEA12C4025A2005E958D /* CreatePrivateEventMutation.graphql.swift in Sources */,
@@ -859,6 +926,7 @@
 				80FFBEA52C4025A2005E958D /* LockTeamMutation.graphql.swift in Sources */,
 				80FFBEA62C4025A2005E958D /* EndEventV2Mutation.graphql.swift in Sources */,
 				80FFBEA72C4025A2005E958D /* JoinEventWithShortCodeMutation.graphql.swift in Sources */,
+				80D37EAA2C4832CF00997C6D /* GameStateV2.swift in Sources */,
 				80FFBEA82C4025A2005E958D /* Gamestateschema.graphql.swift in Sources */,
 				80FFBEA92C4025A2005E958D /* TeamResult.graphql.swift in Sources */,
 				80FFBEAA2C4025A2005E958D /* Organization.graphql.swift in Sources */,
@@ -868,6 +936,7 @@
 				80FFBEAE2C4025A2005E958D /* LoadEventHostV2Query.graphql.swift in Sources */,
 				80FFBEAF2C4025A2005E958D /* MatchDetails.graphql.swift in Sources */,
 				80FFBEB02C4025A2005E958D /* DeckConstructionDetails.graphql.swift in Sources */,
+				80D37EA82C4832B800997C6D /* Reservation.swift in Sources */,
 				80FFBEB12C4025A2005E958D /* DateTime.swift in Sources */,
 				80FFBEB22C4025A2005E958D /* MatchesDetailsV2.graphql.swift in Sources */,
 				80FFBEB32C4025A2005E958D /* PlatformStatus.graphql.swift in Sources */,
@@ -880,6 +949,7 @@
 				80FFBEB92C4025A2005E958D /* Team.graphql.swift in Sources */,
 				80FFBEBA2C4025A2005E958D /* GameStateV2.graphql.swift in Sources */,
 				80FFBEBB2C4025A2005E958D /* TimerDetails.graphql.swift in Sources */,
+				80D37EAE2C4832F000997C6D /* Top8Draft.swift in Sources */,
 				80FFBEBC2C4025A2005E958D /* GetRegisteredPlayersListQuery.graphql.swift in Sources */,
 				80FFBEBD2C4025A2005E958D /* EventSearchQuery.graphql.swift in Sources */,
 				80FFBEBE2C4025A2005E958D /* StandingsDetails.graphql.swift in Sources */,
@@ -890,6 +960,7 @@
 				80FFBEC32C4025A2005E958D /* EventPage.graphql.swift in Sources */,
 				80FFBEC42C4025A2005E958D /* SeatDetailsV2.graphql.swift in Sources */,
 				80FFBEC52C4025A2005E958D /* UnlockTeamMutation.graphql.swift in Sources */,
+				80D37EBA2C48334F00997C6D /* Seat.swift in Sources */,
 				80FFBEC62C4025A2005E958D /* PageSize_Int_min_1.swift in Sources */,
 				80FFBEC72C4025A2005E958D /* LeaveQueueMutation.graphql.swift in Sources */,
 				80FFBEC82C4025A2005E958D /* TeamStandingV2.graphql.swift in Sources */,
@@ -898,6 +969,7 @@
 				80FFBECB2C4025A2005E958D /* PodDetailsV2.graphql.swift in Sources */,
 				80FFBECC2C4025A2005E958D /* Void.swift in Sources */,
 				80FFBECD2C4025A2005E958D /* StorePage.graphql.swift in Sources */,
+				80D37EC62C48340300997C6D /* convenience functions.swift in Sources */,
 				80FFBECE2C4025A2005E958D /* MatchFoundSubscription.graphql.swift in Sources */,
 				80FFBF0B2C402D41005E958D /* KeychainSwiftDistrib.swift in Sources */,
 				80FFBECF2C4025A2005E958D /* EventDetailsMyActive.graphql.swift in Sources */,
@@ -905,6 +977,8 @@
 				80FFBED12C4025A2005E958D /* JoinTeamMutation.graphql.swift in Sources */,
 				80FFBED22C4025A2005E958D /* GameStateV2Host.graphql.swift in Sources */,
 				80FFBED32C4025A2005E958D /* SeatV2.graphql.swift in Sources */,
+				80D37EA42C48327800997C6D /* EventFormat.swift in Sources */,
+				80D37EB42C48331C00997C6D /* Team.swift in Sources */,
 				80FFBED42C4025A2005E958D /* PodDetails.graphql.swift in Sources */,
 				80FFBED52C4025A2005E958D /* TimerUpdatedSubscription.graphql.swift in Sources */,
 				80FFBF0F2C4030E9005E958D /* Network.swift in Sources */,
@@ -920,6 +994,7 @@
 				80FFBEDF2C4025A2005E958D /* PlayerRegisteredSubscription.graphql.swift in Sources */,
 				80FFBEE02C4025A2005E958D /* EventFormatDetails.graphql.swift in Sources */,
 				80FFBEE12C4025A2005E958D /* SchemaConfiguration.swift in Sources */,
+				80D37EC22C48338600997C6D /* Standing.swift in Sources */,
 				80FFBEE22C4025A2005E958D /* PodV2.graphql.swift in Sources */,
 				80FFBEE32C4025A2005E958D /* GetQueuesQuery.graphql.swift in Sources */,
 				80FFBEE42C4025A2005E958D /* DeleteTeamMutation.graphql.swift in Sources */,
@@ -932,8 +1007,11 @@
 				80FFBEEA2C4025A2005E958D /* MatchFoundPayload.graphql.swift in Sources */,
 				80FFBEEB2C4025A2005E958D /* ResultDetails.graphql.swift in Sources */,
 				80FFBEEC2C4025A2005E958D /* Query.graphql.swift in Sources */,
+				80D37EC02C48337000997C6D /* MatchResult.swift in Sources */,
+				80D37EB62C48332E00997C6D /* Player.swift in Sources */,
 				80FFBEED2C4025A2005E958D /* GameResultReportedSubscription.graphql.swift in Sources */,
 				80FFBEEE2C4025A2005E958D /* CreateNextRoundV2Mutation.graphql.swift in Sources */,
+				80D37EA62C48329500997C6D /* Registration.swift in Sources */,
 				80FFBEEF2C4025A2005E958D /* RoundDetails.graphql.swift in Sources */,
 				80FFBEF02C4025A2005E958D /* EventFormat.graphql.swift in Sources */,
 				80FFBEF12C4025A2005E958D /* SchemaMetadata.graphql.swift in Sources */,
@@ -957,7 +1035,9 @@
 				80FFBF032C4025A2005E958D /* GetGameStateV2AtRoundHostQuery.graphql.swift in Sources */,
 				80FFBF042C4025A2005E958D /* Seat.graphql.swift in Sources */,
 				80FFBF052C4025A2005E958D /* TeamResultDetailsV2.graphql.swift in Sources */,
+				80D37EAC2C4832E300997C6D /* Draft.swift in Sources */,
 				80FFBF062C4025A2005E958D /* ID.swift in Sources */,
+				80D37EB22C48330F00997C6D /* Round.swift in Sources */,
 				80FFBF072C4025A2005E958D /* RegisterPlayer.graphql.swift in Sources */,
 				803AECF02AA26B2200CF03EB /* OSTRichApp.swift in Sources */,
 				80B8E1412ABA23F000845ECC /* LoginView.swift in Sources */,
