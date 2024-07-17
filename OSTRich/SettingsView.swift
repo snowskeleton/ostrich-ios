@@ -12,6 +12,7 @@ import SwiftUI
 struct SettingsView: View {
     @AppStorage("saveLoginCreds") var saveLoginCreds = false
     @AppStorage("useLoadGameStateV2") var useGameStateV2 = true
+    @AppStorage("useLaunchCrashProtection") var useLaunchProtection = true
     @State private var showCrashConfirmation = false
     
     var body: some View {
@@ -21,6 +22,9 @@ struct SettingsView: View {
             }
             Toggle(isOn: $useGameStateV2) {
                 Text("Use new Game State method")
+            }
+            Toggle(isOn: $useLaunchProtection) {
+                Text("Protect from bad data causing launch crashes")
             }
             Button("Crash!") {
                 showCrashConfirmation = true

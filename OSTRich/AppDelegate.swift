@@ -10,21 +10,26 @@ import Foundation
 import UserNotifications
 import SwiftData
 
+fileprivate func crashProtection() {
+    let count = UserDefaults.standard.integer(
+        forKey: "timesLaunchedWithoutSafeClose"
+    )
+    if count > 1 {
+        try? ModelContainer().deleteAllData()
+    }
+    UserDefaults.standard
+        .setValue(count + 1, forKey: "timesLaunchedWithoutSafeClose")
+    NSLog("Crash count: \(count)")
+}
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
-        let count = UserDefaults.standard.integer(
-            forKey: "timesLaunchedWithoutSafeClose"
-        )
-        if count > 1 {
-            try? ModelContainer().deleteAllData()
+        if UserDefaults.standard.bool(forKey: "useLaunchCrashProtection") {
+            crashProtection()
         }
-        UserDefaults.standard
-            .setValue(count + 1, forKey: "timesLaunchedWithoutSafeClose")
-        NSLog("Crash count: \(count)")
         UNUserNotificationCenter.current().delegate = self
         
         return true
