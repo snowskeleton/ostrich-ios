@@ -11,7 +11,7 @@ import SwiftData
 @Model
 class Player: Identifiable {
     @Attribute(.unique)
-    let id: String
+    var id: String
     var team: Team?
     var personaId: String?
     var displayName: String?

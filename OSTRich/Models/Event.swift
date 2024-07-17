@@ -214,7 +214,7 @@ class Event: Identifiable {
     @Relationship(deleteRule: .cascade)
     var registeredPlayers: [Registration]
     
-    let created: Date = Date.now
+    var created: Date = Date.now
     
     init(
         id: String, title: String, pairingType: String?, status: String?,

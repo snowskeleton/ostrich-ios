@@ -537,7 +537,6 @@
 				80D37EA32C48327800997C6D /* EventFormat.swift */,
 				80D37EA52C48329500997C6D /* Registration.swift */,
 				80D37EA72C4832B800997C6D /* Reservation.swift */,
-				80D37EC52C48340300997C6D /* convenience functions.swift */,
 				80D37EA92C4832CF00997C6D /* GameStateV2.swift */,
 				80D37EAB2C4832E300997C6D /* Draft.swift */,
 				80D37EAD2C4832F000997C6D /* Top8Draft.swift */,
@@ -551,6 +550,7 @@
 				80D37EB92C48334F00997C6D /* Seat.swift */,
 				80D37EC12C48338600997C6D /* Standing.swift */,
 				80D37EBB2C48335C00997C6D /* Match.swift */,
+				80D37EC52C48340300997C6D /* convenience functions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

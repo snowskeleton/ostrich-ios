@@ -11,10 +11,10 @@ import SwiftData
 @Model
 class Reservation: Identifiable {
     @Attribute(.unique)
-    let personaId: String?
-    let displayName: String?
-    let firstName: String?
-    let lastName: String?
+    var personaId: String?
+    var displayName: String?
+    var firstName: String?
+    var lastName: String?
     var safeName: String {
         return safeNameExpander(self.firstName, self.lastName, self.displayName)
     }

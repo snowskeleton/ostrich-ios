@@ -11,10 +11,10 @@ import SwiftData
 @Model
 class EventFormat: Identifiable {
     @Attribute(.unique)
-    let id: String?
-    let name: String = ""
-    let includesDraft: Bool = false
-    let includesDeckbuilding: Bool = false
+    var id: String?
+    var name: String = ""
+    var includesDraft: Bool = false
+    var includesDeckbuilding: Bool = false
     
     init(
         id: String, name: String, includesDraft: Bool,

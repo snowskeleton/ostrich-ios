@@ -11,12 +11,12 @@ import SwiftData
 @Model
 class Team: Identifiable {
     @Attribute(.unique)
-    let eventId: String
-    let teamCode: String
-    let isLocked: Bool?
-    let isRegistered: Bool?
-    let registrations: [Registration]?
-    let reservations: [Reservation]?
+    var eventId: String
+    var teamCode: String
+    var isLocked: Bool?
+    var isRegistered: Bool?
+    var registrations: [Registration]?
+    var reservations: [Reservation]?
     var teamId: String
     var teamName: String?
     @Relationship(inverse: \Player.team) var players: [Player]
