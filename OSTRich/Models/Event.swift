@@ -8,6 +8,53 @@
 import Foundation
 import SwiftData
 
+@Model
+class Event: Identifiable {
+    @Attribute(.unique)
+    var id: String
+    var title: String
+    var pairingType: String?
+    var status: String?
+    var isOnline: Bool?
+    var createdBy: String?
+    var requiredTeamSize: Int
+    @Relationship(deleteRule: .cascade)
+    var eventFormat: EventFormat?
+    var teams: [Team]
+    var shortCode: String?
+    var scheduledStartTime: Gamestateschema.DateTime?
+    var actualStartTime: Gamestateschema.DateTime?
+    //    var registeredPlayers: [Registration]
+    @Relationship(deleteRule: .cascade)
+    var registeredPlayers: [Registration]
+    
+    var created: Date = Date.now
+    
+    init(
+        id: String, title: String, pairingType: String?, status: String?,
+        isOnline: Bool?, createdBy: String?, requiredTeamSize: Int,
+        eventFormat: EventFormat?, teams: [Team], shortCode: String?,
+        scheduledStartTime: Gamestateschema.DateTime?,
+        actualStartTime: Gamestateschema.DateTime?,
+        registeredPlayers: [Registration] = []
+    ) {
+        self.id = id
+        self.title = title
+        self.pairingType = pairingType
+        self.status = status
+        self.isOnline = isOnline
+        self.createdBy = createdBy
+        self.requiredTeamSize = requiredTeamSize
+        self.eventFormat = eventFormat
+        self.teams = teams
+        self.shortCode = shortCode
+        self.scheduledStartTime = scheduledStartTime
+        self.actualStartTime = actualStartTime
+        self.registeredPlayers = registeredPlayers
+    }
+    
+}
+
 extension Event {
     
     func update(with data: Gamestateschema.LoadEventHostV2Query.Data.Event) {
@@ -192,51 +239,4 @@ extension Event {
             actualStartTime: event.actualStartTime
         )
     }
-}
-
-@Model
-class Event: Identifiable {
-    @Attribute(.unique)
-    var id: String
-    var title: String
-    var pairingType: String?
-    var status: String?
-    var isOnline: Bool?
-    var createdBy: String?
-    var requiredTeamSize: Int
-    @Relationship(deleteRule: .cascade)
-    var eventFormat: EventFormat?
-    var teams: [Team]
-    var shortCode: String?
-    var scheduledStartTime: Gamestateschema.DateTime?
-    var actualStartTime: Gamestateschema.DateTime?
-    //    var registeredPlayers: [Registration]
-    @Relationship(deleteRule: .cascade)
-    var registeredPlayers: [Registration]
-    
-    var created: Date = Date.now
-    
-    init(
-        id: String, title: String, pairingType: String?, status: String?,
-        isOnline: Bool?, createdBy: String?, requiredTeamSize: Int,
-        eventFormat: EventFormat?, teams: [Team], shortCode: String?,
-        scheduledStartTime: Gamestateschema.DateTime?,
-        actualStartTime: Gamestateschema.DateTime?,
-        registeredPlayers: [Registration] = []
-    ) {
-        self.id = id
-        self.title = title
-        self.pairingType = pairingType
-        self.status = status
-        self.isOnline = isOnline
-        self.createdBy = createdBy
-        self.requiredTeamSize = requiredTeamSize
-        self.eventFormat = eventFormat
-        self.teams = teams
-        self.shortCode = shortCode
-        self.scheduledStartTime = scheduledStartTime
-        self.actualStartTime = actualStartTime
-        self.registeredPlayers = registeredPlayers
-    }
-    
 }
