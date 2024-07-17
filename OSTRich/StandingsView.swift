@@ -8,26 +8,26 @@
 import SwiftUI
 
 struct TeamStandingView: View {
-    let teamStandings: [TeamStanding]
+    let teamStandings: [Standing]
     
     var body: some View {
         Grid {
             GridRow {
                 Text("Rank")
                 Text("Name")
-                Text("W-L-D-B")
+                Text("W-L-D")
                 Text("GW")
                 Text("OGW")
                 Text("OMW")
             }.font(.title2)
             Divider()
-            ForEach(teamStandings, id: \.team.id) { teamStanding in
+            ForEach(teamStandings, id: \.teamId) { teamStanding in
                 GridRow {
                     Text("\(teamStanding.rank).")
                         .font(.headline)
-                    Text("\(teamStanding.team.fullName)")
+                    Text("\(teamStanding.teamId)")
                         .font(.subheadline)
-                    Text("\(teamStanding.wins) - \(teamStanding.losses) - \(teamStanding.draws) - \(teamStanding.byes) = \(teamStanding.matchPoints)")
+                    Text("\(teamStanding.wins) - \(teamStanding.losses) - \(teamStanding.draws) = \(teamStanding.matchPoints)")
                         .font(.footnote)
                     Text("GW:\n\(String(format: "%.2f", teamStanding.gameWinPercent * 100))%")
                         .font(.footnote)
