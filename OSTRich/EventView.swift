@@ -201,7 +201,7 @@ struct PlayersView: View {
     var body: some View {
         List {
             Section("Players: \(event.registeredPlayers.count)") {
-                ForEach(event.registeredPlayers, id: \.id) { player in
+                ForEach(event.registeredPlayers.sorted(by: { $0.safeName < $1.safeName }), id: \.id) { player in
                     VStack {
                         HStack {
                             Text(player.safeName)
