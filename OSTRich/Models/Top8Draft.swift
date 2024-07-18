@@ -18,4 +18,11 @@ class Top8Draft: Identifiable {
         self.pods = pods
         self.timerId = timerId
     }
+    
+    convenience init(from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data.GameStateV2AtRound.Top8Draft) {
+        let pods = data.pods.map {
+            Pod(from: $0)
+        }
+        self.init(pods: pods, timerId: data.timerId)
+    }
 }

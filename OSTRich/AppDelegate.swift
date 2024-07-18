@@ -10,7 +10,7 @@ import Foundation
 import UserNotifications
 import SwiftData
 
-fileprivate func crashProtection() {
+func crashProtection() {
     let count = UserDefaults.standard.integer(
         forKey: "timesLaunchedWithoutSafeClose"
     )

@@ -23,9 +23,10 @@ struct EventView: View {
             Picker(selection: $selectedTab, label: Text("")) {
                 Text("Players").tag("Players")
 
-                //                if !event.currentMatches.isEmpty {
-                //                    Text("Pairings").tag("Pairings")
-                //                }
+                if event.gameStateAtRound != nil {
+//                    if !((event.gameStateAtRound?.currentMatches.isEmpty) != nil) {
+                    Text("Pairings").tag("Pairings")
+                }
 
                 //                if !(event.gameStateAtRound?.standings?.isEmpty ?? true) {
                 //                    Text("Standings").tag("Standings")
@@ -35,9 +36,10 @@ struct EventView: View {
             TabView(selection: $selectedTab) {
                 PlayersView(event: event).tag("Players")
 
-                //                if !event.currentMatches.isEmpty {
-                //                    MatchesView(event: event).tag("Pairings")
-                //                }
+                if event.gameStateAtRound != nil {
+//                if !((event.gameStateAtRound?.currentMatches.isEmpty) != nil) {
+                    MatchesView(event: event).tag("Pairings")
+                }
 
                 //                if !(event.gameStateAtRound?.standings?.isEmpty ?? true) {
                 //                    TeamStandingView(teamStandings: event.gameStateAtRound!.standings!).tag("Standings")
@@ -107,7 +109,7 @@ struct EventView: View {
     fileprivate func updateEvent() {
         Network.getEvent(event: event)
         Network.getEvenAsHost(event: event)
-//        Network.getGameState(event: event)
+        Network.getGameState(event: event)
     }
 
     //    fileprivate func getTime() {
@@ -155,46 +157,57 @@ struct EventView: View {
     //    }
 }
 
-//struct MatchesView: View {
-//    @State var event: Event
-//    var matches: [Match] {
-//        return event.gameStateAtRound?.currentRound?.matches ?? []
-//    }
-//    var match: Match? {
-//        return event.gameStateAtRound.currentRound.matches.first { match in
-//            match.teams.contains { team in
-//                team.players.contains { player in
-//                    player.personaId == UserDefaults.standard.string(forKey: "personaId")!
-//                }
-//            }
-//        }
-//    }
-//
-//    var body: some View {
-//        List {
-//            if match != nil {
-//                Section("My Match") {
-//                    NavigationLink {
+struct MatchesView: View {
+    @State var event: Event
+    var matches: [Match] {
+        let gs = event.gameStateAtRound
+        if gs == nil { return [] }
+        if let currentRound = gs?.currentRound {
+            return currentRound.matches
+        } else {
+            return []
+        }
+    }
+    
+    var match: Match? {
+        return event.gameStateAtRound?.currentMatches.first { match in
+            match.teams.contains { team in
+                team.players.contains { player in
+                    player.personaId == UserDefaults.standard.string(forKey: "personaId")!
+                }
+            }
+        }
+    }
+
+    var body: some View {
+        List {
+            if match != nil {
+                Section("My Match") {
+                    NavigationLink {
+                        Text("Some Match View")
+                        EmptyView()
 //                        SubmitMatchView(event: event)
-//                    } label: {
-//                        MatchLineItem(match: match!)
-//                    }
-//                }
-//            }
-//            Section("All Matches") {
-//                ForEach(matches, id: \.tableNumber) { match in
-//                    HStack {
-//                        NavigationLink {
+                    } label: {
+                        MatchLineItem(match: match!)
+                    }
+                }
+            }
+            Section("All Matches") {
+                ForEach(matches, id: \.tableNumber) { match in
+                    HStack {
+                        Text("Here is some text")
+                        NavigationLink {
+                            EmptyView()
 //                            SubmitMatchView(event: event, notMyMatch: match)
-//                        } label: {
-//                            MatchLineItem(match: match)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
+                        } label: {
+                            MatchLineItem(match: match)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 struct PlayersView: View {
     @State var event: Event
@@ -221,25 +234,28 @@ struct PlayersView: View {
 
 struct MatchLineItem: View {
     let match: Match
-    var longString: String {
-        if match.isBye! { return "\(match.teams[0].fullName)" }
+    var vsString: String {
+        if match.teams.isEmpty {
+            return "Unknown match"
+        }
+        if match.isBye {
+            return "\(match.teams.first!.fullName)"
+        }
         return "\(match.teams[0].fullName)\nvs.\n\(match.teams[1].fullName)"
     }
+    
 
     var body: some View {
         HStack {
             if match.tableNumber != nil {
                 Text("Table: \(String(describing: match.tableNumber!))")
-                Text(longString)
                 Spacer()
                 //                if match.leftTeamWins != nil && match.rightTeamWins != nil {
                 //                    // this "-" character makes things look weird. Find something else
                 //                    Text("\(match.leftTeamWins!)\n–\n\(match.rightTeamWins!)")
                 //                }
-            } else {
-                Text("Bye:")
-                Text(longString)
             }
+            Text(vsString)
         }
     }
 }

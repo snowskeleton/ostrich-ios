@@ -18,4 +18,9 @@ class DeckConstruction: Identifiable {
         self.timerId = timerId
         self.seats = seats
     }
+    
+    convenience init(from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data.GameStateV2AtRound.DeckConstruction) {
+        let seats = data.seats.map { Seat(from: $0) }
+        self.init(timerId: data.timerId, seats: seats)
+    }
 }

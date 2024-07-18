@@ -25,4 +25,18 @@ class Pod: Identifiable {
         self.draft = draft
         self.top8Draft = top8Draft
     }
+    
+    convenience init(from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data.GameStateV2AtRound.Draft.Pod) {
+        let seats = data.seats.map {
+            Seat(from: $0)
+        }
+        self.init(podNumber: data.podNumber, seats: seats)
+    }
+    
+    convenience init(from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data.GameStateV2AtRound.Top8Draft.Pod) {
+        let seats = data.seats.map {
+            Seat(from: $0)
+        }
+        self.init(podNumber: data.podNumber, seats: seats)
+    }
 }

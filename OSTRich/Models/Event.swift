@@ -24,12 +24,13 @@ class Event: Identifiable {
     var shortCode: String?
     var scheduledStartTime: Gamestateschema.DateTime?
     var actualStartTime: Gamestateschema.DateTime?
-    //    var registeredPlayers: [Registration]
     @Relationship(deleteRule: .cascade)
     var registeredPlayers: [Registration]
-    
+    @Relationship(deleteRule: .cascade, inverse: \GameStateV2.event)
+    var gameStateAtRound: GameStateV2? = nil
+
     var created: Date = Date.now
-    
+
     init(
         id: String, title: String, pairingType: String?, status: String?,
         isOnline: Bool?, createdBy: String?, requiredTeamSize: Int,
@@ -52,36 +53,18 @@ class Event: Identifiable {
         self.actualStartTime = actualStartTime
         self.registeredPlayers = registeredPlayers
     }
-    
+
 }
 
 extension Event {
-    
-    func update(with data: Gamestateschema.LoadEventHostV2Query.Data.Event) {
-        var existingPlayers = Dictionary(uniqueKeysWithValues: self.registeredPlayers.map { ($0.id, $0) })
-        
-        for player in data.registeredPlayers! {
-            if let existingPlayer = existingPlayers[player.id] {
-                existingPlayer.status = player.status?.rawValue
-                existingPlayer.personaId = player.personaId
-                existingPlayer.displayName = player.displayName
-                existingPlayer.firstName = player.firstName
-                existingPlayer.lastName = player.lastName
-            } else {
-                let newPlayer = Registration(
-                    id: player.id,
-                    status: player.status?.rawValue,
-                    personaId: player.personaId,
-                    displayName: player.displayName,
-                    firstName: player.firstName,
-                    lastName: player.lastName
-                )
-                self.registeredPlayers.append(newPlayer)
-                existingPlayers[newPlayer.id] = newPlayer
-            }
-        }
-        
-        self.registeredPlayers = Array(existingPlayers.values)
+
+    func update(
+        with data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
+            .GameStateV2AtRound
+    ) {
+        let gs = GameStateV2(from: data, event: self)
+        // TODO: make this not crash. Every time I try to assign gs to self.gameStateAtRound, I get some sort of error. Make this go away >.<
+        self.gameStateAtRound = gs
     }
     
     func update(
@@ -102,7 +85,18 @@ extension Event {
             )
         }
     }
-    
+
+    func update(with data: Gamestateschema.LoadEventHostV2Query.Data.Event) {
+        for player in data.registeredPlayers! {
+            if let existingPlayer = self.registeredPlayers.first(where: { $0.id == player.id }) {
+                existingPlayer.update(from: player)
+            } else {
+                let newPlayer = Registration(from: player)
+                self.registeredPlayers.append(newPlayer)
+            }
+        }
+    }
+
     func update(with data: Gamestateschema.LoadEventJoinV2Query.Data.Event) {
         self.title = data.title
         self.pairingType = data.pairingType.rawValue
@@ -110,52 +104,33 @@ extension Event {
         self.isOnline = data.isOnline
         self.createdBy = data.createdBy
         self.requiredTeamSize = data.requiredTeamSize
-        
+
         // Initialize eventFormat
-        self.eventFormat = data.eventFormat.map {
-            EventFormat(
-                id: $0.id,
-                name: $0.name,
-                includesDraft: $0.includesDraft,
-                includesDeckbuilding: $0.includesDeckbuilding
-            )
+        if let format = data.eventFormat {
+            self.eventFormat = EventFormat(from: format)
         }
-        
+
         // Update teams
         self.teams = data.teams.map { teamData in
             let registrations = teamData.registrations?.map {
-                Registration(
-                    id: $0.id,
-                    status: $0.status?.rawValue,
-                    personaId: $0.personaId,
-                    displayName: $0.displayName,
-                    firstName: $0.firstName,
-                    lastName: $0.lastName
-                )
+                Registration(from: $0)
             }
-            
+
             let reservations = teamData.reservations?.map {
-                Reservation(
-                    personaId: $0.personaId,
-                    displayName: $0.displayName,
-                    firstName: $0.firstName,
-                    lastName: $0.lastName
-                )
+                Reservation(from: $0)
             }
-            
+
             return Team(
                 eventId: teamData.eventId,
-                teamCode: teamData.teamCode,
-                isLocked: teamData.isLocked,
-                isRegistered: teamData.isRegistered,
                 registrations: registrations,
                 reservations: reservations,
                 teamId: teamData.id,
                 players: [] as [Player]
             )
         }
+        print(data.teams)
     }
-    
+
     //    convenience init(from data: Gamestateschema.LoadEventJoinV2Query.Data) {
     //        let event = data.event!
     //
@@ -220,7 +195,7 @@ extension Event {
     //            actualStartTime: nil
     //        )
     //    }
-    
+
     convenience init(
         from event: Gamestateschema.MyActiveEventsQuery.Data.MyActiveEvent
     ) {

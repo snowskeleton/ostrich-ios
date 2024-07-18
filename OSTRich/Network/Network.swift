@@ -88,7 +88,7 @@ class Network {
             switch response {
             case .success(let graphQLResult):
                 if let gamestateData = graphQLResult.data?.gameStateV2AtRound {
-//                    print(gamestateData)
+                    event.update(with: gamestateData)
                 }
             case .failure(let error):
                 print(error)

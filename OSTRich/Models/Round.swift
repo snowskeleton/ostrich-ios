@@ -22,7 +22,7 @@ class Round: Identifiable {
     var timerId: String?
     @Relationship(inverse: \Standing.round) var standings: [Standing]
     var gameState: GameStateV2?
-    
+
     init(
         roundId: String, roundNumber: Int, isFinalRound: Bool? = nil,
         isPlayoff: Bool? = nil, isCertified: Bool? = nil, matches: [Match],
@@ -41,5 +41,23 @@ class Round: Identifiable {
         self.timerId = timerId
         self.standings = standings
         self.gameState = gameState
+    }
+
+    convenience init(
+        from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
+            .GameStateV2AtRound.Round
+    ) {
+        let matches = data.matches.map { Match(from: $0) }
+        let standings = data.standings.map { Standing(from: $0) }
+        self.init(
+            roundId: data.roundId, roundNumber: data.roundNumber,
+            matches: matches, standings: standings
+        )
+        matches.forEach { match in
+            match.round = self
+        }
+        standings.forEach { standing in
+            standing.round = self
+        }
     }
 }

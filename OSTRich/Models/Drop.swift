@@ -12,17 +12,19 @@ import SwiftData
 class Drop: Identifiable {
     @Attribute(.unique) var id: UUID = UUID()
     var teamId: String
-    var reason: String
-    var timestamp: Date
+    var roundNumber: Int
     var gameState: GameStateV2?
 
     init(
-        teamId: String, reason: String, timestamp: Date,
+        teamId: String, roundNumber: Int,
         gameState: GameStateV2? = nil
     ) {
         self.teamId = teamId
-        self.reason = reason
-        self.timestamp = timestamp
+        self.roundNumber = roundNumber
         self.gameState = gameState
+    }
+    
+    convenience init(from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data.GameStateV2AtRound.Drop) {
+        self.init(teamId: data.teamId, roundNumber: data.roundNumber)
     }
 }

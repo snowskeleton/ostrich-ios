@@ -33,4 +33,14 @@ class MatchResult: Identifiable {
         self.teamId = teamId
         self.match = match
     }
+
+    convenience init(
+        from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
+            .GameStateV2AtRound.Round.Match.Result
+    ) {
+        self.init(
+            matchId: data.matchId, submitter: data.submitter, isBye: data.isBye,
+            wins: data.wins, losses: data.losses, draws: data.draws,
+            teamId: data.teamId)
+    }
 }

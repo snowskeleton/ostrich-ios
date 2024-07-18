@@ -19,7 +19,6 @@ class Reservation: Identifiable {
         return safeNameExpander(self.firstName, self.lastName, self.displayName)
     }
 
-    
     init(
         personaId: String?, displayName: String?, firstName: String?,
         lastName: String?
@@ -28,5 +27,13 @@ class Reservation: Identifiable {
         self.displayName = displayName
         self.firstName = firstName
         self.lastName = lastName
+    }
+    convenience init(
+        from data: Gamestateschema.LoadEventJoinV2Query.Data.Event.Team
+            .Reservation
+    ) {
+        self.init(
+            personaId: data.personaId, displayName: data.displayName,
+            firstName: data.firstName, lastName: data.lastName)
     }
 }

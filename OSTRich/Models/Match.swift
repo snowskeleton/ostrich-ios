@@ -12,20 +12,28 @@ import SwiftData
 class Match: Identifiable {
     @Attribute(.unique)
     var matchId: String
-    var isBye: Bool?
+    var isBye: Bool = false
     var teamIds: [String]
     @Relationship(inverse: \MatchResult.match) var results: [MatchResult]?
     var tableNumber: Int?
     var round: Round?
     
+//    var teams: [Team] {
+//        return self.round?.gameState?.teams.filter {
+//            $0.teamId == self.teamIds[0] || $0.teamId == self.teamIds[1]
+//        } ?? []
+//    }
     var teams: [Team] {
-        return self.round?.gameState?.teams.filter {
-            $0.teamId == self.teamIds[0] || $0.teamId == self.teamIds[1]
-        } ?? []
+        guard let teams = self.round?.gameState?.teams else {
+            return []
+        }
+        return teams.filter { team in
+            self.teamIds.contains(team.teamId)
+        }
     }
     
     init(
-        matchId: String, isBye: Bool? = nil, teamIds: [String],
+        matchId: String, isBye: Bool, teamIds: [String],
         results: [MatchResult]? = nil, tableNumber: Int? = nil,
         round: Round? = nil
     ) {
@@ -35,5 +43,15 @@ class Match: Identifiable {
         self.results = results
         self.tableNumber = tableNumber
         self.round = round
+    }
+    
+    convenience init(
+        from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
+            .GameStateV2AtRound.Round.Match
+    ) {
+        let results = data.results!.map {
+            MatchResult(from: $0)
+        }
+        self.init(matchId: data.matchId, isBye: data.isBye ?? false, teamIds: data.teamIds, results: results)
     }
 }

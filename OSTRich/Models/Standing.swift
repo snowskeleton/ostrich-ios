@@ -39,4 +39,18 @@ class Standing: Identifiable {
         self.opponentMatchWinPercent = opponentMatchWinPercent
         self.round = round
     }
+
+    convenience init(
+        from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
+            .GameStateV2AtRound.Round.Standing
+    ) {
+        self.init(
+            teamId: data.teamId, rank: data.rank, wins: data.wins,
+            losses: data.losses, draws: data.draws,
+            matchPoints: data.matchPoints,
+            gameWinPercent: data.gameWinPercent,
+            opponentGameWinPercent: data.opponentGameWinPercent,
+            opponentMatchWinPercent: data.opponentMatchWinPercent
+        )
+    }
 }

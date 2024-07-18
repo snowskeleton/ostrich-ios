@@ -25,4 +25,16 @@ class Seat: Identifiable {
         self.pod = pod
         self.deckConstruction = deckConstruction
     }
+    
+    convenience init(from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data.GameStateV2AtRound.Draft.Pod.Seat) {
+        self.init(seatNumber: data.seatNumber, teamId: data.teamId)
+    }
+    
+    convenience init(from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data.GameStateV2AtRound.Top8Draft.Pod.Seat) {
+        self.init(seatNumber: data.seatNumber, teamId: data.teamId)
+    }
+    
+    convenience init(from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data.GameStateV2AtRound.DeckConstruction.Seat) {
+        self.init(seatNumber: data.seatNumber, teamId: data.teamId)
+    }
 }

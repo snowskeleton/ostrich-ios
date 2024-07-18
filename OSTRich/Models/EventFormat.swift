@@ -15,7 +15,7 @@ class EventFormat: Identifiable {
     var name: String = ""
     var includesDraft: Bool = false
     var includesDeckbuilding: Bool = false
-    
+
     init(
         id: String, name: String, includesDraft: Bool,
         includesDeckbuilding: Bool
@@ -24,5 +24,13 @@ class EventFormat: Identifiable {
         self.name = name
         self.includesDraft = includesDraft
         self.includesDeckbuilding = includesDeckbuilding
+    }
+
+    convenience init(
+        from data: Gamestateschema.LoadEventJoinV2Query.Data.Event.EventFormat
+    ) {
+        self.init(
+            id: data.id, name: data.name, includesDraft: data.includesDraft,
+            includesDeckbuilding: data.includesDeckbuilding)
     }
 }

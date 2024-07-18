@@ -20,7 +20,7 @@ class Registration: Identifiable {
     var safeName: String {
         return safeNameExpander(self.firstName, self.lastName, self.displayName)
     }
-    
+
     init(
         id: String, status: String?, personaId: String?,
         displayName: String?, firstName: String?, lastName: String?
@@ -31,6 +31,37 @@ class Registration: Identifiable {
         self.displayName = displayName
         self.firstName = firstName
         self.lastName = lastName
-        //        self.event = event
     }
+
+    convenience init(
+        from data: Gamestateschema.LoadEventJoinV2Query.Data.Event.Team
+            .Registration
+    ) {
+        self.init(
+            id: data.id, status: data.status?.rawValue,
+            personaId: data.personaId, displayName: data.displayName,
+            firstName: data.firstName, lastName: data.lastName
+        )
+    }
+
+    convenience init(
+        from data: Gamestateschema.LoadEventHostV2Query.Data.Event
+            .RegisteredPlayer
+    ) {
+        self.init(
+            id: data.id, status: data.status?.rawValue,
+            personaId: data.personaId, displayName: data.displayName,
+            firstName: data.firstName, lastName: data.lastName
+        )
+    }
+    
+    func update(from data: Gamestateschema.LoadEventHostV2Query.Data.Event
+        .RegisteredPlayer) {
+            self.id = id
+            self.status = status
+            self.personaId = personaId
+            self.displayName = displayName
+            self.firstName = firstName
+            self.lastName = lastName
+        }
 }
