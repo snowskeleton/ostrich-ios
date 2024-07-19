@@ -18,13 +18,12 @@ struct EventView: View {
         Text(event.shortCode ?? "")
         Text(event.status ?? "")
         Text(timeRemaining)
-        //        Text(event.gameStateAtRound?.currentRoundNumber?.description ?? "no round number")
+        Text((event.gameStateAtRound?.currentRoundNumber.description) ?? "0")
         VStack {
             Picker(selection: $selectedTab, label: Text("")) {
                 Text("Players").tag("Players")
 
                 if event.gameStateAtRound != nil {
-//                    if !((event.gameStateAtRound?.currentMatches.isEmpty) != nil) {
                     Text("Pairings").tag("Pairings")
                 }
 
@@ -37,7 +36,6 @@ struct EventView: View {
                 PlayersView(event: event).tag("Players")
 
                 if event.gameStateAtRound != nil {
-//                if !((event.gameStateAtRound?.currentMatches.isEmpty) != nil) {
                     MatchesView(event: event).tag("Pairings")
                 }
 
