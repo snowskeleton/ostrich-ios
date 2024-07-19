@@ -179,23 +179,23 @@ struct MatchesView: View {
 
     var body: some View {
         List {
-            if match != nil {
-                Section("My Match") {
-                    NavigationLink {
-                        Text("Some Match View")
-                        EmptyView()
-//                        SubmitMatchView(event: event)
-                    } label: {
-                        MatchLineItem(match: match!)
-                    }
-                }
-            }
+//            if match != nil {
+//                Section("My Match") {
+//                    NavigationLink {
+//                        Text("Some Match View")
+//                        EmptyView()
+////                        SubmitMatchView(event: event)
+//                    } label: {
+//                        MatchLineItem(match: match!)
+//                    }
+//                }
+//            }
             Section("All Matches") {
                 ForEach(matches, id: \.matchId) { match in
                     HStack {
                         NavigationLink {
                             EmptyView()
-//                            SubmitMatchView(event: event, notMyMatch: match)
+                            SubmitMatchView(event: event, match: match)
                         } label: {
                             HStack {
                                 Text("MatchID is " + match.matchId)
