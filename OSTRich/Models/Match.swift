@@ -18,12 +18,6 @@ class Match: Identifiable {
     var tableNumber: Int?
     var round: Round
     
-
-    //    var teams: [Team] {
-    //        return self.round?.gameState?.teams.filter {
-    //            $0.teamId == self.teamIds[0] || $0.teamId == self.teamIds[1]
-    //        } ?? []
-    //    }
     var teams: [Team] {
         self.round.gameState.teams.filter {
             self.teamIds.contains($0.teamId)
