@@ -16,19 +16,21 @@ class Round: Identifiable {
     var isFinalRound: Bool?
     var isPlayoff: Bool?
     var isCertified: Bool?
-    @Relationship(inverse: \Match.round) var matches: [Match]
+    @Relationship(deleteRule: .cascade, inverse: \Match.round) var matches: [Match] = []
     var pairingStrategy: String?
     var canRollback: Bool?
     var timerId: String?
-    @Relationship(inverse: \Standing.round) var standings: [Standing]
-    var gameState: GameStateV2?
+    @Relationship(deleteRule: .cascade, inverse: \Standing.round) var standings: [Standing] = []
+    var gameState: GameStateV2
 
     init(
         roundId: String, roundNumber: Int, isFinalRound: Bool? = nil,
-        isPlayoff: Bool? = nil, isCertified: Bool? = nil, matches: [Match],
+        isPlayoff: Bool? = nil, isCertified: Bool? = nil,
+        matches: [Match] = [],
         pairingStrategy: String? = nil, canRollback: Bool? = nil,
-        timerId: String? = nil, standings: [Standing],
-        gameState: GameStateV2? = nil
+        timerId: String? = nil,
+        standings: [Standing] = [],
+        gameState: GameStateV2
     ) {
         self.roundId = roundId
         self.roundNumber = roundNumber
@@ -45,19 +47,16 @@ class Round: Identifiable {
 
     convenience init(
         from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
-            .GameStateV2AtRound.Round
+            .GameStateV2AtRound.Round,
+        gameState: GameStateV2
     ) {
-        let matches = data.matches.map { Match(from: $0) }
-        let standings = data.standings.map { Standing(from: $0) }
         self.init(
-            roundId: data.roundId, roundNumber: data.roundNumber,
-            matches: matches, standings: standings
+            roundId: data.roundId,
+            roundNumber: data.roundNumber,
+            timerId: data.timerId,
+            gameState: gameState
         )
-        matches.forEach { match in
-            match.round = self
-        }
-        standings.forEach { standing in
-            standing.round = self
-        }
+        self.matches = data.matches.map { Match(from: $0, round: self) }
+        self.standings = data.standings.map { Standing(from: $0, round: self) }
     }
 }

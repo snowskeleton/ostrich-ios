@@ -20,13 +20,13 @@ class Standing: Identifiable {
     var gameWinPercent: Double
     var opponentGameWinPercent: Double
     var opponentMatchWinPercent: Double
-    var round: Round?
+    var round: Round
 
     init(
         teamId: String, rank: Int, wins: Int, losses: Int, draws: Int,
         matchPoints: Int, gameWinPercent: Double,
         opponentGameWinPercent: Double, opponentMatchWinPercent: Double,
-        round: Round? = nil
+        round: Round
     ) {
         self.teamId = teamId
         self.rank = rank
@@ -42,7 +42,8 @@ class Standing: Identifiable {
 
     convenience init(
         from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
-            .GameStateV2AtRound.Round.Standing
+            .GameStateV2AtRound.Round.Standing,
+        round: Round
     ) {
         self.init(
             teamId: data.teamId, rank: data.rank, wins: data.wins,
@@ -50,7 +51,8 @@ class Standing: Identifiable {
             matchPoints: data.matchPoints,
             gameWinPercent: data.gameWinPercent,
             opponentGameWinPercent: data.opponentGameWinPercent,
-            opponentMatchWinPercent: data.opponentMatchWinPercent
+            opponentMatchWinPercent: data.opponentMatchWinPercent,
+            round: round
         )
     }
 }

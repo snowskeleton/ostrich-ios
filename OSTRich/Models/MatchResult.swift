@@ -18,11 +18,11 @@ class MatchResult: Identifiable {
     var losses: Int
     var draws: Int
     var teamId: String
-    var match: Match?
+    var match: Match
 
     init(
         matchId: String, submitter: String, isBye: Bool, wins: Int, losses: Int,
-        draws: Int, teamId: String, match: Match? = nil
+        draws: Int, teamId: String, match: Match
     ) {
         self.matchId = matchId
         self.submitter = submitter
@@ -36,11 +36,14 @@ class MatchResult: Identifiable {
 
     convenience init(
         from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
-            .GameStateV2AtRound.Round.Match.Result
+            .GameStateV2AtRound.Round.Match.Result,
+        match: Match
     ) {
         self.init(
             matchId: data.matchId, submitter: data.submitter, isBye: data.isBye,
             wins: data.wins, losses: data.losses, draws: data.draws,
-            teamId: data.teamId)
+            teamId: data.teamId,
+            match: match
+        )
     }
 }

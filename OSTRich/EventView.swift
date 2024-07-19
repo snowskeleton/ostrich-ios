@@ -191,13 +191,17 @@ struct MatchesView: View {
                 }
             }
             Section("All Matches") {
-                ForEach(matches, id: \.tableNumber) { match in
+                ForEach(matches, id: \.matchId) { match in
                     HStack {
                         NavigationLink {
                             EmptyView()
 //                            SubmitMatchView(event: event, notMyMatch: match)
                         } label: {
-                            MatchLineItem(match: match)
+                            HStack {
+                                Text("MatchID is " + match.matchId)
+                                Spacer()
+                                MatchLineItem(match: match)
+                            }
                         }
                     }
                 }
@@ -246,12 +250,12 @@ struct MatchLineItem: View {
         HStack {
             if match.tableNumber != nil {
                 Text("Table: \(String(describing: match.tableNumber!))")
-                Spacer()
                 //                if match.leftTeamWins != nil && match.rightTeamWins != nil {
                 //                    // this "-" character makes things look weird. Find something else
                 //                    Text("\(match.leftTeamWins!)\n–\n\(match.rightTeamWins!)")
                 //                }
             }
+            Spacer()
             Text(vsString)
         }
     }

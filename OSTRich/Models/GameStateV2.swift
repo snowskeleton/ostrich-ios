@@ -17,8 +17,8 @@ class GameStateV2: Identifiable {
     var top8Draft: Top8Draft?
     var deckConstruction: DeckConstruction?
     var currentRoundNumber: Int
-    @Relationship(inverse: \Round.gameState) var rounds: [Round] = []
-    @Relationship(deleteRule: .noAction) var teams: [Team] = []
+    @Relationship(deleteRule: .cascade, inverse: \Round.gameState) var rounds: [Round] = []
+    @Relationship(deleteRule: .cascade) var teams: [Team] = []
     @Relationship(deleteRule: .cascade, inverse: \Drop.gameState) var drops: [Drop] = []
 //    var podPairingType: String? //unused
     var gamesToWin: Int?
@@ -64,10 +64,10 @@ class GameStateV2: Identifiable {
             gamesToWin: data.gamesToWin, event: event
         )
         if let roundsData = data.rounds {
-            self.rounds = roundsData.map { Round(from: $0) }
+            self.rounds = roundsData.map { Round(from: $0, gameState: self) }
         }
         if let dropData = data.drops {
-            self.drops = dropData.map { Drop(from: $0) }
+            self.drops = dropData.map { Drop(from: $0, gameState: self) }
         }
         if let teamsData = data.teams {
             self.teams = teamsData.map { Team(from: $0, gamestate: self) }

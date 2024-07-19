@@ -14,28 +14,26 @@ class Match: Identifiable {
     var matchId: String
     var isBye: Bool = false
     var teamIds: [String]
-    @Relationship(inverse: \MatchResult.match) var results: [MatchResult]?
+    @Relationship(deleteRule: .cascade, inverse: \MatchResult.match) var results: [MatchResult]?
     var tableNumber: Int?
-    var round: Round?
+    var round: Round
     
-//    var teams: [Team] {
-//        return self.round?.gameState?.teams.filter {
-//            $0.teamId == self.teamIds[0] || $0.teamId == self.teamIds[1]
-//        } ?? []
-//    }
+
+    //    var teams: [Team] {
+    //        return self.round?.gameState?.teams.filter {
+    //            $0.teamId == self.teamIds[0] || $0.teamId == self.teamIds[1]
+    //        } ?? []
+    //    }
     var teams: [Team] {
-        guard let teams = self.round?.gameState?.teams else {
-            return []
-        }
-        return teams.filter { team in
-            self.teamIds.contains(team.teamId)
+        self.round.gameState.teams.filter {
+            self.teamIds.contains($0.teamId)
         }
     }
-    
+
     init(
         matchId: String, isBye: Bool, teamIds: [String],
         results: [MatchResult]? = nil, tableNumber: Int? = nil,
-        round: Round? = nil
+        round: Round
     ) {
         self.matchId = matchId
         self.isBye = isBye
@@ -44,14 +42,19 @@ class Match: Identifiable {
         self.tableNumber = tableNumber
         self.round = round
     }
-    
+
     convenience init(
         from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
-            .GameStateV2AtRound.Round.Match
+            .GameStateV2AtRound.Round.Match,
+        round: Round
     ) {
-        let results = data.results!.map {
-            MatchResult(from: $0)
+        self.init(
+            matchId: data.matchId, isBye: data.isBye ?? false,
+            teamIds: data.teamIds,
+            round: round
+        )
+        self.results = data.results!.map {
+            MatchResult(from: $0, match: self)
         }
-        self.init(matchId: data.matchId, isBye: data.isBye ?? false, teamIds: data.teamIds, results: results)
     }
 }

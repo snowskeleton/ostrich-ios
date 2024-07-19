@@ -55,25 +55,14 @@ class Team: Identifiable {
 
 extension Team {
     var fullName: String {
-        let firstPlayer = self.players[0]
-        let fpName =
-            "\(String(describing: firstPlayer.firstName)) \(String(describing: firstPlayer.lastName))"
         if self.players.count == 1 {
-            return fpName
+            return self.players[0].safeName
         }
 
-        let secondPlayer = self.players[1]
-        let spName =
-            "\(String(describing: secondPlayer.firstName)) \(String(describing: secondPlayer.lastName))"
-        var combinedName = "\(fpName) \(spName)"
         if self.players.count == 2 {
-            return combinedName
+            return "\(self.players[0].safeName) and \(self.players[1].safeName)"
         }
 
-        let thirdPlayer = self.players[2]
-        let tpName =
-            "\(String(describing: thirdPlayer.firstName)) \(String(describing: thirdPlayer.lastName))"
-        combinedName = "\(fpName), \(spName), and \(tpName)"
-        return combinedName
+        return "\(self.players[0].safeName), \(self.players[1].safeName), and \(self.players[2].safeName)"
     }
 }
