@@ -5,26 +5,29 @@
 //  Created by snow on 7/11/24.
 //
 
+import Apollo
 import Foundation
 import SwiftData
-import Apollo
 
 class Network {
     static let shared = Network()
-    
-//    private(set) lazy var apollo = ApolloClient(url: URL(string: "https://api.tabletop.wizards.com/silverbeak-griffin-service/graphql")!)
+
+    //    private(set) lazy var apollo = ApolloClient(url: URL(string: "https://api.tabletop.wizards.com/silverbeak-griffin-service/graphql")!)
     private(set) lazy var apollo: ApolloClient = {
         let client = URLSessionClient()
         let cache = InMemoryNormalizedCache()
         let store = ApolloStore(cache: cache)
         let provider = NetworkInterceptorProvider(client: client, store: store)
-        let url = URL(string: "https://api.tabletop.wizards.com/silverbeak-griffin-service/graphql")!
-        let transport = RequestChainNetworkTransport(interceptorProvider: provider, endpointURL: url)
-        
+        let url = URL(
+            string:
+                "https://api.tabletop.wizards.com/silverbeak-griffin-service/graphql"
+        )!
+        let transport = RequestChainNetworkTransport(
+            interceptorProvider: provider, endpointURL: url)
+
         return ApolloClient(networkTransport: transport, store: store)
     }()
-    
-    
+
     /// Get a fresh copy of all events from the server. Makes new events or updates old events with new data as appropriate
     static func getEvents(context: ModelContext) {
         Network.shared.apollo.fetch(
@@ -47,9 +50,9 @@ class Network {
             }
         }
     }
-    
+
     /// Fetch additional data about event from server. Not all data is included with getEvents() response, so this has to be called too.
-    static func getEvent(event: Event) -> Void {
+    static func getEvent(event: Event) {
         Network.shared.apollo.fetch(
             query: Gamestateschema.LoadEventJoinV2Query(eventId: event.id)
         ) { response in
@@ -66,8 +69,8 @@ class Network {
             }
         }
     }
-    
-    static func getEvenAsHost(event: Event) -> Void {
+
+    static func getEvenAsHost(event: Event) {
         Network.shared.apollo.fetch(
             query: Gamestateschema.LoadEventHostV2Query(eventId: event.id)
         ) { response in
@@ -81,10 +84,13 @@ class Network {
             }
         }
     }
-    
-    static func getGameState(event: Event) -> Void {
+
+    static func getGameState(event: Event) {
         // round: 0 always returns the current round
-        Network.shared.apollo.fetch(query: Gamestateschema.GetGameStateV2AtRoundQuery(eventId: event.id, round: 0)) { response in
+        Network.shared.apollo.fetch(
+            query: Gamestateschema.GetGameStateV2AtRoundQuery(
+                eventId: event.id, round: 0)
+        ) { response in
             switch response {
             case .success(let graphQLResult):
                 if let gamestateData = graphQLResult.data?.gameStateV2AtRound {

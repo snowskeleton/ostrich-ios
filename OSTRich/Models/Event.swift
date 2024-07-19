@@ -26,8 +26,8 @@ class Event: Identifiable {
     var actualStartTime: Gamestateschema.DateTime?
     @Relationship(deleteRule: .cascade)
     var registeredPlayers: [Registration]
-    @Relationship(deleteRule: .cascade, inverse: \GameStateV2.event)
-    var gameStateAtRound: GameStateV2? = nil
+    @Relationship(deleteRule: .cascade)
+    var gameStateAtRound: GameStateV2?
 
     var created: Date = Date.now
 
@@ -37,7 +37,8 @@ class Event: Identifiable {
         eventFormat: EventFormat?, teams: [Team], shortCode: String?,
         scheduledStartTime: Gamestateschema.DateTime?,
         actualStartTime: Gamestateschema.DateTime?,
-        registeredPlayers: [Registration] = []
+        registeredPlayers: [Registration] = [],
+        gameStateAtRound: GameStateV2? = nil
     ) {
         self.id = id
         self.title = title
@@ -52,6 +53,7 @@ class Event: Identifiable {
         self.scheduledStartTime = scheduledStartTime
         self.actualStartTime = actualStartTime
         self.registeredPlayers = registeredPlayers
+        self.gameStateAtRound = gameStateAtRound
     }
 
 }
@@ -62,9 +64,7 @@ extension Event {
         with data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
             .GameStateV2AtRound
     ) {
-        let gs = GameStateV2(from: data, event: self)
-        // TODO: make this not crash. Every time I try to assign gs to self.gameStateAtRound, I get some sort of error. Make this go away >.<
-        self.gameStateAtRound = gs
+        self.gameStateAtRound = GameStateV2(from: data, event: self)
     }
     
     func update(
@@ -111,24 +111,24 @@ extension Event {
         }
 
         // Update teams
-        self.teams = data.teams.map { teamData in
-            let registrations = teamData.registrations?.map {
-                Registration(from: $0)
-            }
-
-            let reservations = teamData.reservations?.map {
-                Reservation(from: $0)
-            }
-
-            return Team(
-                eventId: teamData.eventId,
-                registrations: registrations,
-                reservations: reservations,
-                teamId: teamData.id,
-                players: [] as [Player]
-            )
-        }
-        print(data.teams)
+        // I don't think we're getting Teams data from this endpoint
+//        self.teams = data.teams.map { teamData in
+//            let registrations = teamData.registrations?.map {
+//                Registration(from: $0)
+//            }
+//
+//            let reservations = teamData.reservations?.map {
+//                Reservation(from: $0)
+//            }
+//
+//            return Team(
+//                eventId: teamData.eventId,
+//                registrations: registrations,
+//                reservations: reservations,
+//                teamId: teamData.id,
+//                players: [] as [Player]
+//            )
+//        }
     }
 
     //    convenience init(from data: Gamestateschema.LoadEventJoinV2Query.Data) {

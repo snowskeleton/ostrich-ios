@@ -11,44 +11,46 @@ import SwiftData
 @Model
 class Team: Identifiable {
     @Attribute(.unique)
-    var eventId: String
-
-    var teamCode: String = "Unused"  //unused
-    var isLocked: Bool? = false  //unused
-    var isRegistered: Bool = true  //unused
-    var registrations: [Registration]?
-    var reservations: [Reservation]?
+    var id: String = UUID().uuidString
+    
     var teamId: String
     var teamName: String?
-    @Relationship(inverse: \Player.team) var players: [Player]
-    var gameState: GameStateV2?
-
+    @Relationship(inverse: \Player.team)
+    var players: [Player] = []
+    @Relationship(deleteRule: .cascade)
+    var gameState: GameStateV2
+    
+    
+//    var registrations: [Registration]?
+//    var reservations: [Reservation]?
+    
     init(
-        eventId: String, registrations: [Registration]? = nil,
-        reservations: [Reservation]? = nil, teamId: String,
-        teamName: String? = nil, players: [Player],
-        gameState: GameStateV2? = nil
+        teamId: String,
+        teamName: String? = nil,
+        players: [Player] = [],
+        gameState: GameStateV2
     ) {
-        self.eventId = eventId
-        self.registrations = registrations
-        self.reservations = reservations
         self.teamId = teamId
         self.teamName = teamName
-        self.players = players
         self.gameState = gameState
-    }
+        self.players = players
 
-    /// manually assign gameState value after init finishes
+    }
+    
     convenience init(
         from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
-            .GameStateV2AtRound.Team
+            .GameStateV2AtRound.Team,
+        gamestate: GameStateV2
     ) {
         self.init(
-            eventId: data.teamId, teamId: data.teamId, teamName: data.teamName,
-            players: data.players.map { Player(from: $0) }
+            teamId: data.teamId,
+            teamName: data.teamName,
+            players: data.players.map { Player(from: $0) },
+            gameState: gamestate
         )
         self.players.forEach { $0.team = self }
     }
+
 }
 
 extension Team {

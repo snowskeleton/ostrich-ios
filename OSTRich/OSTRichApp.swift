@@ -20,7 +20,13 @@ struct OSTRichApp: App {
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+            crashProtection()
+            do {
+                NSLog("Failed to load current schema and config. Cleraing and trying again")
+                return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            } catch {
+                fatalError("Could not create ModelContainer: \(error)")
+            }
         }
     }()
     @Environment(\.scenePhase) private var scenePhase

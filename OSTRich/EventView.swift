@@ -195,7 +195,6 @@ struct MatchesView: View {
             Section("All Matches") {
                 ForEach(matches, id: \.tableNumber) { match in
                     HStack {
-                        Text("Here is some text")
                         NavigationLink {
                             EmptyView()
 //                            SubmitMatchView(event: event, notMyMatch: match)
