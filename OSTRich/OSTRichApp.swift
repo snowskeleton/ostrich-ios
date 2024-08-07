@@ -38,20 +38,6 @@ struct OSTRichApp: App {
                     if newPhase == .inactive {
                         UserDefaults.standard.setValue(0, forKey: "timesLaunchedWithoutSafeClose")
                     }
-                    // crash protection
-//                    switch newPhase {
-//                    case .active:
-//                        let count = UserDefaults.standard.integer(forKey: "timesLaunchedWithoutSafeClose")
-//                        if count > 3 {
-//                            try? ModelContainer().deleteAllData()
-//                        }
-//                        UserDefaults.standard.setValue(count + 1, forKey: "timesLaunchedWithoutSafeClose")
-//                        NSLog("Crash count: \(count)")
-//                    case .inactive:
-//                        UserDefaults.standard.setValue(0, forKey: "timesLaunchedWithoutSafeClose")
-//                    default:
-//                        break
-//                    }
                 }
         }
         .modelContainer(sharedModelContainer)

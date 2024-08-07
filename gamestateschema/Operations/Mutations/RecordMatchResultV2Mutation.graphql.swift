@@ -47,5 +47,4 @@ extension Gamestateschema {
       var recordMatchResultV2: Gamestateschema.Void? { __data["recordMatchResultV2"] }
     }
   }
-
 }

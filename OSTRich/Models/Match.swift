@@ -23,6 +23,21 @@ class Match: Identifiable {
             self.teamIds.contains($0.teamId)
         }
     }
+    
+    var myTeam: Team? {
+        return self.teams.first {
+            $0.players.contains {
+                $0.personaId == UserDefaults.standard.string(forKey: "personaId")!
+            }
+        }
+    }
+    
+    var myOpponentTeams: [Team] {
+        if myTeam == nil { return [] }
+        return self.teams.filter {
+            $0.teamId != self.myTeam!.teamId
+        }
+    }
 
     init(
         matchId: String, isBye: Bool, teamIds: [String],
@@ -44,11 +59,12 @@ class Match: Identifiable {
     ) {
         self.init(
             matchId: data.matchId, isBye: data.isBye ?? false,
-            teamIds: data.teamIds,
+            teamIds: data.teamIds, tableNumber: data.tableNumber,
             round: round
         )
         self.results = data.results!.map {
             MatchResult(from: $0, match: self)
         }
     }
+    
 }

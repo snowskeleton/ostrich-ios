@@ -59,4 +59,14 @@ class Round: Identifiable {
         self.matches = data.matches.map { Match(from: $0, round: self) }
         self.standings = data.standings.map { Standing(from: $0, round: self) }
     }
+    
+    var myMatch: Match? {
+        return self.matches.first { match in
+            match.teams.contains { team in
+                team.players.contains { player in
+                    player.personaId == UserDefaults.standard.string(forKey: "personaId")!
+                }
+            }
+        }
+    }
 }

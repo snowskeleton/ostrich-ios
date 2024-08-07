@@ -74,5 +74,4 @@ extension Gamestateschema {
       set { __data["teamId"] = newValue }
     }
   }
-
 }

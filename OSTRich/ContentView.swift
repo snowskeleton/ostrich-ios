@@ -21,6 +21,8 @@ struct ContentView: View {
     @State var timerIsRunning = false
     @State var joinEventCode: String = ""
     
+    @AppStorage("netowrkAuthorized") var networkAuthorized = true
+
     var body: some View {
         NavigationView {
             List {
@@ -67,6 +69,16 @@ struct ContentView: View {
                 ToolbarItem {
                     Spacer()
                 }
+                ToolbarItem {
+                    if !networkAuthorized {
+                        Text("Please login")
+                            .font(.title)
+                            .foregroundColor(.red)
+                    }
+                }
+                ToolbarItem {
+                    Spacer()
+                }
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
@@ -110,7 +122,7 @@ struct ContentView: View {
             Network.getEvents(context: context)
             events.forEach { event in
                 Network.getEvent(event: event)
-                Network.getEvenAsHost(event: event)
+                Network.getEventAsHost(event: event)
             }
         }
     }

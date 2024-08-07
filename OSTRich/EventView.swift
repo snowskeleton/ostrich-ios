@@ -106,7 +106,7 @@ struct EventView: View {
     
     fileprivate func updateEvent() {
         Network.getEvent(event: event)
-        Network.getEvenAsHost(event: event)
+        Network.getEventAsHost(event: event)
         Network.getGameState(event: event)
     }
 
@@ -179,31 +179,18 @@ struct MatchesView: View {
 
     var body: some View {
         List {
-//            if match != nil {
-//                Section("My Match") {
-//                    NavigationLink {
-//                        Text("Some Match View")
-//                        EmptyView()
-////                        SubmitMatchView(event: event)
-//                    } label: {
-//                        MatchLineItem(match: match!)
-//                    }
-//                }
-//            }
+            if match != nil {
+                Section("My Match") {
+                    NavigationLink {
+                        SubmitMatchView(match: match!)
+                    } label: {
+                        MatchLineItem(match: match!)
+                    }
+                }
+            }
             Section("All Matches") {
                 ForEach(matches, id: \.matchId) { match in
-                    HStack {
-                        NavigationLink {
-                            EmptyView()
-                            SubmitMatchView(event: event, match: match)
-                        } label: {
-                            HStack {
-                                Text("MatchID is " + match.matchId)
-                                Spacer()
-                                MatchLineItem(match: match)
-                            }
-                        }
-                    }
+                    MatchLineItem(match: match)
                 }
             }
         }
@@ -249,11 +236,9 @@ struct MatchLineItem: View {
     var body: some View {
         HStack {
             if match.tableNumber != nil {
-                Text("Table: \(String(describing: match.tableNumber!))")
-                //                if match.leftTeamWins != nil && match.rightTeamWins != nil {
-                //                    // this "-" character makes things look weird. Find something else
-                //                    Text("\(match.leftTeamWins!)\n–\n\(match.rightTeamWins!)")
-                //                }
+                Text("Table: \(match.tableNumber!)")
+            } else {
+                Text("Bye")
             }
             Spacer()
             Text(vsString)

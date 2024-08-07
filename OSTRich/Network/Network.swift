@@ -8,10 +8,50 @@
 import Apollo
 import Foundation
 import SwiftData
+import SwiftUI
 
 class Network {
     static let shared = Network()
+    
+    @AppStorage("netowrkAuthorized") static var authorized = true
 
+    @discardableResult public func fetch<Query: GraphQLQuery>(
+        query: Query,
+        cachePolicy: CachePolicy = .default,
+        contextIdentifier: UUID? = nil,
+        context: (any RequestContext)? = nil,
+        queue: DispatchQueue = .main,
+        resultHandler: @escaping (Result<Query.Data, Error>) -> Void
+    ) -> (any Cancellable) {
+        return Network.shared.apollo.fetch(
+            query: query,
+            cachePolicy: cachePolicy,
+            contextIdentifier: contextIdentifier,
+            context: context,
+            queue: queue
+        ) { result in
+            switch result {
+            case .success(let graphQLResult):
+                Network.authorized = true
+                if let errors = graphQLResult.errors, !errors.isEmpty {
+                    if errors.contains(where: { $0.message!.contains("401: Unauthorized") }) {
+                        Network.authorized  = false
+                        resultHandler(.failure(NetworkError.authorizationError))
+                    } else {
+                        resultHandler(.failure(NetworkError.graphQLError(errors)))
+                    }
+                } else if let data = graphQLResult.data {
+                    resultHandler(.success(data))
+                } else {
+                    resultHandler(.failure(NetworkError.unknownError))
+                }
+            case .failure(let error):
+                resultHandler(.failure(error))
+            }
+        }
+    }
+    
+    
     //    private(set) lazy var apollo = ApolloClient(url: URL(string: "https://api.tabletop.wizards.com/silverbeak-griffin-service/graphql")!)
     private(set) lazy var apollo: ApolloClient = {
         let client = URLSessionClient()
@@ -30,12 +70,12 @@ class Network {
 
     /// Get a fresh copy of all events from the server. Makes new events or updates old events with new data as appropriate
     static func getEvents(context: ModelContext) {
-        Network.shared.apollo.fetch(
+        Network.shared.fetch(
             query: Gamestateschema.MyActiveEventsQuery()
         ) { response in
             switch response {
             case .success(let graphQLResult):
-                graphQLResult.data?.myActiveEvents.forEach { eventData in
+                graphQLResult.myActiveEvents.forEach { eventData in
                     let oldEvents = try! context.fetch(FetchDescriptor<Event>())
                     if let oldEvent = oldEvents.first(where: {
                         $0.id == eventData.id
@@ -53,12 +93,12 @@ class Network {
 
     /// Fetch additional data about event from server. Not all data is included with getEvents() response, so this has to be called too.
     static func getEvent(event: Event) {
-        Network.shared.apollo.fetch(
+        Network.shared.fetch(
             query: Gamestateschema.LoadEventJoinV2Query(eventId: event.id)
         ) { response in
             switch response {
             case .success(let graphQLResult):
-                if let eventData = graphQLResult.data?.event {
+                if let eventData = graphQLResult.event {
                     eventData.teams.forEach { team in
                         print(team)
                     }
@@ -69,14 +109,14 @@ class Network {
             }
         }
     }
-
-    static func getEvenAsHost(event: Event) {
-        Network.shared.apollo.fetch(
+    
+    static func getEventAsHost(event: Event) {
+        Network.shared.fetch(
             query: Gamestateschema.LoadEventHostV2Query(eventId: event.id)
         ) { response in
             switch response {
             case .success(let graphQLResult):
-                if let eventData = graphQLResult.data?.event {
+                if let eventData = graphQLResult.event {
                     event.update(with: eventData)
                 }
             case .failure(let error):
@@ -87,13 +127,13 @@ class Network {
 
     static func getGameState(event: Event) {
         // round: 0 always returns the current round
-        Network.shared.apollo.fetch(
+        Network.shared.fetch(
             query: Gamestateschema.GetGameStateV2AtRoundQuery(
                 eventId: event.id, round: 0)
         ) { response in
             switch response {
             case .success(let graphQLResult):
-                if let gamestateData = graphQLResult.data?.gameStateV2AtRound {
+                if let gamestateData = graphQLResult.gameStateV2AtRound {
                     event.update(with: gamestateData)
                 }
             case .failure(let error):
@@ -101,4 +141,10 @@ class Network {
             }
         }
     }
+}
+
+enum NetworkError: Error {
+    case authorizationError
+    case graphQLError([GraphQLError])
+    case unknownError
 }

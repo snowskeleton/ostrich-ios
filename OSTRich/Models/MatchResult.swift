@@ -12,7 +12,7 @@ import SwiftData
 class MatchResult: Identifiable {
     @Attribute(.unique) var id: UUID = UUID()
     var matchId: String
-    var submitter: String
+    var submitter: String?
     var isBye: Bool
     var wins: Int
     var losses: Int
@@ -21,7 +21,7 @@ class MatchResult: Identifiable {
     var match: Match
 
     init(
-        matchId: String, submitter: String, isBye: Bool, wins: Int, losses: Int,
+        matchId: String, submitter: String?, isBye: Bool, wins: Int, losses: Int,
         draws: Int, teamId: String, match: Match
     ) {
         self.matchId = matchId
