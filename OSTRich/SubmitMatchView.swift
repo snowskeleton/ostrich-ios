@@ -162,6 +162,7 @@ struct SubmitMatchView: View {
     var body: some View {
         VStack {
             Form {
+                Text("MatchID: \(match.matchId)\nID: \(match.round.roundId)")
                 if match.isBye {
                     Text("Goodbye!")
                 } else {

@@ -21,8 +21,8 @@ class Team: Identifiable {
     var gameState: GameStateV2
     
     
-//    var registrations: [Registration]?
-//    var reservations: [Reservation]?
+    //    var registrations: [Registration]?
+    //    var reservations: [Reservation]?
     
     init(
         teamId: String,
@@ -34,7 +34,7 @@ class Team: Identifiable {
         self.teamName = teamName
         self.gameState = gameState
         self.players = players
-
+        
     }
     
     convenience init(
@@ -50,11 +50,30 @@ class Team: Identifiable {
         )
         self.players.forEach { $0.team = self }
     }
-
+    
+    static func createOrUpdate(
+        from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
+            .GameStateV2AtRound.Team,
+        gamestate: GameStateV2
+    ) -> Team {
+        if let team = gamestate.teams.first(where: { $0.teamId == data.teamId }) {
+            team.teamName = data.teamName
+            // implement createOrUpdate for Players too
+            team.players = data.players.map { Player(from: $0) }
+            team.players.forEach { $0.team = team }
+            return team
+        } else {
+            return Team(from: data, gamestate: gamestate)
+        }
+    }
 }
 
 extension Team {
     var fullName: String {
+        if self.players.count == 0 {
+            return "No players in team"
+        }
+        
         if self.players.count == 1 {
             return self.players[0].safeName
         }
@@ -63,6 +82,10 @@ extension Team {
             return "\(self.players[0].safeName) and \(self.players[1].safeName)"
         }
 
-        return "\(self.players[0].safeName), \(self.players[1].safeName), and \(self.players[2].safeName)"
+        if self.players.count == 3 {
+            return "\(self.players[0].safeName), \(self.players[1].safeName), and \(self.players[2].safeName)"
+        }
+        
+        return "Unknown player count"
     }
 }

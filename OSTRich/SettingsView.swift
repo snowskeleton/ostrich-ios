@@ -13,6 +13,7 @@ struct SettingsView: View {
     @AppStorage("saveLoginCreds") var saveLoginCreds = false
     @AppStorage("useLoadGameStateV2") var useGameStateV2 = true
     @AppStorage("useLaunchCrashProtection") var useLaunchProtection = true
+    @AppStorage("showDebugValues") var showDebugValues = false
     @State private var showCrashConfirmation = false
     
     var body: some View {
@@ -25,6 +26,9 @@ struct SettingsView: View {
             }
             Toggle(isOn: $useLaunchProtection) {
                 Text("Protect from bad data causing launch crashes")
+            }
+            Toggle(isOn: $showDebugValues) {
+                Text("Show debug values in various locations throughout the app")
             }
             Button("Crash!") {
                 showCrashConfirmation = true

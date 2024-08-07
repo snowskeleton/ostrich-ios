@@ -63,14 +63,35 @@ class GameStateV2: Identifiable {
             currentRoundNumber: data.currentRoundNumber,
             gamesToWin: data.gamesToWin, event: event
         )
+        
+        self.post_init(from: data, event: event)
+    }
+    
+    static func createOrUpdate(
+        from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data.GameStateV2AtRound,
+        event: Event
+    ) -> GameStateV2 {
+        if event.gameStateAtRound?.currentRoundNumber == data.currentRoundNumber {
+            let gs = event.gameStateAtRound!
+            gs.post_init(from: data, event: event)
+            return gs
+        } else {
+            return GameStateV2(from: data, event: event)
+        }
+    }
+   
+    private func post_init(
+        from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data.GameStateV2AtRound,
+        event: Event
+    ) {
         if let roundsData = data.rounds {
-            self.rounds = roundsData.map { Round(from: $0, gameState: self) }
+            self.rounds = roundsData.map { Round.createOrUpdate(from: $0, gamestate: self) }
         }
         if let dropData = data.drops {
-            self.drops = dropData.map { Drop(from: $0, gameState: self) }
+            self.drops = dropData.map { Drop.createOrUpdate(from: $0, gameState: self) }
         }
         if let teamsData = data.teams {
-            self.teams = teamsData.map { Team(from: $0, gamestate: self) }
+            self.teams = teamsData.map { Team.createOrUpdate(from: $0, gamestate: self) }
         }
     }
     

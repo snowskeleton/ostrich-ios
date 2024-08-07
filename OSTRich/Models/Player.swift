@@ -18,7 +18,7 @@ class Player: Identifiable {
     var team: Team?
 
     var safeName: String {
-        return safeNameExpander(self.firstName, self.lastName, self.displayName)
+        return safeNameExpander(self.firstName, self.lastName, self.displayName, self.team?.teamId, self.personaId)
     }
 
     init(

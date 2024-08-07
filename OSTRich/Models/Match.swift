@@ -67,4 +67,22 @@ class Match: Identifiable {
         }
     }
     
+    static func createOrUpdate(
+        from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
+            .GameStateV2AtRound.Round.Match,
+        round: Round
+    ) -> Match {
+        if let match = round.gameState.currentMatches.first(where: { $0.matchId == data.matchId }) {
+            match.isBye = data.isBye!
+            match.teamIds = data.teamIds
+            match.tableNumber = data.tableNumber
+            match.results = data.results!.map {
+                MatchResult(from: $0, match: match)
+            }
+            return match
+        } else {
+            return Match(from: data, round: round)
+        }
+    }
+    
 }

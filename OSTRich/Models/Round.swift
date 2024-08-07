@@ -60,6 +60,29 @@ class Round: Identifiable {
         self.standings = data.standings.map { Standing(from: $0, round: self) }
     }
     
+    static func createOrUpdate(
+        from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
+            .GameStateV2AtRound.Round,
+        gamestate: GameStateV2
+    ) -> Round {
+        if let round = gamestate.rounds.first(where: { $0.roundId == data.roundId }) {
+            round.roundNumber = data.roundNumber
+            round.isFinalRound = data.isFinalRound
+            round.isPlayoff = data.isPlayoff
+            round.isCertified = data.isCertified
+            round.pairingStrategy = data.pairingStrategy
+            round.canRollback = data.canRollback
+            round.timerId = data.timerId
+            
+            round.matches = data.matches.map { Match.createOrUpdate(from: $0, round: round) }
+            round.standings = data.standings.map { Standing.createOrUpdate(from: $0, round: round) }
+            
+            return round
+        } else {
+            return Round(from: data, gameState: gamestate)
+        }
+    }
+
     var myMatch: Match? {
         return self.matches.first { match in
             match.teams.contains { team in

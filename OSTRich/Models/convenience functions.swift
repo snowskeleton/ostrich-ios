@@ -4,29 +4,35 @@
 //
 //  Created by snow on 7/17/24.
 //
+import SwiftUI
 
 func safeNameExpander(
-    _ firstName: String?, _ lastName: String?, _ displayName: String?
+    _ firstName: String?, _ lastName: String?, _ displayName: String?, _ teamId: String? = nil, _ playerId: String? = nil
 ) -> String {
+    var nameString = ""
     if firstName == nil
         && lastName == nil
         && displayName == nil
     {
-        return "Unknown player"
+        nameString = "Unknown player"
     } else if firstName == nil
                 && lastName == nil
                 && displayName != nil
     {
-        return displayName!
+        nameString = displayName!
     } else if firstName != nil
                 && lastName == nil
     {
-        return firstName!
+        nameString = firstName!
     } else if firstName == nil
                 && lastName != nil
     {
         return lastName!
     } else {
-        return "\(firstName!) \(lastName!)"
+        nameString = "\(firstName!) \(lastName!))"
     }
+    if UserDefaults.standard.bool(forKey: "showDebugValues") {
+        nameString += " | t: \(teamId ?? "no ID"), p: \(playerId ?? "no ID")"
+    }
+    return nameString
 }

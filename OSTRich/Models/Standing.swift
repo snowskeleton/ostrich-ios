@@ -55,4 +55,25 @@ class Standing: Identifiable {
             round: round
         )
     }
+    
+    static func createOrUpdate(
+        from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
+            .GameStateV2AtRound.Round.Standing,
+        round: Round
+    ) -> Standing {
+        if let standings = round.standings.first(where: { $0.teamId == data.teamId }) {
+            standings.rank = data.rank
+            standings.wins = data.wins
+            standings.losses = data.losses
+            standings.draws = data.draws
+            standings.matchPoints = data.matchPoints
+            standings.gameWinPercent = data.gameWinPercent
+            standings.opponentGameWinPercent = data.opponentGameWinPercent
+            standings.opponentMatchWinPercent = data.opponentMatchWinPercent
+            
+            return standings
+        } else {
+            return Standing(from: data, round: round)
+        }
+    }
 }

@@ -18,7 +18,7 @@ class Registration: Identifiable {
     var firstName: String?
     var lastName: String?
     var safeName: String {
-        return safeNameExpander(self.firstName, self.lastName, self.displayName)
+        return safeNameExpander(self.firstName, self.lastName, self.displayName, nil, self.personaId)
     }
 
     init(

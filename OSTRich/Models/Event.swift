@@ -64,7 +64,7 @@ extension Event {
         with data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
             .GameStateV2AtRound
     ) {
-        self.gameStateAtRound = GameStateV2(from: data, event: self)
+        self.gameStateAtRound = GameStateV2.createOrUpdate(from: data, event: self)
     }
     
     func update(
