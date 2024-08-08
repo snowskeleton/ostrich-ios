@@ -10,7 +10,8 @@ import SwiftData
 
 @Model
 class Player: Identifiable {
-    @Attribute(.unique)
+    @Attribute(.unique) var id = UUID()
+    
     var personaId: String?
     var displayName: String?
     var firstName: String?
@@ -34,10 +35,28 @@ class Player: Identifiable {
 
     convenience init(
         from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
-            .GameStateV2AtRound.Team.Player
+            .GameStateV2AtRound.Team.Player,
+        team: Team
     ) {
         self.init(
             personaId: data.personaId, displayName: data.displayName,
-            firstName: data.firstName, lastName: data.lastName)
+            firstName: data.firstName, lastName: data.lastName, team: team)
+    }
+    
+    static func createOrUpdate(
+        from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
+            .GameStateV2AtRound.Team.Player,
+        team: Team
+    ) -> Player {
+        if let player = team.players.first(where: {
+            $0.personaId == data.personaId
+        }) {
+            player.displayName = data.displayName
+            player.firstName = data.firstName
+            player.lastName = data.lastName
+            return player
+        } else {
+            return Player(from: data, team: team)
+        }
     }
 }

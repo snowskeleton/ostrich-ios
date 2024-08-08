@@ -46,4 +46,22 @@ class MatchResult: Identifiable {
             match: match
         )
     }
+    
+    static func createOrUpdate(
+        from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
+            .GameStateV2AtRound.Round.Match.Result,
+        match: Match
+    ) -> MatchResult {
+        if let result = match.results!.first(where: { $0.matchId == data.matchId && $0.teamId == data.teamId }) {
+            result.submitter = data.submitter
+            result.isBye = data.isBye
+            result.wins = data.wins
+            result.losses = data.losses
+            result.draws = data.draws
+            return result
+        } else {
+            return MatchResult(from: data, match: match)
+        }
+    }
+    
 }

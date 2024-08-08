@@ -14,11 +14,22 @@ struct EventView: View {
     @State private var selectedTab = "Players"
     @State private var showEventDetails = false
 
+    var round: Round? {
+        event.gameStateAtRound?.currentRound
+    }
+    
     var body: some View {
         Text(event.shortCode ?? "")
         Text(event.status ?? "")
         Text(timeRemaining)
         Text((event.gameStateAtRound?.currentRoundNumber.description) ?? "0")
+        
+        if UserDefaults.standard.bool(forKey: "showDebugValues") {
+            if round != nil {
+                Text("Round ID: \(round!.roundId)")
+            }
+        }
+
         VStack {
             Picker(selection: $selectedTab, label: Text("")) {
                 Text("Players").tag("Players")
@@ -27,9 +38,10 @@ struct EventView: View {
                     Text("Pairings").tag("Pairings")
                 }
 
-                //                if !(event.gameStateAtRound?.standings?.isEmpty ?? true) {
-                //                    Text("Standings").tag("Standings")
-                //                }
+                if !(event.standings.isEmpty) {
+                    Text("Standings").tag("Standings")
+                }
+                
             }.pickerStyle(SegmentedPickerStyle())
 
             TabView(selection: $selectedTab) {
@@ -39,9 +51,9 @@ struct EventView: View {
                     MatchesView(event: event).tag("Pairings")
                 }
 
-                //                if !(event.gameStateAtRound?.standings?.isEmpty ?? true) {
-                //                    TeamStandingView(teamStandings: event.gameStateAtRound!.standings!).tag("Standings")
-                //                }
+                if !(event.standings.isEmpty) {
+                    TeamStandingView(teamStandings: event.standings).tag("Standings")
+                }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
 

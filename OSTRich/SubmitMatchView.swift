@@ -143,31 +143,18 @@ struct SubmitMatchView: View {
     @State private var draws: Int = 0
     @State private var isBye: Bool = false
     
-    var myTeamName: String {
-        if match.myTeam != nil {
-            return match.myTeam!.fullName
-        } else {
-            return "Object deleted!"
-        }
-    }
-    
-    var myOppTeamName: String {
-        if match.myOpponentTeams.first != nil {
-            return match.myOpponentTeams.first!.fullName
-        } else {
-            return "Object deleted!"
-        }
-    }
-    
     var body: some View {
         VStack {
             Form {
-                Text("MatchID: \(match.matchId)\nID: \(match.round.roundId)")
+                
+                if UserDefaults.standard.bool(forKey: "showDebugValues") {
+                    Text("Match ID: \(match.matchId)\nRound ID: \(match.round.roundId)")
+                }
                 if match.isBye {
                     Text("Goodbye!")
                 } else {
                     
-                    Section(myTeamName) {
+                    Section(match.myTeam!.fullName) {
                         Picker(selection: $wins, label: Text("Your wins")) {
                             Text("0").tag(0)
                             Text("1").tag(1)
@@ -175,7 +162,7 @@ struct SubmitMatchView: View {
                         }.pickerStyle(SegmentedPickerStyle())
                     }
                     
-                    Section(myOppTeamName) {
+                    Section(match.myOpponentTeams.first!.fullName) {
                         Picker(selection: $losses, label: Text("Opponent wins")) {
                             Text("0").tag(0)
                             Text("1").tag(1)
@@ -203,7 +190,7 @@ struct SubmitMatchView: View {
         
         let matchResult = Gamestateschema.TeamResultInputV2(
             matchId: match.matchId,
-//            submitter: "User", //  blank unless submitted by the TO
+            //            submitter: "User", //  blank unless submitted by the TO
             isBye: false, // if isBye, then match is auto submitted when the round is started and we never get here
             wins: wins,
             losses: losses,
@@ -211,11 +198,18 @@ struct SubmitMatchView: View {
             teamId: team.teamId
         )
         // Assuming we have a method to save or submit the match result
-        saveMatchResult(matchResult)
+        saveTeamResultInput(matchResult)
     }
     
-    private func saveMatchResult(_ matchResult: Gamestateschema.TeamResultInputV2) {
-        // Implement saving logic here, e.g., updating the game state or sending to a server
-        print("Match result saved: \(matchResult)")
+    private func saveTeamResultInput(_ teamResultInput: Gamestateschema.TeamResultInputV2) {
+        let results = [teamResultInput]
+        Network.shared.submitMatchResults(eventId: match.round.gameState.eventId, results: results) { result in
+            switch result {
+            case .success:
+                print("Match result submitted successfully")
+            case .failure(let error):
+                print("Failed to submit match result: \(error.localizedDescription)")
+            }
+        }
     }
 }

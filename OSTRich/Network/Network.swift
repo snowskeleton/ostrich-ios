@@ -141,6 +141,26 @@ class Network {
             }
         }
     }
+    
+    func submitMatchResults(eventId: String, results: [Gamestateschema.TeamResultInputV2], completion: @escaping (Result<Void, Error>) -> Void) {
+        let mutation = Gamestateschema.RecordMatchResultV2Mutation(eventId: eventId, results: results)
+        
+        apollo.perform(mutation: mutation) { result in
+            switch result {
+            case .success(let graphQLResult):
+                if let errors = graphQLResult.errors {
+                    let error = errors.map { $0.localizedDescription }.joined(separator: "\n")
+                    completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: error])))
+                } else {
+                    print(graphQLResult.data)
+                    completion(.success(()))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
 }
 
 enum NetworkError: Error {

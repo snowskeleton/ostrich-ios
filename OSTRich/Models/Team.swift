@@ -45,11 +45,9 @@ class Team: Identifiable {
         self.init(
             teamId: data.teamId,
             teamName: data.teamName,
-            players: data.players.map { Player(from: $0) },
             gameState: gamestate
         )
-        self.players.forEach { $0.team = self }
-    }
+        self.players = data.players.map { Player.createOrUpdate(from: $0, team: self) }    }
     
     static func createOrUpdate(
         from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
@@ -59,8 +57,8 @@ class Team: Identifiable {
         if let team = gamestate.teams.first(where: { $0.teamId == data.teamId }) {
             team.teamName = data.teamName
             // implement createOrUpdate for Players too
-            team.players = data.players.map { Player(from: $0) }
-            team.players.forEach { $0.team = team }
+            team.players = data.players.map { Player.createOrUpdate(from: $0, team: team) }
+//            team.players.forEach { $0.team = team }
             return team
         } else {
             return Team(from: data, gamestate: gamestate)

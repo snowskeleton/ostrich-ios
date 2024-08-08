@@ -25,7 +25,7 @@ struct TeamStandingView: View {
                 GridRow {
                     Text("\(teamStanding.rank).")
                         .font(.headline)
-                    Text("\(teamStanding.teamId)")
+                    Text("\(teamStanding.team.fullName)")
                         .font(.subheadline)
                     Text("\(teamStanding.wins) - \(teamStanding.losses) - \(teamStanding.draws) = \(teamStanding.matchPoints)")
                         .font(.footnote)

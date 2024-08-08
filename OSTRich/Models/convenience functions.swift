@@ -29,7 +29,7 @@ func safeNameExpander(
     {
         return lastName!
     } else {
-        nameString = "\(firstName!) \(lastName!))"
+        nameString = "\(firstName!) \(lastName!)"
     }
     if UserDefaults.standard.bool(forKey: "showDebugValues") {
         nameString += " | t: \(teamId ?? "no ID"), p: \(playerId ?? "no ID")"

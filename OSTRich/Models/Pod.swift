@@ -39,4 +39,33 @@ class Pod: Identifiable {
         }
         self.init(podNumber: data.podNumber, seats: seats)
     }
+    
+    static func createOrUpdate(
+        from draftData: Gamestateschema.GetGameStateV2AtRoundQuery.Data.GameStateV2AtRound.Draft.Pod,
+        draft: Draft
+    ) -> Pod  {
+        if let pod = draft.pods.first(where: { $0.podNumber == draftData.podNumber }) {
+            pod.seats = draftData.seats.map {
+                Seat.createOrUpdate(from: $0, pod: pod)
+            }
+            return pod
+        } else {
+            return Pod(from: draftData)
+        }
+    }
+        
+    static func createOrUpdate(
+        from top8DraftData: Gamestateschema.GetGameStateV2AtRoundQuery.Data.GameStateV2AtRound.Top8Draft.Pod,
+        top8Draft: Top8Draft
+    ) -> Pod  {
+        if let pod = top8Draft.pods.first(where: { $0.podNumber == top8DraftData.podNumber }) {
+            pod.seats = top8DraftData.seats.map {
+                Seat.createOrUpdate(from: $0, pod: pod)
+            }
+            return pod
+        } else {
+            return Pod(from: top8DraftData)
+        }
+    }
 }
+extension String: @retroactive Error {}

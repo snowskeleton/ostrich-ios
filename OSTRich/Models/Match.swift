@@ -77,7 +77,7 @@ class Match: Identifiable {
             match.teamIds = data.teamIds
             match.tableNumber = data.tableNumber
             match.results = data.results!.map {
-                MatchResult(from: $0, match: match)
+                MatchResult.createOrUpdate(from: $0, match: match)
             }
             return match
         } else {

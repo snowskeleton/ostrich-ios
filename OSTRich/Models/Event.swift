@@ -214,4 +214,13 @@ extension Event {
             actualStartTime: event.actualStartTime
         )
     }
+    
+    var standings: [Standing] {
+        if let round = self.gameStateAtRound?.currentRound {
+            return round.standings
+        } else {
+            return []
+        }
+    }
+    
 }
