@@ -14,13 +14,13 @@ class DeckConstruction: Identifiable {
     var timerId: String?
     @Relationship(inverse: \Seat.deckConstruction) var seats: [Seat]
     
-    init(timerId: String? = nil, seats: [Seat]) {
+    init(timerId: String? = nil, seats: [Seat] = []) {
         self.timerId = timerId
         self.seats = seats
     }
     
     convenience init(from data: Gamestateschema.GetGameStateV2AtRoundQuery.Data.GameStateV2AtRound.DeckConstruction) {
-        let seats = data.seats.map { Seat(from: $0) }
-        self.init(timerId: data.timerId, seats: seats)
+        self.init(timerId: data.timerId)
+        self.seats = data.seats.map { Seat(from: $0, deckConstruction: self) }
     }
 }
