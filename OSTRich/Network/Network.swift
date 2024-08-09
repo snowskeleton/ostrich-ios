@@ -152,7 +152,6 @@ class Network {
                     let error = errors.map { $0.localizedDescription }.joined(separator: "\n")
                     completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: error])))
                 } else {
-                    print(graphQLResult.data)
                     completion(.success(()))
                 }
             case .failure(let error):

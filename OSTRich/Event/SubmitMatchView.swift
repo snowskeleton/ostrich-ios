@@ -10,7 +10,8 @@ import SwiftUI
 
 
 struct SubmitMatchView: View {
-    @State var match: Match
+    @Environment(\.dismiss) var dismiss
+    @Binding var match: Match
     
     @State private var wins: Int = 0
     @State private var losses: Int = 0
@@ -18,7 +19,33 @@ struct SubmitMatchView: View {
     @State private var showProgressView = false
 
     private var ableToSubmitMatch: Bool {
-        match.results.isEmpty
+        // if we're the TO, we can submit any match regardless of whether or not it's already been submitted
+        if match.round.gameState.event.createdBy == UserDefaults.standard.string(forKey: "personaId") {
+            return true
+        }
+        // otherwise we can only submit matches that we're in
+        if !match.teams.contains(where: { $0.players.contains(
+            where: { $0.personaId == UserDefaults.standard.string(forKey: "personaId") }
+        )}) {
+            return false
+        }
+        
+        // and that haven't been submitted yet
+        return match.results.isEmpty
+    }
+    
+    init(match: Binding<Match>) {
+        _match = match
+        if let result = match.results.wrappedValue.first {
+            if result.teamId == _match.wrappedValue.myTeam!.teamId {
+                _wins = State(initialValue: result.wins)
+                _losses = State(initialValue: result.losses)
+            } else {
+                _wins = State(initialValue: result.losses)
+                _losses = State(initialValue: result.wins)
+            }
+        }
+        _showProgressView = .init(initialValue: false)
     }
     
     var body: some View {
@@ -57,8 +84,8 @@ struct SubmitMatchView: View {
                         Button(action: submitMatchResult) {
                             Text("Submit Match Result")
                                 .frame(maxWidth: .infinity, alignment: .center)
-                                .disabled(!ableToSubmitMatch)
                         }
+                        .disabled(!ableToSubmitMatch)
                     }
                 }
                 
@@ -94,6 +121,7 @@ struct SubmitMatchView: View {
         showProgressView = true
         saveTeamResultInput(matchResult)
         showProgressView = false
+        dismiss()
     }
     
     private func saveTeamResultInput(
