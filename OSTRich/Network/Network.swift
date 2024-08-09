@@ -17,7 +17,7 @@ class Network {
 
     @discardableResult public func fetch<Query: GraphQLQuery>(
         query: Query,
-        cachePolicy: CachePolicy = .default,
+        cachePolicy: CachePolicy = .fetchIgnoringCacheCompletely,
         contextIdentifier: UUID? = nil,
         context: (any RequestContext)? = nil,
         queue: DispatchQueue = .main,

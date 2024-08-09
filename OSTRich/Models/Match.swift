@@ -14,7 +14,7 @@ class Match: Identifiable {
     var matchId: String
     var isBye: Bool = false
     var teamIds: [String]
-    @Relationship(deleteRule: .cascade, inverse: \MatchResult.match) var results: [MatchResult]?
+    @Relationship(deleteRule: .cascade, inverse: \MatchResult.match) var results: [MatchResult]
     var tableNumber: Int?
     var round: Round
     
@@ -41,7 +41,7 @@ class Match: Identifiable {
 
     init(
         matchId: String, isBye: Bool, teamIds: [String],
-        results: [MatchResult]? = nil, tableNumber: Int? = nil,
+        results: [MatchResult] = [], tableNumber: Int? = nil,
         round: Round
     ) {
         self.matchId = matchId
@@ -63,7 +63,7 @@ class Match: Identifiable {
             round: round
         )
         self.results = data.results!.map {
-            MatchResult(from: $0, match: self)
+            MatchResult.createOrUpdate(from: $0, match: self)
         }
     }
     

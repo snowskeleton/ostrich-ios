@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct TeamStandingView: View {
-    let teamStandings: [Standing]
+struct StandingsView: View {
+    @Binding var teamStandings: [Standing]
     
     var body: some View {
         Grid {

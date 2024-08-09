@@ -52,7 +52,7 @@ class MatchResult: Identifiable {
             .GameStateV2AtRound.Round.Match.Result,
         match: Match
     ) -> MatchResult {
-        if let result = match.results!.first(where: { $0.matchId == data.matchId && $0.teamId == data.teamId }) {
+        if let result = match.results.first(where: { $0.matchId == data.matchId }) {
             result.submitter = data.submitter
             result.isBye = data.isBye
             result.wins = data.wins

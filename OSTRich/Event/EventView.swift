@@ -45,14 +45,14 @@ struct EventView: View {
             }.pickerStyle(SegmentedPickerStyle())
 
             TabView(selection: $selectedTab) {
-                PlayersView(event: event).tag("Players")
+                PlayersView(players: Binding<[Registration]>.constant(event.registeredPlayers)).tag("Players")
 
                 if event.gameStateAtRound != nil {
-                    MatchesView(event: event).tag("Pairings")
+                    PairingsView(matches: Binding<[Match]>.constant(event.gameStateAtRound!.currentMatches)).tag("Pairings")
                 }
 
                 if !(event.standings.isEmpty) {
-                    TeamStandingView(teamStandings: event.standings).tag("Standings")
+                    StandingsView(teamStandings: Binding<[Standing]>.constant(event.standings)).tag("Standings")
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
@@ -72,6 +72,9 @@ struct EventView: View {
             updateEvent()
         }
         .onAppear {
+            if event.gameStateAtRound != nil {
+                selectedTab = "Pairings"
+            }
             //                getTime()
             updateEvent()
         }

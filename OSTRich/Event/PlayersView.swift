@@ -9,20 +9,18 @@
 import SwiftUI
 
 struct PlayersView: View {
-    @State var event: Event
+    @Binding var players: [Registration]
     var body: some View {
         List {
-            Section("Players: \(event.registeredPlayers.count)") {
-                ForEach(event.registeredPlayers.sorted(by: { $0.safeName < $1.safeName }), id: \.id) { player in
-                    VStack {
-                        HStack {
-                            Text(player.safeName)
-                            if player.personaId
-                                == UserDefaults.standard.string(
-                                    forKey: "personaId")
-                            {
-                                Image(systemName: "checkmark")
-                            }
+            Section("Players: \(players.count)") {
+                ForEach(players.sorted(by: { $0.safeName < $1.safeName }), id: \.id) { player in
+                    HStack {
+                        Text(player.safeName)
+                        if player.personaId
+                            == UserDefaults.standard.string(
+                                forKey: "personaId")
+                        {
+                            Image(systemName: "checkmark")
                         }
                     }
                 }

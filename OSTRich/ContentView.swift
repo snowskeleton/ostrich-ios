@@ -123,6 +123,7 @@ struct ContentView: View {
             events.forEach { event in
                 Network.getEvent(event: event)
                 Network.getEventAsHost(event: event)
+                Network.getGameState(event: event)
             }
         }
     }
