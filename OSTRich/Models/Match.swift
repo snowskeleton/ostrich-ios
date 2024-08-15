@@ -14,7 +14,7 @@ class Match: Identifiable {
     var matchId: String
     var isBye: Bool = false
     var teamIds: [String]
-    @Relationship(deleteRule: .nullify, inverse: \MatchResult.match) var results: [MatchResult]
+    @Relationship(deleteRule: .cascade, inverse: \MatchResult.match) var results: [MatchResult]
     var tableNumber: Int?
     var round: Round
     
