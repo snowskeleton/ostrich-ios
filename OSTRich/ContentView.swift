@@ -12,7 +12,7 @@ import Observation
 
 struct ContentView: View {
     @Environment(\.modelContext) private var context
-    @Query(sort: \Event.id, order: .reverse) private var events: [Event]
+    @Query(sort: \Event.scheduledStartTime, order: .reverse) private var events: [Event]
     
     @State var showJoinEvent = false
     @State var userIsLoggedIn = false
@@ -42,7 +42,7 @@ struct ContentView: View {
                 }
                 
                 Section {
-                    ForEach(events.sorted(by: { $0.scheduledStartTime ?? "" < $1.scheduledStartTime ?? ""}), id: \.id) { event in
+                    ForEach(events, id: \.id) { event in
                         NavigationLink {
                             EventView(event: event)
                         } label: {
