@@ -145,7 +145,7 @@ class Network {
     func submitMatchResults(eventId: String, results: [Gamestateschema.TeamResultInputV2], completion: @escaping (Result<Void, Error>) -> Void) {
         let mutation = Gamestateschema.RecordMatchResultV2Mutation(eventId: eventId, results: results)
         
-        apollo.perform(mutation: mutation) { result in
+        Network.shared.apollo.perform(mutation: mutation) { result in
             switch result {
             case .success(let graphQLResult):
                 if let errors = graphQLResult.errors {
