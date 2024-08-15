@@ -13,11 +13,10 @@ struct SubmitMatchView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var match: Match
     
-    @State private var wins: Int = 0
-    @State private var losses: Int = 0
-    
     @State private var showProgressView = false
-
+    
+    @State private var teamWins: [String: Int] = [:]
+    
     private var ableToSubmitMatch: Bool {
         // if we're the TO, we can submit any match regardless of whether or not it's already been submitted
         if match.round.gameState.event.createdBy == UserDefaults.standard.string(forKey: "personaId") {
@@ -36,18 +35,18 @@ struct SubmitMatchView: View {
     
     init(match: Binding<Match>) {
         _match = match
-        if let result = match.results.wrappedValue.first {
-            if result.teamId == _match.wrappedValue.myTeam!.teamId {
-                _wins = State(initialValue: result.wins)
-                _losses = State(initialValue: result.losses)
-            } else {
-                _wins = State(initialValue: result.losses)
-                _losses = State(initialValue: result.wins)
-            }
+        var initialWins = [String: Int]()
+        for team in match.wrappedValue.teams {
+            initialWins[team.teamId] = 0
         }
+        
+        for result in match.results.wrappedValue {
+            initialWins[result.teamId] = result.wins
+        }
+        
+        _teamWins = State(initialValue: initialWins)
         _showProgressView = .init(initialValue: false)
     }
-    
     var body: some View {
         VStack {
             Form {
@@ -61,23 +60,15 @@ struct SubmitMatchView: View {
                     Text("Goodbye!")
                 } else {
                     
-                    Section(match.myTeam!.fullName) {
-                        Picker(selection: $wins, label: Text("Your wins")) {
-                            Text("0").tag(0)
-                            Text("1").tag(1)
-                            Text("2").tag(2)
-                        }.pickerStyle(SegmentedPickerStyle())
-                    }
-                    
-                    Section(match.myOpponentTeams.first!.fullName) {
-                        Picker(
-                            selection: $losses,
-                            label: Text("Opponent wins")
-                        ) {
-                            Text("0").tag(0)
-                            Text("1").tag(1)
-                            Text("2").tag(2)
-                        }.pickerStyle(SegmentedPickerStyle())
+                    ForEach(match.teams, id: \.teamId) { team in
+                        Section(team.fullName) {
+                            Picker(selection: $teamWins[team.teamId], label: Text("Wins")) {
+                                Text("0").tag(0)
+                                Text("1").tag(1)
+                                Text("2").tag(2)
+                            }
+                            .pickerStyle(SegmentedPickerStyle())
+                        }
                     }
                     
                     Section {
@@ -104,41 +95,41 @@ struct SubmitMatchView: View {
     }
     
     private func submitMatchResult() {
-        guard let team = match.myTeam else {
-            return
+        let totalWins = teamWins.values.reduce(0, +)
+        var teamResults = [Gamestateschema.TeamResultInputV2]()
+        
+        for team in match.teams {
+            let wins = teamWins[team.teamId]!
+            let losses = totalWins - wins // Calculate losses implicitly
+            
+            let teamResult = Gamestateschema.TeamResultInputV2(
+                matchId: match.matchId,
+                isBye: match.isBye,
+                wins: wins,
+                losses: losses,
+                draws: 0,
+                teamId: team.teamId
+            )
+            
+            teamResults.append(teamResult)
         }
         
-        let matchResult = Gamestateschema.TeamResultInputV2(
-            matchId: match.matchId,
-            //            submitter: "User", //  blank unless submitted by the TO
-            isBye: false, // if isBye, then match is auto submitted when the round is started and we never get here
-            wins: wins,
-            losses: losses,
-            draws: 0, // draws don't matter. We decide based on first to 2 wins, not best out of 3
-            teamId: team.teamId
-        )
-        
         showProgressView = true
-        saveTeamResultInput(matchResult)
+        saveTeamResultInputs(teamResults)
         showProgressView = false
         dismiss()
     }
     
-    private func saveTeamResultInput(
-        _ teamResultInput: Gamestateschema.TeamResultInputV2
-    ) {
-        let results = [teamResultInput]
+    private func saveTeamResultInputs(_ teamResults: [Gamestateschema.TeamResultInputV2]) {
         Network.shared.submitMatchResults(
             eventId: match.round.gameState.eventId,
-            results: results
+            results: teamResults
         ) { result in
             switch result {
             case .success:
                 print("Match result submitted successfully")
             case .failure(let error):
-                print(
-                    "Failed to submit match result: \(error.localizedDescription)"
-                )
+                print("Failed to submit match result: \(error.localizedDescription)")
             }
         }
     }
