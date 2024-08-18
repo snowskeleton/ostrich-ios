@@ -11,6 +11,7 @@ import SwiftData
 @Model
 class Match: Identifiable {
     @Attribute(.unique)
+    var id: String = UUID().uuidString
     var matchId: String
     var isBye: Bool = false
     var teamIds: [String]
