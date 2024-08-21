@@ -29,7 +29,8 @@ struct OSTRichApp: App {
             Seat.self,
             Standing.self,
             Top8Draft.self,
-            Team.self
+            Team.self,
+            ScoutingResult.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         

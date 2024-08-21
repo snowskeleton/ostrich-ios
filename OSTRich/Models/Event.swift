@@ -92,14 +92,17 @@ extension Event {
         self.isOnline = data.isOnline
         self.shortCode = data.shortCode
         
-        for player in data.registeredPlayers! {
-            if let existingPlayer = self.registeredPlayers.first(where: { $0.id == player.id }) {
-                existingPlayer.update(from: player)
-            } else {
-                let newPlayer = Registration(from: player)
-                self.registeredPlayers.append(newPlayer)
-            }
+        if let players = data.registeredPlayers {
+            self.registeredPlayers = players.map { Registration.createOrUpdate(from: $0, event: self) }
         }
+//        for player in data.registeredPlayers! {
+//            if let existingPlayer = self.registeredPlayers.first(where: { $0.id == player.id }) {
+//                existingPlayer.update(from: player, event: self)
+//            } else {
+//                let newPlayer = Registration(from: player, event: self)
+//                self.registeredPlayers.append(newPlayer)
+//            }
+//        }
     }
 
     func update(with data: Gamestateschema.LoadEventJoinV2Query.Data.Event) {

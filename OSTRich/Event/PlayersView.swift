@@ -14,13 +14,22 @@ struct PlayersView: View {
         List {
             Section("Players: \(players.count)") {
                 ForEach(players.sorted(by: { $0.safeName < $1.safeName }), id: \.id) { player in
-                    HStack {
-                        Text(player.safeName)
-                        if player.personaId
-                            == UserDefaults.standard.string(
-                                forKey: "personaId")
-                        {
-                            Image(systemName: "checkmark")
+                    NavigationLink {
+                        CreateScoutingResultView(
+                            playerName: player.safeName,
+                            playerPersonaId: player.personaId ?? "",
+                            eventName: player.event?.title ?? "",
+                            eventId: player.event?.id ?? ""
+                        )
+                    } label: {
+                        HStack {
+                            Text(player.safeName)
+                            if player.personaId
+                                == UserDefaults.standard.string(
+                                    forKey: "personaId")
+                            {
+                                Image(systemName: "checkmark")
+                            }
                         }
                     }
                 }

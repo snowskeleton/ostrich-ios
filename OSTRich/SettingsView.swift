@@ -10,6 +10,7 @@ import SwiftUI
 
 
 struct SettingsView: View {
+    @Environment(\.modelContext) private var context
     @AppStorage("saveLoginCreds") var saveLoginCreds = false
     @AppStorage("useLoadGameStateV2") var useGameStateV2 = true
     @AppStorage("useLaunchCrashProtection") var useLaunchProtection = true
@@ -43,6 +44,20 @@ struct SettingsView: View {
             NavigationLink(destination: NetworkLogView()) {
                 Text("Network Logs")
             }
+            NavigationLink(destination: LoginView()) {
+                Text("Login")
+            }
+            Button("Clear event history") { deleteAll() }
+
         }
     }
+    private func deleteAll() {
+        do {
+            try context.delete(model: Event.self, includeSubclasses: true)
+            try context.save()
+        } catch {
+            print("error: \(error)")
+        }
+    }
+
 }

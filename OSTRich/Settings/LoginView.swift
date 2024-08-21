@@ -51,7 +51,7 @@ struct LoginView: View {
                 TextField("Last Name", text: $lastName)
                 Button("Save") { changeName() }
             }
-            Button("Clear event history") { deleteAll() }
+//            Button("Clear event history") { deleteAll() }
         }
     }
     fileprivate func relogin() {
@@ -119,7 +119,6 @@ struct LoginView: View {
                 UserDefaults.standard.setValue("", forKey: "email")
                 UserDefaults.standard.setValue("", forKey: "password")
             }
-            deleteAll()
         }
     }
     fileprivate func changeName() {
@@ -132,12 +131,12 @@ struct LoginView: View {
             }
         }
     }
-    private func deleteAll() {
-        do {
-            try context.delete(model: Event.self, includeSubclasses: true)
-            try context.save()
-        } catch {
-            print("error: \(error)")
-        }
-    }
+//    private func deleteAll() {
+//        do {
+//            try context.delete(model: Event.self, includeSubclasses: true)
+//            try context.save()
+//        } catch {
+//            print("error: \(error)")
+//        }
+//    }
 }

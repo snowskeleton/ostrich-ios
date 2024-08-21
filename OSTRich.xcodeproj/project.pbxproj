@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		80249EC92C7675B400A6A1E6 /* RoundTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249EC82C7675B400A6A1E6 /* RoundTimerView.swift */; };
+		80249ECB2C76789900A6A1E6 /* ScoutingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249ECA2C76789900A6A1E6 /* ScoutingResult.swift */; };
+		80249ECF2C767A3500A6A1E6 /* PlayerStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249ECE2C767A3500A6A1E6 /* PlayerStatsView.swift */; };
+		80249ED32C76880C00A6A1E6 /* AllEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249ED22C76880C00A6A1E6 /* AllEventsView.swift */; };
+		80249ED72C768A4500A6A1E6 /* CreateScoutingResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249ED62C768A4500A6A1E6 /* CreateScoutingResultView.swift */; };
 		802BCBDA2AC215D300E1501F /* submitMatch.query in Resources */ = {isa = PBXBuildFile; fileRef = 802BCBD92AC215D300E1501F /* submitMatch.query */; };
 		8030DC692AC7613600F775B6 /* HTTPQueryTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */; };
 		8030DC6B2AC763E900F775B6 /* DataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8030DC6A2AC763E900F775B6 /* DataTypes.swift */; };
@@ -221,6 +225,10 @@
 
 /* Begin PBXFileReference section */
 		80249EC82C7675B400A6A1E6 /* RoundTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundTimerView.swift; sourceTree = "<group>"; };
+		80249ECA2C76789900A6A1E6 /* ScoutingResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingResult.swift; sourceTree = "<group>"; };
+		80249ECE2C767A3500A6A1E6 /* PlayerStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatsView.swift; sourceTree = "<group>"; };
+		80249ED22C76880C00A6A1E6 /* AllEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEventsView.swift; sourceTree = "<group>"; };
+		80249ED62C768A4500A6A1E6 /* CreateScoutingResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScoutingResultView.swift; sourceTree = "<group>"; };
 		802BCBD92AC215D300E1501F /* submitMatch.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = submitMatch.query; sourceTree = "<group>"; };
 		8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPQueryTypes.swift; sourceTree = "<group>"; };
 		8030DC6A2AC763E900F775B6 /* DataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypes.swift; sourceTree = "<group>"; };
@@ -433,6 +441,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		80249ED42C76893E00A6A1E6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				80B8E1402ABA23F000845ECC /* LoginView.swift */,
+				806843132C383AE000264D1A /* NetworkLogsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		80249ED52C768A3100A6A1E6 /* Player Stats */ = {
+			isa = PBXGroup;
+			children = (
+				80249ED62C768A4500A6A1E6 /* CreateScoutingResultView.swift */,
+			);
+			path = "Player Stats";
+			sourceTree = "<group>";
+		};
 		803AECE32AA26B2200CF03EB = {
 			isa = PBXGroup;
 			children = (
@@ -460,9 +485,12 @@
 				803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */,
 				803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */,
 				803AECF12AA26B2200CF03EB /* ContentView.swift */,
-				807A56402C650AE300302836 /* Event */,
-				80B8E1402ABA23F000845ECC /* LoginView.swift */,
+				80249ED22C76880C00A6A1E6 /* AllEventsView.swift */,
+				80249ECE2C767A3500A6A1E6 /* PlayerStatsView.swift */,
 				80A5722E2BE2C78E00D8D888 /* SettingsView.swift */,
+				80249ED52C768A3100A6A1E6 /* Player Stats */,
+				80249ED42C76893E00A6A1E6 /* Settings */,
+				807A56402C650AE300302836 /* Event */,
 				80D37EA02C48322F00997C6D /* Models */,
 				806843162C38653D00264D1A /* Network */,
 				80FFBF0A2C402D41005E958D /* KeychainSwiftDistrib.swift */,
@@ -494,15 +522,6 @@
 			path = Notifications;
 			sourceTree = "<group>";
 		};
-		806843152C38652B00264D1A /* Logging */ = {
-			isa = PBXGroup;
-			children = (
-				806843182C38656400264D1A /* Models.swift */,
-				806843132C383AE000264D1A /* NetworkLogsView.swift */,
-			);
-			path = Logging;
-			sourceTree = "<group>";
-		};
 		806843162C38653D00264D1A /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -514,7 +533,6 @@
 				8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */,
 				80B8E1442ABA245600845ECC /* networkRequests.swift */,
 				8046EA482AA64E8B00578539 /* Network Manager.swift */,
-				806843152C38652B00264D1A /* Logging */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -561,6 +579,7 @@
 				80D37EBB2C48335C00997C6D /* Match.swift */,
 				80330D722C74FE1300D19CAB /* RoundTimer.swift */,
 				80D37EBF2C48337000997C6D /* MatchResult.swift */,
+				80249ECA2C76789900A6A1E6 /* ScoutingResult.swift */,
 				80D37EB52C48332E00997C6D /* Player.swift */,
 				80D37EB72C48333D00997C6D /* Pod.swift */,
 				80D37EA52C48329500997C6D /* Registration.swift */,
@@ -571,6 +590,7 @@
 				80D37EAD2C4832F000997C6D /* Top8Draft.swift */,
 				80D37EB32C48331C00997C6D /* Team.swift */,
 				80D37EC52C48340300997C6D /* convenience functions.swift */,
+				806843182C38656400264D1A /* Models.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -899,7 +919,9 @@
 				803D6BE32BFE416F00CEB9F2 /* View+Notifications.swift in Sources */,
 				803D6BE22BFE416F00CEB9F2 /* NotificationViewModifier.swift in Sources */,
 				806843192C38656600264D1A /* Models.swift in Sources */,
+				80249ECB2C76789900A6A1E6 /* ScoutingResult.swift in Sources */,
 				806843142C383AE000264D1A /* NetworkLogsView.swift in Sources */,
+				80249ECF2C767A3500A6A1E6 /* PlayerStatsView.swift in Sources */,
 				80B8E1372AB7EF0700845ECC /* EventView.swift in Sources */,
 				8030DC6B2AC763E900F775B6 /* DataTypes.swift in Sources */,
 				803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */,
@@ -1001,6 +1023,7 @@
 				80FFBED22C4025A2005E958D /* GameStateV2Host.graphql.swift in Sources */,
 				80FFBED32C4025A2005E958D /* SeatV2.graphql.swift in Sources */,
 				80249EC92C7675B400A6A1E6 /* RoundTimerView.swift in Sources */,
+				80249ED72C768A4500A6A1E6 /* CreateScoutingResultView.swift in Sources */,
 				80D37EA42C48327800997C6D /* EventFormat.swift in Sources */,
 				80D37EB42C48331C00997C6D /* Team.swift in Sources */,
 				80FFBED42C4025A2005E958D /* PodDetails.graphql.swift in Sources */,
@@ -1053,6 +1076,7 @@
 				80FFBEFD2C4025A2005E958D /* PersonaId_String_NotNull_maxLength_50.swift in Sources */,
 				80FFBEFE2C4025A2005E958D /* TeamFields.graphql.swift in Sources */,
 				80FFBEFF2C4025A2005E958D /* PlayerStatus.graphql.swift in Sources */,
+				80249ED32C76880C00A6A1E6 /* AllEventsView.swift in Sources */,
 				80FFBF002C4025A2005E958D /* RemoveTeamMemberMutation.graphql.swift in Sources */,
 				80FFBF012C4025A2005E958D /* TeamPayload.graphql.swift in Sources */,
 				80FFBF022C4025A2005E958D /* DropDetails.graphql.swift in Sources */,

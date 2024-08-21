@@ -15,14 +15,11 @@ class Team: Identifiable {
     
     var teamId: String
     var teamName: String?
-    @Relationship(inverse: \Player.team)
+    @Relationship(deleteRule: .noAction, inverse: \Player.team)
     var players: [Player] = []
     @Relationship(deleteRule: .cascade)
     var gameState: GameStateV2
     
-    
-    //    var registrations: [Registration]?
-    //    var reservations: [Reservation]?
     
     init(
         teamId: String,
