@@ -87,6 +87,11 @@ extension Event {
     }
 
     func update(with data: Gamestateschema.LoadEventHostV2Query.Data.Event) {
+        self.pairingType = data.pairingType.rawValue
+        self.status = data.status.rawValue
+        self.isOnline = data.isOnline
+        self.shortCode = data.shortCode
+        
         for player in data.registeredPlayers! {
             if let existingPlayer = self.registeredPlayers.first(where: { $0.id == player.id }) {
                 existingPlayer.update(from: player)
@@ -105,96 +110,11 @@ extension Event {
         self.createdBy = data.createdBy
         self.requiredTeamSize = data.requiredTeamSize
 
-        // Initialize eventFormat
         if let format = data.eventFormat {
             self.eventFormat = EventFormat(from: format)
         }
-
-        // Update teams
-        // I don't think we're getting Teams data from this endpoint
-//        self.teams = data.teams.map { teamData in
-//            let registrations = teamData.registrations?.map {
-//                Registration(from: $0)
-//            }
-//
-//            let reservations = teamData.reservations?.map {
-//                Reservation(from: $0)
-//            }
-//
-//            return Team(
-//                eventId: teamData.eventId,
-//                registrations: registrations,
-//                reservations: reservations,
-//                teamId: teamData.id,
-//                players: [] as [Player]
-//            )
-//        }
     }
 
-    //    convenience init(from data: Gamestateschema.LoadEventJoinV2Query.Data) {
-    //        let event = data.event!
-    //
-    //        // Initialize eventFormat
-    //        let eventFormat = event.eventFormat.map {
-    //            EventFormat(
-    //                id: $0.id,
-    //                name: $0.name,
-    //                includesDraft: $0.includesDraft,
-    //                includesDeckbuilding: $0.includesDeckbuilding
-    //            )
-    //        }
-    //
-    //        // Initialize teams
-    //        let teams = event.teams.map { teamData in
-    //            // Initialize registrations
-    //            let registrations = teamData.registrations?.map {
-    //                Registration(
-    //                    id: $0.id,
-    //                    status: $0.status?.rawValue,
-    //                    personaId: $0.personaId,
-    //                    displayName: $0.displayName,
-    //                    firstName: $0.firstName,
-    //                    lastName: $0.lastName
-    //                )
-    //            }
-    //
-    //            // Initialize reservations
-    //            let reservations = teamData.reservations?.map {
-    //                Reservation(
-    //                    personaId: $0.personaId,
-    //                    displayName: $0.displayName,
-    //                    firstName: $0.firstName,
-    //                    lastName: $0.lastName
-    //                )
-    //            }
-    //
-    //            return Team(
-    //                eventId: teamData.eventId,
-    //                teamCode: teamData.teamCode,
-    //                isLocked: teamData.isLocked,
-    //                isRegistered: teamData.isRegistered,
-    //                registrations: registrations,
-    //                reservations: reservations,
-    //                teamId: teamData.id,
-    //                players: []
-    //            )
-    //        }
-    //
-    //        self.init(
-    //            id: event.id,
-    //            title: event.title,
-    //            pairingType: event.pairingType.rawValue,
-    //            status: event.status.rawValue,
-    //            isOnline: event.isOnline,
-    //            createdBy: event.createdBy,
-    //            requiredTeamSize: event.requiredTeamSize,
-    //            eventFormat: eventFormat,
-    //            teams: teams,
-    //            shortCode: nil,
-    //            scheduledStartTime: nil,
-    //            actualStartTime: nil
-    //        )
-    //    }
 
     convenience init(
         from event: Gamestateschema.MyActiveEventsQuery.Data.MyActiveEvent

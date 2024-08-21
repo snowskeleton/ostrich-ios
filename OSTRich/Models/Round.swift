@@ -22,6 +22,7 @@ class Round: Identifiable {
     var timerId: String?
     @Relationship(deleteRule: .cascade, inverse: \Standing.round) var standings: [Standing] = []
     var gameState: GameStateV2
+    @Relationship(deleteRule: .cascade) var timer: RoundTimer?
 
     init(
         roundId: String, roundNumber: Int, isFinalRound: Bool? = nil,
@@ -43,6 +44,7 @@ class Round: Identifiable {
         self.timerId = timerId
         self.standings = standings
         self.gameState = gameState
+        self.timer = RoundTimer()
     }
 
     convenience init(
@@ -72,7 +74,9 @@ class Round: Identifiable {
             round.isCertified = data.isCertified
             round.pairingStrategy = data.pairingStrategy
             round.canRollback = data.canRollback
-            round.timerId = data.timerId
+            if data.timerId != "" {
+                round.timerId = data.timerId
+            }
             
             round.matches = data.matches.map { Match.createOrUpdate(from: $0, round: round) }
             round.standings = data.standings.map { Standing.createOrUpdate(from: $0, round: round) }
@@ -82,7 +86,7 @@ class Round: Identifiable {
             return Round(from: data, gameState: gamestate)
         }
     }
-
+    
     var myMatch: Match? {
         return self.matches.first { match in
             match.teams.contains { team in

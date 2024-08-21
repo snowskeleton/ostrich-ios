@@ -14,7 +14,7 @@ class Network {
     static let shared = Network()
     
     @AppStorage("netowrkAuthorized") static var authorized = true
-
+    
     @discardableResult public func fetch<Query: GraphQLQuery>(
         query: Query,
         cachePolicy: CachePolicy = .fetchIgnoringCacheCompletely,
@@ -64,10 +64,10 @@ class Network {
         )!
         let transport = RequestChainNetworkTransport(
             interceptorProvider: provider, endpointURL: url)
-
+        
         return ApolloClient(networkTransport: transport, store: store)
     }()
-
+    
     /// Get a fresh copy of all events from the server. Makes new events or updates old events with new data as appropriate
     static func getEvents(context: ModelContext) {
         Network.shared.fetch(
@@ -90,7 +90,7 @@ class Network {
             }
         }
     }
-
+    
     /// Fetch additional data about event from server. Not all data is included with getEvents() response, so this has to be called too.
     static func getEvent(event: Event) {
         Network.shared.fetch(
@@ -124,7 +124,7 @@ class Network {
             }
         }
     }
-
+    
     static func getGameState(event: Event) {
         // round: 0 always returns the current round
         Network.shared.fetch(
@@ -160,6 +160,20 @@ class Network {
         }
     }
     
+    
+    static func getTimer(timerId: String, completion: @escaping (Result<Gamestateschema.GetTimerQuery.Data.Timer, Error>) -> Void) {
+        Network.shared.fetch(
+            query: Gamestateschema.GetTimerQuery(id: timerId)
+        ) { response in
+            switch response {
+            case .success(let data):
+                completion(.success(data.timer))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
 }
 
 enum NetworkError: Error {

@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		80249EC92C7675B400A6A1E6 /* RoundTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249EC82C7675B400A6A1E6 /* RoundTimerView.swift */; };
 		802BCBDA2AC215D300E1501F /* submitMatch.query in Resources */ = {isa = PBXBuildFile; fileRef = 802BCBD92AC215D300E1501F /* submitMatch.query */; };
 		8030DC692AC7613600F775B6 /* HTTPQueryTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */; };
 		8030DC6B2AC763E900F775B6 /* DataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8030DC6A2AC763E900F775B6 /* DataTypes.swift */; };
+		80330D732C74FE1300D19CAB /* RoundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80330D722C74FE1300D19CAB /* RoundTimer.swift */; };
 		803AECF02AA26B2200CF03EB /* OSTRichApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */; };
 		803AECF22AA26B2200CF03EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECF12AA26B2200CF03EB /* ContentView.swift */; };
 		803AECF42AA26B2300CF03EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803AECF32AA26B2300CF03EB /* Assets.xcassets */; };
@@ -218,9 +220,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		80249EC82C7675B400A6A1E6 /* RoundTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundTimerView.swift; sourceTree = "<group>"; };
 		802BCBD92AC215D300E1501F /* submitMatch.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = submitMatch.query; sourceTree = "<group>"; };
 		8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPQueryTypes.swift; sourceTree = "<group>"; };
 		8030DC6A2AC763E900F775B6 /* DataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypes.swift; sourceTree = "<group>"; };
+		80330D722C74FE1300D19CAB /* RoundTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundTimer.swift; sourceTree = "<group>"; };
 		803AECEC2AA26B2200CF03EB /* OSTRich.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSTRich.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSTRichApp.swift; sourceTree = "<group>"; };
 		803AECF12AA26B2200CF03EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -460,10 +464,10 @@
 				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				80A5722E2BE2C78E00D8D888 /* SettingsView.swift */,
 				80D37EA02C48322F00997C6D /* Models */,
+				806843162C38653D00264D1A /* Network */,
 				80FFBF0A2C402D41005E958D /* KeychainSwiftDistrib.swift */,
 				80FFBDEB2C4020D0005E958D /* GameState.graphql */,
 				80FFBDE62C401FA8005E958D /* gamestateschema.json */,
-				806843162C38653D00264D1A /* Network */,
 				803D6BE02BFE416F00CEB9F2 /* Notifications */,
 				803AECF32AA26B2300CF03EB /* Assets.xcassets */,
 				80B8E11C2AAA31BB00845ECC /* GameState.graphql */,
@@ -519,6 +523,7 @@
 			isa = PBXGroup;
 			children = (
 				80B8E1362AB7EF0700845ECC /* EventView.swift */,
+				80249EC82C7675B400A6A1E6 /* RoundTimerView.swift */,
 				807A56432C650BB500302836 /* PlayersView.swift */,
 				807A56412C650BA000302836 /* PairingsView.swift */,
 				80D091452ACB7BB600B91257 /* SubmitMatchView.swift */,
@@ -554,6 +559,7 @@
 				80D37EA32C48327800997C6D /* EventFormat.swift */,
 				80D37EA92C4832CF00997C6D /* GameStateV2.swift */,
 				80D37EBB2C48335C00997C6D /* Match.swift */,
+				80330D722C74FE1300D19CAB /* RoundTimer.swift */,
 				80D37EBF2C48337000997C6D /* MatchResult.swift */,
 				80D37EB52C48332E00997C6D /* Player.swift */,
 				80D37EB72C48333D00997C6D /* Pod.swift */,
@@ -915,6 +921,7 @@
 				80FFBE8D2C4025A2005E958D /* StoreByLocationQuery.graphql.swift in Sources */,
 				80FFBE8E2C4025A2005E958D /* RecordMatchResultV2Mutation.graphql.swift in Sources */,
 				80FFBE8F2C4025A2005E958D /* LoadEventJoinV2Query.graphql.swift in Sources */,
+				80330D732C74FE1300D19CAB /* RoundTimer.swift in Sources */,
 				80FFBE902C4025A2005E958D /* RegisterInterestedPlayerMutation.graphql.swift in Sources */,
 				80FFBE912C4025A2005E958D /* Subscription.graphql.swift in Sources */,
 				80D37EC42C48339600997C6D /* Drop.swift in Sources */,
@@ -993,6 +1000,7 @@
 				80FFBED12C4025A2005E958D /* JoinTeamMutation.graphql.swift in Sources */,
 				80FFBED22C4025A2005E958D /* GameStateV2Host.graphql.swift in Sources */,
 				80FFBED32C4025A2005E958D /* SeatV2.graphql.swift in Sources */,
+				80249EC92C7675B400A6A1E6 /* RoundTimerView.swift in Sources */,
 				80D37EA42C48327800997C6D /* EventFormat.swift in Sources */,
 				80D37EB42C48331C00997C6D /* Team.swift in Sources */,
 				80FFBED42C4025A2005E958D /* PodDetails.graphql.swift in Sources */,
