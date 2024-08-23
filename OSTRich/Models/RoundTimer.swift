@@ -51,16 +51,16 @@ class RoundTimer: Identifiable {
     }
     
     convenience init(
-        from timerData: Gamestateschema.GetTimerQuery.Data.Timer,
+        from data: Gamestateschema.GetTimerQuery.Data.Timer,
         round: Round
     ) {
-        let durationStartTime = Date(timeIntervalSince1970: TimeInterval((Int(timerData.durationStartTime) ?? 0) / 1000))
-        let serverTime = Date(timeIntervalSince1970: TimeInterval((Int(timerData.serverTime) ?? 0) / 1000))
+        let durationStartTime = convertWotcTimestamps(from: data.durationStartTime)
+        let serverTime = convertWotcTimestamps(from: data.serverTime)
 
         self.init(
-            id: timerData.id,
-            state: TimerState(rawValue: timerData.state.rawValue) ?? .deleted,
-            durationMs: timerData.durationMs,
+            id: data.id,
+            state: TimerState(rawValue: data.state.rawValue) ?? .deleted,
+            durationMs: data.durationMs,
             durationStartTime: durationStartTime,
             serverTime: serverTime,
             round: round
@@ -76,8 +76,9 @@ class RoundTimer: Identifiable {
             return nil
         }
         if timer.id == data.id {
-            let durationStartTime = Date( timeIntervalSince1970: TimeInterval( (Int(data.durationStartTime) ?? 0) / 1000 ) )
-            let serverTime = Date( timeIntervalSince1970: TimeInterval( (Int(data.serverTime) ?? 0) / 1000 ) )
+            let durationStartTime = convertWotcTimestamps(from: data.durationStartTime)
+            let serverTime = convertWotcTimestamps(from: data.serverTime)
+
             timer.state = TimerState(rawValue: data.state.rawValue) ?? .deleted
             timer.durationMs = data.durationMs
             timer.durationStartTime = durationStartTime
@@ -94,12 +95,12 @@ class RoundTimer: Identifiable {
         if self.id != nil && self.id != "" {
             Network.getTimer(timerId: self.id!) { result in
                 switch result {
-                case .success(let timerData):
-                    let durationStartTime = Date( timeIntervalSince1970: TimeInterval( (Int(timerData.durationStartTime) ?? 0) / 1000 ) )
-                    let serverTime = Date( timeIntervalSince1970: TimeInterval( (Int(timerData.serverTime) ?? 0) / 1000 ) )
-                    
-                    self.state = TimerState(rawValue: timerData.state.rawValue) ?? .deleted
-                    self.durationMs = timerData.durationMs
+                case .success(let data):
+                    let durationStartTime = convertWotcTimestamps(from: data.durationStartTime)
+                    let serverTime = convertWotcTimestamps(from: data.serverTime)
+
+                    self.state = TimerState(rawValue: data.state.rawValue) ?? .deleted
+                    self.durationMs = data.durationMs
                     self.durationStartTime = durationStartTime
                     self.serverTime = serverTime
                 case .failure(let error):
@@ -108,8 +109,6 @@ class RoundTimer: Identifiable {
                 }
             }
         } else { //fake timer
-            print("Setting fake time")
-            
             let durationMs = 50 * 60 * 1000 // 50 minutes in milliseconds
             let durationStartTime = Date().addingTimeInterval(-5 * 60) // 5 minutes ago
             let serverTime = Date()
@@ -123,19 +122,6 @@ class RoundTimer: Identifiable {
         }
     }
     
-    var color: Color {
-        switch self.state {
-        case .running:
-            return .green
-        case .halted:
-            return .yellow
-        case .fake:
-            return .blue
-        default:
-            return .red
-        }
-    }
-    
 }
 
 enum TimerState: String, Codable {
@@ -144,4 +130,11 @@ enum TimerState: String, Codable {
     case deleted
     case fake
     case uncreated
+}
+
+fileprivate func convertWotcTimestamps(from originTimestamp: String) -> Date {
+    let isoFormatter = ISO8601DateFormatter()
+    isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+    let convertedTimestamp = isoFormatter.date(from: originTimestamp) ?? Date()
+    return convertedTimestamp
 }

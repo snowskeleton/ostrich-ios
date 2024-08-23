@@ -76,6 +76,7 @@ class Round: Identifiable {
             round.canRollback = data.canRollback
             if data.timerId != "" {
                 round.timerId = data.timerId
+                round.timer?.id = data.timerId
             }
             
             round.matches = data.matches.map { Match.createOrUpdate(from: $0, round: round) }

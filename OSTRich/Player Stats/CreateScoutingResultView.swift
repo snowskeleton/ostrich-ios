@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CreateScoutingResultView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
     
     @State private var deckName: String = ""
     @State private var deckNotes: String = ""
@@ -49,5 +50,6 @@ struct CreateScoutingResultView: View {
             playerPersonaId: playerPersonaId.isEmpty ? nil : playerPersonaId
         )
         modelContext.insert(result)
+        dismiss()
     }
 }
