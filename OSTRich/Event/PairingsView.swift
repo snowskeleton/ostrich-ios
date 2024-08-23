@@ -10,7 +10,7 @@ import SwiftUI
 import SwiftData
 
 struct PairingsView: View {
-    @Binding var matches: [Match]
+    @State var matches: [Match]
     
     var myMatch: Match? {
         return matches.first { match in

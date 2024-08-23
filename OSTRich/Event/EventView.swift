@@ -36,7 +36,7 @@ struct EventView: View {
             Picker(selection: $selectedTab, label: Text("")) {
                 Text("Players").tag("Players")
 
-                if event.gameStateAtRound != nil {
+                if let gs = event.gameStateAtRound, !gs.currentMatches.isEmpty {
                     Text("Pairings").tag("Pairings")
                 }
 
@@ -49,8 +49,9 @@ struct EventView: View {
             TabView(selection: $selectedTab) {
                 PlayersView(players: Binding<[Registration]>.constant(event.registeredPlayers)).tag("Players")
 
-                if event.gameStateAtRound != nil {
-                    PairingsView(matches: Binding<[Match]>.constant(event.gameStateAtRound!.currentMatches)).tag("Pairings")
+                if let gs = event.gameStateAtRound, !gs.currentMatches.isEmpty {
+                    PairingsView(matches: gs.currentMatches).tag("Pairings")
+//                    PairingsView(matches: Binding<[Match]>.constant(event.gameStateAtRound!.currentMatches)).tag("Pairings")
                 }
 
                 if !(event.standings.isEmpty) {
@@ -74,7 +75,7 @@ struct EventView: View {
             updateEvent()
         }
         .onAppear {
-            if event.gameStateAtRound != nil {
+            if let gs = event.gameStateAtRound, !gs.currentMatches.isEmpty {
                 selectedTab = "Pairings"
             }
             getTime()

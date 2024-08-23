@@ -444,6 +444,7 @@
 		80249ED42C76893E00A6A1E6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				80A5722E2BE2C78E00D8D888 /* SettingsView.swift */,
 				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				806843132C383AE000264D1A /* NetworkLogsView.swift */,
 			);
@@ -453,6 +454,7 @@
 		80249ED52C768A3100A6A1E6 /* Player Stats */ = {
 			isa = PBXGroup;
 			children = (
+				80249ECE2C767A3500A6A1E6 /* PlayerStatsView.swift */,
 				80249ED62C768A4500A6A1E6 /* CreateScoutingResultView.swift */,
 			);
 			path = "Player Stats";
@@ -485,12 +487,9 @@
 				803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */,
 				803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */,
 				803AECF12AA26B2200CF03EB /* ContentView.swift */,
-				80249ED22C76880C00A6A1E6 /* AllEventsView.swift */,
-				80249ECE2C767A3500A6A1E6 /* PlayerStatsView.swift */,
-				80A5722E2BE2C78E00D8D888 /* SettingsView.swift */,
+				807A56402C650AE300302836 /* Event */,
 				80249ED52C768A3100A6A1E6 /* Player Stats */,
 				80249ED42C76893E00A6A1E6 /* Settings */,
-				807A56402C650AE300302836 /* Event */,
 				80D37EA02C48322F00997C6D /* Models */,
 				806843162C38653D00264D1A /* Network */,
 				80FFBF0A2C402D41005E958D /* KeychainSwiftDistrib.swift */,
@@ -540,6 +539,7 @@
 		807A56402C650AE300302836 /* Event */ = {
 			isa = PBXGroup;
 			children = (
+				80249ED22C76880C00A6A1E6 /* AllEventsView.swift */,
 				80B8E1362AB7EF0700845ECC /* EventView.swift */,
 				80249EC82C7675B400A6A1E6 /* RoundTimerView.swift */,
 				807A56432C650BB500302836 /* PlayersView.swift */,
