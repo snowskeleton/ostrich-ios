@@ -16,12 +16,8 @@ class ScoutingResult: Identifiable {
     var deckNotes: String?
     var eventName: String?
     var eventId: String?
-    var format: String?
-    
+    var format: String = ""
     var player: LocalPlayer?
-//    var playerName: String?
-//    var playerPersonaId: String?
-//    var player: LocalPlayer?
     
     var date: Date = Date.now
 

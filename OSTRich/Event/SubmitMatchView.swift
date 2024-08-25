@@ -82,31 +82,6 @@ struct SubmitMatchView: View {
                 
                 ForEach(match.teams.sorted(by: { $0.teamId < $1.teamId }), id: \.teamId) { team in
                     ScoutingResultsForTeamView(team: team)
-//                    List {
-//                        ForEach(team.players, id: \.personaId) { player in
-//                            Section(player.safeName) {
-//                                if let persona = player.personaId {
-//                                    ScoutingHistoryForPlayerView(
-//                                        playerPersonaId: persona,
-//                                        fetchLimit: 5
-////                                        format: player.team?.gameState.event.eventFormat?.name ?? "Other"
-//                                    )
-//                                }
-//                                NavigationLink {
-//                                    CreateScoutingResultView(
-//                                        playerName: player.safeName,
-//                                        playerPersonaId: player.personaId ?? "",
-//                                        eventName: player.team?.gameState.event.title ?? "",
-//                                        eventId: player.team?.gameState.event.id ?? "",
-//                                        formatName: player.team?.gameState.event.eventFormat?.name ?? "Other"
-//                                    )
-//                                    
-//                                } label: {
-//                                    Text("New...")
-//                                }
-//                            }
-//                        }
-//                    }
                 }
             }
             .navigationTitle("Submit Match Result")

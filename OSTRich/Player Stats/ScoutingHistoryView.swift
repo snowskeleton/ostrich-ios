@@ -11,6 +11,21 @@ import SwiftData
 struct ScoutingHistoryAllPlayersView: View {
     @Environment(\.modelContext) private var context
     @Query var players: [LocalPlayer]
+    
+    @State private var isPresented: Bool = false
+    @State private var searchText: String = ""
+    var searchablePlayers: [LocalPlayer] {
+        if searchText.isEmpty {
+            return players
+        } else {
+            return players.filter {
+                $0.safeName.lowercased().contains(searchText.lowercased()) ||
+                $0.stats.contains {
+                    $0.format.lowercased().contains(searchText.lowercased())
+                }
+            }
+        }
+    }
 
     init() {
         let predicate = #Predicate<LocalPlayer> { !$0.stats.isEmpty }
@@ -22,12 +37,16 @@ struct ScoutingHistoryAllPlayersView: View {
     }
 
     var body: some View {
-        List {
-            ForEach(players, id: \.personaId) { player in
-                Section(player.safeName) {
-                    ScoutingHistoryCollapsableView(player: player)
+        NavigationStack {
+            List {
+                ForEach(searchablePlayers, id: \.personaId) { player in
+                    Section(player.safeName) {
+                        ScoutingHistoryCollapsableView(player: player)
+                    }
                 }
             }
+            .navigationTitle("Scouted Players")
         }
+        .searchable(text: $searchText, isPresented: $isPresented)
     }
 }

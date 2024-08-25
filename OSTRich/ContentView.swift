@@ -10,23 +10,21 @@ import Foundation
 
 struct ContentView: View {
     var body: some View {
-        NavigationStack {
-            TabView {
-                AllEventsView()
-                    .tabItem {
-                        Label("Events", systemImage: "bus.doubledecker")
-                    }
-                ScoutingHistoryAllPlayersView()
-                    .tabItem {
-                        Label("Player Stats", systemImage: "person.2")
-                    }
-                SettingsView()
-                    .tabItem {
-                        Label("Settings", systemImage: "gearshape")
-                    }
-            }
-            // this is needed to make the tabs show up properly on the iPad version for macOS
-            .environment(\.horizontalSizeClass, .compact)
+        TabView {
+            AllEventsView()
+                .tabItem {
+                    Label("Events", systemImage: "bus.doubledecker")
+                }
+            ScoutingHistoryAllPlayersView()
+                .tabItem {
+                    Label("Player Stats", systemImage: "person.2")
+                }
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape")
+                }
         }
+        // this is needed to make the tabs show up properly on the iPad version for macOS
+        .environment(\.horizontalSizeClass, .compact)
     }
 }
