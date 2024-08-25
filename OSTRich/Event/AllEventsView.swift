@@ -16,7 +16,6 @@ struct AllEventsView: View {
     @Query(sort: \Event.scheduledStartTime, order: .reverse) private var events: [Event]
     
     @State var showJoinEvent = false
-    @State var showScoutingStats = false
     @State var showAccountScreen = false
     @State var showSettingsScreen = false
     
@@ -43,9 +42,6 @@ struct AllEventsView: View {
                         }
                     }.onDelete(perform: deleteItems)
                 }
-            }
-            .sheet(isPresented: $showScoutingStats) {
-                PlayerStatsView()
             }
             .sheet(isPresented: $showAccountScreen) {
                 LoginView()

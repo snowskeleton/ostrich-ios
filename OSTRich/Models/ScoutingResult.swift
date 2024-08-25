@@ -16,8 +16,14 @@ class ScoutingResult: Identifiable {
     var deckNotes: String?
     var eventName: String?
     var eventId: String?
-    var playerName: String?
-    var playerPersonaId: String?
+    var format: String?
+    
+    var player: LocalPlayer?
+//    var playerName: String?
+//    var playerPersonaId: String?
+//    var player: LocalPlayer?
+    
+    var date: Date = Date.now
 
     
     init(
@@ -26,13 +32,18 @@ class ScoutingResult: Identifiable {
         eventName: String? = nil,
         eventId: String? = nil,
         playerName: String? = nil,
-        playerPersonaId: String? = nil
+        playerPersonaId: String? = nil,
+        format: String = "",
+        player: LocalPlayer,
+        date: Date
+        
     ) {
         self.deckName = deckName
         self.deckNotes = deckNotes
         self.eventName = eventName
         self.eventId = eventId
-        self.playerName = playerName
-        self.playerPersonaId = playerPersonaId
+        self.format = format
+        self.player = player
+        self.date = date
     }
 }

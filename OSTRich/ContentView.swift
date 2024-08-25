@@ -16,7 +16,7 @@ struct ContentView: View {
                     .tabItem {
                         Label("Events", systemImage: "bus.doubledecker")
                     }
-                PlayerStatsView()
+                ScoutingHistoryAllPlayersView()
                     .tabItem {
                         Label("Player Stats", systemImage: "person.2")
                     }

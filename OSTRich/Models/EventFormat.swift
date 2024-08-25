@@ -17,8 +17,10 @@ class EventFormat: Identifiable {
     var includesDeckbuilding: Bool = false
 
     init(
-        id: String, name: String, includesDraft: Bool,
-        includesDeckbuilding: Bool
+        id: String = UUID().uuidString,
+        name: String,
+        includesDraft: Bool = false,
+        includesDeckbuilding: Bool = false
     ) {
         self.id = id
         self.name = name
