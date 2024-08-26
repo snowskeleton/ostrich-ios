@@ -106,6 +106,7 @@ extension HTTPClient {
             switch response.statusCode {
             case 200...299:
                 do {
+                    UserDefaults.standard.set(true, forKey: "netowrkAuthorized")
                     return .success(
                         try JSONDecoder().decode(responseModel, from: data))
                 } catch {
@@ -126,6 +127,7 @@ extension HTTPClient {
                     case "INVALID CLIENT CREDENTIALS":
                         return .failure(.unauthorized)
                     case "UNAUTHENTICATED":
+                        UserDefaults.standard.set(false, forKey: "netowrkAuthorized")
                         return .failure(.unauthorized)
                     default:
                         print("Unknown error case: \(error)")
