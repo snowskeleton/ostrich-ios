@@ -27,10 +27,7 @@ struct PlayersView: View {
                     } label: {
                         HStack {
                             Text(player.safeName)
-                            if player.personaId
-                                == UserDefaults.standard.string(
-                                    forKey: "personaId")
-                            {
+                            if player.personaId == UserManager.shared.currentUser?.personaId {
                                 Image(systemName: "checkmark")
                             }
                         }

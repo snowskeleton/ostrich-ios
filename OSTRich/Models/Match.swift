@@ -28,7 +28,7 @@ class Match: Identifiable {
     var myTeam: Team? {
         return self.teams.first {
             $0.players.contains {
-                $0.personaId == UserDefaults.standard.string(forKey: "personaId")!
+                $0.personaId == UserManager.shared.currentUser?.personaId
             }
         }
     }

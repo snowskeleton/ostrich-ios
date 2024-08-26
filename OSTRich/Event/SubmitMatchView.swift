@@ -19,12 +19,12 @@ struct SubmitMatchView: View {
     
     private var ableToSubmitMatch: Bool {
         // if we're the TO, we can submit any match regardless of whether or not it's already been submitted
-        if match.round.gameState.event.createdBy == UserDefaults.standard.string(forKey: "personaId") {
+        if match.round.gameState.event.createdBy == UserManager.shared.currentUser?.personaId {
             return true
         }
         // otherwise we can only submit matches that we're in
         if !match.teams.contains(where: { $0.players.contains(
-            where: { $0.personaId == UserDefaults.standard.string(forKey: "personaId") }
+            where: { $0.personaId == UserManager.shared.currentUser?.personaId }
         )}) {
             return false
         }

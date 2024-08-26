@@ -27,7 +27,7 @@
 		8046EA492AA64E8B00578539 /* Network Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA482AA64E8B00578539 /* Network Manager.swift */; };
 		8046EA4B2AA6A60500578539 /* GraphQLQueryTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */; };
 		806843142C383AE000264D1A /* NetworkLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843132C383AE000264D1A /* NetworkLogsView.swift */; };
-		806843192C38656600264D1A /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843182C38656400264D1A /* Models.swift */; };
+		806843192C38656600264D1A /* NetworkLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843182C38656400264D1A /* NetworkLog.swift */; };
 		807A56422C650BA000302836 /* PairingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A56412C650BA000302836 /* PairingsView.swift */; };
 		807A56442C650BB500302836 /* PlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A56432C650BB500302836 /* PlayersView.swift */; };
 		80A5722F2BE2C78E00D8D888 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A5722E2BE2C78E00D8D888 /* SettingsView.swift */; };
@@ -39,11 +39,13 @@
 		80B8E13D2AB8C24300845ECC /* dropSelf.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E13C2AB8C24300845ECC /* dropSelf.query */; };
 		80B8E13F2AB8C5D300845ECC /* dropTeamV2.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E13E2AB8C5D300845ECC /* dropTeamV2.query */; };
 		80B8E1412ABA23F000845ECC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1402ABA23F000845ECC /* LoginView.swift */; };
-		80B8E1452ABA245600845ECC /* networkRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1442ABA245600845ECC /* networkRequests.swift */; };
 		80C5D4BB2C09263100503FD9 /* ExampleSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C5D4BA2C09263100503FD9 /* ExampleSecrets.swift */; };
 		80C5D4BD2C0926B800503FD9 /* StandingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C5D4BC2C0926B800503FD9 /* StandingsView.swift */; };
 		80CCA5442C7BB24A00B90BF5 /* ScoutingHistoryCollapsableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA5432C7BB24A00B90BF5 /* ScoutingHistoryCollapsableView.swift */; };
 		80CCA5462C7BB29600B90BF5 /* ScoutingResultsForTeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA5452C7BB29600B90BF5 /* ScoutingResultsForTeamView.swift */; };
+		80CCA5492C7BBD3B00B90BF5 /* RequestLoggingInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA5482C7BBD3B00B90BF5 /* RequestLoggingInterceptor.swift */; };
+		80CCA54B2C7BBD4500B90BF5 /* ResponseLoggingInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA54A2C7BBD4500B90BF5 /* ResponseLoggingInterceptor.swift */; };
+		80CCA54D2C7BC99900B90BF5 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA54C2C7BC99900B90BF5 /* UserManager.swift */; };
 		80D091462ACB7BB600B91257 /* SubmitMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D091452ACB7BB600B91257 /* SubmitMatchView.swift */; };
 		80D37EA22C48323A00997C6D /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EA12C48323A00997C6D /* Event.swift */; };
 		80D37EA42C48327800997C6D /* EventFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EA32C48327800997C6D /* EventFormat.swift */; };
@@ -251,7 +253,7 @@
 		8046EA482AA64E8B00578539 /* Network Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network Manager.swift"; sourceTree = "<group>"; };
 		8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLQueryTypes.swift; sourceTree = "<group>"; };
 		806843132C383AE000264D1A /* NetworkLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogsView.swift; sourceTree = "<group>"; };
-		806843182C38656400264D1A /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		806843182C38656400264D1A /* NetworkLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLog.swift; sourceTree = "<group>"; };
 		807A56412C650BA000302836 /* PairingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingsView.swift; sourceTree = "<group>"; };
 		807A56432C650BB500302836 /* PlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersView.swift; sourceTree = "<group>"; };
 		80A5722E2BE2C78E00D8D888 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -264,11 +266,13 @@
 		80B8E13C2AB8C24300845ECC /* dropSelf.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = dropSelf.query; sourceTree = "<group>"; };
 		80B8E13E2AB8C5D300845ECC /* dropTeamV2.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = dropTeamV2.query; sourceTree = "<group>"; };
 		80B8E1402ABA23F000845ECC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		80B8E1442ABA245600845ECC /* networkRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = networkRequests.swift; sourceTree = "<group>"; };
 		80C5D4BA2C09263100503FD9 /* ExampleSecrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSecrets.swift; sourceTree = "<group>"; };
 		80C5D4BC2C0926B800503FD9 /* StandingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsView.swift; sourceTree = "<group>"; };
 		80CCA5432C7BB24A00B90BF5 /* ScoutingHistoryCollapsableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingHistoryCollapsableView.swift; sourceTree = "<group>"; };
 		80CCA5452C7BB29600B90BF5 /* ScoutingResultsForTeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingResultsForTeamView.swift; sourceTree = "<group>"; };
+		80CCA5482C7BBD3B00B90BF5 /* RequestLoggingInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLoggingInterceptor.swift; sourceTree = "<group>"; };
+		80CCA54A2C7BBD4500B90BF5 /* ResponseLoggingInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseLoggingInterceptor.swift; sourceTree = "<group>"; };
+		80CCA54C2C7BC99900B90BF5 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		80D091452ACB7BB600B91257 /* SubmitMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitMatchView.swift; sourceTree = "<group>"; };
 		80D37EA12C48323A00997C6D /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		80D37EA32C48327800997C6D /* EventFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFormat.swift; sourceTree = "<group>"; };
@@ -537,13 +541,12 @@
 		806843162C38653D00264D1A /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				80FFBF082C402C67005E958D /* AuthorizationInterceptor.swift */,
+				80CCA5472C7BBD2F00B90BF5 /* Interceptors */,
 				80FFBF0C2C402E79005E958D /* NetworkInterceptorProvider.swift */,
 				80FFBF0E2C4030E9005E958D /* Network.swift */,
 				80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */,
 				8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */,
 				8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */,
-				80B8E1442ABA245600845ECC /* networkRequests.swift */,
 				8046EA482AA64E8B00578539 /* Network Manager.swift */,
 			);
 			path = Network;
@@ -579,6 +582,16 @@
 			path = queries;
 			sourceTree = "<group>";
 		};
+		80CCA5472C7BBD2F00B90BF5 /* Interceptors */ = {
+			isa = PBXGroup;
+			children = (
+				80CCA5482C7BBD3B00B90BF5 /* RequestLoggingInterceptor.swift */,
+				80CCA54A2C7BBD4500B90BF5 /* ResponseLoggingInterceptor.swift */,
+				80FFBF082C402C67005E958D /* AuthorizationInterceptor.swift */,
+			);
+			path = Interceptors;
+			sourceTree = "<group>";
+		};
 		80D37EA02C48322F00997C6D /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -603,9 +616,10 @@
 				80D37EB92C48334F00997C6D /* Seat.swift */,
 				80D37EC12C48338600997C6D /* Standing.swift */,
 				80D37EAD2C4832F000997C6D /* Top8Draft.swift */,
+				80CCA54C2C7BC99900B90BF5 /* UserManager.swift */,
 				80D37EB32C48331C00997C6D /* Team.swift */,
 				80D37EC52C48340300997C6D /* convenience functions.swift */,
-				806843182C38656400264D1A /* Models.swift */,
+				806843182C38656400264D1A /* NetworkLog.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -930,10 +944,9 @@
 				80D37EB02C4832FF00997C6D /* DeckConstruction.swift in Sources */,
 				80C5D4BB2C09263100503FD9 /* ExampleSecrets.swift in Sources */,
 				80D37EB82C48333D00997C6D /* Pod.swift in Sources */,
-				80B8E1452ABA245600845ECC /* networkRequests.swift in Sources */,
 				803D6BE32BFE416F00CEB9F2 /* View+Notifications.swift in Sources */,
 				803D6BE22BFE416F00CEB9F2 /* NotificationViewModifier.swift in Sources */,
-				806843192C38656600264D1A /* Models.swift in Sources */,
+				806843192C38656600264D1A /* NetworkLog.swift in Sources */,
 				80249ECB2C76789900A6A1E6 /* ScoutingResult.swift in Sources */,
 				806843142C383AE000264D1A /* NetworkLogsView.swift in Sources */,
 				80249ECF2C767A3500A6A1E6 /* ScoutingHistoryView.swift in Sources */,
@@ -1090,7 +1103,9 @@
 				80FFBEF72C4025A2005E958D /* GetEventTitleQuery.graphql.swift in Sources */,
 				80FFBEF82C4025A2005E958D /* RoundDetailsV2.graphql.swift in Sources */,
 				80FFBEF92C4025A2005E958D /* EventSearchSortDirection.graphql.swift in Sources */,
+				80CCA54D2C7BC99900B90BF5 /* UserManager.swift in Sources */,
 				80FFBEFA2C4025A2005E958D /* Round.graphql.swift in Sources */,
+				80CCA5492C7BBD3B00B90BF5 /* RequestLoggingInterceptor.swift in Sources */,
 				80FFBEFB2C4025A2005E958D /* TeamPlayerInput.graphql.swift in Sources */,
 				80FFBEFC2C4025A2005E958D /* StartPhaseInputV2.graphql.swift in Sources */,
 				80FFBEFD2C4025A2005E958D /* PersonaId_String_NotNull_maxLength_50.swift in Sources */,
@@ -1109,6 +1124,7 @@
 				80FFBF072C4025A2005E958D /* RegisterPlayer.graphql.swift in Sources */,
 				803AECF02AA26B2200CF03EB /* OSTRichApp.swift in Sources */,
 				80B8E1412ABA23F000845ECC /* LoginView.swift in Sources */,
+				80CCA54B2C7BBD4500B90BF5 /* ResponseLoggingInterceptor.swift in Sources */,
 				8046EA4B2AA6A60500578539 /* GraphQLQueryTypes.swift in Sources */,
 				8030DC692AC7613600F775B6 /* HTTPQueryTypes.swift in Sources */,
 				803D6BE52BFE41EA00CEB9F2 /* AppDelegate.swift in Sources */,

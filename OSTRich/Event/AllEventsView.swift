@@ -96,9 +96,12 @@ struct AllEventsView: View {
     
     fileprivate func refreshMainPage() {
         Task {
-            if Date().timeIntervalSince1970 > UserDefaults.standard.double(forKey: "access_token_expiry") - 40.0 { //seconds
-                await refreshLogin()
+            if let user = UserManager.shared.currentUser, !user.loggedIn {
+                await UserManager.shared.refresh()
             }
+//            if Date().timeIntervalSince1970 > UserDefaults.standard.double(forKey: "access_token_expiry") - 40.0 { //seconds
+//                await refreshLogin()
+//            }
 //            if Date().timeIntervalSince1970 > UserDefaults.standard.double(forKey: "ostrichAccessTokenExpiry") - 40 { //seconds
 //                await ostrichRefreshLogin()
 //            }

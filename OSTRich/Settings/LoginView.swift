@@ -55,37 +55,43 @@ struct LoginView: View {
         }
     }
     fileprivate func relogin() {
-        someStatus = Image(systemName: "circle.dotted")
         Task {
-            if let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") {
-                switch await HTOService().refreshLogin(refreshToken) {
-                case .success(let creds):
-                    await pickleAuthentication(creds)
-                    someStatus = Image(systemName: "checkmark.circle")
-                case .failure:
-                    someStatus = Image(systemName: "circle.slash")
-                }
+            someStatus = Image(systemName: "circle.dotted")
+            await UserManager.shared.refresh()
+            if let loggedIn = UserManager.shared.currentUser?.loggedIn, loggedIn {
+                someStatus = Image(systemName: "checkmark.circle")
+            } else {
+                someStatus = Image(systemName: "circle.slash")
             }
+//            if let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") {
+//                switch await HTOService().refreshLogin(refreshToken) {
+//                case .success(let creds):
+//                    await pickleAuthentication(creds)
+//                    someStatus = Image(systemName: "checkmark.circle")
+//                case .failure:
+//                    someStatus = Image(systemName: "circle.slash")
+//                }
+//            }
         }
     }
     fileprivate func loginServer() {
         Task {
-            if !showRegistration && ![email, password].contains("") {
-                let authTokens = await HTOService().login(email, password)
-                switch authTokens {
-                case .success(let creds):
-                    let ostrichAuthTokens = await HTOService().ostrichLogin(creds.refresh_token)
-                    switch ostrichAuthTokens {
-                    case .success(let ostrichCreds):
-                        await pickleOSTRichAuthentication(ostrichCreds)
-                        dismiss()
-                    case .failure(let error):
-                        print(error)
-                }
-                case .failure(let error):
-                    print(error)
-                }
-            }
+//            if !showRegistration && ![email, password].contains("") {
+//                let authTokens = await HTOService().login(email, password)
+//                switch authTokens {
+//                case .success(let creds):
+//                    let ostrichAuthTokens = await HTOService().ostrichLogin(creds.refresh_token)
+//                    switch ostrichAuthTokens {
+//                    case .success(let ostrichCreds):
+//                        await pickleOSTRichAuthentication(ostrichCreds)
+//                        dismiss()
+//                    case .failure(let error):
+//                        print(error)
+//                }
+//                case .failure(let error):
+//                    print(error)
+//                }
+//            }
         }
     }
     fileprivate func login() {
@@ -94,7 +100,13 @@ struct LoginView: View {
                 let authTokens = await HTOService().login(email, password)
                 switch authTokens {
                 case .success(let creds):
-                    await pickleAuthentication(creds)
+                    var user = UserManager.shared.currentUser
+                    if user == nil {
+                        user = User(from: creds)
+                    } else {
+                        UserManager.shared.updateToken(creds)
+                    }
+                    await UserManager.shared.refreshProfile()
                     dismiss()
                 case .failure(let error):
                     print(error)
@@ -104,7 +116,9 @@ struct LoginView: View {
                     let newAccount = await HTOService().register(displayName: displayName, firstName: firstName, lastName: lastName, email: email, password: password, birthday: birthday)
                     switch newAccount {
                     case .success(let creds):
-                        await pickleAuthentication(creds.tokens)
+                        UserManager.shared.updateToken(creds.tokens)
+                        await UserManager.shared.refreshProfile()
+//                        await pickleAuthentication(creds.tokens)
                         dismiss()
                     case .failure(let error):
                         print("Couldn't create account")
@@ -112,12 +126,16 @@ struct LoginView: View {
                     }
                 }
             }
-            if UserDefaults.standard.bool(forKey: "saveLoginCreds") {
-                UserDefaults.standard.setValue(email, forKey: "email")
-                UserDefaults.standard.setValue(password, forKey: "password")
-            } else {
-                UserDefaults.standard.setValue("", forKey: "email")
-                UserDefaults.standard.setValue("", forKey: "password")
+            if let user = UserManager.shared.currentUser {
+                if UserDefaults.standard.bool(forKey: "saveLoginCreds") {
+                    user.email = email
+                    user.password = password
+                    UserManager.shared.saveUser(user)
+                    
+                } else {
+                    UserManager.shared.currentUser?.email = ""
+                    UserManager.shared.currentUser?.password = ""
+                }
             }
         }
     }

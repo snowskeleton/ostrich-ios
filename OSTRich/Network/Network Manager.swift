@@ -90,7 +90,7 @@ extension HTOEndpoint: Endpoint {
                 "Content-Type": "application/json",
             ]
         default:
-            guard let accessToken = UserDefaults.standard.string(forKey: "accessToken") else {
+            guard let accessToken = UserManager.shared.currentUser?.token?.access_token else {
                 print("Couldn't find key: accessToken in UserDefaults")
                 return [:]
             }

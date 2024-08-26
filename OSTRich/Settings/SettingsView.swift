@@ -18,37 +18,27 @@ struct SettingsView: View {
     @State private var showCrashConfirmation = false
     
     var body: some View {
-        List {
-            Toggle(isOn: $saveLoginCreds) {
-                Text("Save email and password to login")
+        NavigationStack {
+            List {
+                Toggle("Save email and password to login", isOn: $saveLoginCreds)
+                Toggle("Use new Game State method", isOn: $useGameStateV2)
+                Toggle("Protect from bad data causing launch crashes", isOn: $useLaunchProtection)
+                Toggle("Show debug values in various locations throughout the app", isOn: $showDebugValues)
+                Button("Crash!") { showCrashConfirmation = true }
+                    .confirmationDialog(
+                        "Crash car into a bridge",
+                        isPresented: $showCrashConfirmation) {
+                            Button(
+                                "Watch and let it burn",
+                                   role: .destructive ) {
+                                fatalError()
+                            }
+                        }
+                NavigationLink(destination: NetworkLogView()) { Text("Network Logs") }
+                NavigationLink(destination: LoginView()) { Text("Login") }
+                Button("Clear event history") { deleteAll() }
+                
             }
-            Toggle(isOn: $useGameStateV2) {
-                Text("Use new Game State method")
-            }
-            Toggle(isOn: $useLaunchProtection) {
-                Text("Protect from bad data causing launch crashes")
-            }
-            Toggle(isOn: $showDebugValues) {
-                Text("Show debug values in various locations throughout the app")
-            }
-            Button("Crash!") {
-                showCrashConfirmation = true
-            }
-            .confirmationDialog(
-                "Crash car into a bridge",
-                isPresented: $showCrashConfirmation) {
-                    Button("Watch and let it burn", role: .destructive) {
-                        fatalError()
-                    }
-            }
-            NavigationLink(destination: NetworkLogView()) {
-                Text("Network Logs")
-            }
-            NavigationLink(destination: LoginView()) {
-                Text("Login")
-            }
-            Button("Clear event history") { deleteAll() }
-
         }
     }
     private func deleteAll() {

@@ -92,7 +92,7 @@ class Round: Identifiable {
         return self.matches.first { match in
             match.teams.contains { team in
                 team.players.contains { player in
-                    player.personaId == UserDefaults.standard.string(forKey: "personaId")!
+                    player.personaId == UserManager.shared.currentUser?.personaId
                 }
             }
         }

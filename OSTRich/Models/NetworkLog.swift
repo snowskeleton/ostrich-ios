@@ -20,18 +20,18 @@ class NetworkLogger: ObservableObject {
 
 struct NetworkLog: Identifiable {
     let id = UUID()
-    let url: String
-    let method: String
-    let headers: [String: String]?
-    let body: [String: Any]?
-    let response: String?
-    let statusCode: Int?
+    var url: String
+    var method: String
+    var headers: [String: String]?
+    var body: [String: Any]?
+    var response: String?
+    var statusCode: Int?
     
     var operationName: String? {
         if let body = body, let operationName = body["operationName"] as? String {
             return operationName
         }
-        return nil
+        return headers?["X-APOLLO-OPERATION-NAME"]
     }
     
     func getBodyDictionary() -> [String: Any]? {

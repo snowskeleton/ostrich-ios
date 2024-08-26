@@ -46,8 +46,8 @@ struct GameState: Codable {
 }
 
 
-struct User: Codable {
-}
+//struct User: Codable {
+//}
 
 struct TeamResult: Codable {
 }
