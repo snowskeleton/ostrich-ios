@@ -16,13 +16,8 @@ enum HTOEndpoint {
     case changeName(firstName: String, lastName: String)
     case getProfile
     
-//    case myActiveEvents
-//    case loadEvent(eventId: String)
-//    case getGameStateV2AtRound(eventId: String, round: Int)
     case joinEventWithShortCode(code: String)
 //    case dropSelf(eventId: String)
-//    case submitMatch(matchDetails: MatchDetails)
-//    case getTimer(id: String)
 
     case ostrichLogin(wotcRefreshToken: String)
     case ostrichRefreshLogin(refreshToken: String)
@@ -146,18 +141,6 @@ extension HTOEndpoint: Endpoint {
                 "emailOptIn": false,
                 "dataShareOptIn": true
             ]
-//        case .loadEvent(let eventId):
-//            return [
-//                "operationName": self.operationName,
-//                "query": self.query!,
-//                "variables": ["eventId": eventId]
-//            ]
-//        case .getGameStateV2AtRound(let eventId, let roundNumber):
-//            return [
-//                "operationName": self.operationName,
-//                "query": self.query!,
-//                "variables": ["eventId": eventId, "round": roundNumber]
-//            ]
         case .joinEventWithShortCode(let shortcode):
             return [
                 "operationName": self.operationName,
@@ -169,32 +152,6 @@ extension HTOEndpoint: Endpoint {
 //                "operationName": self.operationName,
 //                "query": self.query!,
 //                "variables": ["eventId": eventId]
-//            ]
-//        case .submitMatch(let matchDetails):
-//            return [
-//                
-//                "operationName": self.operationName,
-//                "query": self.query!,
-//                "variables": [
-//                    "input": [
-//                        "draws": matchDetails.draws,
-//                        "eventId": matchDetails.eventId,
-//                        "isBye": matchDetails.isBye,
-//                        "leftTeamId": matchDetails.leftTeamId,
-//                        "leftTeamWins": matchDetails.leftTeamWins,
-//                        "matchId": matchDetails.matchId,
-//                        "rightTeamId": matchDetails.rightTeamId,
-//                        "rightTeamWins": matchDetails.rightTeamWins
-//                    ]
-//                ]
-//            ]
-//        case .getTimer(let id):
-//            return [
-//                "operationName": self.operationName,
-//                "query": self.query!,
-//                "variables": [
-//                    "ID": id
-//                ]
 //            ]
         default:
             return [
@@ -226,18 +183,9 @@ protocol HTOServiceable {
     
     func joinEvent(_ shortcode: String) async -> Result<joinEventWithShortCode.Response, RequestError>
     
-//    func getActiveEvents() async -> Result<myActiveEvents.Response, RequestError>
-//    func getEvent(eventId: String) async -> Result<loadEvent.Response, RequestError>
-//    func loadGameStateV2AtRound(eventId: String, round: Int) async -> Result<getGameStateV2AtRound.Response, RequestError>
-//    func dropEvent(eventId: String) async -> Result<dropSelf.Response, RequestError>
-//    func recordMatchResults(matchDetails: MatchDetails) async -> Result<submitMatch.Response, RequestError>
 }
 
 struct HTOService: HTTPClient, HTOServiceable {
-//    func recordMatchResults(matchDetails: MatchDetails) async -> Result<submitMatch.Response, RequestError> {
-//        return await sendRequest(endpoint: HTOEndpoint.submitMatch(matchDetails: matchDetails), responseModel: submitMatch.Response.self)
-//    }
-//    
     func getProfile() async -> Result<Profile.Response, RequestError> {
         return await sendRequest(endpoint: HTOEndpoint.getProfile, responseModel: Profile.Response.self)
     }
@@ -250,57 +198,9 @@ struct HTOService: HTTPClient, HTOServiceable {
 //        return await sendRequest(endpoint: HTOEndpoint.dropSelf(eventId: eventId), responseModel: dropSelf.Response.self)
 //    }
 //    
-//    func getEvent(eventId: String) async -> Result<loadEvent.Response, RequestError> {
-//        let event = await sendRequest(endpoint: HTOEndpoint.loadEvent(eventId: eventId), responseModel: loadEvent.Response.self)
-//        return event
-//    }
-//    
-//    func loadGameStateV2AtRound(eventId: String, round: Int) async -> Result<getGameStateV2AtRound.Response, RequestError> {
-//        let event = await sendRequest(endpoint: HTOEndpoint.getGameStateV2AtRound(eventId: eventId, round: round), responseModel: getGameStateV2AtRound.Response.self)
-//        return event
-//    }
-    
-//    func dynamicGameStateLoader(eventId: String, round: Int) async -> EventV1? {
-//        if UserDefaults.standard.bool(forKey: "useLoadGameStateV2") {
-//            print("using new gamestate method")
-//            switch await loadGameStateV2AtRound(eventId: eventId, round: round) {
-//            case .success(let response):
-//                return response.data.event
-//            default:
-//                break
-//            }
-//        } else {
-//            switch await getEvent(eventId: eventId) {
-//            case .success(let response):
-//                print("using old method")
-//                return response.data.event
-//            default:
-//                break
-//            }
-//        }
-//        return nil
-//    }
-    
-//    func getActiveEvents() async -> Result<myActiveEvents.Response, RequestError> {
-//        return await sendRequest(endpoint: HTOEndpoint.myActiveEvents, responseModel: myActiveEvents.Response.self)
-//    }
-//    
     func joinEvent(_ shortcode: String) async -> Result<joinEventWithShortCode.Response, RequestError> {
         return await sendRequest(endpoint: HTOEndpoint.joinEventWithShortCode(code: shortcode.uppercased()), responseModel: joinEventWithShortCode.Response.self)
     }
-//    
-//    func getTimer(_ timerId: String) async -> Result<getTimer.Response, RequestError> {
-//        return await sendRequest(endpoint: HTOEndpoint.getTimer(id: timerId), responseModel: OSTRich.getTimer.Response.self)
-////        let timer = WotcTimer(
-////            id: "some_timer_id",
-////            state: "RUNNING",
-////            durationMs: 6000000,
-////            durationStartTime: "2024-05-26T18:55:20.199Z",
-////            serverTime: "2024-05-26T02:25:56.663Z"
-////        )
-////        return .success(OSTRich.getTimer.Response(data: getTimerData(timer: timer)))
-//
-//    }
     
     func register(displayName: String, firstName: String, lastName: String, email: String, password: String, birthday: Date) async -> Result<NewAccount.Response, RequestError> {
         return await sendRequest(

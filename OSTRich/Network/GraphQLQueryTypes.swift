@@ -24,37 +24,6 @@ extension OSTRichGraphQLQuery {
         return finalAnswer
     }
 }
-
-struct loadEvent: OSTRichGraphQLQuery {
-    var operationName: String
-    var query: String
-    var variables: [String: String] = [:]
-    struct Response: Codable { let data: loadEventData }
-}
-struct loadEventData: Codable {
-    let event: EventV1
-}
-
-struct getGameStateV2AtRound: OSTRichGraphQLQuery {
-    var operationName: String
-    var query: String
-    var variables: [String: String] = [:]
-    struct Response: Codable { let data:  getGameStateV2AtRoundData }
-}
-struct getGameStateV2AtRoundData: Codable {
-    let event: EventV1
-}
-
-struct myActiveEvents: OSTRichGraphQLQuery {
-    var operationName: String
-    var query: String
-    var variables: [String: String] = [:]
-    struct Response: Codable { let data: myActiveEventsData }
-}
-class myActiveEventsData: Codable {
-    let myActiveEvents: [EventV1]
-}
-
 struct joinEventWithShortCode: OSTRichGraphQLQuery {
     var operationName: String
     var query: String
@@ -63,44 +32,4 @@ struct joinEventWithShortCode: OSTRichGraphQLQuery {
 }
 struct joinEventWithShortCodeData: Codable {
         let joinEventWithShortCode: String
-}
-
-struct dropSelf: OSTRichGraphQLQuery {
-    var operationName: String
-    var query: String
-    var variables: [String: String] = [:]
-    struct Response: Codable { let data: dropSelfData }
-}
-struct dropSelfData: Codable {
-    let dropSelf: String
-}
-
-struct dropTeamV2: OSTRichGraphQLQuery {
-    var operationName: String
-    var query: String
-    var variables: [String: String] = [:]
-    struct Response: Codable { let data: dropTeamV2Data }
-}
-struct dropTeamV2Data: Codable {
-    let dropTeam: String
-}
-
-struct submitMatch: OSTRichGraphQLQuery {
-    var operationName: String
-    var query: String
-    var variables: [String: String] = [:]
-    struct Response: Codable { let data: submitMatchData}
-}
-struct submitMatchData: Codable {
-    let recordMatchResult: GameState
-}
-
-struct getTimer: OSTRichGraphQLQuery {
-    var operationName: String
-    var query: String
-    var variables: [String : String] = [:]
-    struct Response: Codable { let data: getTimerData }
-}
-struct getTimerData: Codable {
-    let timer: WotcTimer
 }
