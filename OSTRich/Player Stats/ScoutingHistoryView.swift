@@ -22,6 +22,9 @@ struct ScoutingHistoryAllPlayersView: View {
                 $0.safeName.lowercased().contains(searchText.lowercased()) ||
                 $0.stats.contains {
                     $0.format.lowercased().contains(searchText.lowercased())
+                } ||
+                $0.stats.contains {
+                    $0.deckName.lowercased().contains(searchText.lowercased())
                 }
             }
         }

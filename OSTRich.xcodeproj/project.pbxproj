@@ -470,8 +470,8 @@
 			children = (
 				80CCA5452C7BB29600B90BF5 /* ScoutingResultsForTeamView.swift */,
 				80249ECE2C767A3500A6A1E6 /* ScoutingHistoryView.swift */,
-				80ED1C942C7A5A0300E83B2D /* ScoutingHistoryByFormatView.swift */,
 				80CCA5432C7BB24A00B90BF5 /* ScoutingHistoryCollapsableView.swift */,
+				80ED1C942C7A5A0300E83B2D /* ScoutingHistoryByFormatView.swift */,
 				80249ED62C768A4500A6A1E6 /* CreateScoutingResultView.swift */,
 			);
 			path = "Player Stats";

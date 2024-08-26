@@ -16,13 +16,8 @@ struct PlayersView: View {
                 ForEach(players.sorted(by: { $0.safeName < $1.safeName }), id: \.id) { player in
                     NavigationLink {
                         CreateScoutingResultView(
-//                            playerName: player.safeName,
-//                            playerPersonaId: player.personaId ?? "",
                             registeredPlayer: player,
                             event: player.event!
-//                            eventName: player.event?.title ?? "",
-//                            eventId: player.event?.id ?? "",
-//                            formatName: player.event?.eventFormat?.name ?? ""
                         )
                     } label: {
                         HStack {
