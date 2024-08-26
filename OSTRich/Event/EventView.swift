@@ -55,7 +55,7 @@ struct EventView: View {
                 }
 
                 if !(event.standings.isEmpty) {
-                    StandingsView(teamStandings: Binding<[Standing]>.constant(event.standings)).tag("Standings")
+                    StandingsView(event: event).tag("Standings")
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
