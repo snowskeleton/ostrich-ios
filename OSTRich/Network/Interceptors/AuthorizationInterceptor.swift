@@ -9,45 +9,6 @@ import Foundation
 import Apollo
 import ApolloAPI
 
-//class AuthorizationInterceptor: ApolloInterceptor {
-//    enum UserError: Error {
-//        case noUserLoggedIn
-//    }
-//    
-//    public var id: String = UUID().uuidString
-//    
-//    func interceptAsync<Operation>(
-//        chain: RequestChain,
-//        request: HTTPRequest<Operation>,
-//        response: HTTPResponse<Operation>?,
-//        completion: @escaping (Result<GraphQLResult<Operation.Data>, Error>) -> Void
-//    ) where Operation : GraphQLOperation {
-////        if Date().timeIntervalSince1970 > UserDefaults.standard.double(forKey: "access_token_expiry") - 40.0 { //seconds
-////            await refreshLogin()
-////        }
-//        if let accessToken = UserManager.shared.currentUser?.token?.access_token  {
-//            request.addHeader(name: "Authorization", value: "Bearer \(accessToken)")
-//        } else {
-//            print("Something went wrong, we can't get an access token")
-//            chain.handleErrorAsync(
-//                UserError.noUserLoggedIn,
-//                request: request,
-//                response: response,
-//                completion: completion
-//            )
-//            return
-//
-//        }
-//
-//        chain.proceedAsync(
-//            request: request,
-//            response: response,
-//            interceptor: self,
-//            completion: completion)
-//    }
-//    
-//}
-
 class UserManagementInterceptor: ApolloInterceptor {
     enum UserError: Error {
         case noLoginToken
