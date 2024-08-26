@@ -117,7 +117,10 @@ class User: Codable {
     }
     
     var loggedIn: Bool {
-        return Date().timeIntervalSince1970 > (self.token?.expiresOn ?? 0) - 10.0
+//        print(self.token?.expiresOn)
+//        print(Date().timeIntervalSince1970)
+//        print(self.token!.expiresOn ?? 0 < Date().timeIntervalSince1970)
+        return Date().timeIntervalSince1970 < (self.token?.expiresOn ?? 0) - 10.0
     }
     
 }
