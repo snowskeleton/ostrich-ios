@@ -133,8 +133,8 @@ struct LoginView: View {
                     UserManager.shared.saveUser(user)
                     
                 } else {
-                    UserManager.shared.currentUser?.email = ""
-                    UserManager.shared.currentUser?.password = ""
+                    user.email = ""
+                    user.password = ""
                 }
             }
         }

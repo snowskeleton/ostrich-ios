@@ -95,12 +95,13 @@ class UserManager {
 
 class User: Codable {
     var personaId: String?
+    var displayName: String?
 
     // these two come from a separate endpoint
     var firstName: String?
     var lastName: String?
-    var displayName: String?
     
+    // these two are only set if UserDefaeults key saveLoginCreds is true
     var email: String?
     var password: String?
 
@@ -117,9 +118,6 @@ class User: Codable {
     }
     
     var loggedIn: Bool {
-//        print(self.token?.expiresOn)
-//        print(Date().timeIntervalSince1970)
-//        print(self.token!.expiresOn ?? 0 < Date().timeIntervalSince1970)
         return Date().timeIntervalSince1970 < (self.token?.expiresOn ?? 0) - 10.0
     }
     
