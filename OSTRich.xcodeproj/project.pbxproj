@@ -504,9 +504,7 @@
 				803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */,
 				803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */,
 				803AECF12AA26B2200CF03EB /* ContentView.swift */,
-				807A56402C650AE300302836 /* Event */,
-				80249ED52C768A3100A6A1E6 /* Player Stats */,
-				80249ED42C76893E00A6A1E6 /* Settings */,
+				80CCA54E2C7D299800B90BF5 /* Tabs */,
 				80D37EA02C48322F00997C6D /* Models */,
 				806843162C38653D00264D1A /* Network */,
 				80FFBF0A2C402D41005E958D /* KeychainSwiftDistrib.swift */,
@@ -590,6 +588,16 @@
 				80FFBF082C402C67005E958D /* AuthorizationInterceptor.swift */,
 			);
 			path = Interceptors;
+			sourceTree = "<group>";
+		};
+		80CCA54E2C7D299800B90BF5 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				807A56402C650AE300302836 /* Event */,
+				80249ED52C768A3100A6A1E6 /* Player Stats */,
+				80249ED42C76893E00A6A1E6 /* Settings */,
+			);
+			path = Tabs;
 			sourceTree = "<group>";
 		};
 		80D37EA02C48322F00997C6D /* Models */ = {
