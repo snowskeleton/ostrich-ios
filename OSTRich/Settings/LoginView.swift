@@ -11,14 +11,28 @@ import SwiftUI
 struct LoginView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
-    @State var email: String = UserDefaults.standard.bool(forKey: "saveLoginCreds") ? UserDefaults.standard.string(forKey: "email") ?? "" : ""
-    @State var password: String = UserDefaults.standard.bool(forKey: "saveLoginCreds") ? UserDefaults.standard.string(forKey: "password") ?? "" : ""
-    @State var firstName: String = UserDefaults.standard.string(forKey: "firstName") ?? ""
-    @State var lastName: String = UserDefaults.standard.string(forKey: "lastName") ?? ""
-    @State var displayName: String = UserDefaults.standard.string(forKey: "displayName") ?? ""
-    @State var showRegistration: Bool = false
-    @State var birthday = Date()
-    @State var someStatus: Image?
+    @State private var email: String
+    @State private var password: String
+    @State private var firstName: String
+    @State private var lastName: String
+    @State private var displayName: String
+    @State private var showRegistration: Bool = false
+    @State private var birthday = Date()
+    @State private var someStatus: Image?
+    
+    init() {
+        if UserDefaults.standard.bool(forKey: "saveLoginCreds") {
+            _email = State(initialValue: UserDefaults.standard.string(forKey: "email") ?? "" )
+            _password = State(initialValue: UserDefaults.standard.string(forKey: "password") ?? "")
+        } else {
+            _email = State(initialValue: "")
+            _password = State(initialValue: "")
+        }
+        
+        _firstName = State(initialValue: UserDefaults.standard.string(forKey: "firstName") ?? "")
+        _lastName = State(initialValue: UserDefaults.standard.string(forKey: "lastName") ?? "")
+        _displayName = State(initialValue: UserDefaults.standard.string(forKey: "displayName") ?? "")
+    }
     
     var body: some View {
         if let displayName = UserDefaults.standard.string(forKey: "displayName") {
@@ -54,6 +68,7 @@ struct LoginView: View {
 //            Button("Clear event history") { deleteAll() }
         }
     }
+    
     fileprivate func relogin() {
         Task {
             someStatus = Image(systemName: "circle.dotted")
@@ -63,17 +78,9 @@ struct LoginView: View {
             } else {
                 someStatus = Image(systemName: "circle.slash")
             }
-//            if let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") {
-//                switch await HTOService().refreshLogin(refreshToken) {
-//                case .success(let creds):
-//                    await pickleAuthentication(creds)
-//                    someStatus = Image(systemName: "checkmark.circle")
-//                case .failure:
-//                    someStatus = Image(systemName: "circle.slash")
-//                }
-//            }
         }
     }
+    
     fileprivate func loginServer() {
         Task {
 //            if !showRegistration && ![email, password].contains("") {
@@ -100,12 +107,7 @@ struct LoginView: View {
                 let authTokens = await HTOService().login(email, password)
                 switch authTokens {
                 case .success(let creds):
-                    var user = UserManager.shared.currentUser
-                    if user == nil {
-                        user = User(from: creds)
-                    } else {
-                        UserManager.shared.updateToken(creds)
-                    }
+                    UserManager.shared.updateToken(creds)
                     await UserManager.shared.refreshProfile()
                     dismiss()
                 case .failure(let error):
@@ -118,7 +120,6 @@ struct LoginView: View {
                     case .success(let creds):
                         UserManager.shared.updateToken(creds.tokens)
                         await UserManager.shared.refreshProfile()
-//                        await pickleAuthentication(creds.tokens)
                         dismiss()
                     case .failure(let error):
                         print("Couldn't create account")
@@ -131,7 +132,6 @@ struct LoginView: View {
                     user.email = email
                     user.password = password
                     UserManager.shared.saveUser(user)
-                    
                 } else {
                     user.email = ""
                     user.password = ""
@@ -143,6 +143,7 @@ struct LoginView: View {
         Task {
             switch await HTOService().changeName(firstName: firstName, lastName: lastName) {
             case .success:
+                await UserManager.shared.refreshProfile()
                 dismiss()
             case .failure(let error):
                 print(error)
