@@ -22,7 +22,7 @@ struct CreateScoutingResultView: View {
 
     @State private var scoutingResult: ScoutingResult?
     @State private var player: LocalPlayer
-    @State private var date: Date = .now
+    @State private var date: Date
     
     init(
         playingPlayer: Player,
@@ -55,60 +55,39 @@ struct CreateScoutingResultView: View {
             deckNotes: deckNotes
         )
     }
-    
-//    init(
-//        playerFirstName: String,
-//        playerLastName: String,
-//        playerDisplayName: String,
-//        playerPersonaId: String,
-//        
-//        event: Event,
-//        deckName: String = "",
-//        deckNotes: String = ""
-//    ) {
-//        let newPlayer = LocalPlayer.createOrUpdate(
-//            personaId: playerPersonaId,
-//            displayName: playerDisplayName,
-//            firstName: playerFirstName,
-//            lastName: playerLastName
-//        )
-//        
-//        self.init(
-//            player: newPlayer,
-//            event: event,
-//            deckName: deckName,
-//            deckNotes: deckNotes
-//        )
-//    }
-
-    init(
-        player: LocalPlayer,
-        eventName: String,
-        eventId: String,
-        formatName: String?,
-        deckName: String = "",
-        deckNotes: String = ""
-    ) {
-        _player = .init(initialValue: player)
-        _eventName = .init(initialValue: eventName)
-        _eventId = .init(initialValue: eventId)
-        _formatName = .init(initialValue: formatName != nil ? formatName! : "Please select")
-        _deckName = .init(initialValue: deckName)
-        _deckNotes = .init(initialValue: deckNotes)
-        _player = .init(initialValue: player)
-    }
-    
+     
     init(
         player: LocalPlayer,
         event: Event,
         deckName: String = "",
         deckNotes: String = ""
     ) {
+        let dateFormatter = ISO8601DateFormatter()
+        let date: Date = {
+            if let scheduledStartTime = event.scheduledStartTime {
+                
+                dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                var date = dateFormatter.date(from: scheduledStartTime)
+                
+                // If parsing fails, try without fractional seconds
+                if date == nil {
+                    dateFormatter.formatOptions = [.withInternetDateTime]
+                    date = dateFormatter.date(from: scheduledStartTime)
+                }
+                
+                if date != nil {
+                    return date!
+                }
+            }
+            return Date.now
+        }()
+        
         self.init(
             player: player,
             eventName: event.title,
             eventId: event.id,
             formatName: event.eventFormat?.name ?? "Other",
+            date: date,
             deckName: deckName,
             deckNotes: deckNotes
         )
@@ -121,10 +100,30 @@ struct CreateScoutingResultView: View {
             eventName: scoutingResult.eventName ?? "",
             eventId: scoutingResult.eventId ?? "",
             formatName: scoutingResult.format,
+            date: scoutingResult.date,
             deckName: scoutingResult.deckName,
             deckNotes: scoutingResult.deckNotes ?? ""
         )
         _scoutingResult = .init(initialValue: scoutingResult)
+    }
+    
+    init(
+        player: LocalPlayer,
+        eventName: String,
+        eventId: String,
+        formatName: String?,
+        date: Date,
+        deckName: String = "",
+        deckNotes: String = ""
+    ) {
+        _player = .init(initialValue: player)
+        _eventName = .init(initialValue: eventName)
+        _eventId = .init(initialValue: eventId)
+        _formatName = .init(initialValue: formatName != nil ? formatName! : "Please select")
+        _date = .init(initialValue: date)
+        _deckName = .init(initialValue: deckName)
+        _deckNotes = .init(initialValue: deckNotes)
+        _player = .init(initialValue: player)
     }
     
     var body: some View {
