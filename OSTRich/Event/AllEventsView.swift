@@ -43,21 +43,7 @@ struct AllEventsView: View {
                     }.onDelete(perform: deleteItems)
                 }
             }
-            .sheet(isPresented: $showAccountScreen) {
-                LoginView()
-            }
             .toolbar {
-//                ToolbarItem(placement: .topBarLeading) {
-//                    Button(
-//                        action: { showAccountScreen = true },
-//                        label:  {
-//                            Image(systemName: "person.crop.circle")
-//                                .font(.largeTitle)
-//                                .foregroundColor(Color.secondary)
-//                        }
-//                    ).accessibilityLabel(("Login/Logout"))
-//                }
-                
                 ToolbarItem {
                     Spacer()
                 }
@@ -95,23 +81,12 @@ struct AllEventsView: View {
     }
     
     fileprivate func refreshMainPage() {
-        Task {
-            if let user = UserManager.shared.currentUser, !user.loggedIn {
-                await UserManager.shared.refresh()
-            }
-//            if Date().timeIntervalSince1970 > UserDefaults.standard.double(forKey: "access_token_expiry") - 40.0 { //seconds
-//                await refreshLogin()
-//            }
-//            if Date().timeIntervalSince1970 > UserDefaults.standard.double(forKey: "ostrichAccessTokenExpiry") - 40 { //seconds
-//                await ostrichRefreshLogin()
-//            }
             Network.getEvents(context: context)
             events.forEach { event in
                 Network.getEvent(event: event)
                 Network.getEventAsHost(event: event)
                 Network.getGameState(event: event)
             }
-        }
     }
     
     fileprivate func deleteItems(offsets: IndexSet) {
@@ -136,55 +111,118 @@ struct AllEventsView: View {
 struct EventRow: View {
     var event: Event
     
+    var statusColor: Color {
+        if let status = event.status {
+            switch status {
+            case "ROUNDACTIVE":
+                return .blue
+            case "ENDED":
+                return .red
+            default:
+                return .yellow
+            }
+        }
+        return .yellow
+    }
+    
     var body: some View {
         HStack {
+            VStack {
+                if let scheduledStartTime = event.scheduledStartTime {
+                    Text(convertToLocalTime(scheduledStartTime))
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.primary)
+
+                    Text(convertToLocalDate(scheduledStartTime))
+                        .font(.caption2)
+                        .foregroundColor(.primary.opacity(0.8))
+                    
+                } else {
+                    Text("None")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.primary)
+                }
+            }
+            .padding(14)
+            .background(
+                LinearGradient(gradient: Gradient(colors: [
+                    Color.secondary,
+                    Color.primary
+                ]),
+                               startPoint: .topLeading,
+                               endPoint: .bottomTrailing
+                )
+                .opacity(0.5)
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 30))
+//            .clipShape(Circle())
+            .shadow(
+                color: Color.black.opacity(0.6),
+                radius: 10, x: 0, y: 5
+            )
+            
             VStack(alignment: .leading) {
                 Text(event.title)
+                    .foregroundColor(.primary)
                     .font(.title2)
                     .fontWeight(.bold)
-                    .foregroundColor(.primary)
-                
-                if let pairingType = event.pairingType {
-                    Text(pairingType)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-                
+
                 if let status = event.status {
                     Text(status)
                         .font(.subheadline)
-                        .foregroundColor(status == "Active" ? .green : .red)
+                        .fontWeight(.semibold)
+                        .padding(4)
+                        .foregroundColor(statusColor)
                 }
-                
-                HStack {
-                    if event.isOnline == true {
-                        Image(systemName: "globe")
-                            .foregroundColor(.blue)
-                    } else {
-                        Image(systemName: "person.2")
-                            .foregroundColor(.gray)
-                    }
-                    
-                    Text(event.createdBy ?? "Unknown")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-            }
-            Spacer()
-            VStack {
-                Text("\(event.requiredTeamSize)")
-                    .font(.headline)
-                    .foregroundColor(.primary)
-                    .padding(8)
-                    .background(Color(.systemBlue))
-                    .clipShape(Circle())
-                    .foregroundColor(.white)
             }
         }
-        .padding()
-        .background(Color(.systemGray6))
-        .cornerRadius(10)
-        .shadow(radius: 2)
-        .padding(.horizontal)
+    }
+    
+    func convertToLocalDate(_ utcTime: String) -> String {
+        let dateFormatter = ISO8601DateFormatter()
+        
+        // Attempt to parse with fractional seconds
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        var date = dateFormatter.date(from: utcTime)
+        
+        // If parsing fails, try without fractional seconds
+        if date == nil {
+            dateFormatter.formatOptions = [.withInternetDateTime]
+            date = dateFormatter.date(from: utcTime)
+        }
+        
+        if let date = date {
+            let formatter = RelativeDateTimeFormatter()
+            formatter.unitsStyle = .full
+            
+            return formatter.localizedString(for: date, relativeTo: Date.now)
+        }
+        
+        return "Invalid"
+    }
+    func convertToLocalTime(_ utcTime: String) -> String {
+        let dateFormatter = ISO8601DateFormatter()
+        
+        // Attempt to parse with fractional seconds
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        var date = dateFormatter.date(from: utcTime)
+        
+        // If parsing fails, try without fractional seconds
+        if date == nil {
+            dateFormatter.formatOptions = [.withInternetDateTime]
+            date = dateFormatter.date(from: utcTime)
+        }
+        
+        if let date = date {
+            let localFormatter = DateFormatter()
+            localFormatter.timeStyle = .short
+            localFormatter.timeZone = .current
+            
+            return localFormatter.string(from: date)
+        }
+        
+        return "Invalid date"
     }
 }
