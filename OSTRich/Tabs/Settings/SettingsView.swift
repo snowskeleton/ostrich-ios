@@ -12,7 +12,6 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.modelContext) private var context
     @AppStorage("saveLoginCreds") var saveLoginCreds = false
-    @AppStorage("useLoadGameStateV2") var useGameStateV2 = true
     @AppStorage("useLaunchCrashProtection") var useLaunchProtection = true
     @AppStorage("showDebugValues") var showDebugValues = false
     @State private var showCrashConfirmation = false
@@ -21,7 +20,6 @@ struct SettingsView: View {
         NavigationStack {
             List {
                 Toggle("Save email and password to login", isOn: $saveLoginCreds)
-                Toggle("Use new Game State method", isOn: $useGameStateV2)
                 Toggle("Protect from bad data causing launch crashes", isOn: $useLaunchProtection)
                 Toggle("Show debug values in various locations throughout the app", isOn: $showDebugValues)
                 Button("Crash!") { showCrashConfirmation = true }
