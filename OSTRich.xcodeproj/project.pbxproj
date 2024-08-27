@@ -46,6 +46,8 @@
 		80CCA5492C7BBD3B00B90BF5 /* RequestLoggingInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA5482C7BBD3B00B90BF5 /* RequestLoggingInterceptor.swift */; };
 		80CCA54B2C7BBD4500B90BF5 /* ResponseLoggingInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA54A2C7BBD4500B90BF5 /* ResponseLoggingInterceptor.swift */; };
 		80CCA54D2C7BC99900B90BF5 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA54C2C7BC99900B90BF5 /* UserManager.swift */; };
+		80CCA5502C7D4A2500B90BF5 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA54F2C7D4A2500B90BF5 /* Notifications.swift */; };
+		80CCA5522C7D4E7200B90BF5 /* NotificationPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA5512C7D4E7200B90BF5 /* NotificationPermissionsView.swift */; };
 		80D091462ACB7BB600B91257 /* SubmitMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D091452ACB7BB600B91257 /* SubmitMatchView.swift */; };
 		80D37EA22C48323A00997C6D /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EA12C48323A00997C6D /* Event.swift */; };
 		80D37EA42C48327800997C6D /* EventFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EA32C48327800997C6D /* EventFormat.swift */; };
@@ -273,6 +275,8 @@
 		80CCA5482C7BBD3B00B90BF5 /* RequestLoggingInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLoggingInterceptor.swift; sourceTree = "<group>"; };
 		80CCA54A2C7BBD4500B90BF5 /* ResponseLoggingInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseLoggingInterceptor.swift; sourceTree = "<group>"; };
 		80CCA54C2C7BC99900B90BF5 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		80CCA54F2C7D4A2500B90BF5 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		80CCA5512C7D4E7200B90BF5 /* NotificationPermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionsView.swift; sourceTree = "<group>"; };
 		80D091452ACB7BB600B91257 /* SubmitMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitMatchView.swift; sourceTree = "<group>"; };
 		80D37EA12C48323A00997C6D /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		80D37EA32C48327800997C6D /* EventFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFormat.swift; sourceTree = "<group>"; };
@@ -461,6 +465,7 @@
 				80A5722E2BE2C78E00D8D888 /* SettingsView.swift */,
 				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				806843132C383AE000264D1A /* NetworkLogsView.swift */,
+				80CCA5512C7D4E7200B90BF5 /* NotificationPermissionsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -508,6 +513,7 @@
 				80D37EA02C48322F00997C6D /* Models */,
 				806843162C38653D00264D1A /* Network */,
 				80FFBF0A2C402D41005E958D /* KeychainSwiftDistrib.swift */,
+				80CCA54F2C7D4A2500B90BF5 /* Notifications.swift */,
 				80FFBDEB2C4020D0005E958D /* GameState.graphql */,
 				80FFBDE62C401FA8005E958D /* gamestateschema.json */,
 				803D6BE02BFE416F00CEB9F2 /* Notifications */,
@@ -615,10 +621,10 @@
 				80D37EBF2C48337000997C6D /* MatchResult.swift */,
 				80D37EB52C48332E00997C6D /* Player.swift */,
 				80D37EB72C48333D00997C6D /* Pod.swift */,
-				80330D722C74FE1300D19CAB /* RoundTimer.swift */,
 				80D37EA52C48329500997C6D /* Registration.swift */,
 				80D37EA72C4832B800997C6D /* Reservation.swift */,
 				80D37EB12C48330F00997C6D /* Round.swift */,
+				80330D722C74FE1300D19CAB /* RoundTimer.swift */,
 				80ED1C9A2C7A7CC500E83B2D /* SwiftDataManager.swift */,
 				80249ECA2C76789900A6A1E6 /* ScoutingResult.swift */,
 				80D37EB92C48334F00997C6D /* Seat.swift */,
@@ -1062,6 +1068,8 @@
 				80FFBED32C4025A2005E958D /* SeatV2.graphql.swift in Sources */,
 				80CCA5462C7BB29600B90BF5 /* ScoutingResultsForTeamView.swift in Sources */,
 				80249EC92C7675B400A6A1E6 /* RoundTimerView.swift in Sources */,
+				80CCA5522C7D4E7200B90BF5 /* NotificationPermissionsView.swift in Sources */,
+				80CCA5502C7D4A2500B90BF5 /* Notifications.swift in Sources */,
 				80249ED72C768A4500A6A1E6 /* CreateScoutingResultView.swift in Sources */,
 				80D37EA42C48327800997C6D /* EventFormat.swift in Sources */,
 				80D37EB42C48331C00997C6D /* Team.swift in Sources */,

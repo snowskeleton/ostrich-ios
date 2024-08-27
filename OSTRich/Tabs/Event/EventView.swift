@@ -114,6 +114,9 @@ struct EventView: View {
     fileprivate func getTime() {
         if let timer = event.gameStateAtRound?.currentRound?.timer {
             timer.update()
+            if timer.state == .running || timer.state == .fake {
+                Notifications.scheduleRoundTimerNotifications(for: timer)
+            }
         }
     }
 

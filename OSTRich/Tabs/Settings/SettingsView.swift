@@ -36,6 +36,7 @@ struct SettingsView: View {
                         }
                 NavigationLink(destination: NetworkLogView()) { Text("Network Logs") }
                 NavigationLink(destination: LoginView()) { Text("Login") }
+                NavigationLink(destination: NotificationPermissionsView()) { Text("Notification Permissions") }
                 Button("Clear event history") { deleteAll() }
                 
             }
