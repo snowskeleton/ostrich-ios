@@ -56,16 +56,19 @@ class ResponseLoggingInterceptor: ApolloInterceptor {
         let httpMethod = "POST" // GraphQL requests are typically POST
         let headers = request.additionalHeaders
         
-        let bodyData = try? JSONSerialization.data(withJSONObject: request.operation.__variables ?? [:], options: [])
+        guard let bodyData = try? JSONSerialization.data(withJSONObject: request.operation.__variables ?? [:], options: []) else {
+            chain.proceedAsync(request: request, response: response, interceptor: self, completion: completion)
+            return
+        }
         
         let body: [String: Any]?
         
-        if let data = bodyData,
-           let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-            body = jsonObject
-        } else {
-            body = nil
+        guard let jsonObject = try? JSONSerialization.jsonObject(with: bodyData, options: []) else {
+            chain.proceedAsync(request: request, response: response, interceptor: self, completion: completion)
+            return
         }
+        
+        body = jsonObject as? [String : Any]
         
         // Create a log object
         var networkLog = NetworkLog(
