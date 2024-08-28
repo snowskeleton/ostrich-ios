@@ -28,9 +28,6 @@ struct AllEventsView: View {
     var body: some View {
         NavigationView {
             List {
-                Button("Track me!") {
-                    Aptabase.shared.trackEvent("app_started")
-                }
                 Section("New event") {
                     TextField("Event Code", text: $joinEventCode)
                     Button("Join Event", action: { joinEvent() })
