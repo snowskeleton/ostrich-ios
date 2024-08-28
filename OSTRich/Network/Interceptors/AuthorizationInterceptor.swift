@@ -46,7 +46,6 @@ class UserManagementInterceptor: ApolloInterceptor {
                 let user = UserManager.shared.currentUser,
                 user.loggedIn
             else {
-                print("No valid token")
                 chain.handleErrorAsync(
                     UserError.UserNotLoggedIn,
                     request: request,
@@ -56,42 +55,26 @@ class UserManagementInterceptor: ApolloInterceptor {
                 return
             }
             
-            if user.tokenExpired {
-                // Try to refresh the user's token
-                await UserManager.shared.refreshToken()
-                
-                // Fetch the updated token
-                let refreshedUser = UserManager.shared.currentUser
-                guard let updatedToken = refreshedUser?.token, !refreshedUser!.tokenExpired else {
-                    print("Failed to update token")
-                    chain.handleErrorAsync(
-                        UserError.unableToRefreshToken,
-                        request: request,
-                        response: response,
-                        completion: completion
-                    )
-                    return
-                }
-                
-                print("Updated token successfully. Proceed.")
-                self.addTokenAndProceed(
-                    updatedToken,
-                    to: request,
-                    chain: chain,
+            let _ = await AsyncUserManager.shared.refreshTokenIfNeeded()
+            
+            let refreshedUser = UserManager.shared.currentUser
+            guard let token = refreshedUser?.token, refreshedUser?.loggedIn == true, !refreshedUser!.tokenExpired else {
+                chain.handleErrorAsync(
+                    UserError.unableToRefreshToken,
+                    request: request,
                     response: response,
                     completion: completion
                 )
-            } else {
-                // User is logged in and has a fresh token; proceed
-                print("Token doesn't need updating")
-                self.addTokenAndProceed(
-                    user.token!,
-                    to: request,
-                    chain: chain,
-                    response: response,
-                    completion: completion
-                )
+                return
             }
+            
+            self.addTokenAndProceed(
+                token,
+                to: request,
+                chain: chain,
+                response: response,
+                completion: completion
+            )
         }
     }
 }

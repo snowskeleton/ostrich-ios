@@ -8,6 +8,35 @@
 import Foundation
 import SwiftData
 
+actor AsyncUserManager {
+    static let shared = AsyncUserManager()
+    
+    private var refreshTask: Task<Bool, Never>? = nil
+    
+    func refreshTokenIfNeeded() async -> Bool {
+        if let refreshTask = refreshTask {
+            return await refreshTask.value
+        }
+        
+        let task = Task { () -> Bool in
+            defer { refreshTask = nil }
+            
+            guard let user = UserManager.shared.currentUser, user.tokenExpired else {
+                return false // No need to refresh
+            }
+            
+            await UserManager.shared.refreshToken()
+            
+            // Ensure the user state is re-evaluated after the refresh.
+//            let user = UserManager.shared.currentUser
+            return user.loggedIn == true && !user.tokenExpired
+        }
+        
+        self.refreshTask = task
+        return await task.value
+    }
+}
+
 class UserManager {
     static let shared = UserManager()
      let userDefaultsKey = "user"
