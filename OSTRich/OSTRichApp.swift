@@ -15,7 +15,10 @@ struct OSTRichApp: App {
     @Environment(\.scenePhase) private var scenePhase
     
     init() {
-        Aptabase.shared.initialize(appKey: "A-SH-8446942175") // 👈 this is where you enter your App Key
+        Aptabase.shared.initialize(
+            appKey: AptabaseSecrets.appKey,
+            with: InitOptions(host: AptabaseSecrets.host)
+        )
     }
 
     var body: some Scene {

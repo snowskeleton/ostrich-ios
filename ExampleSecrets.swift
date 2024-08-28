@@ -8,3 +8,8 @@
 //struct WotcCreds {
 //    static let basicCredentialsBase64 = ""
 //}
+
+//struct AptabaseSecrets {
+//    static let appKey = ""
+//    static let host = ""
+//}
