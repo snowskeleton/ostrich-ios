@@ -1,5 +1,5 @@
 //
-//  Network Manager.swift
+//  HTTP Network Manager.swift
 //  OSTRich
 //
 //  Created by snow on 9/4/23.

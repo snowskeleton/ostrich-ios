@@ -107,8 +107,8 @@ struct EventView: View {
     }
     
     fileprivate func updateEvent() {
-        Network.getEventAsHost(event: event)
-        Network.getGameState(event: event)
+        GQLNetwork.getEventAsHost(event: event)
+        GQLNetwork.getGameState(event: event)
     }
 
     fileprivate func getTime() {

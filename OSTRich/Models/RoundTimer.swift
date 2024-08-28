@@ -93,7 +93,7 @@ class RoundTimer: Identifiable {
     
     func update() {
         if self.id != nil && self.id != "" {
-            Network.getTimer(timerId: self.id!) { result in
+            GQLNetwork.getTimer(timerId: self.id!) { result in
                 switch result {
                 case .success(let data):
                     let durationStartTime = convertWotcTimestamps(from: data.durationStartTime)

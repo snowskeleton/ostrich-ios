@@ -124,7 +124,7 @@ struct SubmitMatchView: View {
     }
     
     private func saveTeamResultInputs(_ teamResults: [Gamestateschema.TeamResultInputV2]) {
-        Network.shared.submitMatchResults(
+        GQLNetwork.shared.submitMatchResults(
             eventId: match.round.gameState.eventId,
             results: teamResults
         ) { result in

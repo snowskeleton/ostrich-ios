@@ -1,5 +1,5 @@
 //
-//  Network.swift
+//  GQL Network Manager.swift
 //  OSTRich
 //
 //  Created by snow on 7/11/24.
@@ -10,8 +10,8 @@ import Foundation
 import SwiftData
 import SwiftUI
 
-class Network {
-    static let shared = Network()
+class GQLNetwork {
+    static let shared = GQLNetwork()
     
     @AppStorage("netowrkAuthorized") static var authorized = true
     
@@ -23,7 +23,7 @@ class Network {
         queue: DispatchQueue = .main,
         resultHandler: @escaping (Result<Query.Data, Error>) -> Void
     ) -> (any Cancellable) {
-        return Network.shared.apollo.fetch(
+        return GQLNetwork.shared.apollo.fetch(
             query: query,
             cachePolicy: cachePolicy,
             contextIdentifier: contextIdentifier,
@@ -32,10 +32,10 @@ class Network {
         ) { result in
             switch result {
             case .success(let graphQLResult):
-                Network.authorized = true
+                GQLNetwork.authorized = true
                 if let errors = graphQLResult.errors, !errors.isEmpty {
                     if errors.contains(where: { $0.message!.contains("401: Unauthorized") }) {
-                        Network.authorized  = false
+                        GQLNetwork.authorized  = false
                         resultHandler(.failure(NetworkError.authorizationError))
                     } else {
                         resultHandler(.failure(NetworkError.graphQLError(errors)))
@@ -70,7 +70,7 @@ class Network {
     
     /// Get a fresh copy of all events from the server. Makes new events or updates old events with new data as appropriate
     static func getEvents(context: ModelContext) {
-        Network.shared.fetch(
+        GQLNetwork.shared.fetch(
             query: Gamestateschema.MyActiveEventsQuery()
         ) { response in
             switch response {
@@ -93,7 +93,7 @@ class Network {
     
     /// Fetch additional data about event from server. Not all data is included with getEvents() response, so this has to be called too.
     static func getEvent(event: Event) {
-        Network.shared.fetch(
+        GQLNetwork.shared.fetch(
             query: Gamestateschema.LoadEventJoinV2Query(eventId: event.id)
         ) { response in
             switch response {
@@ -111,7 +111,7 @@ class Network {
     }
     
     static func getEventAsHost(event: Event) {
-        Network.shared.fetch(
+        GQLNetwork.shared.fetch(
             query: Gamestateschema.LoadEventHostV2Query(eventId: event.id)
         ) { response in
             switch response {
@@ -127,7 +127,7 @@ class Network {
     
     static func getGameState(event: Event) {
         // round: 0 always returns the current round
-        Network.shared.fetch(
+        GQLNetwork.shared.fetch(
             query: Gamestateschema.GetGameStateV2AtRoundQuery(
                 eventId: event.id, round: 0)
         ) { response in
@@ -145,7 +145,7 @@ class Network {
     func submitMatchResults(eventId: String, results: [Gamestateschema.TeamResultInputV2], completion: @escaping (Result<Void, Error>) -> Void) {
         let mutation = Gamestateschema.RecordMatchResultV2Mutation(eventId: eventId, results: results)
         
-        Network.shared.apollo.perform(mutation: mutation) { result in
+        GQLNetwork.shared.apollo.perform(mutation: mutation) { result in
             switch result {
             case .success(let graphQLResult):
                 if let errors = graphQLResult.errors {
@@ -161,7 +161,7 @@ class Network {
     }
     
     static func getTimer(timerId: String, completion: @escaping (Result<Gamestateschema.GetTimerQuery.Data.Timer, Error>) -> Void) {
-        Network.shared.fetch(
+        GQLNetwork.shared.fetch(
             query: Gamestateschema.GetTimerQuery(id: timerId)
         ) { response in
             switch response {
@@ -177,7 +177,7 @@ class Network {
         let allCapsShortCode = shortCode.uppercased()
         let mutation = Gamestateschema.JoinEventWithShortCodeMutation(shortCode: allCapsShortCode)
         
-        Network.shared.apollo.perform(mutation: mutation) { result in
+        GQLNetwork.shared.apollo.perform(mutation: mutation) { result in
             switch result {
             case .success(let graphQLResult):
                 if let errors = graphQLResult.errors {

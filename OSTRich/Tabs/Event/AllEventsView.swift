@@ -80,11 +80,11 @@ struct AllEventsView: View {
     }
     
     fileprivate func refreshMainPage() {
-            Network.getEvents(context: context)
+        GQLNetwork.getEvents(context: context)
             events.forEach { event in
-                Network.getEvent(event: event)
-                Network.getEventAsHost(event: event)
-                Network.getGameState(event: event)
+                GQLNetwork.getEvent(event: event)
+                GQLNetwork.getEventAsHost(event: event)
+                GQLNetwork.getGameState(event: event)
             }
     }
     
@@ -95,7 +95,7 @@ struct AllEventsView: View {
     }
     
     fileprivate func joinEvent() {
-        Network.shared.joinEventWithShortCode(shortCode: joinEventCode) { results in
+        GQLNetwork.shared.joinEventWithShortCode(shortCode: joinEventCode) { results in
             switch results {
             case .success:
                 joinEventCode = ""
