@@ -31,41 +31,60 @@ struct LoginView: View {
         
         _firstName = State(initialValue: UserDefaults.standard.string(forKey: "firstName") ?? "")
         _lastName = State(initialValue: UserDefaults.standard.string(forKey: "lastName") ?? "")
-        _displayName = State(initialValue: UserDefaults.standard.string(forKey: "displayName") ?? "")
+        var someDisplayName = UserDefaults.standard.string(forKey: "displayName") ?? ""
+        someDisplayName = someDisplayName.components(separatedBy: ("#"))[0]
+        _displayName = State(initialValue: someDisplayName)
     }
     
     var body: some View {
         if let displayName = UserDefaults.standard.string(forKey: "displayName") {
+            Text("Magic Companion login")
             Text("Logged in as \(displayName)")
         }
         List {
-            Section(showRegistration ? "New Account" : "Login") {
+            Section("Email") {
                 TextField("Email", text: $email)
+            }
+            
+            Section("Password") {
                 SecureField("Password", text: $password)
+            }
+            
+            if showRegistration {
+                Section("Username") {
+                    TextField("Display Name", text: $displayName)
+                }
+                Section("First Name") {
+                    TextField("First Name", text: $firstName)
+                }
+                Section("Last Name") {
+                    TextField("Last Name", text: $lastName)
+                }
+                Section("Birthday") {
+                    DatePicker("Birth Date", selection: $birthday, displayedComponents: .date)
+                }
+                Section("Privacy Policy") {
+                    Text(
+                        "By creating an account with Wizards of the Coast, you agree to abide by their [Terms and Conditions](https://company.wizards.com/en/legal/terms), [Code of Conduct](https://company.wizards.com/en/legal/code-conduct), and [Privacy Policy](https://company.wizards.com/en/legal/wizards-coasts-privacy-policy)."
+                    )
+                }
+            }
+            
+            Section {
                 Toggle(isOn: $showRegistration) {
                     Text("Create New Account")
                 }
-                if showRegistration {
-                    TextField("Display Name", text: $displayName)
-                    TextField("First Name", text: $firstName)
-                    TextField("Last Name", text: $lastName)
-                    DatePicker("Birth Date", selection: $birthday, displayedComponents: .date)
-                    Text("By creating an account with Wizards of the Coast, you agree to abide by their [Terms and Conditions](https://company.wizards.com/en/legal/terms), [Code of Conduct](https://company.wizards.com/en/legal/code-conduct), and [Privacy Policy](https://company.wizards.com/en/legal/wizards-coasts-privacy-policy).")
-                }
+            }
+            
+            Section {
                 Button(showRegistration ? "Create" : "Login") { login() }
-                Button("Login Server") { loginServer() }
-                HStack {
-                    Button("Refresh Login") { relogin() }
-                    if someStatus != nil { someStatus }
-                }
-                Button("Register for Notifications") { NotificationHandler.shared.getNotificationSettings() }
             }
-            Section("Change Name") {
-                TextField("First Name", text: $firstName)
-                TextField("Last Name", text: $lastName)
-                Button("Save") { changeName() }
+            Button("Login Server") { loginServer() }
+            HStack {
+                Button("Refresh Login") { relogin() }
+                if someStatus != nil { someStatus }
             }
-//            Button("Clear event history") { deleteAll() }
+            Button("Register for Notifications") { NotificationHandler.shared.getNotificationSettings() }
         }
     }
     
@@ -73,7 +92,11 @@ struct LoginView: View {
         Task {
             someStatus = Image(systemName: "circle.dotted")
             await UserManager.shared.refresh()
-            if let loggedIn = UserManager.shared.currentUser?.loggedIn, loggedIn {
+            if
+                let user = UserManager.shared.currentUser,
+                user.loggedIn,
+                !user.tokenExpired
+            {
                 someStatus = Image(systemName: "checkmark.circle")
             } else {
                 someStatus = Image(systemName: "circle.slash")
@@ -136,17 +159,6 @@ struct LoginView: View {
                     user.email = ""
                     user.password = ""
                 }
-            }
-        }
-    }
-    fileprivate func changeName() {
-        Task {
-            switch await HTOService().changeName(firstName: firstName, lastName: lastName) {
-            case .success:
-                await UserManager.shared.refreshProfile()
-                dismiss()
-            case .failure(let error):
-                print(error)
             }
         }
     }
