@@ -42,14 +42,15 @@ struct LoginView: View {
             Text("Logged in as \(displayName)")
         }
         List {
-            Section("Email") {
+            Section {
                 TextField("Email", text: $email)
-            }
-            
-            Section("Password") {
                 SecureField("Password", text: $password)
+            } header: {
+                Text("Email and password")
+            } footer: {
+                Text("Magic Companion login")
             }
-            
+
             if showRegistration {
                 Section("Username") {
                     TextField("Display Name", text: $displayName)
@@ -79,12 +80,14 @@ struct LoginView: View {
             Section {
                 Button(showRegistration ? "Create" : "Login") { login() }
             }
-            Button("Login Server") { loginServer() }
-            HStack {
-                Button("Refresh Login") { relogin() }
-                if someStatus != nil { someStatus }
+//            Button("Login Server") { loginServer() }
+            if UserDefaults.standard.bool(forKey: "showDebugValues") {
+                HStack {
+                    Button("Refresh Login") { relogin() }
+                    if someStatus != nil { someStatus }
+                }
             }
-            Button("Register for Notifications") { NotificationHandler.shared.getNotificationSettings() }
+//            Button("Register for Notifications") { NotificationHandler.shared.getNotificationSettings() }
         }
     }
     
