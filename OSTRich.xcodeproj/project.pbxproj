@@ -43,7 +43,6 @@
 		80C5D4BD2C0926B800503FD9 /* StandingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C5D4BC2C0926B800503FD9 /* StandingsView.swift */; };
 		80CCA5442C7BB24A00B90BF5 /* ScoutingHistoryCollapsableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA5432C7BB24A00B90BF5 /* ScoutingHistoryCollapsableView.swift */; };
 		80CCA5462C7BB29600B90BF5 /* ScoutingResultsForTeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA5452C7BB29600B90BF5 /* ScoutingResultsForTeamView.swift */; };
-		80CCA5492C7BBD3B00B90BF5 /* RequestLoggingInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA5482C7BBD3B00B90BF5 /* RequestLoggingInterceptor.swift */; };
 		80CCA54B2C7BBD4500B90BF5 /* ResponseLoggingInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA54A2C7BBD4500B90BF5 /* ResponseLoggingInterceptor.swift */; };
 		80CCA54D2C7BC99900B90BF5 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA54C2C7BC99900B90BF5 /* UserManager.swift */; };
 		80CCA5502C7D4A2500B90BF5 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA54F2C7D4A2500B90BF5 /* Notifications.swift */; };
@@ -274,7 +273,6 @@
 		80C5D4BC2C0926B800503FD9 /* StandingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsView.swift; sourceTree = "<group>"; };
 		80CCA5432C7BB24A00B90BF5 /* ScoutingHistoryCollapsableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingHistoryCollapsableView.swift; sourceTree = "<group>"; };
 		80CCA5452C7BB29600B90BF5 /* ScoutingResultsForTeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingResultsForTeamView.swift; sourceTree = "<group>"; };
-		80CCA5482C7BBD3B00B90BF5 /* RequestLoggingInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLoggingInterceptor.swift; sourceTree = "<group>"; };
 		80CCA54A2C7BBD4500B90BF5 /* ResponseLoggingInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseLoggingInterceptor.swift; sourceTree = "<group>"; };
 		80CCA54C2C7BC99900B90BF5 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		80CCA54F2C7D4A2500B90BF5 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
@@ -595,7 +593,6 @@
 		80CCA5472C7BBD2F00B90BF5 /* Interceptors */ = {
 			isa = PBXGroup;
 			children = (
-				80CCA5482C7BBD3B00B90BF5 /* RequestLoggingInterceptor.swift */,
 				80CCA54A2C7BBD4500B90BF5 /* ResponseLoggingInterceptor.swift */,
 				80FFBF082C402C67005E958D /* AuthorizationInterceptor.swift */,
 			);
@@ -1129,7 +1126,6 @@
 				80FFBEF92C4025A2005E958D /* EventSearchSortDirection.graphql.swift in Sources */,
 				80CCA54D2C7BC99900B90BF5 /* UserManager.swift in Sources */,
 				80FFBEFA2C4025A2005E958D /* Round.graphql.swift in Sources */,
-				80CCA5492C7BBD3B00B90BF5 /* RequestLoggingInterceptor.swift in Sources */,
 				80FFBEFB2C4025A2005E958D /* TeamPlayerInput.graphql.swift in Sources */,
 				80FFBEFC2C4025A2005E958D /* StartPhaseInputV2.graphql.swift in Sources */,
 				80FFBEFD2C4025A2005E958D /* PersonaId_String_NotNull_maxLength_50.swift in Sources */,
