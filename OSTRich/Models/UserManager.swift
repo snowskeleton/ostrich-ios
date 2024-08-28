@@ -44,7 +44,7 @@ class UserManager {
     func refresh() async {
         if let user = UserManager.shared.currentUser {
             await self.refreshToken()
-            if user.loggedIn {
+            if user.loggedIn, !user.tokenExpired {
                 await self.refreshProfile()
             }
         }
@@ -91,6 +91,18 @@ class UserManager {
             UserManager.shared.loadUser()
         }
     }
+    
+    func logout() {
+        if let user = UserManager.shared.currentUser {
+            user.token = nil
+            user.displayName = nil
+            user.personaId = nil
+            user.firstName = nil
+            user.lastName = nil
+            UserManager.shared.saveUser(user)
+            UserManager.shared.loadUser()
+        }
+    }
 }
 
 class User: Codable {
@@ -117,8 +129,12 @@ class User: Codable {
         )
     }
     
+    var tokenExpired: Bool {
+        return Date().timeIntervalSince1970 > (self.token?.expiresOn ?? 0) - 10
+    }
+    
     var loggedIn: Bool {
-        return Date().timeIntervalSince1970 < (self.token?.expiresOn ?? 0) - 10.0
+        return self.token != nil
     }
     
 }

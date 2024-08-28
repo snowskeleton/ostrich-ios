@@ -41,44 +41,57 @@ class UserManagementInterceptor: ApolloInterceptor {
         response: HTTPResponse<Operation>?,
         completion: @escaping (Result<GraphQLResult<Operation.Data>, Error>) -> Void
     ) {
-                    Task {
-        guard
-            let user = UserManager.shared.currentUser,
-            let token = user.token
-        else {
-            chain.handleErrorAsync(
-                UserError.noLoginToken,
-                request: request,
-                response: response,
-                completion: completion
-            )
-            return
-        }
-        
-        // If we've gotten here, there is a token!
-        if !user.loggedIn {
-            // try once to refresh the user's token
-            await UserManager.shared.refreshToken()
-
-            if !user.loggedIn {
-                // user is beyond our help, so throw an error
+        Task {
+            guard
+                let user = UserManager.shared.currentUser,
+                user.loggedIn
+            else {
+                print("No valid token")
                 chain.handleErrorAsync(
-                    UserError.unableToRefreshToken,
+                    UserError.UserNotLoggedIn,
                     request: request,
                     response: response,
                     completion: completion
                 )
                 return
             }
+            
+            if user.tokenExpired {
+                // Try to refresh the user's token
+                await UserManager.shared.refreshToken()
+                
+                // Fetch the updated token
+                let refreshedUser = UserManager.shared.currentUser
+                guard let updatedToken = refreshedUser?.token, !refreshedUser!.tokenExpired else {
+                    print("Failed to update token")
+                    chain.handleErrorAsync(
+                        UserError.unableToRefreshToken,
+                        request: request,
+                        response: response,
+                        completion: completion
+                    )
+                    return
+                }
+                
+                print("Updated token successfully. Proceed.")
+                self.addTokenAndProceed(
+                    updatedToken,
+                    to: request,
+                    chain: chain,
+                    response: response,
+                    completion: completion
+                )
+            } else {
+                // User is logged in and has a fresh token; proceed
+                print("Token doesn't need updating")
+                self.addTokenAndProceed(
+                    user.token!,
+                    to: request,
+                    chain: chain,
+                    response: response,
+                    completion: completion
+                )
+            }
         }
-        // user logged in; proceed
-        self.addTokenAndProceed(
-            token,
-            to: request,
-            chain: chain,
-            response: response,
-            completion: completion
-        )
-                                    }
     }
 }
