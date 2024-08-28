@@ -24,7 +24,6 @@ struct OSTRichApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-//                .modelContainer(for: [Event.self])
                 .onChange(of: scenePhase) { _, newPhase in
                     switch newPhase {
                     case .inactive:
