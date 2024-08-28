@@ -99,21 +99,13 @@ struct AllEventsView: View {
         GQLNetwork.shared.joinEventWithShortCode(shortCode: joinEventCode) { results in
             switch results {
             case .success:
+                
                 joinEventCode = ""
                 refreshMainPage()
             case .failure(let failure):
                 print(failure)
             }
         }
-//        Task {
-//            switch await HTOService().joinEvent(joinEventCode) {
-//            case .success:
-//                joinEventCode = ""
-//                refreshMainPage()
-//            case .failure(let failure):
-//                print(failure)
-//            }
-//        }
     }
 }
 
