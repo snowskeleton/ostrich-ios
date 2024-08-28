@@ -48,6 +48,7 @@
 		80CCA5522C7D4E7200B90BF5 /* NotificationPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA5512C7D4E7200B90BF5 /* NotificationPermissionsView.swift */; };
 		80CCA5542C7DFAFD00B90BF5 /* info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 80CCA5532C7DFAFD00B90BF5 /* info.plist */; };
 		80CCA5562C7E240300B90BF5 /* ChangeNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA5552C7E240300B90BF5 /* ChangeNameView.swift */; };
+		80CCA5582C7F8A7500B90BF5 /* DeveloperMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA5572C7F8A7500B90BF5 /* DeveloperMenuView.swift */; };
 		80D091462ACB7BB600B91257 /* SubmitMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D091452ACB7BB600B91257 /* SubmitMatchView.swift */; };
 		80D37EA22C48323A00997C6D /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EA12C48323A00997C6D /* Event.swift */; };
 		80D37EA42C48327800997C6D /* EventFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D37EA32C48327800997C6D /* EventFormat.swift */; };
@@ -277,6 +278,7 @@
 		80CCA5512C7D4E7200B90BF5 /* NotificationPermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionsView.swift; sourceTree = "<group>"; };
 		80CCA5532C7DFAFD00B90BF5 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		80CCA5552C7E240300B90BF5 /* ChangeNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNameView.swift; sourceTree = "<group>"; };
+		80CCA5572C7F8A7500B90BF5 /* DeveloperMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperMenuView.swift; sourceTree = "<group>"; };
 		80D091452ACB7BB600B91257 /* SubmitMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitMatchView.swift; sourceTree = "<group>"; };
 		80D37EA12C48323A00997C6D /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		80D37EA32C48327800997C6D /* EventFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFormat.swift; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 			isa = PBXGroup;
 			children = (
 				80A5722E2BE2C78E00D8D888 /* SettingsView.swift */,
+				80CCA5572C7F8A7500B90BF5 /* DeveloperMenuView.swift */,
 				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				80CCA5552C7E240300B90BF5 /* ChangeNameView.swift */,
 				806843132C383AE000264D1A /* NetworkLogsView.swift */,
@@ -1017,6 +1020,7 @@
 				80FFBEA62C4025A2005E958D /* EndEventV2Mutation.graphql.swift in Sources */,
 				80FFBEA72C4025A2005E958D /* JoinEventWithShortCodeMutation.graphql.swift in Sources */,
 				80D37EAA2C4832CF00997C6D /* GameStateV2.swift in Sources */,
+				80CCA5582C7F8A7500B90BF5 /* DeveloperMenuView.swift in Sources */,
 				80FFBEA82C4025A2005E958D /* Gamestateschema.graphql.swift in Sources */,
 				80FFBEA92C4025A2005E958D /* TeamResult.graphql.swift in Sources */,
 				80FFBEAA2C4025A2005E958D /* Organization.graphql.swift in Sources */,
