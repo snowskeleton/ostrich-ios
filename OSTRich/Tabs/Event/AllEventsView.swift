@@ -19,7 +19,6 @@ struct AllEventsView: View {
     @State var showAccountScreen = false
     @State var showSettingsScreen = false
     
-    @State var userIsLoggedIn = false
     @State var timerIsRunning = false
     @State var joinEventCode: String = ""
     
