@@ -46,7 +46,7 @@
 		80CCA54D2C7BC99900B90BF5 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA54C2C7BC99900B90BF5 /* UserManager.swift */; };
 		80CCA5502C7D4A2500B90BF5 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA54F2C7D4A2500B90BF5 /* Notifications.swift */; };
 		80CCA5522C7D4E7200B90BF5 /* NotificationPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA5512C7D4E7200B90BF5 /* NotificationPermissionsView.swift */; };
-		80CCA5542C7DFAFD00B90BF5 /* info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 80CCA5532C7DFAFD00B90BF5 /* info.plist */; };
+		80CCA5542C7DFAFD00B90BF5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 80CCA5532C7DFAFD00B90BF5 /* Info.plist */; };
 		80CCA5562C7E240300B90BF5 /* ChangeNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA5552C7E240300B90BF5 /* ChangeNameView.swift */; };
 		80CCA5582C7F8A7500B90BF5 /* DeveloperMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCA5572C7F8A7500B90BF5 /* DeveloperMenuView.swift */; };
 		80D091462ACB7BB600B91257 /* SubmitMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D091452ACB7BB600B91257 /* SubmitMatchView.swift */; };
@@ -276,7 +276,7 @@
 		80CCA54C2C7BC99900B90BF5 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		80CCA54F2C7D4A2500B90BF5 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		80CCA5512C7D4E7200B90BF5 /* NotificationPermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionsView.swift; sourceTree = "<group>"; };
-		80CCA5532C7DFAFD00B90BF5 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
+		80CCA5532C7DFAFD00B90BF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80CCA5552C7E240300B90BF5 /* ChangeNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNameView.swift; sourceTree = "<group>"; };
 		80CCA5572C7F8A7500B90BF5 /* DeveloperMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperMenuView.swift; sourceTree = "<group>"; };
 		80D091452ACB7BB600B91257 /* SubmitMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitMatchView.swift; sourceTree = "<group>"; };
@@ -511,7 +511,7 @@
 			children = (
 				803D6BE62BFE497600CEB9F2 /* OSTRich.entitlements */,
 				803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */,
-				80CCA5532C7DFAFD00B90BF5 /* info.plist */,
+				80CCA5532C7DFAFD00B90BF5 /* Info.plist */,
 				803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */,
 				803AECF12AA26B2200CF03EB /* ContentView.swift */,
 				80CCA54E2C7D299800B90BF5 /* Tabs */,
@@ -941,7 +941,7 @@
 				80FFBDE32C38A1E4005E958D /* getGameStateV2AtRound.query in Resources */,
 				80A572312BE5985B00D8D888 /* getTimer.query in Resources */,
 				803AECF42AA26B2300CF03EB /* Assets.xcassets in Resources */,
-				80CCA5542C7DFAFD00B90BF5 /* info.plist in Resources */,
+				80CCA5542C7DFAFD00B90BF5 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
