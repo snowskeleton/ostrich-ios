@@ -160,7 +160,6 @@ class Network {
         }
     }
     
-    
     static func getTimer(timerId: String, completion: @escaping (Result<Gamestateschema.GetTimerQuery.Data.Timer, Error>) -> Void) {
         Network.shared.fetch(
             query: Gamestateschema.GetTimerQuery(id: timerId)
@@ -173,7 +172,27 @@ class Network {
             }
         }
     }
-
+    
+    func joinEventWithShortCode(shortCode: String, completion: @escaping (Result<Gamestateschema.ID, Error>) -> Void) {
+        let allCapsShortCode = shortCode.uppercased()
+        let mutation = Gamestateschema.JoinEventWithShortCodeMutation(shortCode: allCapsShortCode)
+        
+        Network.shared.apollo.perform(mutation: mutation) { result in
+            switch result {
+            case .success(let graphQLResult):
+                if let errors = graphQLResult.errors {
+                    let error = errors.map { $0.localizedDescription }.joined(separator: "\n")
+                    completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: error])))
+                } else if let eventId = graphQLResult.data?.joinEventWithShortCode {
+                    completion(.success(eventId))
+                } else {
+                    completion(.failure(NetworkError.unknownError))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }
 
 enum NetworkError: Error {

@@ -25,7 +25,6 @@
 		803D6BE32BFE416F00CEB9F2 /* View+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D6BDF2BFE416F00CEB9F2 /* View+Notifications.swift */; };
 		803D6BE52BFE41EA00CEB9F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */; };
 		8046EA492AA64E8B00578539 /* Network Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA482AA64E8B00578539 /* Network Manager.swift */; };
-		8046EA4B2AA6A60500578539 /* GraphQLQueryTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */; };
 		806843142C383AE000264D1A /* NetworkLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843132C383AE000264D1A /* NetworkLogsView.swift */; };
 		806843192C38656600264D1A /* NetworkLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843182C38656400264D1A /* NetworkLog.swift */; };
 		807A56422C650BA000302836 /* PairingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A56412C650BA000302836 /* PairingsView.swift */; };
@@ -254,7 +253,6 @@
 		803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		803D6BE62BFE497600CEB9F2 /* OSTRich.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OSTRich.entitlements; sourceTree = "<group>"; };
 		8046EA482AA64E8B00578539 /* Network Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network Manager.swift"; sourceTree = "<group>"; };
-		8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLQueryTypes.swift; sourceTree = "<group>"; };
 		806843132C383AE000264D1A /* NetworkLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogsView.swift; sourceTree = "<group>"; };
 		806843182C38656400264D1A /* NetworkLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLog.swift; sourceTree = "<group>"; };
 		807A56412C650BA000302836 /* PairingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingsView.swift; sourceTree = "<group>"; };
@@ -554,7 +552,6 @@
 				80FFBF0E2C4030E9005E958D /* Network.swift */,
 				80EBC24B2ABE5FE0005817AD /* HTTPClient.swift */,
 				8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */,
-				8046EA4A2AA6A60500578539 /* GraphQLQueryTypes.swift */,
 				8046EA482AA64E8B00578539 /* Network Manager.swift */,
 			);
 			path = Network;
@@ -1145,7 +1142,6 @@
 				803AECF02AA26B2200CF03EB /* OSTRichApp.swift in Sources */,
 				80B8E1412ABA23F000845ECC /* LoginView.swift in Sources */,
 				80CCA54B2C7BBD4500B90BF5 /* ResponseLoggingInterceptor.swift in Sources */,
-				8046EA4B2AA6A60500578539 /* GraphQLQueryTypes.swift in Sources */,
 				8030DC692AC7613600F775B6 /* HTTPQueryTypes.swift in Sources */,
 				803D6BE52BFE41EA00CEB9F2 /* AppDelegate.swift in Sources */,
 				80A5722F2BE2C78E00D8D888 /* SettingsView.swift in Sources */,

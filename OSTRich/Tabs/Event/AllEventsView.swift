@@ -95,8 +95,8 @@ struct AllEventsView: View {
     }
     
     fileprivate func joinEvent() {
-        Task {
-            switch await HTOService().joinEvent(joinEventCode) {
+        Network.shared.joinEventWithShortCode(shortCode: joinEventCode) { results in
+            switch results {
             case .success:
                 joinEventCode = ""
                 refreshMainPage()
@@ -104,6 +104,15 @@ struct AllEventsView: View {
                 print(failure)
             }
         }
+//        Task {
+//            switch await HTOService().joinEvent(joinEventCode) {
+//            case .success:
+//                joinEventCode = ""
+//                refreshMainPage()
+//            case .failure(let failure):
+//                print(failure)
+//            }
+//        }
     }
 }
 

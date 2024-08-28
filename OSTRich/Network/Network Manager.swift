@@ -16,7 +16,7 @@ enum HTOEndpoint {
     case changeName(firstName: String, lastName: String)
     case getProfile
     
-    case joinEventWithShortCode(code: String)
+//    case joinEventWithShortCode(code: String)
 //    case dropSelf(eventId: String)
 
     case ostrichLogin(wotcRefreshToken: String)
@@ -37,8 +37,8 @@ extension HTOEndpoint: Endpoint {
             return "/token"
         case .ostrichRegisterDevice:
             return "/register-device"
-        default:
-            return "/silverbeak-griffin-service/graphql"
+//        default:
+//            return "/silverbeak-griffin-service/graphql"
         }
     }
     
@@ -48,8 +48,8 @@ extension HTOEndpoint: Endpoint {
             return "api.platform.wizards.com"
         case .ostrichLogin, .ostrichRefreshLogin, .ostrichRegisterDevice:
             return "ostrich.snowskeleton.net"
-        default:
-            return "api.tabletop.wizards.com"
+//        default:
+//            return "api.tabletop.wizards.com"
         }
     }
     
@@ -141,18 +141,6 @@ extension HTOEndpoint: Endpoint {
                 "emailOptIn": false,
                 "dataShareOptIn": true
             ]
-        case .joinEventWithShortCode(let shortcode):
-            return [
-                "operationName": self.operationName,
-                "query": self.query!,
-                "variables": ["shortCode": shortcode]
-            ]
-//        case .dropSelf(let eventId):
-//            return [
-//                "operationName": self.operationName,
-//                "query": self.query!,
-//                "variables": ["eventId": eventId]
-//            ]
         default:
             return [
                 "operationName": self.operationName,
@@ -180,9 +168,6 @@ protocol HTOServiceable {
     func register(displayName: String, firstName: String, lastName: String, email: String, password: String, birthday: Date) async -> Result<NewAccount.Response, RequestError>
     func changeName(firstName: String, lastName: String) async -> Result<Profile.Response, RequestError>
     func getProfile() async -> Result<Profile.Response, RequestError>
-    
-    func joinEvent(_ shortcode: String) async -> Result<joinEventWithShortCode.Response, RequestError>
-    
 }
 
 struct HTOService: HTTPClient, HTOServiceable {
@@ -192,14 +177,6 @@ struct HTOService: HTTPClient, HTOServiceable {
     
     func changeName(firstName: String, lastName: String) async -> Result<Profile.Response, RequestError> {
         return await sendRequest(endpoint: HTOEndpoint.changeName(firstName: firstName, lastName: lastName), responseModel: Profile.Response.self)
-    }
-    
-//    func dropEvent(eventId: String) async -> Result<dropSelf.Response, RequestError> {
-//        return await sendRequest(endpoint: HTOEndpoint.dropSelf(eventId: eventId), responseModel: dropSelf.Response.self)
-//    }
-//    
-    func joinEvent(_ shortcode: String) async -> Result<joinEventWithShortCode.Response, RequestError> {
-        return await sendRequest(endpoint: HTOEndpoint.joinEventWithShortCode(code: shortcode.uppercased()), responseModel: joinEventWithShortCode.Response.self)
     }
     
     func register(displayName: String, firstName: String, lastName: String, email: String, password: String, birthday: Date) async -> Result<NewAccount.Response, RequestError> {
