@@ -51,8 +51,6 @@ struct EventView: View {
 
                 if let gs = event.gameStateAtRound, !gs.currentMatches.isEmpty {
                     PairingsView(from: gs.id).tag("Pairings")
-//                    PairingsView(matches: gs.currentMatches).tag("Pairings")
-//                    PairingsView(matches: Binding<[Match]>.constant(event.gameStateAtRound!.currentMatches)).tag("Pairings")
                 }
 
                 if !(event.standings.isEmpty) {
@@ -65,7 +63,7 @@ struct EventView: View {
                 Button(
                     role: .destructive,
                     action: {
-                        //                    dropSelfFromEvent(eventId: event.id)
+                        dropSelfFromEvent(eventId: event.id)
                     },
                     label: {
                         Text("Drop")
@@ -121,17 +119,17 @@ struct EventView: View {
         }
     }
 
-    //    fileprivate func dropSelfFromEvent(eventId: String) {
-    //        Task {
-    //            switch await HTOService().dropEvent(eventId: eventId) {
-    //            case .success(let response):
-    //                print(response)
-    //            case .failure(let error):
-    //                print("The error we got was: \(String(describing: error))")
-    //            }
-    //        }
-    //
-    //    }
+    fileprivate func dropSelfFromEvent(eventId: String) {
+        GQLNetwork.shared.dropSelfFromEvent(eventId: eventId) { results in
+            switch results {
+            case .success(let response):
+                print(response)
+            case .failure(let error):
+                print("The error we got was: \(String(describing: error))")
+            }
+        }
+        
+    }
 }
 
 

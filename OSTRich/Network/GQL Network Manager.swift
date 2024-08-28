@@ -193,6 +193,24 @@ class GQLNetwork {
             }
         }
     }
+    
+    func dropSelfFromEvent(eventId: Gamestateschema.ID, completion: @escaping (Result<Void, Error>) -> Void) {
+        let mutation = Gamestateschema.DropSelfV2Mutation(eventId: eventId)
+        
+        GQLNetwork.shared.apollo.perform(mutation: mutation) { result in
+            switch result {
+            case .success(let graphQLResult):
+                if let errors = graphQLResult.errors {
+                    let error = errors.map { $0.localizedDescription }.joined(separator: "\n")
+                    completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: error])))
+                } else {
+                    completion(.success(()))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }
 
 enum NetworkError: Error {
