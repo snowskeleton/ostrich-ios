@@ -1,5 +1,5 @@
 {
-  "originHash" : "931440278103ba39b2d835f2c346aeb873ebcb4ff41767ce2ae24e250b359dbe",
+  "originHash" : "290105dd698159be532a9490c586f5b66b4ff2ec63ce157abdbc1fd1134cf3b0",
   "pins" : [
     {
       "identity" : "apollo-ios",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "8dd101dfd6c5becc658c33580e49aaac085ba327",
         "version" : "1.13.0"
+      }
+    },
+    {
+      "identity" : "aptabase-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/aptabase/aptabase-swift",
+      "state" : {
+        "revision" : "73579250784f7040aad28ec376a0ddfcdaa171cf",
+        "version" : "0.3.10"
       }
     },
     {
