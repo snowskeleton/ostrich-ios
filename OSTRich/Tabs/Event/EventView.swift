@@ -50,7 +50,8 @@ struct EventView: View {
                 PlayersView(players: Binding<[Registration]>.constant(event.registeredPlayers)).tag("Players")
 
                 if let gs = event.gameStateAtRound, !gs.currentMatches.isEmpty {
-                    PairingsView(matches: gs.currentMatches).tag("Pairings")
+                    PairingsView(from: gs.id).tag("Pairings")
+//                    PairingsView(matches: gs.currentMatches).tag("Pairings")
 //                    PairingsView(matches: Binding<[Match]>.constant(event.gameStateAtRound!.currentMatches)).tag("Pairings")
                 }
 

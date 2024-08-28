@@ -10,7 +10,15 @@ import SwiftUI
 import SwiftData
 
 struct PairingsView: View {
-    @State var matches: [Match]
+    @Query var matches: [Match]
+    
+    init(from gameStateId: UUID) {
+        let predicate = #Predicate<Match> {
+            $0.round.gameState.id == gameStateId
+        }
+        let resultDescriptor = FetchDescriptor<Match>(predicate: predicate, sortBy: [SortDescriptor(\.matchId)])
+        _matches = Query(resultDescriptor)
+    }
     
     var myMatch: Match? {
         return matches.first { match in
@@ -29,7 +37,7 @@ struct PairingsView: View {
                     NavigationLink {
                         SubmitMatchView(match: Binding<Match>.constant(myMatch!))
                     } label: {
-                        PairingItem(match: Binding<Match>.constant(myMatch!))
+                        PairingItem(match: myMatch!)
                     }
                 }
             }
@@ -38,7 +46,7 @@ struct PairingsView: View {
                     NavigationLink {
                         SubmitMatchView(match: Binding<Match>.constant(match))
                     } label: {
-                        PairingItem(match: Binding<Match>.constant(match))
+                        PairingItem(match: match)
                     }
                 }
             }
@@ -48,31 +56,52 @@ struct PairingsView: View {
 
 
 struct PairingItem: View {
-    @Binding var match: Match
     
-    var firstTeam: Team {
-        match.teams.first!
+    @Query var teams: [Team]
+    @Query var matchResults: [MatchResult]
+    var match: Match
+    
+    
+    private var sortedTeams: [Team] {
+        let teamIds = match.teamIds
+        return teams.filter { teamIds.contains($0.teamId) }
+            .sorted(by: { teamIds.firstIndex(of: $0.teamId)! < teamIds.firstIndex(of: $1.teamId)! })
     }
     
-    var lastTeam: Team {
-        match.teams.last!
-    }
-    
-    var firstTeamWins: Int {
-        let result = match.results.first!
-        if result.teamId == firstTeam.teamId {
-            return result.wins
-        } else {
-            return result.losses
-        }
-    }
-    var lastTeamWins: Int {
-        let result = match.results.first!
-        if result.teamId == firstTeam.teamId {
-            return result.losses
-        } else {
+    private func wins(for team: Team) -> Int {
+        if let result = matchResults.first(where: { $0.teamId == team.teamId }) {
             return result.wins
         }
+        return 0
+    }
+    
+//    private func losses(for team: Team) -> Int {
+//        if let result = matchResults.first(where: { $0.teamId == team.teamId }) {
+//            return result.losses
+//        }
+//        return 0
+//    }
+    
+    init(match: Match) {
+        self.match = match
+        
+        // Query for teams
+        let matchGameStateId = match.round.gameState.id
+        let matchTeamIds = match.teamIds
+        let teamPredicate = #Predicate<Team> {
+            $0.gameState.id == matchGameStateId  &&
+            matchTeamIds .contains($0.teamId)
+        }
+        let teamDescriptor = FetchDescriptor<Team>(predicate: teamPredicate, sortBy: [SortDescriptor(\.teamId)])
+        _teams = Query(teamDescriptor)
+        
+        // Query for match results
+        let matchId = match.matchId
+        let resultPredicate = #Predicate<MatchResult> {
+            $0.matchId == matchId
+        }
+        let resultDescriptor = FetchDescriptor<MatchResult>(predicate: resultPredicate)
+        _matchResults = Query(resultDescriptor)
     }
     
     var body: some View {
@@ -81,31 +110,22 @@ struct PairingItem: View {
             if match.isBye {
                 Text("Bye")
             } else {
-                Text("Table: \(match.tableNumber!)")
+                Text("Table: \(match.tableNumber ?? 0)")
             }
             Spacer()
             
             VStack {
-                
-                HStack {
-                    Spacer()
-                    Text(firstTeam.fullName)
-                    Spacer()
-                    if !match.results.isEmpty {
-                        Text(String(firstTeamWins))
-                    }
-                }
-                
-                if !match.isBye {
-                    Text("vs.")
-                    
+                ForEach(sortedTeams, id: \.teamId) { team in
                     HStack {
                         Spacer()
-                        Text(lastTeam.fullName)
+                        Text(team.fullName)
                         Spacer()
-                        if !match.results.isEmpty {
-                            Text(String(lastTeamWins))
+                        if !matchResults.isEmpty {
+                            Text(String(wins(for: team)))
                         }
+                    }
+                    if team != sortedTeams.last {
+                        Text("vs.")
                     }
                 }
             }
