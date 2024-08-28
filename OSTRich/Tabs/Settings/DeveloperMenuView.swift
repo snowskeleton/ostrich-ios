@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Aptabase
 
 struct DeveloperMenuView: View {
     @Environment(\.modelContext) private var context
@@ -42,6 +43,9 @@ struct DeveloperMenuView: View {
                         }
                 Button("Clear event history") { deleteAll() }
             }
+        }
+        .onAppear {
+            Aptabase.shared.trackEvent("opened_developer_menu_view")
         }
     }
     

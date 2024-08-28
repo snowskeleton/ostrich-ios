@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import Aptabase
 
 struct ScoutingHistoryAllPlayersView: View {
     @Environment(\.modelContext) private var context
@@ -51,5 +52,8 @@ struct ScoutingHistoryAllPlayersView: View {
             .navigationTitle("Scouted Players")
         }
         .searchable(text: $searchText, isPresented: $isPresented)
+        .onAppear {
+            Aptabase.shared.trackEvent("opened_scouting_history_all_players_view")
+        }
     }
 }

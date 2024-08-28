@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Aptabase
 
 struct NetworkLogView: View {
     @ObservedObject var logger = NetworkLogger.shared
@@ -41,6 +42,9 @@ struct NetworkLogView: View {
                 .shadow(radius: 1)
                 .padding(.vertical, 4)
             }
+        }
+        .onAppear {
+            Aptabase.shared.trackEvent("opened_network_logs_view")
         }
         .navigationTitle("Network Logs")
     }

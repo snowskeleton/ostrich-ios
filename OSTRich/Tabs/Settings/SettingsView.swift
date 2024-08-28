@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Aptabase
 
 
 struct SettingsView: View {

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import Aptabase
 
 struct CreateScoutingResultView: View {
     @Environment(\.modelContext) private var context
@@ -167,6 +168,9 @@ struct CreateScoutingResultView: View {
                 }
             }
             .navigationTitle("New Scouting Result")
+            .onAppear {
+                Aptabase.shared.trackEvent("opened_create_scouting_result_view")
+            }
         }
     
     private func createScoutingResult() {

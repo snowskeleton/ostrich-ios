@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import Aptabase
 
 struct StandingsView: View {
     @Query var teamStandings: [Standing]

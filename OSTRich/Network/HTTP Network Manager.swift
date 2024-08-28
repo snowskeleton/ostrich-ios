@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Aptabase
 
 
 enum HTOEndpoint {
@@ -176,10 +177,12 @@ struct HTOService: HTTPClient, HTOServiceable {
     }
     
     func changeName(firstName: String, lastName: String) async -> Result<Profile.Response, RequestError> {
+        Aptabase.shared.trackEvent("change_name")
         return await sendRequest(endpoint: HTOEndpoint.changeName(firstName: firstName, lastName: lastName), responseModel: Profile.Response.self)
     }
     
     func register(displayName: String, firstName: String, lastName: String, email: String, password: String, birthday: Date) async -> Result<NewAccount.Response, RequestError> {
+        Aptabase.shared.trackEvent("register_new_account")
         return await sendRequest(
             endpoint: HTOEndpoint.register(
                 displayName: displayName,
@@ -192,6 +195,7 @@ struct HTOService: HTTPClient, HTOServiceable {
     }
     
     func login(_ email: String, _ password: String) async -> Result<AuthCredentials.Response, RequestError> {
+        Aptabase.shared.trackEvent("login")
         return await sendRequest(endpoint: HTOEndpoint.login(email: email, password: password), responseModel: AuthCredentials.Response.self)
     }
     

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import Aptabase
 
 
 struct EventView: View {
@@ -71,6 +72,7 @@ struct EventView: View {
             }
         }
         .refreshable {
+            Aptabase.shared.trackEvent("initiated_manual_refresh")
             updateEvent()
         }
         .onAppear {
@@ -79,6 +81,7 @@ struct EventView: View {
             }
             getTime()
             updateEvent()
+            Aptabase.shared.trackEvent("opened_main_event_page")
         }
         .onReceive(
             Timer.publish(every: 10, on: .main, in: .common).autoconnect(),

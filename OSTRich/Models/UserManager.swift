@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import Aptabase
 
 actor AsyncUserManager {
     static let shared = AsyncUserManager()
@@ -131,6 +132,7 @@ class UserManager {
             UserManager.shared.saveUser(user)
             UserManager.shared.loadUser()
         }
+        Aptabase.shared.trackEvent("logout")
     }
 }
 
