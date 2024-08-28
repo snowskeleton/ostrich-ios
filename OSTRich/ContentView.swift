@@ -9,6 +9,11 @@ import SwiftUI
 import Foundation
 
 struct ContentView: View {
+    @State private var loggedIn = false
+    
+    init() {
+        _loggedIn = .init(initialValue: !(UserManager.shared.currentUser?.loggedIn ?? false))
+    }
     var body: some View {
         TabView {
             AllEventsView()
@@ -23,6 +28,9 @@ struct ContentView: View {
                 .tabItem {
                     Label("Settings", systemImage: "gearshape")
                 }
+        }
+        .sheet(isPresented: $loggedIn) {
+            LoginView()
         }
         // this is needed to make the tabs show up properly on the iPad version for macOS
         .environment(\.horizontalSizeClass, .compact)
