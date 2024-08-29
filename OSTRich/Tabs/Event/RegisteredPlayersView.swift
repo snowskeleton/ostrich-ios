@@ -7,9 +7,26 @@
 
 
 import SwiftUI
+import SwiftData
 
 struct RegisteredPlayersView: View {
-    @Binding var players: [Registration]
+    @Query var players: [Registration]
+    @Query var playerStats: [ScoutingResult]
+    
+    init(event: Event) {
+        let eventId = event.id
+        let playersPredicate = #Predicate<Registration> {
+            $0.event?.id == eventId
+        }
+        let playersDescriptor = FetchDescriptor(predicate: playersPredicate)
+        _players = Query(playersDescriptor)
+        
+        let statsPredicate = #Predicate<ScoutingResult> {
+            $0.eventId == eventId
+        }
+        let statsDescriptor = FetchDescriptor(predicate: statsPredicate)
+        _playerStats = Query(statsDescriptor)
+    }
     var body: some View {
         List {
             Section("Players: \(players.count)") {
@@ -22,8 +39,12 @@ struct RegisteredPlayersView: View {
                     } label: {
                         HStack {
                             Text(player.safeName)
-                            if player.personaId == UserManager.shared.currentUser?.personaId {
-                                Image(systemName: "checkmark")
+                            Spacer()
+                            if playerStats.contains(where: {
+                                $0.player?.personaId == player.personaId &&
+                                $0.eventId == player.event?.id
+                            }) {
+                                Image(systemName: "binoculars")
                             }
                         }
                     }
