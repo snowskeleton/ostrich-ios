@@ -33,7 +33,6 @@ class ResponseLoggingInterceptor: ApolloInterceptor {
             
             // Serialize the sanitized variables
             let bodyData = try JSONSerialization.data(withJSONObject: loggableVariables ?? [:], options: [])
-            print(bodyData)
             
             let body: [String: Any]?
             
