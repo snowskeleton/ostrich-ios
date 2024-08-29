@@ -10,6 +10,8 @@ import SwiftUI
 import SwiftData
 
 struct ScoutingHistoryByFormatView: View {
+    @Environment(\.modelContext) private var context
+
     @Query var playerStats: [ScoutingResult]
     private var format: String
 

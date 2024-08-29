@@ -10,6 +10,8 @@ import SwiftUI
 import SwiftData
 
 struct RegisteredPlayersView: View {
+    @Environment(\.modelContext) private var context
+
     @Query var players: [Registration]
     @Query var playerStats: [ScoutingResult]
     

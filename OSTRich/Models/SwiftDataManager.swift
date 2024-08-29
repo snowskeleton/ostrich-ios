@@ -32,7 +32,8 @@ public class SwiftDataManager {
             Standing.self,
             Top8Draft.self,
             Team.self,
-            ScoutingResult.self
+            ScoutingResult.self,
+            LocalPlayer.self
         ])
 
         let modelConfiguration = ModelConfiguration(

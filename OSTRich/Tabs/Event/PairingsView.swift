@@ -10,6 +10,8 @@ import SwiftUI
 import SwiftData
 
 struct PairingsView: View {
+    @Environment(\.modelContext) private var context
+
     @Query var matches: [Match]
     
     init(from gameStateId: UUID) {

@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct StandingsView: View {
+    @Environment(\.modelContext) private var context
+
     @Query var teamStandings: [Standing]
     
     init(event: Event) {

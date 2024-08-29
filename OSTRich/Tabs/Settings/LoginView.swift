@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct LoginView: View {
-    @Environment(\.modelContext) private var context
+//    @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     @State private var email: String
     @State private var password: String
