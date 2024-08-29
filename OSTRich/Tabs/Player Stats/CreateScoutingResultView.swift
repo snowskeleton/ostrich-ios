@@ -13,6 +13,8 @@ struct CreateScoutingResultView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     
+    @FocusState var focusDeckName
+    
     @State private var deckName: String
     @State private var deckNotes: String
     
@@ -132,6 +134,12 @@ struct CreateScoutingResultView: View {
                 Section(header: Text("Deck Information")) {
                     // have some preselections at some point
                     TextField("Deck Name", text: $deckName)
+                        .focused($focusDeckName)
+                        .onAppear {
+                            if scoutingResult == nil {
+                                focusDeckName = true
+                            }
+                        }
                     TextField("Deck Notes", text: $deckNotes)
                 }
                 
