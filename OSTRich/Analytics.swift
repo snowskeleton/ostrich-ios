@@ -54,12 +54,25 @@ class Analytics {
     static private func privateTrack(_ event: AnalyticEvent, with options: [String: Any]?) {
         if UserDefaults.standard.bool(forKey: "isAnalyticsDisabled") {
             return
+        }
+        
+        let expiryTimestamp = UserDefaults.standard.double(forKey: "optInTrackingIdentifierExpiry")
+        let expiryDate = Date(timeIntervalSince1970: expiryTimestamp)
+        
+        if Date() > expiryDate {
+            UserDefaults.standard.set("", forKey: "optInTrackingIdentifier")
+            UserDefaults.standard.set(0, forKey: "optInTrackingIdentifierExpiry")
+        }
+        
+        var modifiedOptions = options ?? [:]
+        if let id = UserDefaults.standard.string(forKey: "optInTrackingIdentifier"), !id.isEmpty {
+            modifiedOptions["trackingIdentifier"] = id
+        }
+        
+        if modifiedOptions.isEmpty {
+            Aptabase.shared.trackEvent(event.rawValue)
         } else {
-            if let options {
-                Aptabase.shared.trackEvent(event.rawValue, with: options)
-            } else {
-                Aptabase.shared.trackEvent(event.rawValue)
-            }
+            Aptabase.shared.trackEvent(event.rawValue, with: modifiedOptions)
         }
     }
     
