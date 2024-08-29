@@ -154,8 +154,8 @@ struct CreateScoutingResultView: View {
                         }
                     TextField("Deck Notes", text: $deckNotes)
                     if !previousDecks.isEmpty {
-                        Picker("Select a previous deck", selection: $selectedPreviousDeck) {
-                            Text("Select a deck").tag(0)
+                        Picker("Select a previous Deck", selection: $selectedPreviousDeck) {
+                            Text("Please select").tag(0)
                             ForEach(previousDecks, id: \.id) {
                                 Text($0.deckName).tag($0)
                             }
@@ -176,6 +176,7 @@ struct CreateScoutingResultView: View {
                 
                 Section(header: Text("Format")) {
                     Picker("Select a Format", selection: $formatName) {
+                        Text("Please select").tag(0)
                         ForEach(formatNames, id: \.self) {
                             Text($0).tag($0)
                         }
@@ -242,7 +243,6 @@ struct CreateScoutingResultView: View {
 
 // sorted with top 7 formats at the top, and the rest in alphabetical order
 let formatNames = [
-    "Please select",
     "Standard",
     "Pioneer",
     "Modern",
