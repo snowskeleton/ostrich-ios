@@ -62,7 +62,7 @@ struct Notifications {
                     if let error = error {
                         print("Error scheduling notification: \(error)")
                     } else {
-                        print("Notification scheduled successfully for \(notificationTime.timeIntervalSinceNow)")
+//                        print("Notification scheduled successfully for \(notificationTime.timeIntervalSinceNow)")
                     }
                 }
             }
