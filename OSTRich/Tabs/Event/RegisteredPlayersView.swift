@@ -1,5 +1,5 @@
 //
-//  PlayersView.swift
+//  RegisteredPlayersView.swift
 //  OSTRich
 //
 //  Created by snow on 8/8/24.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct PlayersView: View {
+struct RegisteredPlayersView: View {
     @Binding var players: [Registration]
     var body: some View {
         List {

@@ -29,7 +29,7 @@
 		806843142C383AE000264D1A /* NetworkLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843132C383AE000264D1A /* NetworkLogsView.swift */; };
 		806843192C38656600264D1A /* NetworkLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843182C38656400264D1A /* NetworkLog.swift */; };
 		807A56422C650BA000302836 /* PairingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A56412C650BA000302836 /* PairingsView.swift */; };
-		807A56442C650BB500302836 /* PlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A56432C650BB500302836 /* PlayersView.swift */; };
+		807A56442C650BB500302836 /* RegisteredPlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A56432C650BB500302836 /* RegisteredPlayersView.swift */; };
 		8080F2042C80D68900A86C14 /* DeckConstructionDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDED2C4025A2005E958D /* DeckConstructionDetails.graphql.swift */; };
 		8080F2052C80D68900A86C14 /* DraftPod.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDEE2C4025A2005E958D /* DraftPod.graphql.swift */; };
 		8080F2062C80D68900A86C14 /* DropDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDEF2C4025A2005E958D /* DropDetails.graphql.swift */; };
@@ -406,7 +406,7 @@
 		806843132C383AE000264D1A /* NetworkLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogsView.swift; sourceTree = "<group>"; };
 		806843182C38656400264D1A /* NetworkLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLog.swift; sourceTree = "<group>"; };
 		807A56412C650BA000302836 /* PairingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingsView.swift; sourceTree = "<group>"; };
-		807A56432C650BB500302836 /* PlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersView.swift; sourceTree = "<group>"; };
+		807A56432C650BB500302836 /* RegisteredPlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredPlayersView.swift; sourceTree = "<group>"; };
 		8080F1F72C80D34D00A86C14 /* OSTRichTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OSTRichTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		80A5722E2BE2C78E00D8D888 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		80A572302BE5985B00D8D888 /* getTimer.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = getTimer.query; sourceTree = "<group>"; };
@@ -730,7 +730,7 @@
 				80249ED22C76880C00A6A1E6 /* AllEventsView.swift */,
 				80B8E1362AB7EF0700845ECC /* EventView.swift */,
 				80249EC82C7675B400A6A1E6 /* RoundTimerView.swift */,
-				807A56432C650BB500302836 /* PlayersView.swift */,
+				807A56432C650BB500302836 /* RegisteredPlayersView.swift */,
 				807A56412C650BA000302836 /* PairingsView.swift */,
 				80D091452ACB7BB600B91257 /* SubmitMatchView.swift */,
 				80C5D4BC2C0926B800503FD9 /* StandingsView.swift */,
@@ -1204,7 +1204,7 @@
 				80FFBE992C4025A2005E958D /* RegistrationDetails.graphql.swift in Sources */,
 				80ED1C952C7A5A0300E83B2D /* ScoutingHistoryByFormatView.swift in Sources */,
 				80ED1C9B2C7A7CC500E83B2D /* SwiftDataManager.swift in Sources */,
-				807A56442C650BB500302836 /* PlayersView.swift in Sources */,
+				807A56442C650BB500302836 /* RegisteredPlayersView.swift in Sources */,
 				80FFBE9A2C4025A2005E958D /* JoinQueueMutation.graphql.swift in Sources */,
 				80FFBE9B2C4025A2005E958D /* GetEventFormatsQuery.graphql.swift in Sources */,
 				80FFBE9C2C4025A2005E958D /* DropV2.graphql.swift in Sources */,

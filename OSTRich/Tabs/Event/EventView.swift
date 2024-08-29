@@ -48,7 +48,7 @@ struct EventView: View {
             }.pickerStyle(SegmentedPickerStyle())
 
             TabView(selection: $selectedTab) {
-                PlayersView(players: Binding<[Registration]>.constant(event.registeredPlayers)).tag("Players")
+                RegisteredPlayersView(event: event).tag("Players")
 
                 if let gs = event.gameStateAtRound, !gs.currentMatches.isEmpty {
                     PairingsView(from: gs.id).tag("Pairings")
