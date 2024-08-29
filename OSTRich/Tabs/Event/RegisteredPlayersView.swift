@@ -32,10 +32,19 @@ struct RegisteredPlayersView: View {
             Section("Players: \(players.count)") {
                 ForEach(players.sorted(by: { $0.safeName < $1.safeName }), id: \.id) { player in
                     NavigationLink {
-                        CreateScoutingResultView(
-                            registeredPlayer: player,
-                            event: player.event!
-                        )
+                        if let matchingScoutingResult = playerStats.first(where: {
+                            $0.player?.personaId == player.personaId &&
+                            $0.eventId == player.event?.id
+                        }) {
+                            CreateScoutingResultView(
+                                scoutingResult: matchingScoutingResult
+                            )
+                        } else {
+                            CreateScoutingResultView(
+                                registeredPlayer: player,
+                                event: player.event!
+                            )
+                        }
                     } label: {
                         HStack {
                             Text(player.safeName)
