@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,10 +25,147 @@
 		803D6BE32BFE416F00CEB9F2 /* View+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D6BDF2BFE416F00CEB9F2 /* View+Notifications.swift */; };
 		803D6BE52BFE41EA00CEB9F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */; };
 		8046EA492AA64E8B00578539 /* HTTP Network Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA482AA64E8B00578539 /* HTTP Network Manager.swift */; };
+		8053FE5C2C7FB4F0005A10BD /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8053FE5B2C7FB4F0005A10BD /* Analytics.swift */; };
 		806843142C383AE000264D1A /* NetworkLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843132C383AE000264D1A /* NetworkLogsView.swift */; };
 		806843192C38656600264D1A /* NetworkLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843182C38656400264D1A /* NetworkLog.swift */; };
 		807A56422C650BA000302836 /* PairingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A56412C650BA000302836 /* PairingsView.swift */; };
 		807A56442C650BB500302836 /* PlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A56432C650BB500302836 /* PlayersView.swift */; };
+		8080F2042C80D68900A86C14 /* DeckConstructionDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDED2C4025A2005E958D /* DeckConstructionDetails.graphql.swift */; };
+		8080F2052C80D68900A86C14 /* DraftPod.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDEE2C4025A2005E958D /* DraftPod.graphql.swift */; };
+		8080F2062C80D68900A86C14 /* DropDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDEF2C4025A2005E958D /* DropDetails.graphql.swift */; };
+		8080F2072C80D68900A86C14 /* DropDetailsV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDF02C4025A2005E958D /* DropDetailsV2.graphql.swift */; };
+		8080F2082C80D68900A86C14 /* EventDetailsMyActive.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDF12C4025A2005E958D /* EventDetailsMyActive.graphql.swift */; };
+		8080F2092C80D68900A86C14 /* EventFormatDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDF22C4025A2005E958D /* EventFormatDetails.graphql.swift */; };
+		8080F20A2C80D68900A86C14 /* EventHostV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDF32C4025A2005E958D /* EventHostV2.graphql.swift */; };
+		8080F20B2C80D68900A86C14 /* EventJoinV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDF42C4025A2005E958D /* EventJoinV2.graphql.swift */; };
+		8080F20C2C80D68900A86C14 /* GameStateDetailsV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDF52C4025A2005E958D /* GameStateDetailsV2.graphql.swift */; };
+		8080F20D2C80D68900A86C14 /* GameStateV2Host.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDF62C4025A2005E958D /* GameStateV2Host.graphql.swift */; };
+		8080F20E2C80D68900A86C14 /* MatchDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDF72C4025A2005E958D /* MatchDetails.graphql.swift */; };
+		8080F20F2C80D68900A86C14 /* MatchesDetailsV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDF82C4025A2005E958D /* MatchesDetailsV2.graphql.swift */; };
+		8080F2102C80D68900A86C14 /* OrganizationDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDF92C4025A2005E958D /* OrganizationDetails.graphql.swift */; };
+		8080F2112C80D68900A86C14 /* PodDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDFA2C4025A2005E958D /* PodDetails.graphql.swift */; };
+		8080F2122C80D68900A86C14 /* PodDetailsV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDFB2C4025A2005E958D /* PodDetailsV2.graphql.swift */; };
+		8080F2132C80D68900A86C14 /* QueueDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDFC2C4025A2005E958D /* QueueDetails.graphql.swift */; };
+		8080F2142C80D68900A86C14 /* RegisterPlayer.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDFD2C4025A2005E958D /* RegisterPlayer.graphql.swift */; };
+		8080F2152C80D68900A86C14 /* RegistrationDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDFE2C4025A2005E958D /* RegistrationDetails.graphql.swift */; };
+		8080F2162C80D68900A86C14 /* ReservationDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDFF2C4025A2005E958D /* ReservationDetails.graphql.swift */; };
+		8080F2172C80D68900A86C14 /* ResultDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE002C4025A2005E958D /* ResultDetails.graphql.swift */; };
+		8080F2182C80D68900A86C14 /* RoundDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE012C4025A2005E958D /* RoundDetails.graphql.swift */; };
+		8080F2192C80D68900A86C14 /* RoundDetailsV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE022C4025A2005E958D /* RoundDetailsV2.graphql.swift */; };
+		8080F21A2C80D68900A86C14 /* SeatDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE032C4025A2005E958D /* SeatDetails.graphql.swift */; };
+		8080F21B2C80D68900A86C14 /* SeatDetailsV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE042C4025A2005E958D /* SeatDetailsV2.graphql.swift */; };
+		8080F21C2C80D68900A86C14 /* StandingsDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE052C4025A2005E958D /* StandingsDetails.graphql.swift */; };
+		8080F21D2C80D68900A86C14 /* TeamDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE062C4025A2005E958D /* TeamDetails.graphql.swift */; };
+		8080F21E2C80D68900A86C14 /* TeamDetailsV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE072C4025A2005E958D /* TeamDetailsV2.graphql.swift */; };
+		8080F21F2C80D68900A86C14 /* TeamFields.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE082C4025A2005E958D /* TeamFields.graphql.swift */; };
+		8080F2202C80D68900A86C14 /* TeamResultDetailsV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE092C4025A2005E958D /* TeamResultDetailsV2.graphql.swift */; };
+		8080F2212C80D68900A86C14 /* TeamStandingsDetailsV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE0A2C4025A2005E958D /* TeamStandingsDetailsV2.graphql.swift */; };
+		8080F2222C80D68900A86C14 /* TimerDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE0B2C4025A2005E958D /* TimerDetails.graphql.swift */; };
+		8080F2232C80D68900A86C14 /* UserDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE0C2C4025A2005E958D /* UserDetails.graphql.swift */; };
+		8080F2242C80D6C500A86C14 /* GetEventCreatedByQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE242C4025A2005E958D /* GetEventCreatedByQuery.graphql.swift */; };
+		8080F2252C80D6C500A86C14 /* GetEventFormatsQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE252C4025A2005E958D /* GetEventFormatsQuery.graphql.swift */; };
+		8080F2262C80D6C500A86C14 /* GetEventStatusQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE262C4025A2005E958D /* GetEventStatusQuery.graphql.swift */; };
+		8080F2272C80D6C500A86C14 /* GetEventTitleQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE272C4025A2005E958D /* GetEventTitleQuery.graphql.swift */; };
+		8080F2282C80D6C500A86C14 /* GetGameStateV2AtRoundHostQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE282C4025A2005E958D /* GetGameStateV2AtRoundHostQuery.graphql.swift */; };
+		8080F2292C80D6C500A86C14 /* GetGameStateV2AtRoundQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE292C4025A2005E958D /* GetGameStateV2AtRoundQuery.graphql.swift */; };
+		8080F22A2C80D6C500A86C14 /* GetPlayerStatusQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE2A2C4025A2005E958D /* GetPlayerStatusQuery.graphql.swift */; };
+		8080F22B2C80D6C500A86C14 /* GetQueuesQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE2B2C4025A2005E958D /* GetQueuesQuery.graphql.swift */; };
+		8080F22C2C80D6C500A86C14 /* GetRegisteredPlayersListQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE2C2C4025A2005E958D /* GetRegisteredPlayersListQuery.graphql.swift */; };
+		8080F22D2C80D6C500A86C14 /* GetTimerQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE2D2C4025A2005E958D /* GetTimerQuery.graphql.swift */; };
+		8080F22E2C80D6C500A86C14 /* LoadEventHostV2Query.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE2E2C4025A2005E958D /* LoadEventHostV2Query.graphql.swift */; };
+		8080F22F2C80D6C500A86C14 /* LoadEventJoinV2Query.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE2F2C4025A2005E958D /* LoadEventJoinV2Query.graphql.swift */; };
+		8080F2302C80D6C500A86C14 /* MyActiveEventsQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE302C4025A2005E958D /* MyActiveEventsQuery.graphql.swift */; };
+		8080F2312C80D6C500A86C14 /* SearchEventsQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE312C4025A2005E958D /* SearchEventsQuery.graphql.swift */; };
+		8080F2322C80D6C500A86C14 /* StoreByLocationQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE322C4025A2005E958D /* StoreByLocationQuery.graphql.swift */; };
+		8080F2332C80D6C500A86C14 /* GameResultReportedSubscription.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE342C4025A2005E958D /* GameResultReportedSubscription.graphql.swift */; };
+		8080F2342C80D6C500A86C14 /* MatchFoundSubscription.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE352C4025A2005E958D /* MatchFoundSubscription.graphql.swift */; };
+		8080F2352C80D6C500A86C14 /* PlayerRegisteredSubscription.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE362C4025A2005E958D /* PlayerRegisteredSubscription.graphql.swift */; };
+		8080F2362C80D6C500A86C14 /* TimerUpdatedSubscription.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE372C4025A2005E958D /* TimerUpdatedSubscription.graphql.swift */; };
+		8080F2372C80D6C500A86C14 /* CurrencyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE3A2C4025A2005E958D /* CurrencyCode.swift */; };
+		8080F2382C80D6E100A86C14 /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE3B2C4025A2005E958D /* DateTime.swift */; };
+		8080F2392C80D6E100A86C14 /* Email_String_format_email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE3C2C4025A2005E958D /* Email_String_format_email.swift */; };
+		8080F23A2C80D6E100A86C14 /* ID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE3D2C4025A2005E958D /* ID.swift */; };
+		8080F23B2C80D6E100A86C14 /* MaxMeters_Int_NotNull_min_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE3E2C4025A2005E958D /* MaxMeters_Int_NotNull_min_1.swift */; };
+		8080F23C2C80D6E100A86C14 /* Page_Int_min_0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE3F2C4025A2005E958D /* Page_Int_min_0.swift */; };
+		8080F23D2C80D6E100A86C14 /* PageSize_Int_min_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE402C4025A2005E958D /* PageSize_Int_min_1.swift */; };
+		8080F23E2C80D6E100A86C14 /* PersonaId_String_NotNull_maxLength_50.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE412C4025A2005E958D /* PersonaId_String_NotNull_maxLength_50.swift */; };
+		8080F23F2C80D6E100A86C14 /* Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE422C4025A2005E958D /* Void.swift */; };
+		8080F2402C80D6E100A86C14 /* EventSearchSortDirection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE442C4025A2005E958D /* EventSearchSortDirection.graphql.swift */; };
+		8080F2412C80D6E100A86C14 /* EventSearchSortField.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE452C4025A2005E958D /* EventSearchSortField.graphql.swift */; };
+		8080F2422C80D6E100A86C14 /* EventStatus.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE462C4025A2005E958D /* EventStatus.graphql.swift */; };
+		8080F2432C80D6E100A86C14 /* PairingType.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE472C4025A2005E958D /* PairingType.graphql.swift */; };
+		8080F2442C80D6E100A86C14 /* PlatformStatus.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE482C4025A2005E958D /* PlatformStatus.graphql.swift */; };
+		8080F2452C80D6E100A86C14 /* PlayerStatus.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE492C4025A2005E958D /* PlayerStatus.graphql.swift */; };
+		8080F2462C80D6E100A86C14 /* PodPairingTypeV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE4A2C4025A2005E958D /* PodPairingTypeV2.graphql.swift */; };
+		8080F2472C80D6E100A86C14 /* TimerState.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE4B2C4025A2005E958D /* TimerState.graphql.swift */; };
+		8080F2482C80D6E100A86C14 /* CreatePrivateEventInput.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE4D2C4025A2005E958D /* CreatePrivateEventInput.graphql.swift */; };
+		8080F2492C80D6E100A86C14 /* EventSearchQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE4E2C4025A2005E958D /* EventSearchQuery.graphql.swift */; };
+		8080F24A2C80D6E100A86C14 /* StartPhaseInputV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE4F2C4025A2005E958D /* StartPhaseInputV2.graphql.swift */; };
+		8080F24B2C80D6E100A86C14 /* StoreByLocationInput.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE502C4025A2005E958D /* StoreByLocationInput.graphql.swift */; };
+		8080F24C2C80D6E100A86C14 /* TeamPlayerInput.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE512C4025A2005E958D /* TeamPlayerInput.graphql.swift */; };
+		8080F24D2C80D6E100A86C14 /* TeamResultInputV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE522C4025A2005E958D /* TeamResultInputV2.graphql.swift */; };
+		8080F24E2C80D6E100A86C14 /* DeckConstructionV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE542C4025A2005E958D /* DeckConstructionV2.graphql.swift */; };
+		8080F24F2C80D6E100A86C14 /* DraftV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE552C4025A2005E958D /* DraftV2.graphql.swift */; };
+		8080F2502C80D6E100A86C14 /* Drop.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE562C4025A2005E958D /* Drop.graphql.swift */; };
+		8080F2512C80D6E100A86C14 /* DropV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE572C4025A2005E958D /* DropV2.graphql.swift */; };
+		8080F2522C80D6E100A86C14 /* Event.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE582C4025A2005E958D /* Event.graphql.swift */; };
+		8080F2532C80D6E100A86C14 /* EventFormat.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE592C4025A2005E958D /* EventFormat.graphql.swift */; };
+		8080F2542C80D6E100A86C14 /* EventPage.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE5A2C4025A2005E958D /* EventPage.graphql.swift */; };
+		8080F2552C80D6E100A86C14 /* GamekeeperResultsNotificationPayload.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE5B2C4025A2005E958D /* GamekeeperResultsNotificationPayload.graphql.swift */; };
+		8080F2562C80D6E100A86C14 /* GameStateV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE5C2C4025A2005E958D /* GameStateV2.graphql.swift */; };
+		8080F2572C80D6E100A86C14 /* Match.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE5D2C4025A2005E958D /* Match.graphql.swift */; };
+		8080F2582C80D6E100A86C14 /* MatchFoundPayload.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE5E2C4025A2005E958D /* MatchFoundPayload.graphql.swift */; };
+		8080F2592C80D6E100A86C14 /* MatchV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE5F2C4025A2005E958D /* MatchV2.graphql.swift */; };
+		8080F25A2C80D6E100A86C14 /* Money.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE602C4025A2005E958D /* Money.graphql.swift */; };
+		8080F25B2C80D6E100A86C14 /* Mutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE612C4025A2005E958D /* Mutation.graphql.swift */; };
+		8080F25C2C80D6E100A86C14 /* Organization.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE622C4025A2005E958D /* Organization.graphql.swift */; };
+		8080F25D2C80D6E100A86C14 /* PageInfo.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE632C4025A2005E958D /* PageInfo.graphql.swift */; };
+		8080F25E2C80D6E100A86C14 /* PlayerRegisteredPayload.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE642C4025A2005E958D /* PlayerRegisteredPayload.graphql.swift */; };
+		8080F25F2C80D6E100A86C14 /* Pod.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE652C4025A2005E958D /* Pod.graphql.swift */; };
+		8080F2602C80D6E100A86C14 /* PodV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE662C4025A2005E958D /* PodV2.graphql.swift */; };
+		8080F2612C80D6E100A86C14 /* PrivateEvent.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE672C4025A2005E958D /* PrivateEvent.graphql.swift */; };
+		8080F2622C80D6E100A86C14 /* Query.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE682C4025A2005E958D /* Query.graphql.swift */; };
+		8080F2632C80D6E100A86C14 /* Queue.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE692C4025A2005E958D /* Queue.graphql.swift */; };
+		8080F2642C80D6E100A86C14 /* Registration.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE6A2C4025A2005E958D /* Registration.graphql.swift */; };
+		8080F2652C80D6E100A86C14 /* Round.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE6B2C4025A2005E958D /* Round.graphql.swift */; };
+		8080F2662C80D6E100A86C14 /* RoundV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE6C2C4025A2005E958D /* RoundV2.graphql.swift */; };
+		8080F2672C80D6E100A86C14 /* Seat.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE6D2C4025A2005E958D /* Seat.graphql.swift */; };
+		8080F2682C80D6E100A86C14 /* SeatV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE6E2C4025A2005E958D /* SeatV2.graphql.swift */; };
+		8080F2692C80D6E100A86C14 /* StorePage.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE6F2C4025A2005E958D /* StorePage.graphql.swift */; };
+		8080F26A2C80D6E100A86C14 /* Subscription.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE702C4025A2005E958D /* Subscription.graphql.swift */; };
+		8080F26B2C80D6E100A86C14 /* Team.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE712C4025A2005E958D /* Team.graphql.swift */; };
+		8080F26C2C80D6E100A86C14 /* TeamPayload.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE722C4025A2005E958D /* TeamPayload.graphql.swift */; };
+		8080F26D2C80D6E100A86C14 /* TeamResult.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE732C4025A2005E958D /* TeamResult.graphql.swift */; };
+		8080F26E2C80D6E100A86C14 /* TeamResultV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE742C4025A2005E958D /* TeamResultV2.graphql.swift */; };
+		8080F26F2C80D6E100A86C14 /* TeamStanding.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE752C4025A2005E958D /* TeamStanding.graphql.swift */; };
+		8080F2702C80D6E100A86C14 /* TeamStandingV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE762C4025A2005E958D /* TeamStandingV2.graphql.swift */; };
+		8080F2712C80D6E100A86C14 /* TeamV2.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE772C4025A2005E958D /* TeamV2.graphql.swift */; };
+		8080F2722C80D6E100A86C14 /* Timer.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE782C4025A2005E958D /* Timer.graphql.swift */; };
+		8080F2732C80D6E100A86C14 /* User.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE792C4025A2005E958D /* User.graphql.swift */; };
+		8080F2742C80D6E100A86C14 /* SchemaConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE7B2C4025A2005E958D /* SchemaConfiguration.swift */; };
+		8080F2752C80D6E100A86C14 /* SchemaMetadata.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE7C2C4025A2005E958D /* SchemaMetadata.graphql.swift */; };
+		8080F2762C80D6E100A86C14 /* Gamestateschema.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE7E2C4025A2005E958D /* Gamestateschema.graphql.swift */; };
+		8080F2772C80D70D00A86C14 /* CreateNextRoundV2Mutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE0E2C4025A2005E958D /* CreateNextRoundV2Mutation.graphql.swift */; };
+		8080F2782C80D70D00A86C14 /* CreatePrivateEventMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE0F2C4025A2005E958D /* CreatePrivateEventMutation.graphql.swift */; };
+		8080F2792C80D70D00A86C14 /* CreateTeamMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE102C4025A2005E958D /* CreateTeamMutation.graphql.swift */; };
+		8080F27A2C80D70D00A86C14 /* DeleteTeamMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE112C4025A2005E958D /* DeleteTeamMutation.graphql.swift */; };
+		8080F27B2C80D70D00A86C14 /* DropSelfV2Mutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE122C4025A2005E958D /* DropSelfV2Mutation.graphql.swift */; };
+		8080F27C2C80D70D00A86C14 /* DropTeamsV2Mutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE132C4025A2005E958D /* DropTeamsV2Mutation.graphql.swift */; };
+		8080F27D2C80D70D00A86C14 /* EndEventV2Mutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE142C4025A2005E958D /* EndEventV2Mutation.graphql.swift */; };
+		8080F27E2C80D70D00A86C14 /* GetTeamByCodeMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE152C4025A2005E958D /* GetTeamByCodeMutation.graphql.swift */; };
+		8080F27F2C80D70D00A86C14 /* JoinEventWithShortCodeMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE162C4025A2005E958D /* JoinEventWithShortCodeMutation.graphql.swift */; };
+		8080F2802C80D70D00A86C14 /* JoinQueueMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE172C4025A2005E958D /* JoinQueueMutation.graphql.swift */; };
+		8080F2812C80D70D00A86C14 /* JoinTeamMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE182C4025A2005E958D /* JoinTeamMutation.graphql.swift */; };
+		8080F2822C80D70D00A86C14 /* LeaveQueueMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE192C4025A2005E958D /* LeaveQueueMutation.graphql.swift */; };
+		8080F2832C80D70D00A86C14 /* LockTeamMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE1A2C4025A2005E958D /* LockTeamMutation.graphql.swift */; };
+		8080F2842C80D70D00A86C14 /* RecordMatchResultV2Mutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE1B2C4025A2005E958D /* RecordMatchResultV2Mutation.graphql.swift */; };
+		8080F2852C80D70D00A86C14 /* RegisterAnonymousPlayerMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE1C2C4025A2005E958D /* RegisterAnonymousPlayerMutation.graphql.swift */; };
+		8080F2862C80D70D00A86C14 /* RegisterInterestedPlayerMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE1D2C4025A2005E958D /* RegisterInterestedPlayerMutation.graphql.swift */; };
+		8080F2872C80D70D00A86C14 /* RemoveTeamMemberMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE1E2C4025A2005E958D /* RemoveTeamMemberMutation.graphql.swift */; };
+		8080F2882C80D70D00A86C14 /* StartEventV2Mutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE1F2C4025A2005E958D /* StartEventV2Mutation.graphql.swift */; };
+		8080F2892C80D70D00A86C14 /* SubmitResultsAndCertifyRoundV2Mutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE202C4025A2005E958D /* SubmitResultsAndCertifyRoundV2Mutation.graphql.swift */; };
+		8080F28A2C80D70D00A86C14 /* UnlockTeamMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE212C4025A2005E958D /* UnlockTeamMutation.graphql.swift */; };
+		8080F28B2C80D70D00A86C14 /* UnRegisterPlayerMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE222C4025A2005E958D /* UnRegisterPlayerMutation.graphql.swift */; };
 		80A5722F2BE2C78E00D8D888 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A5722E2BE2C78E00D8D888 /* SettingsView.swift */; };
 		80A572312BE5985B00D8D888 /* getTimer.query in Resources */ = {isa = PBXBuildFile; fileRef = 80A572302BE5985B00D8D888 /* getTimer.query */; };
 		80B8E1302AB66E3300845ECC /* joinEventWithShortCode.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E12F2AB66E3300845ECC /* joinEventWithShortCode.query */; };
@@ -220,6 +357,16 @@
 		80FFBF112C416DB9005E958D /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBF102C416DB9005E958D /* EventDetail.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8080F1FB2C80D34D00A86C14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 803AECE42AA26B2200CF03EB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 803AECEB2AA26B2200CF03EB;
+			remoteInfo = OSTRich;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		80EFCBBD2C026655004FEF9F /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -255,10 +402,12 @@
 		803D6BE62BFE497600CEB9F2 /* OSTRich.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OSTRich.entitlements; sourceTree = "<group>"; };
 		8046EA482AA64E8B00578539 /* HTTP Network Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTP Network Manager.swift"; sourceTree = "<group>"; };
 		8053FE582C7FA806005A10BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8053FE5B2C7FB4F0005A10BD /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		806843132C383AE000264D1A /* NetworkLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogsView.swift; sourceTree = "<group>"; };
 		806843182C38656400264D1A /* NetworkLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLog.swift; sourceTree = "<group>"; };
 		807A56412C650BA000302836 /* PairingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingsView.swift; sourceTree = "<group>"; };
 		807A56432C650BB500302836 /* PlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersView.swift; sourceTree = "<group>"; };
+		8080F1F72C80D34D00A86C14 /* OSTRichTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OSTRichTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		80A5722E2BE2C78E00D8D888 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		80A572302BE5985B00D8D888 /* getTimer.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = getTimer.query; sourceTree = "<group>"; };
 		80B8E11C2AAA31BB00845ECC /* GameState.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GameState.graphql; path = ../../../../../../Applications/Companion.app/Wrapper/HTO.app/GameState.graphql; sourceTree = "<group>"; };
@@ -449,6 +598,10 @@
 		80FFBF102C416DB9005E958D /* EventDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		8080F1F82C80D34D00A86C14 /* OSTRichTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = OSTRichTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		803AECE92AA26B2200CF03EB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -456,6 +609,13 @@
 			files = (
 				80FFBDEA2C4020C9005E958D /* Apollo in Frameworks */,
 				80CCA55B2C7F9A9900B90BF5 /* Aptabase in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8080F1F42C80D34D00A86C14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +655,7 @@
 				80C5D4BA2C09263100503FD9 /* ExampleSecrets.swift */,
 				80B8E12A2AB665B400845ECC /* queries */,
 				803AECEE2AA26B2200CF03EB /* OSTRich */,
+				8080F1F82C80D34D00A86C14 /* OSTRichTests */,
 				803AECED2AA26B2200CF03EB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -503,6 +664,7 @@
 			isa = PBXGroup;
 			children = (
 				803AECEC2AA26B2200CF03EB /* OSTRich.app */,
+				8080F1F72C80D34D00A86C14 /* OSTRichTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -520,6 +682,7 @@
 				806843162C38653D00264D1A /* Network */,
 				80FFBF0A2C402D41005E958D /* KeychainSwiftDistrib.swift */,
 				80CCA54F2C7D4A2500B90BF5 /* Notifications.swift */,
+				8053FE5B2C7FB4F0005A10BD /* Analytics.swift */,
 				80FFBDEB2C4020D0005E958D /* GameState.graphql */,
 				80FFBDE62C401FA8005E958D /* gamestateschema.json */,
 				803D6BE02BFE416F00CEB9F2 /* Notifications */,
@@ -890,6 +1053,29 @@
 			productReference = 803AECEC2AA26B2200CF03EB /* OSTRich.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8080F1F62C80D34D00A86C14 /* OSTRichTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8080F1FD2C80D34D00A86C14 /* Build configuration list for PBXNativeTarget "OSTRichTests" */;
+			buildPhases = (
+				8080F1F32C80D34D00A86C14 /* Sources */,
+				8080F1F42C80D34D00A86C14 /* Frameworks */,
+				8080F1F52C80D34D00A86C14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8080F1FC2C80D34D00A86C14 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				8080F1F82C80D34D00A86C14 /* OSTRichTests */,
+			);
+			name = OSTRichTests;
+			packageProductDependencies = (
+			);
+			productName = OSTRichTests;
+			productReference = 8080F1F72C80D34D00A86C14 /* OSTRichTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -897,11 +1083,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1540;
+				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					803AECEB2AA26B2200CF03EB = {
 						CreatedOnToolsVersion = 14.3.1;
+					};
+					8080F1F62C80D34D00A86C14 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = 803AECEB2AA26B2200CF03EB;
 					};
 				};
 			};
@@ -923,6 +1113,7 @@
 			projectRoot = "";
 			targets = (
 				803AECEB2AA26B2200CF03EB /* OSTRich */,
+				8080F1F62C80D34D00A86C14 /* OSTRichTests */,
 			);
 		};
 /* End PBXProject section */
@@ -944,6 +1135,13 @@
 				80FFBDE32C38A1E4005E958D /* getGameStateV2AtRound.query in Resources */,
 				80A572312BE5985B00D8D888 /* getTimer.query in Resources */,
 				803AECF42AA26B2300CF03EB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8080F1F52C80D34D00A86C14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -980,6 +1178,7 @@
 				80FFBE822C4025A2005E958D /* DropSelfV2Mutation.graphql.swift in Sources */,
 				80FFBE832C4025A2005E958D /* GetEventCreatedByQuery.graphql.swift in Sources */,
 				80FFBE842C4025A2005E958D /* PodPairingTypeV2.graphql.swift in Sources */,
+				8053FE5C2C7FB4F0005A10BD /* Analytics.swift in Sources */,
 				80FFBE852C4025A2005E958D /* EventSearchSortField.graphql.swift in Sources */,
 				80FFBE862C4025A2005E958D /* PairingType.graphql.swift in Sources */,
 				80FFBE872C4025A2005E958D /* TeamResultV2.graphql.swift in Sources */,
@@ -1154,7 +1353,158 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8080F1F32C80D34D00A86C14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8080F2772C80D70D00A86C14 /* CreateNextRoundV2Mutation.graphql.swift in Sources */,
+				8080F2782C80D70D00A86C14 /* CreatePrivateEventMutation.graphql.swift in Sources */,
+				8080F2792C80D70D00A86C14 /* CreateTeamMutation.graphql.swift in Sources */,
+				8080F27A2C80D70D00A86C14 /* DeleteTeamMutation.graphql.swift in Sources */,
+				8080F27B2C80D70D00A86C14 /* DropSelfV2Mutation.graphql.swift in Sources */,
+				8080F27C2C80D70D00A86C14 /* DropTeamsV2Mutation.graphql.swift in Sources */,
+				8080F27D2C80D70D00A86C14 /* EndEventV2Mutation.graphql.swift in Sources */,
+				8080F27E2C80D70D00A86C14 /* GetTeamByCodeMutation.graphql.swift in Sources */,
+				8080F27F2C80D70D00A86C14 /* JoinEventWithShortCodeMutation.graphql.swift in Sources */,
+				8080F2802C80D70D00A86C14 /* JoinQueueMutation.graphql.swift in Sources */,
+				8080F2812C80D70D00A86C14 /* JoinTeamMutation.graphql.swift in Sources */,
+				8080F2822C80D70D00A86C14 /* LeaveQueueMutation.graphql.swift in Sources */,
+				8080F2832C80D70D00A86C14 /* LockTeamMutation.graphql.swift in Sources */,
+				8080F2842C80D70D00A86C14 /* RecordMatchResultV2Mutation.graphql.swift in Sources */,
+				8080F2852C80D70D00A86C14 /* RegisterAnonymousPlayerMutation.graphql.swift in Sources */,
+				8080F2862C80D70D00A86C14 /* RegisterInterestedPlayerMutation.graphql.swift in Sources */,
+				8080F2872C80D70D00A86C14 /* RemoveTeamMemberMutation.graphql.swift in Sources */,
+				8080F2882C80D70D00A86C14 /* StartEventV2Mutation.graphql.swift in Sources */,
+				8080F2892C80D70D00A86C14 /* SubmitResultsAndCertifyRoundV2Mutation.graphql.swift in Sources */,
+				8080F28A2C80D70D00A86C14 /* UnlockTeamMutation.graphql.swift in Sources */,
+				8080F28B2C80D70D00A86C14 /* UnRegisterPlayerMutation.graphql.swift in Sources */,
+				8080F2382C80D6E100A86C14 /* DateTime.swift in Sources */,
+				8080F2392C80D6E100A86C14 /* Email_String_format_email.swift in Sources */,
+				8080F23A2C80D6E100A86C14 /* ID.swift in Sources */,
+				8080F23B2C80D6E100A86C14 /* MaxMeters_Int_NotNull_min_1.swift in Sources */,
+				8080F23C2C80D6E100A86C14 /* Page_Int_min_0.swift in Sources */,
+				8080F23D2C80D6E100A86C14 /* PageSize_Int_min_1.swift in Sources */,
+				8080F23E2C80D6E100A86C14 /* PersonaId_String_NotNull_maxLength_50.swift in Sources */,
+				8080F23F2C80D6E100A86C14 /* Void.swift in Sources */,
+				8080F2402C80D6E100A86C14 /* EventSearchSortDirection.graphql.swift in Sources */,
+				8080F2412C80D6E100A86C14 /* EventSearchSortField.graphql.swift in Sources */,
+				8080F2422C80D6E100A86C14 /* EventStatus.graphql.swift in Sources */,
+				8080F2432C80D6E100A86C14 /* PairingType.graphql.swift in Sources */,
+				8080F2442C80D6E100A86C14 /* PlatformStatus.graphql.swift in Sources */,
+				8080F2452C80D6E100A86C14 /* PlayerStatus.graphql.swift in Sources */,
+				8080F2462C80D6E100A86C14 /* PodPairingTypeV2.graphql.swift in Sources */,
+				8080F2472C80D6E100A86C14 /* TimerState.graphql.swift in Sources */,
+				8080F2482C80D6E100A86C14 /* CreatePrivateEventInput.graphql.swift in Sources */,
+				8080F2492C80D6E100A86C14 /* EventSearchQuery.graphql.swift in Sources */,
+				8080F24A2C80D6E100A86C14 /* StartPhaseInputV2.graphql.swift in Sources */,
+				8080F24B2C80D6E100A86C14 /* StoreByLocationInput.graphql.swift in Sources */,
+				8080F24C2C80D6E100A86C14 /* TeamPlayerInput.graphql.swift in Sources */,
+				8080F24D2C80D6E100A86C14 /* TeamResultInputV2.graphql.swift in Sources */,
+				8080F24E2C80D6E100A86C14 /* DeckConstructionV2.graphql.swift in Sources */,
+				8080F24F2C80D6E100A86C14 /* DraftV2.graphql.swift in Sources */,
+				8080F2502C80D6E100A86C14 /* Drop.graphql.swift in Sources */,
+				8080F2512C80D6E100A86C14 /* DropV2.graphql.swift in Sources */,
+				8080F2522C80D6E100A86C14 /* Event.graphql.swift in Sources */,
+				8080F2532C80D6E100A86C14 /* EventFormat.graphql.swift in Sources */,
+				8080F2542C80D6E100A86C14 /* EventPage.graphql.swift in Sources */,
+				8080F2552C80D6E100A86C14 /* GamekeeperResultsNotificationPayload.graphql.swift in Sources */,
+				8080F2562C80D6E100A86C14 /* GameStateV2.graphql.swift in Sources */,
+				8080F2572C80D6E100A86C14 /* Match.graphql.swift in Sources */,
+				8080F2582C80D6E100A86C14 /* MatchFoundPayload.graphql.swift in Sources */,
+				8080F2592C80D6E100A86C14 /* MatchV2.graphql.swift in Sources */,
+				8080F25A2C80D6E100A86C14 /* Money.graphql.swift in Sources */,
+				8080F25B2C80D6E100A86C14 /* Mutation.graphql.swift in Sources */,
+				8080F25C2C80D6E100A86C14 /* Organization.graphql.swift in Sources */,
+				8080F25D2C80D6E100A86C14 /* PageInfo.graphql.swift in Sources */,
+				8080F25E2C80D6E100A86C14 /* PlayerRegisteredPayload.graphql.swift in Sources */,
+				8080F25F2C80D6E100A86C14 /* Pod.graphql.swift in Sources */,
+				8080F2602C80D6E100A86C14 /* PodV2.graphql.swift in Sources */,
+				8080F2612C80D6E100A86C14 /* PrivateEvent.graphql.swift in Sources */,
+				8080F2622C80D6E100A86C14 /* Query.graphql.swift in Sources */,
+				8080F2632C80D6E100A86C14 /* Queue.graphql.swift in Sources */,
+				8080F2642C80D6E100A86C14 /* Registration.graphql.swift in Sources */,
+				8080F2652C80D6E100A86C14 /* Round.graphql.swift in Sources */,
+				8080F2662C80D6E100A86C14 /* RoundV2.graphql.swift in Sources */,
+				8080F2672C80D6E100A86C14 /* Seat.graphql.swift in Sources */,
+				8080F2682C80D6E100A86C14 /* SeatV2.graphql.swift in Sources */,
+				8080F2692C80D6E100A86C14 /* StorePage.graphql.swift in Sources */,
+				8080F26A2C80D6E100A86C14 /* Subscription.graphql.swift in Sources */,
+				8080F26B2C80D6E100A86C14 /* Team.graphql.swift in Sources */,
+				8080F26C2C80D6E100A86C14 /* TeamPayload.graphql.swift in Sources */,
+				8080F26D2C80D6E100A86C14 /* TeamResult.graphql.swift in Sources */,
+				8080F26E2C80D6E100A86C14 /* TeamResultV2.graphql.swift in Sources */,
+				8080F26F2C80D6E100A86C14 /* TeamStanding.graphql.swift in Sources */,
+				8080F2702C80D6E100A86C14 /* TeamStandingV2.graphql.swift in Sources */,
+				8080F2712C80D6E100A86C14 /* TeamV2.graphql.swift in Sources */,
+				8080F2722C80D6E100A86C14 /* Timer.graphql.swift in Sources */,
+				8080F2732C80D6E100A86C14 /* User.graphql.swift in Sources */,
+				8080F2742C80D6E100A86C14 /* SchemaConfiguration.swift in Sources */,
+				8080F2752C80D6E100A86C14 /* SchemaMetadata.graphql.swift in Sources */,
+				8080F2762C80D6E100A86C14 /* Gamestateschema.graphql.swift in Sources */,
+				8080F2242C80D6C500A86C14 /* GetEventCreatedByQuery.graphql.swift in Sources */,
+				8080F2252C80D6C500A86C14 /* GetEventFormatsQuery.graphql.swift in Sources */,
+				8080F2262C80D6C500A86C14 /* GetEventStatusQuery.graphql.swift in Sources */,
+				8080F2272C80D6C500A86C14 /* GetEventTitleQuery.graphql.swift in Sources */,
+				8080F2282C80D6C500A86C14 /* GetGameStateV2AtRoundHostQuery.graphql.swift in Sources */,
+				8080F2292C80D6C500A86C14 /* GetGameStateV2AtRoundQuery.graphql.swift in Sources */,
+				8080F22A2C80D6C500A86C14 /* GetPlayerStatusQuery.graphql.swift in Sources */,
+				8080F22B2C80D6C500A86C14 /* GetQueuesQuery.graphql.swift in Sources */,
+				8080F22C2C80D6C500A86C14 /* GetRegisteredPlayersListQuery.graphql.swift in Sources */,
+				8080F22D2C80D6C500A86C14 /* GetTimerQuery.graphql.swift in Sources */,
+				8080F22E2C80D6C500A86C14 /* LoadEventHostV2Query.graphql.swift in Sources */,
+				8080F22F2C80D6C500A86C14 /* LoadEventJoinV2Query.graphql.swift in Sources */,
+				8080F2302C80D6C500A86C14 /* MyActiveEventsQuery.graphql.swift in Sources */,
+				8080F2312C80D6C500A86C14 /* SearchEventsQuery.graphql.swift in Sources */,
+				8080F2322C80D6C500A86C14 /* StoreByLocationQuery.graphql.swift in Sources */,
+				8080F2332C80D6C500A86C14 /* GameResultReportedSubscription.graphql.swift in Sources */,
+				8080F2342C80D6C500A86C14 /* MatchFoundSubscription.graphql.swift in Sources */,
+				8080F2352C80D6C500A86C14 /* PlayerRegisteredSubscription.graphql.swift in Sources */,
+				8080F2362C80D6C500A86C14 /* TimerUpdatedSubscription.graphql.swift in Sources */,
+				8080F2372C80D6C500A86C14 /* CurrencyCode.swift in Sources */,
+				8080F2042C80D68900A86C14 /* DeckConstructionDetails.graphql.swift in Sources */,
+				8080F2052C80D68900A86C14 /* DraftPod.graphql.swift in Sources */,
+				8080F2062C80D68900A86C14 /* DropDetails.graphql.swift in Sources */,
+				8080F2072C80D68900A86C14 /* DropDetailsV2.graphql.swift in Sources */,
+				8080F2082C80D68900A86C14 /* EventDetailsMyActive.graphql.swift in Sources */,
+				8080F2092C80D68900A86C14 /* EventFormatDetails.graphql.swift in Sources */,
+				8080F20A2C80D68900A86C14 /* EventHostV2.graphql.swift in Sources */,
+				8080F20B2C80D68900A86C14 /* EventJoinV2.graphql.swift in Sources */,
+				8080F20C2C80D68900A86C14 /* GameStateDetailsV2.graphql.swift in Sources */,
+				8080F20D2C80D68900A86C14 /* GameStateV2Host.graphql.swift in Sources */,
+				8080F20E2C80D68900A86C14 /* MatchDetails.graphql.swift in Sources */,
+				8080F20F2C80D68900A86C14 /* MatchesDetailsV2.graphql.swift in Sources */,
+				8080F2102C80D68900A86C14 /* OrganizationDetails.graphql.swift in Sources */,
+				8080F2112C80D68900A86C14 /* PodDetails.graphql.swift in Sources */,
+				8080F2122C80D68900A86C14 /* PodDetailsV2.graphql.swift in Sources */,
+				8080F2132C80D68900A86C14 /* QueueDetails.graphql.swift in Sources */,
+				8080F2142C80D68900A86C14 /* RegisterPlayer.graphql.swift in Sources */,
+				8080F2152C80D68900A86C14 /* RegistrationDetails.graphql.swift in Sources */,
+				8080F2162C80D68900A86C14 /* ReservationDetails.graphql.swift in Sources */,
+				8080F2172C80D68900A86C14 /* ResultDetails.graphql.swift in Sources */,
+				8080F2182C80D68900A86C14 /* RoundDetails.graphql.swift in Sources */,
+				8080F2192C80D68900A86C14 /* RoundDetailsV2.graphql.swift in Sources */,
+				8080F21A2C80D68900A86C14 /* SeatDetails.graphql.swift in Sources */,
+				8080F21B2C80D68900A86C14 /* SeatDetailsV2.graphql.swift in Sources */,
+				8080F21C2C80D68900A86C14 /* StandingsDetails.graphql.swift in Sources */,
+				8080F21D2C80D68900A86C14 /* TeamDetails.graphql.swift in Sources */,
+				8080F21E2C80D68900A86C14 /* TeamDetailsV2.graphql.swift in Sources */,
+				8080F21F2C80D68900A86C14 /* TeamFields.graphql.swift in Sources */,
+				8080F2202C80D68900A86C14 /* TeamResultDetailsV2.graphql.swift in Sources */,
+				8080F2212C80D68900A86C14 /* TeamStandingsDetailsV2.graphql.swift in Sources */,
+				8080F2222C80D68900A86C14 /* TimerDetails.graphql.swift in Sources */,
+				8080F2232C80D68900A86C14 /* UserDetails.graphql.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8080F1FC2C80D34D00A86C14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 803AECEB2AA26B2200CF03EB /* OSTRich */;
+			targetProxy = 8080F1FB2C80D34D00A86C14 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		803AECFD2AA26B2300CF03EB /* Debug */ = {
@@ -1294,6 +1644,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1326,6 +1677,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1336,6 +1688,57 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8080F1FE2C80D34D00A86C14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PK7HCG46US;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.snowskeleton.OSTRichTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OSTRich.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OSTRich";
+			};
+			name = Debug;
+		};
+		8080F1FF2C80D34D00A86C14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PK7HCG46US;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.snowskeleton.OSTRichTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OSTRich.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OSTRich";
 			};
 			name = Release;
 		};
@@ -1356,6 +1759,15 @@
 			buildConfigurations = (
 				803AED002AA26B2300CF03EB /* Debug */,
 				803AED012AA26B2300CF03EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8080F1FD2C80D34D00A86C14 /* Build configuration list for PBXNativeTarget "OSTRichTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8080F1FE2C80D34D00A86C14 /* Debug */,
+				8080F1FF2C80D34D00A86C14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
