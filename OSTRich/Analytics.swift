@@ -23,6 +23,8 @@ enum AnalyticEvent: String {
     case disabledShowDebugValues
     case enabledUseLaunchProtection
     case disabledUseLaunchProtection
+    case enabledDisableRoundTimerNotifications
+    case disabledDisableRoundTimerNotifications
 
     case joinEvent
     case matchSubmittedWithError
