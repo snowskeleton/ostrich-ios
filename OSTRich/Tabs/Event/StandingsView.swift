@@ -49,7 +49,7 @@ struct StandingsView: View {
                         //                        .font(.footnote)
                         //                    Text("OGW:\n\(String(format: "%.2f", teamStanding.opponentGameWinPercent * 100))%")
                         //                        .font(.footnote)
-                        Text("OMW:\n\(String(format: "%.2f", teamStanding.opponentMatchWinPercent * 100))%")
+                        Text("\(String(format: "%.2f", teamStanding.opponentMatchWinPercent * 100))%")
                             .font(.footnote)
                         
                     }
