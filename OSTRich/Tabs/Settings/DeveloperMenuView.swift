@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Aptabase
 
 struct DeveloperMenuView: View {
     @Environment(\.modelContext) private var context
@@ -19,10 +18,19 @@ struct DeveloperMenuView: View {
         List {
             Section("Convenience") {
                 Toggle("Save email and password to login", isOn: $saveLoginCreds)
+                    .onChange(of: saveLoginCreds) {
+                        Analytics.track(saveLoginCreds ? .enabledSaveLoginCreds : .disabledSaveLoginCreds)
+                    }
             }
             Section("Troubleshooting") {
                 Toggle("Show debug values in various locations throughout the app", isOn: $showDebugValues)
+                    .onChange(of: showDebugValues) {
+                        Analytics.track(showDebugValues ? .enabledShowDebugValues : .disabledShowDebugValues)
+                    }
                 Toggle("Protect from bad data causing launch crashes", isOn: $useLaunchProtection)
+                    .onChange(of: useLaunchProtection) {
+                        Analytics.track(useLaunchProtection ? .enabledUseLaunchProtection : .disabledUseLaunchProtection )
+                    }
                 NavigationLink(destination: NetworkLogView()) { Text("Network Logs") }
             }
             
@@ -45,7 +53,7 @@ struct DeveloperMenuView: View {
             }
         }
         .onAppear {
-            Aptabase.shared.trackEvent("opened_developer_menu_view")
+            Analytics.track(.openedDeveloperMenu)
         }
     }
     

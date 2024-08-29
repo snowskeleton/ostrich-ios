@@ -9,7 +9,7 @@ import Apollo
 import Foundation
 import SwiftData
 import SwiftUI
-import Aptabase
+
 
 class GQLNetwork {
     static let shared = GQLNetwork()
@@ -144,7 +144,6 @@ class GQLNetwork {
     }
     
     func submitMatchResults(eventId: String, results: [Gamestateschema.TeamResultInputV2], completion: @escaping (Result<Void, Error>) -> Void) {
-        Aptabase.shared.trackEvent("submit_results")
         let mutation = Gamestateschema.RecordMatchResultV2Mutation(eventId: eventId, results: results)
         
         GQLNetwork.shared.apollo.perform(mutation: mutation) { result in
@@ -176,7 +175,6 @@ class GQLNetwork {
     }
     
     func joinEventWithShortCode(shortCode: String, completion: @escaping (Result<Gamestateschema.ID, Error>) -> Void) {
-        Aptabase.shared.trackEvent("joinEvent", with: ["shortCode": shortCode])
         let allCapsShortCode = shortCode.uppercased()
         let mutation = Gamestateschema.JoinEventWithShortCodeMutation(shortCode: allCapsShortCode)
         
@@ -198,7 +196,6 @@ class GQLNetwork {
     }
     
     func dropSelfFromEvent(eventId: Gamestateschema.ID, completion: @escaping (Result<Void, Error>) -> Void) {
-        Aptabase.shared.trackEvent("drop")
         let mutation = Gamestateschema.DropSelfV2Mutation(eventId: eventId)
         
         GQLNetwork.shared.apollo.perform(mutation: mutation) { result in

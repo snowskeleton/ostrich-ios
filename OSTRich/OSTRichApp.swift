@@ -29,7 +29,7 @@ struct OSTRichApp: App {
                     case .inactive:
                         UserDefaults.standard.setValue(0, forKey: "timesLaunchedWithoutSafeClose")
                     case .active:
-                        Aptabase.shared.trackEvent("app_started")
+                        Analytics.track(.appLaunch)
                     default:
                         break
                     }

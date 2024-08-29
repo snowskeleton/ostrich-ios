@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import Aptabase
 
 
 struct SettingsView: View {
@@ -48,7 +47,17 @@ struct SettingsView: View {
                     }
                 }
                 
+                Section{
+                    NavigationLink {
+                        AnalyticsView()
+                    } label: {
+                        Text("Analytics")
+                    }
+                }
             }
+        }
+        .onAppear {
+            Analytics.track(.openedSettingsView)
         }
     }
     

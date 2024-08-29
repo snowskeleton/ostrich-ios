@@ -20,15 +20,18 @@ struct SubmitMatchView: View {
     private var ableToSubmitMatch: Bool {
         // if we're the TO, we can submit any match regardless of whether or not it's already been submitted
         if match.round.gameState.event.createdBy == UserManager.shared.currentUser?.personaId {
+            Analytics.track(.openedSubmitMatchView, with: ["as": "TO"])
             return true
         }
         // otherwise we can only submit matches that we're in
         if !match.teams.contains(where: { $0.players.contains(
             where: { $0.personaId == UserManager.shared.currentUser?.personaId }
         )}) {
+            Analytics.track(.openedSubmitMatchView, with: ["as": "spectator"])
             return false
         }
-        
+        Analytics.track(.openedSubmitMatchView, with: ["as": "self"])
+
         // and that haven't been submitted yet
         return match.results.isEmpty
     }
@@ -107,6 +110,7 @@ struct SubmitMatchView: View {
             
             let teamResult = Gamestateschema.TeamResultInputV2(
                 matchId: match.matchId,
+                submitter: UserManager.shared.currentUser?.personaId ?? nil,
                 isBye: match.isBye,
                 wins: wins,
                 losses: losses,
@@ -131,7 +135,9 @@ struct SubmitMatchView: View {
             switch result {
             case .success:
                 print("Match result submitted successfully")
+                Analytics.track(.matchSubmittedWithoutError)
             case .failure(let error):
+                Analytics.track(.matchSubmittedWithError, with: ["error": error.localizedDescription])
                 print("Failed to submit match result: \(error.localizedDescription)")
             }
         }

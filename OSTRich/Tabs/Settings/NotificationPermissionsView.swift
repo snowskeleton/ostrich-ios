@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Aptabase
 
 struct NotificationPermissionsView: View {
     private let timer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
@@ -48,7 +47,7 @@ struct NotificationPermissionsView: View {
             }
         }
         .onAppear {
-            Aptabase.shared.trackEvent("opened_notification_permissions_view")
+            Analytics.track(.openedNotificationPermissionsView)
         }
         .onReceive(timer) { _ in
             setStates()
@@ -56,8 +55,8 @@ struct NotificationPermissionsView: View {
     }
     
     fileprivate func removeAllPendingNotifications() {
-        Aptabase.shared.trackEvent("cancel_all_notifications")
         Notifications.removeAllPendingNotifications()
+        Analytics.track(.removedAllPendingNotificaionts)
     }
     
     fileprivate func setStates() {

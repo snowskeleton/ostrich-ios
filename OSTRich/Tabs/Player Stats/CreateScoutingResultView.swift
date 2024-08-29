@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import Aptabase
 
 struct CreateScoutingResultView: View {
     @Environment(\.modelContext) private var context
@@ -130,6 +129,11 @@ struct CreateScoutingResultView: View {
         }
         let descriptor = FetchDescriptor<ScoutingResult>(predicate: predicate)
         _previousDecks = Query(descriptor)
+        if !_previousDecks.wrappedValue.isEmpty {
+            Analytics.track(.foundPreviousDecks, with: ["count": _previousDecks.wrappedValue.count])
+        } else {
+            Analytics.track(.newPlayerToFormat)
+        }
         
         _player = .init(initialValue: player)
         _eventName = .init(initialValue: eventName)
@@ -144,7 +148,6 @@ struct CreateScoutingResultView: View {
     var body: some View {
             Form {
                 Section(header: Text("Deck Information")) {
-                    // have some preselections at some point
                     TextField("Deck Name", text: $deckName)
                         .focused($focusDeckName)
                         .onAppear {
@@ -153,6 +156,7 @@ struct CreateScoutingResultView: View {
                             }
                         }
                     TextField("Deck Notes", text: $deckNotes)
+                    
                     if !previousDecks.isEmpty {
                         Picker("Select a previous Deck", selection: $selectedPreviousDeck) {
                             Text("Please select").tag(0)
@@ -205,7 +209,7 @@ struct CreateScoutingResultView: View {
             }
             .navigationTitle("New Scouting Result")
             .onAppear {
-                Aptabase.shared.trackEvent("opened_create_scouting_result_view")
+                Analytics.track(.openedCreateScoutingResultView)
             }
         }
     

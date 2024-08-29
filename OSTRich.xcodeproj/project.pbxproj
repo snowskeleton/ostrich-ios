@@ -28,6 +28,7 @@
 		8053FE5C2C7FB4F0005A10BD /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8053FE5B2C7FB4F0005A10BD /* Analytics.swift */; };
 		806843142C383AE000264D1A /* NetworkLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843132C383AE000264D1A /* NetworkLogsView.swift */; };
 		806843192C38656600264D1A /* NetworkLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843182C38656400264D1A /* NetworkLog.swift */; };
+		806BF5FB2C80F02700306B79 /* AnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806BF5FA2C80F02700306B79 /* AnalyticsView.swift */; };
 		807A56422C650BA000302836 /* PairingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A56412C650BA000302836 /* PairingsView.swift */; };
 		807A56442C650BB500302836 /* RegisteredPlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A56432C650BB500302836 /* RegisteredPlayersView.swift */; };
 		8080F2042C80D68900A86C14 /* DeckConstructionDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDED2C4025A2005E958D /* DeckConstructionDetails.graphql.swift */; };
@@ -405,6 +406,7 @@
 		8053FE5B2C7FB4F0005A10BD /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		806843132C383AE000264D1A /* NetworkLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogsView.swift; sourceTree = "<group>"; };
 		806843182C38656400264D1A /* NetworkLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLog.swift; sourceTree = "<group>"; };
+		806BF5FA2C80F02700306B79 /* AnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsView.swift; sourceTree = "<group>"; };
 		807A56412C650BA000302836 /* PairingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingsView.swift; sourceTree = "<group>"; };
 		807A56432C650BB500302836 /* RegisteredPlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredPlayersView.swift; sourceTree = "<group>"; };
 		8080F1F72C80D34D00A86C14 /* OSTRichTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OSTRichTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -626,6 +628,7 @@
 			isa = PBXGroup;
 			children = (
 				80A5722E2BE2C78E00D8D888 /* SettingsView.swift */,
+				806BF5FA2C80F02700306B79 /* AnalyticsView.swift */,
 				80CCA5572C7F8A7500B90BF5 /* DeveloperMenuView.swift */,
 				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				80CCA5552C7E240300B90BF5 /* ChangeNameView.swift */,
@@ -1309,6 +1312,7 @@
 				80FFBEEA2C4025A2005E958D /* MatchFoundPayload.graphql.swift in Sources */,
 				80FFBEEB2C4025A2005E958D /* ResultDetails.graphql.swift in Sources */,
 				80FFBEEC2C4025A2005E958D /* Query.graphql.swift in Sources */,
+				806BF5FB2C80F02700306B79 /* AnalyticsView.swift in Sources */,
 				80D37EC02C48337000997C6D /* MatchResult.swift in Sources */,
 				80D37EB62C48332E00997C6D /* Player.swift in Sources */,
 				80CCA5442C7BB24A00B90BF5 /* ScoutingHistoryCollapsableView.swift in Sources */,

@@ -10,7 +10,6 @@ import SwiftUI
 import Foundation
 import SwiftData
 import Observation
-import Aptabase
 
 struct AllEventsView: View {
     @Environment(\.modelContext) private var context
@@ -99,7 +98,7 @@ struct AllEventsView: View {
         GQLNetwork.shared.joinEventWithShortCode(shortCode: joinEventCode) { results in
             switch results {
             case .success:
-                Aptabase.shared.trackEvent("joinedEvent", with: ["shortCode": joinEventCode])
+                Analytics.track(.joinEvent, with: ["shortCode": joinEventCode])
                 joinEventCode = ""
                 refreshMainPage()
             case .failure(let failure):

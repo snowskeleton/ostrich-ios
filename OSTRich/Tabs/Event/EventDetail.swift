@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Aptabase
 
 struct EventDetail: View {
     var event: Event
@@ -84,7 +83,7 @@ struct EventDetail: View {
             }
             .padding()
             .onAppear {
-                Aptabase.shared.trackEvent("opened_event_detail_view")
+                Analytics.track(.openedEventDetailsView)
             }
         }
         .navigationTitle("Event Details")

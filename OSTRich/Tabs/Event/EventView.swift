@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import Aptabase
 
 
 struct EventView: View {
@@ -46,6 +45,9 @@ struct EventView: View {
                 }
                 
             }.pickerStyle(SegmentedPickerStyle())
+                .onChange(of: selectedTab) {
+                    Analytics.track(.changedEventViewTab, with: ["to": selectedTab])
+                }
 
             TabView(selection: $selectedTab) {
                 RegisteredPlayersView(event: event).tag("Players")
@@ -72,16 +74,15 @@ struct EventView: View {
             }
         }
         .refreshable {
-            Aptabase.shared.trackEvent("initiated_manual_refresh")
             updateEvent()
+            Analytics.track(.manuallyRefreshedEventView)
         }
         .onAppear {
             if let gs = event.gameStateAtRound, !gs.currentMatches.isEmpty {
                 selectedTab = "Pairings"
             }
-            getTime()
             updateEvent()
-            Aptabase.shared.trackEvent("opened_main_event_page")
+            Analytics.track(.openedEventView)
         }
         .onReceive(
             Timer.publish(every: 10, on: .main, in: .common).autoconnect(),
@@ -111,14 +112,17 @@ struct EventView: View {
     fileprivate func updateEvent() {
         GQLNetwork.getEventAsHost(event: event)
         GQLNetwork.getGameState(event: event)
+        getTime()
     }
 
     fileprivate func getTime() {
         if let timer = event.gameStateAtRound?.currentRound?.timer {
             timer.update()
-            if timer.state == .running || timer.state == .fake {
+            if timer.state == .running {
                 Notifications.scheduleRoundTimerNotifications(for: timer)
             }
+        } else {
+            Analytics.track(.noTimerForEvent)
         }
     }
 
@@ -127,8 +131,10 @@ struct EventView: View {
             switch results {
             case .success(let response):
                 print(response)
+                Analytics.track(.playerDroppedFromEvent)
             case .failure(let error):
                 print("The error we got was: \(String(describing: error))")
+                Analytics.track(.playerDropFromEventFailure)
             }
         }
         
