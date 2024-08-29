@@ -27,6 +27,9 @@ struct CreateScoutingResultView: View {
     @State private var player: LocalPlayer
     @State private var date: Date
     
+    @Query private var previousDecks: [ScoutingResult] = []
+    @State private var selectedPreviousDeck: ScoutingResult?
+    
     init(
         playingPlayer: Player,
         event: Event,
@@ -119,6 +122,15 @@ struct CreateScoutingResultView: View {
         deckName: String = "",
         deckNotes: String = ""
     ) {
+        let searchFormat = formatName != nil ? formatName! : "Other"
+        let searchPersonaId = player.personaId
+        let predicate = #Predicate<ScoutingResult> {
+            $0.player?.personaId == searchPersonaId &&
+            $0.format == searchFormat
+        }
+        let descriptor = FetchDescriptor<ScoutingResult>(predicate: predicate)
+        _previousDecks = Query(descriptor)
+        
         _player = .init(initialValue: player)
         _eventName = .init(initialValue: eventName)
         _eventId = .init(initialValue: eventId)
@@ -141,6 +153,21 @@ struct CreateScoutingResultView: View {
                             }
                         }
                     TextField("Deck Notes", text: $deckNotes)
+                    if !previousDecks.isEmpty {
+                        Picker("Select a previous deck", selection: $selectedPreviousDeck) {
+                            Text("Select a deck").tag(0)
+                            ForEach(previousDecks, id: \.id) {
+                                Text($0.deckName).tag($0)
+                            }
+                        }.onChange(of: selectedPreviousDeck) {
+                            if let previousName = selectedPreviousDeck?.deckName {
+                                deckName = previousName
+                            }
+                            if let previousNotes = selectedPreviousDeck?.deckNotes {
+                                deckNotes = previousNotes
+                            }
+                        }
+                    }
                 }
                 
                 Section(header: Text("Event Information")) {
