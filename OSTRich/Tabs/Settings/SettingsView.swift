@@ -47,7 +47,7 @@ struct SettingsView: View {
                     }
                 }
                 
-                Section{
+                Section {
                     NavigationLink {
                         AnalyticsView()
                     } label: {
