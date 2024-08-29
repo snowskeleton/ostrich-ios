@@ -71,6 +71,7 @@ struct AllEventsView: View {
         .onAppear {
             refreshMainPage()
             timerIsRunning = true
+            Analytics.track(.openedAllEventsView)
         }
         .onDisappear { timerIsRunning = false }
         .onReceive(Timer.publish(every: 30, on: .main, in: .common).autoconnect(), perform: { _ in

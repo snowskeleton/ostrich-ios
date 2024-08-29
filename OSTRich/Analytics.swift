@@ -38,6 +38,7 @@ enum AnalyticEvent: String {
     
     case openedDeveloperMenu
     case openedAnalyticsView
+    case openedAllEventsView
     case openedEventView
     case changedEventViewTab
     case openedSubmitMatchView
