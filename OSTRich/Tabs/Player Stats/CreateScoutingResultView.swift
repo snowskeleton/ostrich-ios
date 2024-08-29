@@ -129,11 +129,12 @@ struct CreateScoutingResultView: View {
         }
         let descriptor = FetchDescriptor<ScoutingResult>(predicate: predicate)
         _previousDecks = Query(descriptor)
-        if !_previousDecks.wrappedValue.isEmpty {
-            Analytics.track(.foundPreviousDecks, with: ["count": _previousDecks.wrappedValue.count])
-        } else {
-            Analytics.track(.newPlayerToFormat)
-        }
+        // this produces errors, for some reason.
+//        if !_previousDecks.wrappedValue.isEmpty {
+//            Analytics.track(.foundPreviousDecks, with: ["count": _previousDecks.wrappedValue.count])
+//        } else {
+//            Analytics.track(.newPlayerToFormat)
+//        }
         
         _player = .init(initialValue: player)
         _eventName = .init(initialValue: eventName)
@@ -214,6 +215,11 @@ struct CreateScoutingResultView: View {
         }
     
     private func createScoutingResult() {
+        if !previousDecks.isEmpty {
+            Analytics.track(.foundPreviousDecks, with: ["count": _previousDecks.wrappedValue.count])
+        } else {
+            Analytics.track(.newPlayerToFormat)
+        }
         if let result = scoutingResult {
             result.deckName = deckName
             result.deckNotes = deckNotes
