@@ -76,7 +76,7 @@ extension HTOEndpoint: Endpoint {
                 "Content-Type": "application/json"
             ]
         case .ostrichRegisterDevice:
-            guard let accessToken = UserDefaults.standard.string(forKey: "ostrichAccessToken") else {
+            guard let accessToken = UserManager.shared.currentUser?.token?.access_token else {
                 print("Couldn't find key: ostrichAccessToken in UserDefaults")
                 return [:]
             }
