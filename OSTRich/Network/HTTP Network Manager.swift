@@ -8,6 +8,17 @@
 import Foundation
 import SwiftUI
 
+func useCredsToLoginToOSTRichServer(_ refreshToken: String) {
+    Task {
+        let ostrichAuthTokens = await HTOService().ostrichLogin(refreshToken)
+        switch ostrichAuthTokens {
+        case .success(let ostrichCreds):
+            await UserManager.shared.updateOSTRichToken(ostrichCreds)
+        case .failure(let error):
+            print("Ostrich login failed:", error)
+        }
+    }
+}
 
 enum HTOEndpoint {
     case login(email: String, password: String)
@@ -76,8 +87,26 @@ extension HTOEndpoint: Endpoint {
                 "Content-Type": "application/json"
             ]
         case .ostrichRegisterDevice:
-            guard let accessToken = UserManager.shared.currentUser?.token?.access_token else {
-                print("Couldn't find key: ostrichAccessToken in UserDefaults")
+            guard let user = UserManager.shared.currentUser else {
+                print("No current user to log in")
+                return [:]
+            }
+            // try to refresh once
+            if user.ostrichTokenExpired {
+                if let refreshToken = user.ostrichToken?.refresh_token {
+                    useCredsToLoginToOSTRichServer(refreshToken)
+                } else {
+                    print("No token to refresh")
+                    return [:]
+                }
+            }
+            // check once more to make sure previous refresh worked
+            if user.ostrichTokenExpired {
+                print("Refresh failed")
+                return [:]
+            }
+            guard let accessToken = user.ostrichToken?.access_token else {
+                print("Couldn't find ostrich Access Token")
                 return [:]
             }
             return [

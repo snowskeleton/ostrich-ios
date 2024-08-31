@@ -187,6 +187,10 @@ class User: Codable {
         return Date().timeIntervalSince1970 > (self.token?.expiresOn ?? 0) - 10
     }
     
+    var ostrichTokenExpired: Bool {
+        return Date().timeIntervalSince1970 > (self.ostrichToken?.expiresOn ?? 0) - 10
+    }
+
     var loggedIn: Bool {
         return self.token != nil
     }
