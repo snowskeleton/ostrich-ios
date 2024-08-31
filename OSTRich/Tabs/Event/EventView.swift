@@ -92,9 +92,6 @@ struct EventView: View {
                 ).accessibilityLabel(("Event Details"))
             }
         }
-//        .navigationTitle(
-//            Text(event.title)
-//        )
     }
     
     fileprivate func updateEvent() {

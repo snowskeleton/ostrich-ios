@@ -65,6 +65,7 @@ struct EventDetailsView: View {
             }
 
         }
+        .environment(\EnvironmentValues.refresh as! WritableKeyPath<EnvironmentValues, RefreshAction?>, nil) 
         .onAppear {
             Analytics.track(.openedEventDetailsView)
         }
