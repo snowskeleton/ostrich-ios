@@ -195,14 +195,29 @@ struct EventRow: View {
         }
         
         if let date = date {
-            let formatter = RelativeDateTimeFormatter()
-            formatter.unitsStyle = .full
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            formatter.timeStyle = .none
             
-            return formatter.localizedString(for: date, relativeTo: Date.now)
+            // Get current year
+            let currentYear = Calendar.current.component(.year, from: Date())
+            
+            // Get year from the parsed date
+            let dateYear = Calendar.current.component(.year, from: date)
+            
+            // Custom format: Include the year only if it's different from the current year
+            if dateYear == currentYear {
+                formatter.dateFormat = "MM/dd"
+            } else {
+                formatter.dateFormat = "MM/dd/yyyy"
+            }
+            
+            return formatter.string(from: date)
         }
         
         return "Invalid"
     }
+    
     func convertToLocalTime(_ utcTime: String) -> String {
         let dateFormatter = ISO8601DateFormatter()
         
