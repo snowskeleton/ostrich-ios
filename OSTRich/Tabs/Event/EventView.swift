@@ -91,7 +91,7 @@ struct EventView: View {
             }
         )
         .sheet(isPresented: $showEventDetails) {
-            EventDetail(event: event)
+            EventDetailsView(event: event)
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {

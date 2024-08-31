@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EventDetail: View {
+struct EventDetailsView: View {
     var event: Event
     
     var body: some View {
