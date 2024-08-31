@@ -41,8 +41,9 @@ struct DeveloperMenuView: View {
                 NavigationLink(destination: NetworkLogView()) { Text("Network Logs") }
             }
             
-            Section("Information") {
+            Section("Notifications") {
                 NavigationLink(destination: NotificationPermissionsView()) { Text("Notification Permissions") }
+                NavigationLink(destination: PendingNotificationsView()) { Text("Pending Notifications") }
             }
             
             Section("Actions") {
