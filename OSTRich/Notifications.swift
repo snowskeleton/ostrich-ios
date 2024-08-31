@@ -23,6 +23,9 @@ struct Notifications {
     }
     
     static func scheduleRoundTimerNotifications(for roundTimer: RoundTimer) {
+        if UserDefaults.standard.bool(forKey: "disableRoundTimerNotifications") {
+            return
+        }
         Notifications.verifyPermissions()
         let notificationCenter = UNUserNotificationCenter.current()
         

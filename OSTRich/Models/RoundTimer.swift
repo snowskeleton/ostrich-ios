@@ -92,9 +92,6 @@ class RoundTimer: Identifiable {
     
     
     func update() {
-        if UserDefaults.standard.bool(forKey: "disableRoundTimerNotifications") {
-            return
-        }
         if self.id != nil && self.id != "" {
             GQLNetwork.getTimer(timerId: self.id!) { result in
                 switch result {
