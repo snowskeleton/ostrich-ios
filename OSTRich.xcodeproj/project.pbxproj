@@ -634,11 +634,11 @@
 				80A5722E2BE2C78E00D8D888 /* SettingsView.swift */,
 				806BF5FA2C80F02700306B79 /* AnalyticsView.swift */,
 				80CCA5572C7F8A7500B90BF5 /* DeveloperMenuView.swift */,
-				8064DF852C8387830017B088 /* PendingNotificationsView.swift */,
 				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				80CCA5552C7E240300B90BF5 /* ChangeNameView.swift */,
 				806843132C383AE000264D1A /* NetworkLogsView.swift */,
 				80CCA5512C7D4E7200B90BF5 /* NotificationPermissionsView.swift */,
+				8064DF852C8387830017B088 /* PendingNotificationsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";

@@ -52,7 +52,9 @@ struct Notifications {
                     content.body = "\(Int(timeBeforeEnd / 60)) minutes remaining"
                 }
                 content.sound = .default
-                
+                content.threadIdentifier = roundTimer.localId
+                content.userInfo = ["scheduledTime": ISO8601DateFormatter().string(from: notificationTime)]
+
                 let trigger = UNTimeIntervalNotificationTrigger(timeInterval: notificationTime.timeIntervalSinceNow, repeats: false)
                 
                 let request = UNNotificationRequest(
