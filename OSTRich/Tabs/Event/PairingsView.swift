@@ -45,10 +45,12 @@ struct PairingsView: View {
             }
             Section("All Matches") {
                 ForEach(matches, id: \.matchId) { match in
-                    NavigationLink {
-                        SubmitMatchView(match: Binding<Match>.constant(match))
-                    } label: {
-                        PairingItem(match: match)
+                    if match != myMatch {
+                        NavigationLink {
+                            SubmitMatchView(match: Binding<Match>.constant(match))
+                        } label: {
+                            PairingItem(match: match)
+                        }
                     }
                 }
             }
