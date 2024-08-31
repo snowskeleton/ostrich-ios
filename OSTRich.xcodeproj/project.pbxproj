@@ -26,6 +26,7 @@
 		803D6BE52BFE41EA00CEB9F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */; };
 		8046EA492AA64E8B00578539 /* HTTP Network Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA482AA64E8B00578539 /* HTTP Network Manager.swift */; };
 		8053FE5C2C7FB4F0005A10BD /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8053FE5B2C7FB4F0005A10BD /* Analytics.swift */; };
+		8064DF842C8381700017B088 /* EventHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064DF832C8381700017B088 /* EventHeaderView.swift */; };
 		806843142C383AE000264D1A /* NetworkLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843132C383AE000264D1A /* NetworkLogsView.swift */; };
 		806843192C38656600264D1A /* NetworkLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843182C38656400264D1A /* NetworkLog.swift */; };
 		806BF5FB2C80F02700306B79 /* AnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806BF5FA2C80F02700306B79 /* AnalyticsView.swift */; };
@@ -404,6 +405,7 @@
 		8046EA482AA64E8B00578539 /* HTTP Network Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTP Network Manager.swift"; sourceTree = "<group>"; };
 		8053FE582C7FA806005A10BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8053FE5B2C7FB4F0005A10BD /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
+		8064DF832C8381700017B088 /* EventHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHeaderView.swift; sourceTree = "<group>"; };
 		806843132C383AE000264D1A /* NetworkLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogsView.swift; sourceTree = "<group>"; };
 		806843182C38656400264D1A /* NetworkLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLog.swift; sourceTree = "<group>"; };
 		806BF5FA2C80F02700306B79 /* AnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsView.swift; sourceTree = "<group>"; };
@@ -732,6 +734,7 @@
 			children = (
 				80249ED22C76880C00A6A1E6 /* AllEventsView.swift */,
 				80B8E1362AB7EF0700845ECC /* EventView.swift */,
+				8064DF832C8381700017B088 /* EventHeaderView.swift */,
 				80249EC82C7675B400A6A1E6 /* RoundTimerView.swift */,
 				807A56432C650BB500302836 /* RegisteredPlayersView.swift */,
 				807A56412C650BA000302836 /* PairingsView.swift */,
@@ -1257,6 +1260,7 @@
 				80FFBEC12C4025A2005E958D /* SubmitResultsAndCertifyRoundV2Mutation.graphql.swift in Sources */,
 				80FFBEC22C4025A2005E958D /* TeamV2.graphql.swift in Sources */,
 				80FFBEC32C4025A2005E958D /* EventPage.graphql.swift in Sources */,
+				8064DF842C8381700017B088 /* EventHeaderView.swift in Sources */,
 				80FFBEC42C4025A2005E958D /* SeatDetailsV2.graphql.swift in Sources */,
 				80FFBEC52C4025A2005E958D /* UnlockTeamMutation.graphql.swift in Sources */,
 				80D37EBA2C48334F00997C6D /* Seat.swift in Sources */,

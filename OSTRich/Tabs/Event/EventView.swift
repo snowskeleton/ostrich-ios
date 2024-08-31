@@ -8,7 +8,6 @@
 import SwiftUI
 import SwiftData
 
-
 struct EventView: View {
     @Bindable var event: Event
     @State private var selectedTab = "Players"
@@ -19,18 +18,7 @@ struct EventView: View {
     }
     
     var body: some View {
-        Text(event.shortCode ?? "")
-        Text(event.status ?? "")
-        if let timer = event.gameStateAtRound?.currentRound?.timer {
-            RoundTimerView(timer: timer)
-        }
-        Text((event.gameStateAtRound?.currentRoundNumber.description) ?? "0")
-        
-        if UserDefaults.standard.bool(forKey: "showDebugValues") {
-            if round != nil {
-                Text("Round ID: \(round!.roundId)")
-            }
-        }
+        EventHeaderView(event: Binding<Event>.constant(event))
 
         VStack {
             Picker(selection: $selectedTab, label: Text("")) {
@@ -99,14 +87,14 @@ struct EventView: View {
                     action: { showEventDetails = true },
                     label: {
                         Image(systemName: "info.circle")
-                            .font(.largeTitle)
                             .foregroundColor(Color.secondary)
                     }
                 ).accessibilityLabel(("Event Details"))
             }
         }
-
-        .navigationTitle(Text(event.title))
+//        .navigationTitle(
+//            Text(event.title)
+//        )
     }
     
     fileprivate func updateEvent() {
@@ -140,5 +128,3 @@ struct EventView: View {
         
     }
 }
-
-
