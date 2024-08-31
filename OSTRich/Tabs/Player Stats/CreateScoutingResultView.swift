@@ -29,6 +29,8 @@ struct CreateScoutingResultView: View {
     @Query private var previousDecks: [ScoutingResult] = []
     @State private var selectedPreviousDeck: ScoutingResult?
     
+    @State private var isPresentingDeleteConfirmation = false
+    
     init(
         playingPlayer: Player,
         event: Event,
@@ -195,16 +197,18 @@ struct CreateScoutingResultView: View {
                     DatePicker("Event Date", selection: $date, displayedComponents: .date)
                 }
                 
-                Button(action: createScoutingResult) {
-                    Text("Save Scouting Result")
-                        .frame(maxWidth: .infinity, alignment: .center)
-                }
-                .disabled(deckName.isEmpty || formatName == "Please select")
+                Button("Save") { createScoutingResult() }
+                    .disabled(deckName.isEmpty || formatName == "Please select")
                 
                 if scoutingResult != nil {
-                    Button(action: deleteScoutingResult) {
-                        Text("Delete entry")
-                            .frame(maxWidth: .infinity, alignment: .center)
+                    Button("Delete Entry", role: .destructive) {
+                        isPresentingDeleteConfirmation = true
+                    }
+                    .confirmationDialog("Are you sure?",
+                                        isPresented: $isPresentingDeleteConfirmation) {
+                        Button("Delete Entry", role: .destructive) {
+                            deleteScoutingResult()
+                        }
                     }
                 }
             }
