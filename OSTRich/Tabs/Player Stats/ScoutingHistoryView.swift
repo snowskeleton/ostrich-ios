@@ -21,11 +21,16 @@ struct ScoutingHistoryAllPlayersView: View {
             return players.filter {
                 $0.safeName.lowercased().contains(searchText.lowercased()) ||
                 $0.stats.contains {
-                    $0.format.lowercased().contains(searchText.lowercased())
-                } ||
-                $0.stats.contains {
                     $0.deckName.lowercased().contains(searchText.lowercased())
                 }
+                // since this returns players, and not formats,
+                // searching by format returns all formats for each player who's
+                // played in the searched format
+                // TODO: fix
+//                ||
+//                $0.stats.contains {
+//                    $0.format.lowercased().contains(searchText.lowercased())
+//                }
             }
         }
     }
