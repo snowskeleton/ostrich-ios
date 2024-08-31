@@ -106,9 +106,29 @@ struct LoginView: View {
             }
         }
     }
-    
     fileprivate func loginServer() {
         Task {
+            if !showRegistration && ![email, password].contains("") {
+                let authTokens = await HTOService().login(email, password)
+                switch authTokens {
+                case .success(let creds):
+                    let ostrichAuthTokens = await HTOService().ostrichLogin(creds.refresh_token)
+                    switch ostrichAuthTokens {
+                    case .success(let ostrichCreds):
+                        await UserManager.shared.updateOSTRichToken(ostrichCreds)
+                        dismiss()
+                    case .failure(let error):
+                        print("Ostrich login failed:", error)
+                    }
+                case .failure(let error):
+                    print("Initial login failed:", error)
+                }
+            }
+        }
+    }
+//
+//    fileprivate func loginServer() {
+//        Task {
 //            if !showRegistration && ![email, password].contains("") {
 //                let authTokens = await HTOService().login(email, password)
 //                switch authTokens {
@@ -125,8 +145,9 @@ struct LoginView: View {
 //                    print(error)
 //                }
 //            }
-        }
-    }
+//        }
+//    }
+    
     fileprivate func login() {
         Task {
             if !showRegistration && ![email, password].contains("") {

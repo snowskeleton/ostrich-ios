@@ -79,6 +79,17 @@ class UserManager {
         }
     }
     
+    func refreshOSTRichToken() async {
+        if let token = UserManager.shared.currentUser?.ostrichToken {
+            switch await HTOService().ostrichRefreshLogin(token.refresh_token) {
+            case .success(let creds):
+                await UserManager.shared.updateOSTRichToken(creds)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     func refreshToken() async {
         if let token = UserManager.shared.currentUser?.token {
             switch await HTOService().refreshLogin(token.refresh_token) {
@@ -121,6 +132,18 @@ class UserManager {
         }
     }
     
+    func updateOSTRichToken(_ creds: OSTRichAuthCredentials.Response) async {
+        if var user = UserManager.shared.currentUser {
+            user.ostrichToken = Token(
+                access_token: creds.access_token,
+                refresh_token: creds.refresh_token,
+                expires_in: creds.expires_in
+            )
+            UserManager.shared.saveUser(user)
+            UserManager.shared.loadUser()
+        }
+    }
+    
     func logout() {
         if let user = UserManager.shared.currentUser {
             user.token = nil
@@ -148,6 +171,7 @@ class User: Codable {
     var password: String?
 
     var token: Token?
+    var ostrichToken: Token?
 
     init() { }
     init(from response: AuthCredentials.Response) {
