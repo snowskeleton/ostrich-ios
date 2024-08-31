@@ -11,80 +11,62 @@ struct EventDetail: View {
     var event: Event
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 10) {
+        List {
+            Section("Event Name") {
                 Text(event.title)
-                    .font(.largeTitle)
-                    .padding(.bottom, 10)
-                
-                if let pairingType = event.pairingType {
-                    HStack {
-                        Text("Pairing Type:")
-                            .fontWeight(.bold)
-                        Text(pairingType)
-                    }
-                }
-                
-                if let status = event.status {
-                    HStack {
-                        Text("Status:")
-                            .fontWeight(.bold)
-                        Text(status)
-                    }
-                }
-                
-                if let isOnline = event.isOnline {
-                    HStack {
-                        Text("Online:")
-                            .fontWeight(.bold)
-                        Text(isOnline ? "Yes" : "No")
-                    }
-                }
-                
-                if let createdBy = event.createdBy {
-                    HStack {
-                        Text("Created By:")
-                            .fontWeight(.bold)
-                        Text(createdBy)
-                    }
-                }
-                
-                HStack {
-                    Text("Required Team Size:")
-                        .fontWeight(.bold)
-                    Text("\(event.requiredTeamSize)")
-                }
-                
-                if let shortCode = event.shortCode {
-                    HStack {
-                        Text("Short Code:")
-                            .fontWeight(.bold)
-                        Text(shortCode)
-                    }
-                }
-                
-                if let scheduledStartTime = event.scheduledStartTime {
-                    HStack {
-                        Text("Scheduled Start:")
-                            .fontWeight(.bold)
-                        Text("\(scheduledStartTime)")
-                    }
-                }
-                
-                if let actualStartTime = event.actualStartTime {
-                    HStack {
-                        Text("Actual Start:")
-                            .fontWeight(.bold)
-                        Text("\(actualStartTime)")
-                    }
-                }
-                
-                Spacer()
             }
-            .padding()
-            .onAppear {
-                Analytics.track(.openedEventDetailsView)
+                
+            if let status = event.status {
+                Section("Status") {
+                    Text(status)
+                }
             }
+            
+            if let shortCode = event.shortCode {
+                Section("Join Code") {
+                    Text(shortCode)
+                }
+            }
+                
+            if let createdBy = event.createdBy {
+                Section("Host") {
+                    Text(createdBy)
+                }
+            }
+                
+            Section("Minimum Team Size") {
+                Text("\(event.requiredTeamSize)")
+            }
+                
+                
+            if let scheduledStartTime = event.scheduledStartTime {
+                Section("Scheduled Start") {
+                    Text("\(scheduledStartTime)")
+                }
+            }
+                
+            if let actualStartTime = event.actualStartTime {
+                Section("Actual Start") {
+                    Text("\(actualStartTime)")
+                }
+            }
+            
+            if let pairingType = event.pairingType {
+                Section("Pairing Type") {
+                    Text(pairingType)
+                }
+            }
+            
+            
+            if let isOnline = event.isOnline {
+                Section("Type") {
+                    Text(isOnline ? "Online" : "In Person")
+                }
+            }
+
+        }
+        .onAppear {
+            Analytics.track(.openedEventDetailsView)
         }
         .navigationTitle("Event Details")
     }
