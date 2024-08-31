@@ -43,6 +43,18 @@ enum RequestError: Error {
     case unauthorized
     case unexpectedStatusCode
     case unknown
+    case badGateway
+    case badRequest
+    case forbidden
+    case notFound
+    case methodNotAllowed
+    case requestTimeout
+    case tooManyRequests
+    case internalServerError
+    case notImplemented
+    case serviceUnavailable
+    case gatewayTimeout
+
 
     case emailInUse
     case ageRestriction
@@ -114,8 +126,18 @@ extension HTTPClient {
                     print("Error decoding response: \(serverError)")
                     return .failure(.decode)
                 }
-            case 401:
-                return .failure(.unauthorized)
+            case 400: return .failure(.badRequest)
+            case 401: return .failure(.unauthorized)
+            case 403: return .failure(.forbidden)
+            case 404: return .failure(.notFound)
+            case 405: return .failure(.methodNotAllowed)
+            case 408: return .failure(.requestTimeout)
+            case 429: return .failure(.tooManyRequests)
+            case 500: return .failure(.internalServerError)
+            case 501: return .failure(.notImplemented)
+            case 502: return .failure(.badGateway)
+            case 503: return .failure(.serviceUnavailable)
+            case 504: return .failure(.gatewayTimeout)
             default:
                 do {
                     let error =  try JSONDecoder().decode(HTTPError.self, from: data)
