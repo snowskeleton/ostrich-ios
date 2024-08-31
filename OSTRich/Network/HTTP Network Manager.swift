@@ -8,18 +8,6 @@
 import Foundation
 import SwiftUI
 
-func useCredsToLoginToOSTRichServer(_ refreshToken: String) {
-    Task {
-        let ostrichAuthTokens = await HTOService().ostrichLogin(refreshToken)
-        switch ostrichAuthTokens {
-        case .success(let ostrichCreds):
-            await UserManager.shared.updateOSTRichToken(ostrichCreds)
-        case .failure(let error):
-            print("Ostrich login failed:", error)
-        }
-    }
-}
-
 enum HTOEndpoint {
     case login(email: String, password: String)
     case refreshLogin(refreshToken: String)
@@ -87,22 +75,9 @@ extension HTOEndpoint: Endpoint {
                 "Content-Type": "application/json"
             ]
         case .ostrichRegisterDevice:
+            updateOSTRichTokenIfNecessary()
             guard let user = UserManager.shared.currentUser else {
                 print("No current user to log in")
-                return [:]
-            }
-            // try to refresh once
-            if user.ostrichTokenExpired {
-                if let refreshToken = user.ostrichToken?.refresh_token {
-                    useCredsToLoginToOSTRichServer(refreshToken)
-                } else {
-                    print("No token to refresh")
-                    return [:]
-                }
-            }
-            // check once more to make sure previous refresh worked
-            if user.ostrichTokenExpired {
-                print("Refresh failed")
                 return [:]
             }
             guard let accessToken = user.ostrichToken?.access_token else {
@@ -243,3 +218,13 @@ struct HTOService: HTTPClient, HTOServiceable {
         return await sendRequest(endpoint: HTOEndpoint.ostrichRegisterDevice(push_token: apns_token, device_id: device_id), responseModel: OSTRichRegisterDevice.Response.self)
     }
 }
+
+fileprivate func updateOSTRichTokenIfNecessary() {
+    Task {
+        let isOSTRichTokenRefreshed = await AsyncUserManager.shared.refreshOSTRichTokenIfNeeded()
+        if !isOSTRichTokenRefreshed {
+            print("Failed to refresh OSTRich token or no need to refresh")
+        }
+    }
+}
+

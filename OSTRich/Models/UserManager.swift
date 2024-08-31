@@ -12,7 +12,8 @@ actor AsyncUserManager {
     static let shared = AsyncUserManager()
     
     private var refreshTask: Task<Bool, Never>? = nil
-    
+    private var refreshOSTRichTask: Task<Bool, Never>? = nil
+
     func refreshTokenIfNeeded() async -> Bool {
         if let refreshTask = refreshTask {
             return await refreshTask.value
@@ -27,14 +28,34 @@ actor AsyncUserManager {
             
             await UserManager.shared.refreshToken()
             
-            // Ensure the user state is re-evaluated after the refresh.
-//            let user = UserManager.shared.currentUser
             return user.loggedIn == true && !user.tokenExpired
         }
         
         self.refreshTask = task
         return await task.value
     }
+    
+    func refreshOSTRichTokenIfNeeded() async -> Bool {
+        if let refreshOSTRichTask = refreshOSTRichTask {
+            return await refreshOSTRichTask.value
+        }
+        
+        let task = Task { () -> Bool in
+            defer { refreshOSTRichTask = nil }
+            
+            guard let user = UserManager.shared.currentUser, user.ostrichTokenExpired else {
+                return false // No need to refresh
+            }
+            
+            await UserManager.shared.refreshOSTRichToken()
+            
+            return user.ostrichLoggedIn == true && !user.ostrichTokenExpired
+        }
+        
+        self.refreshOSTRichTask = task
+        return await task.value
+    }
+
 }
 
 class UserManager {
@@ -192,6 +213,10 @@ class User: Codable {
     }
 
     var loggedIn: Bool {
+        return self.token != nil
+    }
+    
+    var ostrichLoggedIn: Bool {
         return self.token != nil
     }
     

@@ -106,6 +106,7 @@ struct LoginView: View {
             }
         }
     }
+    
     fileprivate func loginServer() {
         Task {
             if !showRegistration && ![email, password].contains("") {
