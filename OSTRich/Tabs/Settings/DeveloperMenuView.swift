@@ -46,6 +46,14 @@ struct DeveloperMenuView: View {
                 NavigationLink(destination: PendingNotificationsView()) { Text("Pending Notifications") }
             }
             
+            Section("In-App Purchases") {
+                NavigationLink {
+                    FakePaywalledView()
+                } label: {
+                    Text("Some Paywall")
+                }
+            }
+            
             Section("Actions") {
                 Button("Crash!") { showCrashConfirmation = true }
                     .confirmationDialog(
@@ -57,16 +65,9 @@ struct DeveloperMenuView: View {
                                     fatalError()
                                 }
                         }
-                Button("Clear event history") { deleteAll() }
+                Button("Clear event history", role: .destructive) { deleteAll() }
             }
             
-            Section("In-App Purchases") {
-                NavigationLink {
-                    FakePaywalledView()
-                } label: {
-                    Text("Some Paywall")
-                }
-            }
         }
         .onAppear {
             Analytics.track(.openedDeveloperMenu)
