@@ -46,6 +46,7 @@ struct DeveloperMenuView: View {
                 NavigationLink(destination: PendingNotificationsView()) { Text("Pending Notifications") }
             }
             
+            #if DEBUG
             Section("In-App Purchases") {
                 NavigationLink {
                     FakePaywalledView()
@@ -53,6 +54,7 @@ struct DeveloperMenuView: View {
                     Text("Some Paywall")
                 }
             }
+            #endif
             
             Section("Actions") {
                 Button("Crash!") { showCrashConfirmation = true }

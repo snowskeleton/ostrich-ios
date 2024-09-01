@@ -9,6 +9,7 @@ import SwiftUI
 import RevenueCat
 import RevenueCatUI
 
+#if DEBUG
 struct FakePaywalledView: View {
     @State private var showDebugOverlay = false
     
@@ -35,3 +36,4 @@ struct FakePaywalledView: View {
         .debugRevenueCatOverlay(isPresented: $showDebugOverlay)
     }
 }
+#endif
