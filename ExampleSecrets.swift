@@ -13,3 +13,7 @@
 //    static let appKey = ""
 //    static let host = ""
 //}
+
+//struct RevenueCatSecrets {
+//    static let apiKey = ""
+//}
