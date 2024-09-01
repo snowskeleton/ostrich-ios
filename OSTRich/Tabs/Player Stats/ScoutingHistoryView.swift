@@ -7,6 +7,8 @@
 
 import SwiftUI
 import SwiftData
+import RevenueCat
+import RevenueCatUI
 
 struct ScoutingHistoryAllPlayersView: View {
     @Environment(\.modelContext) private var context
@@ -59,5 +61,16 @@ struct ScoutingHistoryAllPlayersView: View {
         .onAppear {
             Analytics.track(.openedScoutingHistoryAllPlayersView)
         }
+        .presentPaywallIfNeeded(
+            requiredEntitlementIdentifier: "pro",
+            purchaseCompleted: { customerInfo in
+                print("Purchase completed: \(customerInfo.entitlements)")
+            },
+            restoreCompleted: { customerInfo in
+                // Paywall will be dismissed automatically if "pro" is now active.
+                print("Purchases restored: \(customerInfo.entitlements)")
+            }
+        )
+
     }
 }

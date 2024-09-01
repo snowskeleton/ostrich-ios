@@ -28,6 +28,7 @@
 		8051C3F82C84FA1D0039E257 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 8051C3F72C84FA1D0039E257 /* RevenueCat */; };
 		8051C3FA2C84FA1D0039E257 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8051C3F92C84FA1D0039E257 /* RevenueCatUI */; };
 		8051C3FD2C84FA540039E257 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8051C3FC2C84FA540039E257 /* StoreKit.framework */; };
+		8051C3FF2C84FF2B0039E257 /* FakePaywalledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8051C3FE2C84FF2B0039E257 /* FakePaywalledView.swift */; };
 		8053FE5C2C7FB4F0005A10BD /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8053FE5B2C7FB4F0005A10BD /* Analytics.swift */; };
 		8064DF842C8381700017B088 /* EventHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064DF832C8381700017B088 /* EventHeaderView.swift */; };
 		8064DF862C8387830017B088 /* PendingNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064DF852C8387830017B088 /* PendingNotificationsView.swift */; };
@@ -408,6 +409,7 @@
 		803D6BE62BFE497600CEB9F2 /* OSTRich.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OSTRich.entitlements; sourceTree = "<group>"; };
 		8046EA482AA64E8B00578539 /* HTTP Network Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTP Network Manager.swift"; sourceTree = "<group>"; };
 		8051C3FC2C84FA540039E257 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		8051C3FE2C84FF2B0039E257 /* FakePaywalledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakePaywalledView.swift; sourceTree = "<group>"; };
 		8053FE582C7FA806005A10BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8053FE5B2C7FB4F0005A10BD /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		8064DF832C8381700017B088 /* EventHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHeaderView.swift; sourceTree = "<group>"; };
@@ -644,6 +646,7 @@
 				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				80CCA5552C7E240300B90BF5 /* ChangeNameView.swift */,
 				806843132C383AE000264D1A /* NetworkLogsView.swift */,
+				8051C3FE2C84FF2B0039E257 /* FakePaywalledView.swift */,
 				80CCA5512C7D4E7200B90BF5 /* NotificationPermissionsView.swift */,
 				8064DF852C8387830017B088 /* PendingNotificationsView.swift */,
 			);
@@ -1245,6 +1248,7 @@
 				80FFBEA22C4025A2005E958D /* Email_String_format_email.swift in Sources */,
 				80FFBEA32C4025A2005E958D /* Queue.graphql.swift in Sources */,
 				80FFBEA42C4025A2005E958D /* ReservationDetails.graphql.swift in Sources */,
+				8051C3FF2C84FF2B0039E257 /* FakePaywalledView.swift in Sources */,
 				80FFBEA52C4025A2005E958D /* LockTeamMutation.graphql.swift in Sources */,
 				80FFBEA62C4025A2005E958D /* EndEventV2Mutation.graphql.swift in Sources */,
 				80FFBEA72C4025A2005E958D /* JoinEventWithShortCodeMutation.graphql.swift in Sources */,

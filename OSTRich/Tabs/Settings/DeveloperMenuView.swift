@@ -59,6 +59,14 @@ struct DeveloperMenuView: View {
                         }
                 Button("Clear event history") { deleteAll() }
             }
+            
+            Section("In-App Purchases") {
+                NavigationLink {
+                    FakePaywalledView()
+                } label: {
+                    Text("Some Paywall")
+                }
+            }
         }
         .onAppear {
             Analytics.track(.openedDeveloperMenu)
