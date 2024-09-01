@@ -10,17 +10,28 @@ import RevenueCat
 import RevenueCatUI
 
 struct FakePaywalledView: View {
+    @State private var showDebugOverlay = false
+    
     var body: some View {
-        Text("You broke through the paywall!")
-            .presentPaywallIfNeeded(
-                requiredEntitlementIdentifier: "pro",
-                purchaseCompleted: { customerInfo in
-                    print("Purchase completed: \(customerInfo.entitlements)")
-                },
-                restoreCompleted: { customerInfo in
-                    // Paywall will be dismissed automatically if "pro" is now active.
-                    print("Purchases restored: \(customerInfo.entitlements)")
-                }
-            )
+        List {
+            Button {
+                showDebugOverlay = true
+            } label: {
+                Text("Debug Overlay")
+            }
+            
+            Text("You broke through the paywall!")
+                .presentPaywallIfNeeded(
+                    requiredEntitlementIdentifier: "pro",
+                    purchaseCompleted: { customerInfo in
+                        print("Purchase completed: \(customerInfo.entitlements)")
+                    },
+                    restoreCompleted: { customerInfo in
+                        // Paywall will be dismissed automatically if "pro" is now active.
+                        print("Purchases restored: \(customerInfo.entitlements)")
+                    }
+                )
+        }
+        .debugRevenueCatOverlay(isPresented: $showDebugOverlay)
     }
 }

@@ -8,6 +8,8 @@
 
 import SwiftUI
 import SwiftData
+import RevenueCat
+import RevenueCatUI
 
 struct SubmitMatchView: View {
     @Environment(\.dismiss) var dismiss
@@ -16,6 +18,9 @@ struct SubmitMatchView: View {
     @State private var showProgressView = false
     
     @State private var teamWins: [String: Int] = [:]
+    
+    @State private var showScoutingResults: Bool = true
+    @State private var showPaywall: Bool = false
     
     private var ableToSubmitMatch: Bool {
         // if we're the TO, we can submit any match regardless of whether or not it's already been submitted
@@ -83,8 +88,33 @@ struct SubmitMatchView: View {
                     }
                 }
                 
-                ForEach(match.teams.sorted(by: { $0.teamId < $1.teamId }), id: \.teamId) { team in
-                    ScoutingResultsForTeamView(team: team)
+                if showScoutingResults {
+                    ForEach(match.teams.sorted(by: { $0.teamId < $1.teamId }), id: \.teamId) { team in
+                        ScoutingResultsForTeamView(team: team)
+                    }
+                } else {
+                    VStack {
+                        Text("Scouting results are only available to Pro users.")
+                            .multilineTextAlignment(.center)
+                            .padding()
+                        
+                        Button {
+                            showPaywall = true
+                        } label: {
+                            Text("Subscribe to Pro")
+                                .font(.headline)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                        .padding(.top, 20)
+                        .sheet(isPresented: $showPaywall) {
+                            PaywallView()
+                        }
+                    }
+                    .padding()
                 }
             }
             .navigationTitle("Submit Match Result")
@@ -96,6 +126,16 @@ struct SubmitMatchView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity) // 1
                     .background(Color.gray)
                     .opacity(0.5)
+            }
+        }
+        .onAppear {
+            Task {
+                do {
+                    let customerInfo = try await Purchases.shared.customerInfo()
+                    self.showScoutingResults = customerInfo.entitlements["pro"]?.isActive == true ? true : false
+                } catch {
+                    print("\(error)")
+                }
             }
         }
     }
