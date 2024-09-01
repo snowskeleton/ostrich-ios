@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import Aptabase
+import RevenueCat
 
 @main
 struct OSTRichApp: App {
@@ -19,6 +20,9 @@ struct OSTRichApp: App {
             appKey: AptabaseSecrets.appKey,
             with: InitOptions(host: AptabaseSecrets.host)
         )
+        
+        Purchases.logLevel = .debug
+        Purchases.configure(withAPIKey: RevenueCatSecrets.apiKey)
     }
 
     var body: some Scene {

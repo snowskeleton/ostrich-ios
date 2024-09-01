@@ -1,5 +1,5 @@
 {
-  "originHash" : "290105dd698159be532a9490c586f5b66b4ff2ec63ce157abdbc1fd1134cf3b0",
+  "originHash" : "b8efa2806716e20d2e66481b0f84b12ca0ff31f136fef11bc91832214d40a4b2",
   "pins" : [
     {
       "identity" : "apollo-ios",
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "73579250784f7040aad28ec376a0ddfcdaa171cf",
         "version" : "0.3.10"
+      }
+    },
+    {
+      "identity" : "purchases-ios-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RevenueCat/purchases-ios-spm.git",
+      "state" : {
+        "revision" : "a7371c863ef923c34fd340f95a7fe27de8367c76",
+        "version" : "5.3.1"
       }
     },
     {

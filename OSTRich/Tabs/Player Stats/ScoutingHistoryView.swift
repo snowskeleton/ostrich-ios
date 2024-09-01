@@ -7,6 +7,8 @@
 
 import SwiftUI
 import SwiftData
+import RevenueCat
+import RevenueCatUI
 
 struct ScoutingHistoryAllPlayersView: View {
     @Environment(\.modelContext) private var context
@@ -14,6 +16,8 @@ struct ScoutingHistoryAllPlayersView: View {
     
     @State private var isPresented: Bool = false
     @State private var searchText: String = ""
+    @State private var showScoutingResults: Bool = true
+    @State private var showPaywall: Bool = false
     var searchablePlayers: [LocalPlayer] {
         if searchText.isEmpty {
             return players
@@ -46,18 +50,58 @@ struct ScoutingHistoryAllPlayersView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(searchablePlayers, id: \.personaId) { player in
-                    Section(player.safeName) {
-                        ScoutingHistoryCollapsableView(player: player)
+            
+            if showScoutingResults {
+                List {
+                    ForEach(searchablePlayers, id: \.personaId) { player in
+                        Section(player.safeName) {
+                            ScoutingHistoryCollapsableView(player: player)
+                        }
                     }
                 }
+                .navigationTitle("Scouted Players")
+            } else {
+                Button {
+                    showPaywall = true
+                } label: {
+                    Text("Subscribe to Pro")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding(.top, 20)
+                .sheet(isPresented: $showPaywall) {
+                    PaywallView()
+                }
+
             }
-            .navigationTitle("Scouted Players")
+                
         }
         .searchable(text: $searchText, isPresented: $isPresented)
         .onAppear {
+            Task {
+                do {
+                    let customerInfo = try await Purchases.shared.customerInfo()
+                    self.showScoutingResults = customerInfo.entitlements["pro"]?.isActive == true ? true : false
+                } catch {
+                    print("\(error)")
+                }
             Analytics.track(.openedScoutingHistoryAllPlayersView)
+            }
         }
+        .presentPaywallIfNeeded(
+            requiredEntitlementIdentifier: "pro",
+            purchaseCompleted: { customerInfo in
+                print("Purchase completed: \(customerInfo.entitlements)")
+            },
+            restoreCompleted: { customerInfo in
+                // Paywall will be dismissed automatically if "pro" is now active.
+                print("Purchases restored: \(customerInfo.entitlements)")
+            }
+        )
+
     }
 }

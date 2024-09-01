@@ -25,6 +25,10 @@
 		803D6BE32BFE416F00CEB9F2 /* View+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D6BDF2BFE416F00CEB9F2 /* View+Notifications.swift */; };
 		803D6BE52BFE41EA00CEB9F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */; };
 		8046EA492AA64E8B00578539 /* HTTP Network Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA482AA64E8B00578539 /* HTTP Network Manager.swift */; };
+		8051C3F82C84FA1D0039E257 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 8051C3F72C84FA1D0039E257 /* RevenueCat */; };
+		8051C3FA2C84FA1D0039E257 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8051C3F92C84FA1D0039E257 /* RevenueCatUI */; };
+		8051C3FD2C84FA540039E257 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8051C3FC2C84FA540039E257 /* StoreKit.framework */; };
+		8051C3FF2C84FF2B0039E257 /* FakePaywalledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8051C3FE2C84FF2B0039E257 /* FakePaywalledView.swift */; };
 		8053FE5C2C7FB4F0005A10BD /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8053FE5B2C7FB4F0005A10BD /* Analytics.swift */; };
 		8064DF842C8381700017B088 /* EventHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064DF832C8381700017B088 /* EventHeaderView.swift */; };
 		8064DF862C8387830017B088 /* PendingNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064DF852C8387830017B088 /* PendingNotificationsView.swift */; };
@@ -404,6 +408,8 @@
 		803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		803D6BE62BFE497600CEB9F2 /* OSTRich.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OSTRich.entitlements; sourceTree = "<group>"; };
 		8046EA482AA64E8B00578539 /* HTTP Network Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTP Network Manager.swift"; sourceTree = "<group>"; };
+		8051C3FC2C84FA540039E257 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		8051C3FE2C84FF2B0039E257 /* FakePaywalledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakePaywalledView.swift; sourceTree = "<group>"; };
 		8053FE582C7FA806005A10BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8053FE5B2C7FB4F0005A10BD /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		8064DF832C8381700017B088 /* EventHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHeaderView.swift; sourceTree = "<group>"; };
@@ -613,8 +619,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8051C3FA2C84FA1D0039E257 /* RevenueCatUI in Frameworks */,
 				80FFBDEA2C4020C9005E958D /* Apollo in Frameworks */,
+				8051C3FD2C84FA540039E257 /* StoreKit.framework in Frameworks */,
 				80CCA55B2C7F9A9900B90BF5 /* Aptabase in Frameworks */,
+				8051C3F82C84FA1D0039E257 /* RevenueCat in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,6 +646,7 @@
 				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				80CCA5552C7E240300B90BF5 /* ChangeNameView.swift */,
 				806843132C383AE000264D1A /* NetworkLogsView.swift */,
+				8051C3FE2C84FF2B0039E257 /* FakePaywalledView.swift */,
 				80CCA5512C7D4E7200B90BF5 /* NotificationPermissionsView.swift */,
 				8064DF852C8387830017B088 /* PendingNotificationsView.swift */,
 			);
@@ -664,6 +674,7 @@
 				80B8E12A2AB665B400845ECC /* queries */,
 				803AECEE2AA26B2200CF03EB /* OSTRich */,
 				8080F1F82C80D34D00A86C14 /* OSTRichTests */,
+				8051C3FB2C84FA540039E257 /* Frameworks */,
 				803AECED2AA26B2200CF03EB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -717,6 +728,14 @@
 				803D6BDF2BFE416F00CEB9F2 /* View+Notifications.swift */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		8051C3FB2C84FA540039E257 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8051C3FC2C84FA540039E257 /* StoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		806843162C38653D00264D1A /* Network */ = {
@@ -1057,6 +1076,8 @@
 			packageProductDependencies = (
 				80FFBDE92C4020C9005E958D /* Apollo */,
 				80CCA55A2C7F9A9900B90BF5 /* Aptabase */,
+				8051C3F72C84FA1D0039E257 /* RevenueCat */,
+				8051C3F92C84FA1D0039E257 /* RevenueCatUI */,
 			);
 			productName = "Betrayer App";
 			productReference = 803AECEC2AA26B2200CF03EB /* OSTRich.app */;
@@ -1116,6 +1137,7 @@
 			packageReferences = (
 				80FFBDE82C4020C9005E958D /* XCRemoteSwiftPackageReference "apollo-ios" */,
 				80CCA5592C7F9A9900B90BF5 /* XCRemoteSwiftPackageReference "aptabase-swift" */,
+				8051C3F62C84FA1D0039E257 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */,
 			);
 			productRefGroup = 803AECED2AA26B2200CF03EB /* Products */;
 			projectDirPath = "";
@@ -1226,6 +1248,7 @@
 				80FFBEA22C4025A2005E958D /* Email_String_format_email.swift in Sources */,
 				80FFBEA32C4025A2005E958D /* Queue.graphql.swift in Sources */,
 				80FFBEA42C4025A2005E958D /* ReservationDetails.graphql.swift in Sources */,
+				8051C3FF2C84FF2B0039E257 /* FakePaywalledView.swift in Sources */,
 				80FFBEA52C4025A2005E958D /* LockTeamMutation.graphql.swift in Sources */,
 				80FFBEA62C4025A2005E958D /* EndEventV2Mutation.graphql.swift in Sources */,
 				80FFBEA72C4025A2005E958D /* JoinEventWithShortCodeMutation.graphql.swift in Sources */,
@@ -1787,6 +1810,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8051C3F62C84FA1D0039E257 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.3.1;
+			};
+		};
 		80CCA5592C7F9A9900B90BF5 /* XCRemoteSwiftPackageReference "aptabase-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/aptabase/aptabase-swift";
@@ -1806,6 +1837,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8051C3F72C84FA1D0039E257 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8051C3F62C84FA1D0039E257 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCat;
+		};
+		8051C3F92C84FA1D0039E257 /* RevenueCatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8051C3F62C84FA1D0039E257 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCatUI;
+		};
 		80CCA55A2C7F9A9900B90BF5 /* Aptabase */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 80CCA5592C7F9A9900B90BF5 /* XCRemoteSwiftPackageReference "aptabase-swift" */;

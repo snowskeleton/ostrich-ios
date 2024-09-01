@@ -32,8 +32,10 @@ struct SettingsView: View {
                     } label: {
                         Text("Login")
                     }
-                    Button("Logout") {
-                        logout()
+                    if showLogout {
+                        Button("Logout") {
+                            logout()
+                        }
                     }
                 }
                 
