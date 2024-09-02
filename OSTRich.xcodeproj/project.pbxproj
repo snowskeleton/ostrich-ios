@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		800DB1832C862CCC008F1FDC /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800DB1822C862CCC008F1FDC /* BundleExtension.swift */; };
+		800DB1852C862F4E008F1FDC /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800DB1842C862F4E008F1FDC /* LicenseView.swift */; };
+		800DB18D2C8630DB008F1FDC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 800DB18C2C8630DB008F1FDC /* LICENSE */; };
 		80249EC92C7675B400A6A1E6 /* RoundTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249EC82C7675B400A6A1E6 /* RoundTimerView.swift */; };
 		80249ECB2C76789900A6A1E6 /* ScoutingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249ECA2C76789900A6A1E6 /* ScoutingResult.swift */; };
 		80249ECF2C767A3500A6A1E6 /* ScoutingHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249ECE2C767A3500A6A1E6 /* ScoutingHistoryView.swift */; };
@@ -395,6 +397,8 @@
 
 /* Begin PBXFileReference section */
 		800DB1822C862CCC008F1FDC /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
+		800DB1842C862F4E008F1FDC /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
+		800DB18C2C8630DB008F1FDC /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		80249EC82C7675B400A6A1E6 /* RoundTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundTimerView.swift; sourceTree = "<group>"; };
 		80249ECA2C76789900A6A1E6 /* ScoutingResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingResult.swift; sourceTree = "<group>"; };
 		80249ECE2C767A3500A6A1E6 /* ScoutingHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingHistoryView.swift; sourceTree = "<group>"; };
@@ -654,6 +658,7 @@
 			children = (
 				80A5722E2BE2C78E00D8D888 /* SettingsView.swift */,
 				8051C4042C861DF50039E257 /* AboutView.swift */,
+				800DB1842C862F4E008F1FDC /* LicenseView.swift */,
 				80A152302C8620DE00D60561 /* PrivacyPolicyView.swift */,
 				806BF5FA2C80F02700306B79 /* AnalyticsView.swift */,
 				80CCA5572C7F8A7500B90BF5 /* DeveloperMenuView.swift */,
@@ -685,6 +690,7 @@
 				80FFBE7F2C4025A2005E958D /* gamestateschema */,
 				80EFCB992C02621C004FEF9F /* Secrets.swift */,
 				80C5D4BA2C09263100503FD9 /* ExampleSecrets.swift */,
+				800DB18C2C8630DB008F1FDC /* LICENSE */,
 				80A152322C86231600D60561 /* README.md */,
 				80A152342C86233900D60561 /* PRIVACY_POLICY.md */,
 				80B8E12A2AB665B400845ECC /* queries */,
@@ -1182,6 +1188,7 @@
 				80B8E13D2AB8C24300845ECC /* dropSelf.query in Resources */,
 				80FFBDE72C401FA8005E958D /* gamestateschema.json in Resources */,
 				802BCBDA2AC215D300E1501F /* submitMatch.query in Resources */,
+				800DB18D2C8630DB008F1FDC /* LICENSE in Resources */,
 				803AECF72AA26B2300CF03EB /* Preview Assets.xcassets in Resources */,
 				80B8E13F2AB8C5D300845ECC /* dropTeamV2.query in Resources */,
 				80FFBDE32C38A1E4005E958D /* getGameStateV2AtRound.query in Resources */,
@@ -1374,6 +1381,7 @@
 				80FFBEED2C4025A2005E958D /* GameResultReportedSubscription.graphql.swift in Sources */,
 				80FFBEEE2C4025A2005E958D /* CreateNextRoundV2Mutation.graphql.swift in Sources */,
 				80D37EA62C48329500997C6D /* Registration.swift in Sources */,
+				800DB1852C862F4E008F1FDC /* LicenseView.swift in Sources */,
 				80FFBEEF2C4025A2005E958D /* RoundDetails.graphql.swift in Sources */,
 				80FFBEF02C4025A2005E958D /* EventFormat.graphql.swift in Sources */,
 				80FFBEF12C4025A2005E958D /* SchemaMetadata.graphql.swift in Sources */,

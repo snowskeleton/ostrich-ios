@@ -103,6 +103,15 @@ struct SettingsView: View {
                             }
                         }
                     }
+                    
+                    NavigationLink {
+                        LicenseView()
+                    } label: {
+                        HStack {
+                            Image(systemName: "doc.text")
+                            Text("Licenses & Libraries")
+                        }
+                    }
                 }
                 
                 Section {
