@@ -21,6 +21,7 @@ struct SubmitMatchView: View {
     
     @State private var showScoutingResults: Bool = true
     @State private var showPaywall: Bool = false
+    @State private var timer: Timer?
     
     private var ableToSubmitMatch: Bool {
         // if we're the TO, we can submit any match regardless of whether or not it's already been submitted
@@ -129,14 +130,8 @@ struct SubmitMatchView: View {
             }
         }
         .onAppear {
-            Task {
-                do {
-                    let customerInfo = try await Purchases.shared.customerInfo()
-                    self.showScoutingResults = customerInfo.entitlements["pro"]?.isActive == true ? true : false
-                } catch {
-                    print("\(error)")
-                }
-            }
+            calculatePaywall()
+            startPaywallTimer()
         }
     }
     
@@ -182,6 +177,33 @@ struct SubmitMatchView: View {
             }
         }
     }
+    
+    fileprivate func calculatePaywall() {
+        Task {
+            do {
+                let customerInfo = try await Purchases.shared.customerInfo()
+                self.showScoutingResults = customerInfo.entitlements["pro"]?.isActive == true ? true : false
+            } catch {
+                print("\(error)")
+            }
+        }
+    }
+    
+    private func startPaywallTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+            if !showScoutingResults {
+                calculatePaywall()
+            } else {
+                stopPaywallTimer()
+            }
+        }
+    }
+    
+    private func stopPaywallTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+
 }
 
 
