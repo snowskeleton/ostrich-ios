@@ -16,8 +16,12 @@ struct ScoutingHistoryAllPlayersView: View {
     
     @State private var isPresented: Bool = false
     @State private var searchText: String = ""
+    
+    // paywall stuff
     @State private var showScoutingResults: Bool = true
     @State private var showPaywall: Bool = false
+    @State private var timer: Timer?
+    
     var searchablePlayers: [LocalPlayer] {
         if searchText.isEmpty {
             return players
@@ -82,15 +86,12 @@ struct ScoutingHistoryAllPlayersView: View {
         }
         .searchable(text: $searchText, isPresented: $isPresented)
         .onAppear {
-            Task {
-                do {
-                    let customerInfo = try await Purchases.shared.customerInfo()
-                    self.showScoutingResults = customerInfo.entitlements["pro"]?.isActive == true ? true : false
-                } catch {
-                    print("\(error)")
-                }
+            calculatePaywall()
+            startPaywallTimer()
             Analytics.track(.openedScoutingHistoryAllPlayersView)
-            }
+        }
+        .onDisappear {
+            stopPaywallTimer()
         }
         .presentPaywallIfNeeded(
             requiredEntitlementIdentifier: "pro",
@@ -104,4 +105,31 @@ struct ScoutingHistoryAllPlayersView: View {
         )
 
     }
+    
+    fileprivate func calculatePaywall() {
+        Task {
+            do {
+                let customerInfo = try await Purchases.shared.customerInfo()
+                self.showScoutingResults = customerInfo.entitlements["pro"]?.isActive == true ? true : false
+            } catch {
+                print("\(error)")
+            }
+        }
+    }
+    
+    private func startPaywallTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+            if !showScoutingResults {
+                calculatePaywall()
+            } else {
+                stopPaywallTimer()
+            }
+        }
+    }
+    
+    private func stopPaywallTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+
 }
