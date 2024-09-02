@@ -25,7 +25,7 @@ class LocalPlayer: Identifiable {
     }
 
     var formatsPlayed: [String] {
-        return stats.map { $0.format }
+        return Array(Set(stats.map { $0.format }))
     }
     
     init(
