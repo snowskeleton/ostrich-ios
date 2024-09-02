@@ -10,42 +10,45 @@ import SwiftUI
 
 
 struct SettingsView: View {
-//    @Environment(\.modelContext) private var context
-    @State private var showLogout = false
+    @Environment(\.colorScheme) var colorScheme
+
+    @State private var loggedIn = false
     @AppStorage("showDeveloperMenu") var showDeveloperMenu = false
 
     init() {
-        _showLogout = .init(initialValue: UserManager.shared.currentUser?.loggedIn ?? false)
+        _loggedIn = .init(initialValue: UserManager.shared.currentUser?.loggedIn ?? false)
     }
 
     var body: some View {
         NavigationStack {
             List {
-                Section("Account") {
-                    NavigationLink {
-                        ChangeNameView()
-                    } label: {
-                        Text("Change Name")
-                    }
+                Section {
                     NavigationLink {
                         LoginView()
                     } label: {
-                        Text("Login")
-                    }
-                    if showLogout {
-                        Button("Logout") {
-                            logout()
+                        HStack {
+                            Image(systemName: "person.crop.circle")
+                            Text("Login")
                         }
                     }
-                }
-                
-                Toggle("Show Developer Menu", isOn: $showDeveloperMenu)
-                
-                if showDeveloperMenu {
-                    NavigationLink {
-                        DeveloperMenuView()
-                    } label: {
-                        Text("Developer Menu")
+                    if loggedIn {
+                        NavigationLink {
+                            ChangeNameView()
+                        } label: {
+                            HStack {
+                                Image(systemName: "pencil")
+                                Text("Change Name")
+                            }
+                        }
+                        
+                        Button(action: {
+                            logout()
+                        }) {
+                            HStack {
+                                Image(systemName: "arrow.left.circle")
+                                Text("Logout")
+                            }
+                        }
                     }
                 }
                 
@@ -53,9 +56,54 @@ struct SettingsView: View {
                     NavigationLink {
                         AnalyticsView()
                     } label: {
-                        Text("Analytics")
+                        HStack {
+                            Image(systemName: "chart.bar")
+                            Text("Analytics")
+                        }
                     }
                 }
+                
+                Section {
+                    NavigationLink {
+                        AboutView()
+                    } label: {
+                        HStack {
+                            Image(systemName: "list.clipboard")
+                            Text("About")
+                        }
+                    }
+                    NavigationLink {
+                        PrivacyPolicyView()
+                    } label: {
+                        Text("Privacy Policy")
+                    }
+                }
+                
+                Section {
+                    Link(destination: URL(string: "https://github.com/snowskeleton/ostrich-ios")!) {
+                        HStack {
+                            HStack {
+                                Image(colorScheme == .dark ? "github-mark-white" : "github-mark")
+                                    .resizable()
+                                    .frame(width: 24, height: 24) // Adjust the size to fit your design
+                                
+                                Text("View on GitHub")
+                            }
+                        }
+                    }
+                }
+                
+                Section {
+                    NavigationLink {
+                        DeveloperMenuView()
+                    } label: {
+                        HStack {
+                            Image(systemName: "hammer")
+                            Text("Developer Menu")
+                        }
+                    }
+                }
+                
             }
         }
         .onAppear {
@@ -67,4 +115,8 @@ struct SettingsView: View {
         UserManager.shared.logout()
     }
 
+}
+
+#Preview {
+    SettingsView()
 }
