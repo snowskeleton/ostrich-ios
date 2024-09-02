@@ -31,6 +31,7 @@ struct SettingsView: View {
                             Text("Login")
                         }
                     }
+                    
                     if loggedIn {
                         NavigationLink {
                             ChangeNameView()
@@ -72,6 +73,7 @@ struct SettingsView: View {
                             Text("About")
                         }
                     }
+                    
                     NavigationLink {
                         PrivacyPolicyView()
                     } label: {
@@ -89,6 +91,7 @@ struct SettingsView: View {
                             Text("Support")
                         }
                     }
+                    
                     Link(destination: URL(string: "https://github.com/snowskeleton/ostrich-ios")!) {
                         HStack {
                             HStack {
