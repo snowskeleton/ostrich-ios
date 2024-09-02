@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		800DB1832C862CCC008F1FDC /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800DB1822C862CCC008F1FDC /* BundleExtension.swift */; };
 		80249EC92C7675B400A6A1E6 /* RoundTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249EC82C7675B400A6A1E6 /* RoundTimerView.swift */; };
 		80249ECB2C76789900A6A1E6 /* ScoutingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249ECA2C76789900A6A1E6 /* ScoutingResult.swift */; };
 		80249ECF2C767A3500A6A1E6 /* ScoutingHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249ECE2C767A3500A6A1E6 /* ScoutingHistoryView.swift */; };
@@ -393,6 +394,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		800DB1822C862CCC008F1FDC /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
 		80249EC82C7675B400A6A1E6 /* RoundTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundTimerView.swift; sourceTree = "<group>"; };
 		80249ECA2C76789900A6A1E6 /* ScoutingResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingResult.swift; sourceTree = "<group>"; };
 		80249ECE2C767A3500A6A1E6 /* ScoutingHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingHistoryView.swift; sourceTree = "<group>"; };
@@ -714,6 +716,7 @@
 				80D37EA02C48322F00997C6D /* Models */,
 				806843162C38653D00264D1A /* Network */,
 				80FFBF0A2C402D41005E958D /* KeychainSwiftDistrib.swift */,
+				800DB1822C862CCC008F1FDC /* BundleExtension.swift */,
 				80CCA54F2C7D4A2500B90BF5 /* Notifications.swift */,
 				8053FE5B2C7FB4F0005A10BD /* Analytics.swift */,
 				80FFBDEB2C4020D0005E958D /* GameState.graphql */,
@@ -1306,6 +1309,7 @@
 				80FFBEC12C4025A2005E958D /* SubmitResultsAndCertifyRoundV2Mutation.graphql.swift in Sources */,
 				80FFBEC22C4025A2005E958D /* TeamV2.graphql.swift in Sources */,
 				80FFBEC32C4025A2005E958D /* EventPage.graphql.swift in Sources */,
+				800DB1832C862CCC008F1FDC /* BundleExtension.swift in Sources */,
 				8064DF842C8381700017B088 /* EventHeaderView.swift in Sources */,
 				80FFBEC42C4025A2005E958D /* SeatDetailsV2.graphql.swift in Sources */,
 				80FFBEC52C4025A2005E958D /* UnlockTeamMutation.graphql.swift in Sources */,

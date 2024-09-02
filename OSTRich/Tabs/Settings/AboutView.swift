@@ -24,20 +24,6 @@ struct AboutView: View {
     }
 }
 
-extension Bundle {
-    fileprivate var appName: String           { getInfo("CFBundleName") }
-    fileprivate var appBuild: String          { getInfo("CFBundleVersion") }
-    fileprivate var appVersionLong: String    { getInfo("CFBundleShortVersionString") }
-    fileprivate var copyright: String         { getInfo("NSHumanReadableCopyright").replacingOccurrences(of: "\\\\n", with: "\n") }
-    
-    //    fileprivate var displayName: String       { getInfo("CFBundleDisplayName") }
-    //    fileprivate var language: String          { getInfo("CFBundleDevelopmentRegion") }
-    //    fileprivate var identifier: String        { getInfo("CFBundleIdentifier") }
-    //public var appVersionShort: String { getInfo("CFBundleShortVersion") }
-    
-    fileprivate func getInfo(_ str: String) -> String { infoDictionary?[str] as? String ?? "⚠️" }
-}
-
 #Preview {
     AboutView()
 }

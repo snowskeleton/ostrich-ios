@@ -83,6 +83,12 @@ struct SettingsView: View {
                 }
                 
                 Section {
+                    Link(destination: supportEmailURL()) {
+                        HStack {
+                            Image(systemName: "envelope")
+                            Text("Support")
+                        }
+                    }
                     Link(destination: URL(string: "https://github.com/snowskeleton/ostrich-ios")!) {
                         HStack {
                             HStack {
@@ -117,6 +123,36 @@ struct SettingsView: View {
     private func logout() {
         UserManager.shared.logout()
     }
+    
+    func supportEmailURL() -> URL {
+        let recipient = "ostrich_support@snowskeleton.net"
+        let subject = "OSTRich Support Request"
+        let body = """
+        Describe the problem you're having:
+        
+        
+        Describe when it happens:
+        
+        
+        Anything else you think is relevant:
+        
+        
+        
+        —————————————————————————————————————————————————————
+        Please don't edit anything below this line
+        
+        - App Version: \(Bundle.main.appVersionLong)
+        - Build Number: \(Bundle.main.appBuild)
+        """
+        
+        // URL encode the subject and body
+        let encodedSubject = subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let encodedBody = body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        
+        let urlString = "mailto:\(recipient)?subject=\(encodedSubject)&body=\(encodedBody)"
+        return URL(string: urlString)!
+    }
+
 
 }
 
