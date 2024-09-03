@@ -20,16 +20,18 @@ class Event: Identifiable {
     var requiredTeamSize: Int
     @Relationship(deleteRule: .cascade)
     var eventFormat: EventFormat?
-    var teams: [Team]
+    var teams: [Team] = []
     var shortCode: String?
     var scheduledStartTime: Gamestateschema.DateTime?
     var actualStartTime: Gamestateschema.DateTime?
     @Relationship(deleteRule: .cascade)
-    var registeredPlayers: [Registration]
+    var registeredPlayers: [Registration] = []
     @Relationship(deleteRule: .cascade)
     var gameStateAtRound: GameStateV2?
 
     var created: Date = Date.now
+    
+    var isFakeEvent: Bool = false
 
     init(
         id: String, title: String, pairingType: String?, status: String?,

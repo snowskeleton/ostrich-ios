@@ -10,6 +10,7 @@
 		800DB1832C862CCC008F1FDC /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800DB1822C862CCC008F1FDC /* BundleExtension.swift */; };
 		800DB1852C862F4E008F1FDC /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800DB1842C862F4E008F1FDC /* LicenseView.swift */; };
 		800DB18D2C8630DB008F1FDC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 800DB18C2C8630DB008F1FDC /* LICENSE */; };
+		800DB1912C87A119008F1FDC /* createFakeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800DB1902C87A119008F1FDC /* createFakeEvent.swift */; };
 		80249EC92C7675B400A6A1E6 /* RoundTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249EC82C7675B400A6A1E6 /* RoundTimerView.swift */; };
 		80249ECB2C76789900A6A1E6 /* ScoutingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249ECA2C76789900A6A1E6 /* ScoutingResult.swift */; };
 		80249ECF2C767A3500A6A1E6 /* ScoutingHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249ECE2C767A3500A6A1E6 /* ScoutingHistoryView.swift */; };
@@ -399,6 +400,7 @@
 		800DB1822C862CCC008F1FDC /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
 		800DB1842C862F4E008F1FDC /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
 		800DB18C2C8630DB008F1FDC /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		800DB1902C87A119008F1FDC /* createFakeEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createFakeEvent.swift; sourceTree = "<group>"; };
 		80249EC82C7675B400A6A1E6 /* RoundTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundTimerView.swift; sourceTree = "<group>"; };
 		80249ECA2C76789900A6A1E6 /* ScoutingResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingResult.swift; sourceTree = "<group>"; };
 		80249ECE2C767A3500A6A1E6 /* ScoutingHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingHistoryView.swift; sourceTree = "<group>"; };
@@ -867,6 +869,7 @@
 				80CCA54C2C7BC99900B90BF5 /* UserManager.swift */,
 				80D37EB32C48331C00997C6D /* Team.swift */,
 				80D37EC52C48340300997C6D /* convenience functions.swift */,
+				800DB1902C87A119008F1FDC /* createFakeEvent.swift */,
 				806843182C38656400264D1A /* NetworkLog.swift */,
 			);
 			path = Models;
@@ -1376,6 +1379,7 @@
 				80FFBEDF2C4025A2005E958D /* PlayerRegisteredSubscription.graphql.swift in Sources */,
 				80FFBEE02C4025A2005E958D /* EventFormatDetails.graphql.swift in Sources */,
 				80FFBEE12C4025A2005E958D /* SchemaConfiguration.swift in Sources */,
+				800DB1912C87A119008F1FDC /* createFakeEvent.swift in Sources */,
 				80D37EC22C48338600997C6D /* Standing.swift in Sources */,
 				8051C4052C861DF50039E257 /* AboutView.swift in Sources */,
 				80FFBEE22C4025A2005E958D /* PodV2.graphql.swift in Sources */,

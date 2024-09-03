@@ -18,20 +18,20 @@ class Team: Identifiable {
     @Relationship(deleteRule: .noAction, inverse: \Player.team)
     var players: [Player] = []
     @Relationship(deleteRule: .cascade)
-    var gameState: GameStateV2
+    var gameState: GameStateV2?
     
     
     init(
         teamId: String,
         teamName: String? = nil,
         players: [Player] = [],
-        gameState: GameStateV2
+        gameState: GameStateV2? = nil
     ) {
         self.teamId = teamId
         self.teamName = teamName
-        self.gameState = gameState
         self.players = players
-        
+        self.gameState = gameState
+
     }
     
     convenience init(

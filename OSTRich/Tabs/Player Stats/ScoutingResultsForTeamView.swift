@@ -14,7 +14,7 @@ struct ScoutingResultsForTeamView: View {
     var body: some View {
         List {
             ForEach(team.players, id: \.personaId) { player in
-                if let event = player.team?.gameState.event {
+                if let event = player.team?.gameState?.event {
                     Section(player.safeName) {
                         ScoutingHistoryByFormatView(
                             player: player,

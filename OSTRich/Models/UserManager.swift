@@ -154,7 +154,7 @@ class UserManager {
     }
     
     func updateOSTRichToken(_ creds: OSTRichAuthCredentials.Response) async {
-        if var user = UserManager.shared.currentUser {
+        if let user = UserManager.shared.currentUser {
             user.ostrichToken = Token(
                 access_token: creds.access_token,
                 refresh_token: creds.refresh_token,

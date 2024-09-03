@@ -24,9 +24,13 @@ class Registration: Identifiable {
     }
 
     init(
-        id: String, status: String?, personaId: String?,
-        displayName: String?, firstName: String?, lastName: String?,
-        event: Event?
+        id: String,
+        status: String?,
+        personaId: String?,
+        displayName: String?,
+        firstName: String?,
+        lastName: String?,
+        event: Event? = nil
     ) {
         self.id = id
         self.status = status

@@ -22,14 +22,18 @@ class GameStateV2: Identifiable {
     @Relationship(deleteRule: .cascade, inverse: \Drop.gameState) var drops: [Drop] = []
 //    var podPairingType: String? //unused
     var gamesToWin: Int?
-    var event: Event
+    var event: Event?
 
     init(
-        eventId: String, minRounds: Int? = nil, draft: Draft? = nil,
-        top8Draft: Top8Draft? = nil, deckConstruction: DeckConstruction? = nil,
+        eventId: String,
+        minRounds: Int? = nil,
+        draft: Draft? = nil,
+        top8Draft: Top8Draft? = nil,
+        deckConstruction: DeckConstruction? = nil,
         currentRoundNumber: Int,
 //        podPairingType: String? = nil,
-        gamesToWin: Int? = nil, event: Event
+        gamesToWin: Int? = nil,
+        event: Event? = nil
     ) {
         self.eventId = eventId
         self.event = event

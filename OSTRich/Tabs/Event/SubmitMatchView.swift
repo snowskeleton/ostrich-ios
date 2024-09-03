@@ -25,7 +25,7 @@ struct SubmitMatchView: View {
     
     private var ableToSubmitMatch: Bool {
         // if we're the TO, we can submit any match regardless of whether or not it's already been submitted
-        if match.round.gameState.event.createdBy == UserManager.shared.currentUser?.personaId {
+        if match.round.gameState.event?.createdBy == UserManager.shared.currentUser?.personaId {
             Analytics.track(.openedSubmitMatchView, with: ["as": "TO"])
             return true
         }
