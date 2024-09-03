@@ -7,7 +7,7 @@
 
 import Foundation
 
-fileprivate func createFakeEvent() {
+func createFakeEvent() {
     // Create players
     let playerNames:  [[String: String]] = [
         [
