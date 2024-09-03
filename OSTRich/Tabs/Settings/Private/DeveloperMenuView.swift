@@ -57,6 +57,7 @@ struct DeveloperMenuView: View {
             #endif
             
             Section("Actions") {
+                Button("Create fake event") { createFakeEvent() }
                 Button("Crash!") { showCrashConfirmation = true }
                     .confirmationDialog(
                         "Crash car into a bridge",
