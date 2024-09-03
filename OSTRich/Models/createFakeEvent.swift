@@ -7,7 +7,7 @@
 
 import Foundation
 
-func createFakeEvent() {
+@MainActor func createFakeEvent() {
     // Create players
     let playerNames:  [[String: String]] = [
         [
@@ -164,6 +164,7 @@ func createFakeEvent() {
     // Assign the event to the game state
     gameState.event = event
     event.isFakeEvent = true
+    SwiftDataManager.shared.container.mainContext.insert(event)
 }
 
 extension Date {
