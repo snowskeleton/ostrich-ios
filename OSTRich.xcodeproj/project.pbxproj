@@ -653,21 +653,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		80249ED42C76893E00A6A1E6 /* Settings */ = {
+		800DB18E2C879A33008F1FDC /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				80A5722E2BE2C78E00D8D888 /* SettingsView.swift */,
 				8051C4042C861DF50039E257 /* AboutView.swift */,
 				800DB1842C862F4E008F1FDC /* LicenseView.swift */,
 				80A152302C8620DE00D60561 /* PrivacyPolicyView.swift */,
 				806BF5FA2C80F02700306B79 /* AnalyticsView.swift */,
-				80CCA5572C7F8A7500B90BF5 /* DeveloperMenuView.swift */,
 				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				80CCA5552C7E240300B90BF5 /* ChangeNameView.swift */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		800DB18F2C879A39008F1FDC /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				80CCA5572C7F8A7500B90BF5 /* DeveloperMenuView.swift */,
 				806843132C383AE000264D1A /* NetworkLogsView.swift */,
 				8051C3FE2C84FF2B0039E257 /* FakePaywalledView.swift */,
 				80CCA5512C7D4E7200B90BF5 /* NotificationPermissionsView.swift */,
 				8064DF852C8387830017B088 /* PendingNotificationsView.swift */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		80249ED42C76893E00A6A1E6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				80A5722E2BE2C78E00D8D888 /* SettingsView.swift */,
+				800DB18E2C879A33008F1FDC /* Public */,
+				800DB18F2C879A39008F1FDC /* Private */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
