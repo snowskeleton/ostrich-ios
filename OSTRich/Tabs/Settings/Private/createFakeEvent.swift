@@ -164,7 +164,7 @@ import Foundation
     
     // Assign the event to the game state
     gameState.event = event
-    event.isFakeEvent = true
+    event.explicitDoNotUpdate = true
     SwiftDataManager.shared.container.mainContext.insert(event)
 }
 

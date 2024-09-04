@@ -94,7 +94,7 @@ class GQLNetwork {
     
     /// Fetch additional data about event from server. Not all data is included with getEvents() response, so this has to be called too.
     static func getEvent(event: Event) {
-        if event.isFakeEvent { return }
+        if event.doNotUpdate { return }
         
         GQLNetwork.shared.fetch(
             query: Gamestateschema.LoadEventJoinV2Query(eventId: event.id)
@@ -114,7 +114,7 @@ class GQLNetwork {
     }
     
     static func getEventAsHost(event: Event) {
-        if event.isFakeEvent { return }
+        if event.doNotUpdate { return }
 
         GQLNetwork.shared.fetch(
             query: Gamestateschema.LoadEventHostV2Query(eventId: event.id)
@@ -131,7 +131,7 @@ class GQLNetwork {
     }
     
     static func getGameState(event: Event) {
-        if event.isFakeEvent { return }
+        if event.doNotUpdate { return }
 
         // round: 0 always returns the current round
         GQLNetwork.shared.fetch(

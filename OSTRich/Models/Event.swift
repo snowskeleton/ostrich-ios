@@ -31,7 +31,11 @@ class Event: Identifiable {
 
     var created: Date = Date.now
     
-    var isFakeEvent: Bool = false
+    var doNotUpdate: Bool {
+        explicitDoNotUpdate || status == "ENDED" || status == "EXPIRED"
+    }
+    
+    var explicitDoNotUpdate: Bool = false
 
     init(
         id: String, title: String, pairingType: String?, status: String?,
@@ -66,12 +70,16 @@ extension Event {
         with data: Gamestateschema.GetGameStateV2AtRoundQuery.Data
             .GameStateV2AtRound
     ) {
+        if self.doNotUpdate { return }
+        
         self.gameStateAtRound = GameStateV2.createOrUpdate(from: data, event: self)
     }
     
     func update(
         with data: Gamestateschema.MyActiveEventsQuery.Data.MyActiveEvent
     ) {
+        if self.doNotUpdate { return }
+        
         self.actualStartTime = data.actualStartTime
         self.createdBy = data.createdBy
         self.scheduledStartTime = data.scheduledStartTime
@@ -89,8 +97,11 @@ extension Event {
     }
 
     func update(with data: Gamestateschema.LoadEventHostV2Query.Data.Event) {
-        self.pairingType = data.pairingType.rawValue
         self.status = data.status.rawValue
+        
+        if self.doNotUpdate { return }
+        
+        self.pairingType = data.pairingType.rawValue
         self.isOnline = data.isOnline
         self.shortCode = data.shortCode
         
@@ -108,9 +119,12 @@ extension Event {
     }
 
     func update(with data: Gamestateschema.LoadEventJoinV2Query.Data.Event) {
+        self.status = data.status.rawValue
+        
+        if self.doNotUpdate { return }
+        
         self.title = data.title
         self.pairingType = data.pairingType.rawValue
-        self.status = data.status.rawValue
         self.isOnline = data.isOnline
         self.createdBy = data.createdBy
         self.requiredTeamSize = data.requiredTeamSize
