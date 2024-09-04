@@ -676,6 +676,7 @@
 				8051C3FE2C84FF2B0039E257 /* FakePaywalledView.swift */,
 				80CCA5512C7D4E7200B90BF5 /* NotificationPermissionsView.swift */,
 				8064DF852C8387830017B088 /* PendingNotificationsView.swift */,
+				800DB1902C87A119008F1FDC /* createFakeEvent.swift */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -869,7 +870,6 @@
 				80CCA54C2C7BC99900B90BF5 /* UserManager.swift */,
 				80D37EB32C48331C00997C6D /* Team.swift */,
 				80D37EC52C48340300997C6D /* convenience functions.swift */,
-				800DB1902C87A119008F1FDC /* createFakeEvent.swift */,
 				806843182C38656400264D1A /* NetworkLog.swift */,
 			);
 			path = Models;
