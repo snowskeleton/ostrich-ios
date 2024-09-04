@@ -40,8 +40,8 @@ struct EventView: View {
             TabView(selection: $selectedTab) {
                 RegisteredPlayersView(event: event).tag("Players")
 
-                if let gs = event.gameStateAtRound, !gs.currentMatches.isEmpty {
-                    PairingsView(from: gs.id).tag("Pairings")
+                if let gs = event.gameStateAtRound, let roundId = gs.currentRound?.roundId, !gs.currentMatches.isEmpty {
+                    PairingsView(from: roundId).tag("Pairings")
                 }
 
                 if !(event.standings.isEmpty) {

@@ -18,7 +18,7 @@ class MatchResult: Identifiable {
     var losses: Int
     var draws: Int
     var teamId: String
-    var match: Match
+    var match: Match?
 
     init(
         matchId: String, submitter: String?, isBye: Bool, wins: Int, losses: Int,

@@ -21,7 +21,7 @@ class Round: Identifiable {
     var canRollback: Bool?
     var timerId: String?
     @Relationship(deleteRule: .cascade, inverse: \Standing.round) var standings: [Standing] = []
-    var gameState: GameStateV2
+    var gameState: GameStateV2?
     @Relationship(deleteRule: .cascade) var timer: RoundTimer?
 
     init(

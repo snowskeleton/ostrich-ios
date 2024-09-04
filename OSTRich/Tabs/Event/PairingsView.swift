@@ -14,9 +14,9 @@ struct PairingsView: View {
 
     @Query var matches: [Match]
     
-    init(from gameStateId: UUID) {
+    init(from roundId: String) {
         let predicate = #Predicate<Match> {
-            $0.round.gameState.id == gameStateId
+            $0.round?.roundId == roundId
         }
         let resultDescriptor = FetchDescriptor<Match>(predicate: predicate, sortBy: [SortDescriptor(\.matchId)])
         _matches = Query(resultDescriptor)
@@ -90,22 +90,20 @@ struct PairingItem: View {
         self.match = match
         
         // Query for teams
-        let matchGameStateId = match.round.gameState.id
+        let matchGameStateId = match.round?.gameState?.id
         let matchTeamIds = match.teamIds
         let teamPredicate = #Predicate<Team> {
-            $0.gameState?.id == matchGameStateId  &&
+            $0.gameState?.id == matchGameStateId &&
             matchTeamIds.contains($0.teamId)
         }
         let teamDescriptor = FetchDescriptor<Team>(predicate: teamPredicate, sortBy: [SortDescriptor(\.teamId)])
         _teams = Query(teamDescriptor)
         
         // Query for match results
-        let matchId = match.matchId
-        let roundId = match.round.id
+        let matchId = match.id
         let resultPredicate = #Predicate<MatchResult> {
-            $0.matchId == matchId &&
-            matchTeamIds.contains($0.teamId) &&
-            $0.match.round.id == roundId
+            $0.match?.id == matchId &&
+            matchTeamIds.contains($0.teamId)
         }
         let resultDescriptor = FetchDescriptor<MatchResult>(predicate: resultPredicate)
         _matchResults = Query(resultDescriptor)

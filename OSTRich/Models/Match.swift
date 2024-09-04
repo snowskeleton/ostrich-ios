@@ -15,12 +15,12 @@ class Match: Identifiable {
     var matchId: String
     var isBye: Bool = false
     var teamIds: [String]
-    @Relationship(deleteRule: .cascade, inverse: \MatchResult.match) var results: [MatchResult]
+    @Relationship(deleteRule: .cascade, inverse: \MatchResult.match) var results: [MatchResult] = []
     var tableNumber: Int?
-    var round: Round
+    var round: Round?
     
     var teams: [Team] {
-        self.round.gameState.teams.filter {
+        (self.round?.gameState?.teams ?? []).filter {
             self.teamIds.contains($0.teamId)
         }
     }
@@ -73,7 +73,7 @@ class Match: Identifiable {
             .GameStateV2AtRound.Round.Match,
         round: Round
     ) -> Match {
-        if let match = round.gameState.currentMatches.first(where: { $0.matchId == data.matchId }) {
+        if let match = round.gameState?.currentMatches.first(where: { $0.matchId == data.matchId }) {
             match.isBye = data.isBye!
             match.teamIds = data.teamIds
             match.tableNumber = data.tableNumber

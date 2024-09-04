@@ -20,10 +20,10 @@ class Standing: Identifiable {
     var gameWinPercent: Double
     var opponentGameWinPercent: Double
     var opponentMatchWinPercent: Double
-    var round: Round
+    var round: Round?
     
-    var team: Team {
-        self.round.gameState.teams.first(where: { $0.teamId == self.teamId })!
+    var team: Team? {
+        self.round?.gameState?.teams.first(where: { $0.teamId == self.teamId })
     }
 
     init(

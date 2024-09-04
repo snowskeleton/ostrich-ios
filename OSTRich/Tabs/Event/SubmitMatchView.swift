@@ -25,7 +25,7 @@ struct SubmitMatchView: View {
     
     private var ableToSubmitMatch: Bool {
         // if we're the TO, we can submit any match regardless of whether or not it's already been submitted
-        if match.round.gameState.event?.createdBy == UserManager.shared.currentUser?.personaId {
+        if match.round?.gameState?.event?.createdBy == UserManager.shared.currentUser?.personaId {
             Analytics.track(.openedSubmitMatchView, with: ["as": "TO"])
             return true
         }
@@ -62,7 +62,7 @@ struct SubmitMatchView: View {
                 
                 if UserDefaults.standard.bool(forKey: "showDebugValues") {
                     Text(
-                        "Match ID: \(match.matchId)\nRound ID: \(match.round.roundId)"
+                        "Match ID: \(match.matchId)\nRound ID: \(match.round?.roundId ?? "no round ID")"
                     )
                 }
                 if match.isBye {
@@ -163,18 +163,22 @@ struct SubmitMatchView: View {
     }
     
     private func saveTeamResultInputs(_ teamResults: [Gamestateschema.TeamResultInputV2]) {
-        GQLNetwork.shared.submitMatchResults(
-            eventId: match.round.gameState.eventId,
-            results: teamResults
-        ) { result in
-            switch result {
-            case .success:
-                print("Match result submitted successfully")
-                Analytics.track(.matchSubmittedWithoutError)
-            case .failure(let error):
-                Analytics.track(.matchSubmittedWithError, with: ["error": error.localizedDescription])
-                print("Failed to submit match result: \(error.localizedDescription)")
+        if let eventId = match.round?.gameState?.eventId {
+            GQLNetwork.shared.submitMatchResults(
+                eventId: eventId,
+                results: teamResults
+            ) { result in
+                switch result {
+                case .success:
+                    print("Match result submitted successfully")
+                    Analytics.track(.matchSubmittedWithoutError)
+                case .failure(let error):
+                    Analytics.track(.matchSubmittedWithError, with: ["error": error.localizedDescription])
+                    print("Failed to submit match result: \(error.localizedDescription)")
+                }
             }
+        } else {
+            print("Couldn't resolve eventId")
         }
     }
     

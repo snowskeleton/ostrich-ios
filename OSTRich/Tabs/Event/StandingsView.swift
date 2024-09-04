@@ -16,7 +16,7 @@ struct StandingsView: View {
     init(event: Event) {
         let currentRoundId = event.gameStateAtRound?.currentRound?.roundId
         let predicate = #Predicate<Standing> {
-            $0.round.roundId == currentRoundId ?? ""
+            $0.round?.roundId == currentRoundId
         }
         let descriptor = FetchDescriptor<Standing>(
             predicate: predicate,
@@ -42,7 +42,7 @@ struct StandingsView: View {
                     GridRow {
                         Text("\(teamStanding.rank).")
                             .font(.headline)
-                        Text("\(teamStanding.team.fullName)")
+                        Text("\(teamStanding.team?.fullName ?? "")")
                             .font(.subheadline)
                         Text("\(teamStanding.wins)-\(teamStanding.losses)-\(teamStanding.draws)")
                             .font(.footnote)
