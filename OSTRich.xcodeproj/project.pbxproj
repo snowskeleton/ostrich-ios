@@ -35,6 +35,7 @@
 		8051C3FF2C84FF2B0039E257 /* FakePaywalledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8051C3FE2C84FF2B0039E257 /* FakePaywalledView.swift */; };
 		8051C4052C861DF50039E257 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8051C4042C861DF50039E257 /* AboutView.swift */; };
 		8053FE5C2C7FB4F0005A10BD /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8053FE5B2C7FB4F0005A10BD /* Analytics.swift */; };
+		80582EB82C87EC2E0056C421 /* EventRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80582EB72C87EC2E0056C421 /* EventRowView.swift */; };
 		8064DF842C8381700017B088 /* EventHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064DF832C8381700017B088 /* EventHeaderView.swift */; };
 		8064DF862C8387830017B088 /* PendingNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064DF852C8387830017B088 /* PendingNotificationsView.swift */; };
 		806843142C383AE000264D1A /* NetworkLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843132C383AE000264D1A /* NetworkLogsView.swift */; };
@@ -426,6 +427,7 @@
 		8051C4042C861DF50039E257 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		8053FE582C7FA806005A10BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8053FE5B2C7FB4F0005A10BD /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
+		80582EB72C87EC2E0056C421 /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
 		8064DF832C8381700017B088 /* EventHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHeaderView.swift; sourceTree = "<group>"; };
 		8064DF852C8387830017B088 /* PendingNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNotificationsView.swift; sourceTree = "<group>"; };
 		806843132C383AE000264D1A /* NetworkLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogsView.swift; sourceTree = "<group>"; };
@@ -798,6 +800,7 @@
 			children = (
 				80249ED22C76880C00A6A1E6 /* AllEventsView.swift */,
 				80B8E1362AB7EF0700845ECC /* EventView.swift */,
+				80582EB72C87EC2E0056C421 /* EventRowView.swift */,
 				8064DF832C8381700017B088 /* EventHeaderView.swift */,
 				80249EC82C7675B400A6A1E6 /* RoundTimerView.swift */,
 				807A56432C650BB500302836 /* RegisteredPlayersView.swift */,
@@ -1297,6 +1300,7 @@
 				80FFBEA32C4025A2005E958D /* Queue.graphql.swift in Sources */,
 				80FFBEA42C4025A2005E958D /* ReservationDetails.graphql.swift in Sources */,
 				8051C3FF2C84FF2B0039E257 /* FakePaywalledView.swift in Sources */,
+				80582EB82C87EC2E0056C421 /* EventRowView.swift in Sources */,
 				80FFBEA52C4025A2005E958D /* LockTeamMutation.graphql.swift in Sources */,
 				80FFBEA62C4025A2005E958D /* EndEventV2Mutation.graphql.swift in Sources */,
 				80FFBEA72C4025A2005E958D /* JoinEventWithShortCodeMutation.graphql.swift in Sources */,
