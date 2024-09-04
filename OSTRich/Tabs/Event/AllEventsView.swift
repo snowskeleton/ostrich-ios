@@ -23,6 +23,21 @@ struct AllEventsView: View {
     @State var joinEventCode: String = ""
     
     @AppStorage("netowrkAuthorized") var networkAuthorized = true
+    
+    var currentEvents: [Event] {
+        return events.filter {
+            $0.status != "ENDED" &&
+            $0.status != "EXPIRED" &&
+            $0.status != "CANCELLED"
+        }
+    }
+    var endedEvents: [Event] {
+        return events.filter {
+            $0.status == "ENDED" ||
+            $0.status == "EXPIRED" ||
+            $0.status == "CANCELLED"
+        }
+    }
 
     var body: some View {
         NavigationView {
@@ -33,7 +48,16 @@ struct AllEventsView: View {
                 }
                 
                 Section {
-                    ForEach(events, id: \.id) { event in
+                    ForEach(currentEvents, id: \.id) { event in
+                        NavigationLink {
+                            EventView(event: event)
+                        } label: {
+                            EventRowView(event: event)
+                        }
+                    }.onDelete(perform: deleteItems)
+                }
+                DisclosureGroup("Ended Events") {
+                    ForEach(endedEvents, id: \.id) { event in
                         NavigationLink {
                             EventView(event: event)
                         } label: {
