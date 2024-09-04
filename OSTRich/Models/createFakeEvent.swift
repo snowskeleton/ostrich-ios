@@ -107,6 +107,7 @@ import Foundation
         gamesToWin: 2
     )
     gameState.teams = teams
+    teams.forEach { $0.gameState = gameState }
     event.gameStateAtRound = gameState
     
     
