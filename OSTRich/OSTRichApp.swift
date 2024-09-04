@@ -21,7 +21,7 @@ struct OSTRichApp: App {
             with: InitOptions(host: AptabaseSecrets.host)
         )
         
-        Purchases.logLevel = .debug
+        Purchases.logLevel = .error
         Purchases.configure(withAPIKey: RevenueCatSecrets.apiKey)
     }
 
