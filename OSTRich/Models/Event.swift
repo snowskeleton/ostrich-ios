@@ -31,11 +31,11 @@ class Event: Identifiable {
 
     var created: Date = Date.now
     
+    var showOnMainView: Bool = true
+    var explicitDoNotUpdate: Bool = false
     var doNotUpdate: Bool {
         explicitDoNotUpdate || status == "ENDED" || status == "EXPIRED"
     }
-    
-    var explicitDoNotUpdate: Bool = false
 
     init(
         id: String, title: String, pairingType: String?, status: String?,

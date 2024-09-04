@@ -13,8 +13,8 @@ import Observation
 
 struct AllEventsView: View {
     @Environment(\.modelContext) private var context
-    @Query(sort: \Event.scheduledStartTime, order: .reverse) private var events: [Event]
-    
+    @Query private var events: [Event]
+
     @State var showJoinEvent = false
     @State var showAccountScreen = false
     @State var showSettingsScreen = false
@@ -23,6 +23,17 @@ struct AllEventsView: View {
     @State var joinEventCode: String = ""
     
     @AppStorage("netowrkAuthorized") var networkAuthorized = true
+    
+    init() {
+        let predicate = #Predicate<Event> {
+            $0.showOnMainView
+        }
+        let descriptor = FetchDescriptor<Event>(
+            predicate: predicate,
+            sortBy: [SortDescriptor(\.scheduledStartTime, order: .reverse)]
+        )
+        _events = Query(descriptor)
+    }
     
     var currentEvents: [Event] {
         return events.filter {
@@ -115,7 +126,10 @@ struct AllEventsView: View {
     
     fileprivate func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { events[$0] }.forEach(context.delete)
+            for index in offsets {
+                let event = events[index]
+                event.showOnMainView = false
+            }
         }
     }
     
