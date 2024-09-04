@@ -67,14 +67,16 @@ struct AllEventsView: View {
                         }
                     }.onDelete(perform: deleteItems)
                 }
-                DisclosureGroup("Ended Events") {
-                    ForEach(endedEvents, id: \.id) { event in
-                        NavigationLink {
-                            EventView(event: event)
-                        } label: {
-                            EventRowView(event: event)
-                        }
-                    }.onDelete(perform: deleteItems)
+                if !endedEvents.isEmpty {
+                    DisclosureGroup("Ended Events") {
+                        ForEach(endedEvents, id: \.id) { event in
+                            NavigationLink {
+                                EventView(event: event)
+                            } label: {
+                                EventRowView(event: event)
+                            }
+                        }.onDelete(perform: deleteItems)
+                    }
                 }
             }
             .toolbar {
