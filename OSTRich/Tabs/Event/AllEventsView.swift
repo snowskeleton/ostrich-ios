@@ -106,11 +106,11 @@ struct AllEventsView: View {
     
     fileprivate func refreshMainPage() {
         GQLNetwork.getEvents(context: context)
-            events.forEach { event in
-                GQLNetwork.getEvent(event: event)
-                GQLNetwork.getEventAsHost(event: event)
-                GQLNetwork.getGameState(event: event)
-            }
+        events.forEach { event in
+            GQLNetwork.getEvent(event: event)
+            GQLNetwork.getEventAsHost(event: event)
+            GQLNetwork.getGameState(event: event)
+        }
     }
     
     fileprivate func deleteItems(offsets: IndexSet) {
