@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct DeveloperMenuView: View {
     @Environment(\.modelContext) private var context
@@ -76,6 +77,7 @@ struct DeveloperMenuView: View {
                                 }
                         }
                 Button("Clear event history", role: .destructive) { deleteAll() }
+                Button("Drop all tables", role: .destructive) { try? ModelContainer().deleteAllData() }
             }
             
         }
