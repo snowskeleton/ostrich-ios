@@ -93,22 +93,26 @@ struct ScoutingHistoryAllPlayersView: View {
         .onDisappear {
             stopPaywallTimer()
         }
-        .presentPaywallIfNeeded(
-            requiredEntitlementIdentifier: "pro",
-            purchaseCompleted: { customerInfo in
-                print("Purchase completed: \(customerInfo.entitlements)")
-            },
-            restoreCompleted: { customerInfo in
-                // Paywall will be dismissed automatically if "pro" is now active.
-                print("Purchases restored: \(customerInfo.entitlements)")
-            }
-        )
+        .presentPaywallIfNeeded { customerInfo in
+            if UserDefaults.standard.bool(forKey: "disableInAppPurchasePaywall") { return false }
+            return customerInfo.entitlements.active.keys.contains("pro")
+//            return true
+        } purchaseCompleted: { customerInfo in
+            print("Purchase completed: \(customerInfo.entitlements)")
+        } restoreCompleted: { customerInfo in
+            // Paywall will be dismissed automatically if "pro" is now active.
+            print("Purchases restored: \(customerInfo.entitlements)")
+        }
 
     }
     
     fileprivate func calculatePaywall() {
         Task {
             do {
+                if UserDefaults.standard.bool(forKey: "disableInAppPurchasePaywall") {
+                    self.showScoutingResults = true
+                    return
+                }
                 let customerInfo = try await Purchases.shared.customerInfo()
                 self.showScoutingResults = customerInfo.entitlements["pro"]?.isActive == true ? true : false
             } catch {

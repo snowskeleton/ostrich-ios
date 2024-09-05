@@ -185,6 +185,10 @@ struct SubmitMatchView: View {
     fileprivate func calculatePaywall() {
         Task {
             do {
+                if UserDefaults.standard.bool(forKey: "disableInAppPurchasePaywall") {
+                    self.showScoutingResults = true
+                    return
+                }
                 let customerInfo = try await Purchases.shared.customerInfo()
                 self.showScoutingResults = customerInfo.entitlements["pro"]?.isActive == true ? true : false
             } catch {
