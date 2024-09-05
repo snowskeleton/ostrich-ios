@@ -21,6 +21,10 @@ struct CreateScoutingResultView: View {
     @State private var eventId: String
     @State private var formatName: String
     @State private var freeEntryFormatName: String = ""
+    
+    @State private var createdBy: String
+    @State private var toName: String = ""
+    @State private var toNameOverride: PlayerNameOverride
 
     @State private var scoutingResult: ScoutingResult?
     @State private var player: LocalPlayer
@@ -95,6 +99,7 @@ struct CreateScoutingResultView: View {
             eventId: event.id,
             formatName: event.eventFormat?.name ?? "Other",
             date: date,
+            createdBy: event.createdBy ?? "",
             deckName: deckName,
             deckNotes: deckNotes
         )
@@ -108,6 +113,7 @@ struct CreateScoutingResultView: View {
             eventId: scoutingResult.eventId ?? "",
             formatName: scoutingResult.format,
             date: scoutingResult.date,
+            createdBy: scoutingResult.createdBy ?? "",
             deckName: scoutingResult.deckName,
             deckNotes: scoutingResult.deckNotes ?? ""
         )
@@ -120,17 +126,24 @@ struct CreateScoutingResultView: View {
         eventId: String,
         formatName: String?,
         date: Date,
+        createdBy: String = "",
         deckName: String = "",
         deckNotes: String = ""
     ) {
         let searchFormat = formatName != nil ? formatName! : "Other"
         let searchPersonaId = player.personaId
-        let predicate = #Predicate<ScoutingResult> {
+        let scoutingPredicate = #Predicate<ScoutingResult> {
             $0.player?.personaId == searchPersonaId &&
             $0.format == searchFormat
         }
-        let descriptor = FetchDescriptor<ScoutingResult>(predicate: predicate)
+        let descriptor = FetchDescriptor<ScoutingResult>(predicate: scoutingPredicate)
         _previousDecks = Query(descriptor)
+        
+        let nameOverride = PlayerNameOverride.createOrUpdate(from: createdBy)
+        _toNameOverride = .init(initialValue: nameOverride)
+        _toName = .init(initialValue: nameOverride.userGivenName ?? "")
+        
+
         // this produces errors, for some reason.
 //        if !_previousDecks.wrappedValue.isEmpty {
 //            Analytics.track(.foundPreviousDecks, with: ["count": _previousDecks.wrappedValue.count])
@@ -143,6 +156,7 @@ struct CreateScoutingResultView: View {
         _eventId = .init(initialValue: eventId)
         _formatName = .init(initialValue: formatName != nil ? formatName! : "Please select")
         _date = .init(initialValue: date)
+        _createdBy = .init(initialValue: createdBy)
         _deckName = .init(initialValue: deckName)
         _deckNotes = .init(initialValue: deckNotes)
         _player = .init(initialValue: player)
@@ -179,6 +193,7 @@ struct CreateScoutingResultView: View {
                 
                 Section(header: Text("Event Information")) {
                     TextField("Event Name", text: $eventName)
+                    TextField("Organizer Name", text: $toName)
                 }
                 
                 Section(header: Text("Format")) {
@@ -229,6 +244,7 @@ struct CreateScoutingResultView: View {
             result.deckNotes = deckNotes
             result.eventName = eventName
             result.eventId = eventId
+            result.createdBy = createdBy
             result.player = player
             result.format = formatName == "Other" ? freeEntryFormatName : formatName
             result.date = date
@@ -238,12 +254,17 @@ struct CreateScoutingResultView: View {
                 deckNotes: deckNotes,
                 eventName: eventName,
                 eventId: eventId,
+                createdBy: createdBy,
                 format: formatName == "Other" ? freeEntryFormatName : formatName,
                 player: player,
                 date: date
             )
             context.insert(result)
         }
+        
+        // this shows the correct name
+        toNameOverride.userGivenName = toName
+        
         dismiss()
     }
     

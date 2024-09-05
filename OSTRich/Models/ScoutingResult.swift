@@ -16,6 +16,7 @@ class ScoutingResult: Identifiable {
     var deckNotes: String?
     var eventName: String?
     var eventId: String?
+    var createdBy: String?
     var format: String = ""
     var player: LocalPlayer?
     
@@ -29,6 +30,7 @@ class ScoutingResult: Identifiable {
         eventId: String? = nil,
         playerName: String? = nil,
         playerPersonaId: String? = nil,
+        createdBy: String? = nil,
         format: String = "",
         player: LocalPlayer,
         date: Date
@@ -38,6 +40,7 @@ class ScoutingResult: Identifiable {
         self.deckNotes = deckNotes
         self.eventName = eventName
         self.eventId = eventId
+        self.createdBy = createdBy
         self.format = format
         self.player = player
         self.date = date
