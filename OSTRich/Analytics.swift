@@ -56,7 +56,12 @@ enum AnalyticEvent: String {
 
 class Analytics {
     static private func privateTrack(_ event: AnalyticEvent, with options: [String: Any]?) {
-        if UserDefaults.standard.bool(forKey: "isAnalyticsDisabled") {
+        #if DEBUG
+        let disabled = true
+        #else
+        let disabled = UserDefaults.standard.bool(forKey: "isAnalyticsDisabled")
+        #endif
+        if disabled {
             return
         }
         
