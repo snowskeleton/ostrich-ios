@@ -38,6 +38,7 @@
 		80582EC22C87FE830056C421 /* GameStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80582EC12C87FE830056C421 /* GameStore.swift */; };
 		80582EC42C8A02A50056C421 /* ScoutingHistoryByShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80582EC32C8A02A50056C421 /* ScoutingHistoryByShopView.swift */; };
 		80582EC62C8A30A00056C421 /* DecksInStoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80582EC52C8A30A00056C421 /* DecksInStoreView.swift */; };
+		80582EC82C8A31710056C421 /* ScoutingHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80582EC72C8A31710056C421 /* ScoutingHistoryView.swift */; };
 		8064DF842C8381700017B088 /* EventHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064DF832C8381700017B088 /* EventHeaderView.swift */; };
 		8064DF862C8387830017B088 /* PendingNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064DF852C8387830017B088 /* PendingNotificationsView.swift */; };
 		806843142C383AE000264D1A /* NetworkLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843132C383AE000264D1A /* NetworkLogsView.swift */; };
@@ -432,6 +433,7 @@
 		80582EC12C87FE830056C421 /* GameStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStore.swift; sourceTree = "<group>"; };
 		80582EC32C8A02A50056C421 /* ScoutingHistoryByShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingHistoryByShopView.swift; sourceTree = "<group>"; };
 		80582EC52C8A30A00056C421 /* DecksInStoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksInStoreView.swift; sourceTree = "<group>"; };
+		80582EC72C8A31710056C421 /* ScoutingHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingHistoryView.swift; sourceTree = "<group>"; };
 		8064DF832C8381700017B088 /* EventHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHeaderView.swift; sourceTree = "<group>"; };
 		8064DF852C8387830017B088 /* PendingNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNotificationsView.swift; sourceTree = "<group>"; };
 		806843132C383AE000264D1A /* NetworkLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogsView.swift; sourceTree = "<group>"; };
@@ -700,6 +702,7 @@
 		80249ED52C768A3100A6A1E6 /* Player Stats */ = {
 			isa = PBXGroup;
 			children = (
+				80582EC72C8A31710056C421 /* ScoutingHistoryView.swift */,
 				80249ECE2C767A3500A6A1E6 /* ScoutingHistoryAllPlayersView.swift */,
 				80582EC32C8A02A50056C421 /* ScoutingHistoryByShopView.swift */,
 				80582EC52C8A30A00056C421 /* DecksInStoreView.swift */,
@@ -1300,6 +1303,7 @@
 				80FFBE9E2C4025A2005E958D /* TeamStandingsDetailsV2.graphql.swift in Sources */,
 				80D37EA22C48323A00997C6D /* Event.swift in Sources */,
 				80FFBE9F2C4025A2005E958D /* DropDetailsV2.graphql.swift in Sources */,
+				80582EC82C8A31710056C421 /* ScoutingHistoryView.swift in Sources */,
 				80FFBEA02C4025A2005E958D /* UserDetails.graphql.swift in Sources */,
 				80FFBEA12C4025A2005E958D /* CreatePrivateEventMutation.graphql.swift in Sources */,
 				80FFBEA22C4025A2005E958D /* Email_String_format_email.swift in Sources */,
