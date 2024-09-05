@@ -23,8 +23,8 @@ struct CreateScoutingResultView: View {
     @State private var freeEntryFormatName: String = ""
     
     @State private var createdBy: String
-    @State private var toName: String = ""
-    @State private var toNameOverride: PlayerNameOverride
+    @State private var gameStoreName: String = ""
+    @State private var gameStore: GameStore
 
     @State private var scoutingResult: ScoutingResult?
     @State private var player: LocalPlayer
@@ -127,6 +127,7 @@ struct CreateScoutingResultView: View {
         formatName: String?,
         date: Date,
         createdBy: String = "",
+        gameStore: GameStore? = nil,
         deckName: String = "",
         deckNotes: String = ""
     ) {
@@ -139,9 +140,14 @@ struct CreateScoutingResultView: View {
         let descriptor = FetchDescriptor<ScoutingResult>(predicate: scoutingPredicate)
         _previousDecks = Query(descriptor)
         
-        let nameOverride = PlayerNameOverride.createOrUpdate(from: createdBy)
-        _toNameOverride = .init(initialValue: nameOverride)
-        _toName = .init(initialValue: nameOverride.userGivenName ?? "")
+        if gameStore != nil {
+            _gameStoreName = .init(initialValue: gameStore!.userGivenName ?? "")
+            _gameStore = .init(initialValue: gameStore!)
+        } else {
+            let nameOverride = GameStore.createOrUpdate(from: createdBy)
+            _gameStore = .init(initialValue: nameOverride)
+            _gameStoreName = .init(initialValue: nameOverride.userGivenName ?? "")
+        }
         
 
         // this produces errors, for some reason.
@@ -193,7 +199,7 @@ struct CreateScoutingResultView: View {
                 
                 Section(header: Text("Event Information")) {
                     TextField("Event Name", text: $eventName)
-                    TextField("Organizer Name", text: $toName)
+                    TextField("Organizer Name", text: $gameStoreName)
                 }
                 
                 Section(header: Text("Format")) {
@@ -239,6 +245,11 @@ struct CreateScoutingResultView: View {
         } else {
             Analytics.track(.newPlayerToFormat)
         }
+        
+        if !gameStoreName.isEmpty {
+            gameStore.userGivenName = gameStoreName
+        }
+        
         if let result = scoutingResult {
             result.deckName = deckName
             result.deckNotes = deckNotes
@@ -248,6 +259,7 @@ struct CreateScoutingResultView: View {
             result.player = player
             result.format = formatName == "Other" ? freeEntryFormatName : formatName
             result.date = date
+            result.gameStore = gameStore
         } else {
             let result = ScoutingResult(
                 deckName: deckName,
@@ -259,11 +271,9 @@ struct CreateScoutingResultView: View {
                 player: player,
                 date: date
             )
+            result.gameStore = gameStore
             context.insert(result)
         }
-        
-        // this shows the correct name
-        toNameOverride.userGivenName = toName
         
         dismiss()
     }

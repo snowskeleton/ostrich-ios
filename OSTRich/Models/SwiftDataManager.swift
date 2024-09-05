@@ -34,7 +34,7 @@ public class SwiftDataManager {
             Team.self,
             ScoutingResult.self,
             LocalPlayer.self,
-            PlayerNameOverride.self,
+            GameStore.self,
         ])
 
         let modelConfiguration = ModelConfiguration(

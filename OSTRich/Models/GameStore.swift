@@ -1,5 +1,5 @@
 //
-//  PlayerNameOverride.swift
+//  GameStore.swift
 //  OSTRich
 //
 //  Created by snow on 9/3/24.
@@ -9,19 +9,22 @@ import Foundation
 import SwiftData
 
 @Model
-class PlayerNameOverride {
+class GameStore {
     @Attribute(.unique)
     var personaId: String
     var userGivenName: String?
+    
+    @Relationship(inverse: \ScoutingResult.player)
+    var stats: [ScoutingResult] = []
     
     init(personaId: String) {
         self.personaId = personaId
     }
     
     @MainActor
-    static func createOrUpdate(from personaId: String) -> PlayerNameOverride {
-        let predicate = #Predicate<PlayerNameOverride> { $0.personaId == personaId }
-        let fetchDescriptor = FetchDescriptor<PlayerNameOverride>(predicate: predicate, sortBy: [SortDescriptor(\.personaId)])
+    static func createOrUpdate(from personaId: String) -> GameStore {
+        let predicate = #Predicate<GameStore> { $0.personaId == personaId }
+        let fetchDescriptor = FetchDescriptor<GameStore>(predicate: predicate, sortBy: [SortDescriptor(\.personaId)])
         
         do {
             let names = try SwiftDataManager.shared.container.mainContext.fetch(fetchDescriptor)
@@ -30,16 +33,20 @@ class PlayerNameOverride {
             }
         } catch { }
         
-        let nameOverride = PlayerNameOverride(personaId: personaId)
+        let nameOverride = GameStore(personaId: personaId)
         SwiftDataManager.shared.container.mainContext.insert(nameOverride)
         return nameOverride
+    }
+    
+    var formatsPlayed: [String] {
+        return Array(Set(stats.map { $0.format })).sorted()
     }
 }
 
 //@MainActor
 //func nameFromPersona(_ personaId: String) -> String? {
-//    let predicate = #Predicate<PlayerNameOverride> { $0.personaId == personaId }
-//    let fetchDescriptor = FetchDescriptor<PlayerNameOverride>(predicate: predicate, sortBy: [SortDescriptor(\.personaId)])
+//    let predicate = #Predicate<GameStore> { $0.personaId == personaId }
+//    let fetchDescriptor = FetchDescriptor<GameStore>(predicate: predicate, sortBy: [SortDescriptor(\.personaId)])
 //    
 //    do {
 //        let names = try SwiftDataManager.shared.container.mainContext.fetch(fetchDescriptor)

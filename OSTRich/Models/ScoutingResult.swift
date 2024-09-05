@@ -20,6 +20,8 @@ class ScoutingResult: Identifiable {
     var format: String = ""
     var player: LocalPlayer?
     
+    var gameStore: GameStore?
+    
     var date: Date = Date.now
 
     

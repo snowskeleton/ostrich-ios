@@ -1,5 +1,5 @@
 //
-//  ScoutingHistory.swift
+//  ScoutingHistoryByShopView.swift
 //  OSTRich
 //
 //  Created by snow on 8/21/24.
@@ -10,57 +10,41 @@ import SwiftData
 import RevenueCat
 import RevenueCatUI
 
-struct ScoutingHistoryAllPlayersView: View {
+struct ScoutingHistoryByShopView: View {
     @Environment(\.modelContext) private var context
-    @Query var players: [LocalPlayer]
+    @Query(sort: \GameStore.userGivenName) var shops: [GameStore]
     
     @State private var isPresented: Bool = false
     @State private var searchText: String = ""
+    
+    @State private var format: String = "Modern"
     
     // paywall stuff
     @State private var showScoutingResults: Bool = true
     @State private var showPaywall: Bool = false
     @State private var timer: Timer?
     
-    var searchablePlayers: [LocalPlayer] {
-        if searchText.isEmpty {
-            return players
-        } else {
-            return players.filter {
-                $0.safeName.lowercased().contains(searchText.lowercased()) ||
-                $0.stats.contains {
-                    $0.deckName.lowercased().contains(searchText.lowercased())
-                }
-                // since this returns players, and not formats,
-                // searching by format returns all formats for each player who's
-                // played in the searched format
-                // TODO: fix
-//                ||
-//                $0.stats.contains {
-//                    $0.format.lowercased().contains(searchText.lowercased())
-//                }
-            }
-        }
-    }
-
-    init() {
-        let predicate = #Predicate<LocalPlayer> { !$0.stats.isEmpty }
-        let descriptor = FetchDescriptor<LocalPlayer>(
-            predicate: predicate,
-            sortBy: [SortDescriptor(\.firstName)]
-        )
-        _players = Query(descriptor)
-    }
 
     var body: some View {
         NavigationStack {
             
             if showScoutingResults {
                 List {
-                    ForEach(searchablePlayers, id: \.personaId) { player in
-                        Section(player.safeName) {
-                            ScoutingHistoryCollapsableView(player: player)
+                    ForEach(shops, id: \.personaId) { shop in
+                        DisclosureGroup {
+                            ForEach(shop.formatsPlayed, id: \.self) { format in
+                                NavigationLink {
+                                    DecksInStoreView(storePersonaId: shop.personaId, format: format)
+                                } label: {
+                                    Text(format)
+                                }
+                                .padding(.vertical, 2)
+                            }
+                        } label: {
+                            Text(shop.userGivenName ?? shop.personaId)
+                                .font(.headline)
                         }
+                        .padding(.vertical, 5)
                     }
                 }
                 .navigationTitle("Scouted Players")
