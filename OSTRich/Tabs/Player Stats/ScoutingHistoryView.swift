@@ -22,7 +22,7 @@ struct ScoutingHistoryView: View {
             if showScoutingResults {
                 VStack {
                     Picker(selection: $selection, label: Text("")) {
-                        Text("Standings").tag("Shop")
+                        Text("Shop").tag("Shop")
                         Text("Players").tag("Players")
                     }//.pickerStyle(SegmentedPickerStyle())
 
