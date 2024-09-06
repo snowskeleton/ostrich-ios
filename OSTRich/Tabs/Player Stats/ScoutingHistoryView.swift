@@ -20,11 +20,18 @@ struct ScoutingHistoryView: View {
     var body: some View {
         NavigationStack {
             if showScoutingResults {
-                TabView(selection: $selection) {
-                    ScoutingHistoryByShopView().tag("Shop")
-                    ScoutingHistoryAllPlayersView().tag("Players")
+                VStack {
+                    Picker(selection: $selection, label: Text("")) {
+                        Text("Standings").tag("Shop")
+                        Text("Players").tag("Players")
+                    }//.pickerStyle(SegmentedPickerStyle())
+
+                    TabView(selection: $selection) {
+                        ScoutingHistoryByShopView().tag("Shop")
+                        ScoutingHistoryAllPlayersView().tag("Players")
+                    }
+                    .tabViewStyle(.page(indexDisplayMode: .never))
                 }
-                .tabViewStyle(.page(indexDisplayMode: .never))
             } else {
                 Button {
                     showPaywall = true

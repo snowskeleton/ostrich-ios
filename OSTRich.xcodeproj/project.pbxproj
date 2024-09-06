@@ -10,7 +10,7 @@
 		800DB1832C862CCC008F1FDC /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800DB1822C862CCC008F1FDC /* BundleExtension.swift */; };
 		800DB1852C862F4E008F1FDC /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800DB1842C862F4E008F1FDC /* LicenseView.swift */; };
 		800DB18D2C8630DB008F1FDC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 800DB18C2C8630DB008F1FDC /* LICENSE */; };
-		800DB1912C87A119008F1FDC /* createFakeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800DB1902C87A119008F1FDC /* createFakeEvent.swift */; };
+		800DB1912C87A119008F1FDC /* CreateFakeEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800DB1902C87A119008F1FDC /* CreateFakeEventView.swift */; };
 		80249EC92C7675B400A6A1E6 /* RoundTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249EC82C7675B400A6A1E6 /* RoundTimerView.swift */; };
 		80249ECB2C76789900A6A1E6 /* ScoutingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249ECA2C76789900A6A1E6 /* ScoutingResult.swift */; };
 		80249ECF2C767A3500A6A1E6 /* ScoutingHistoryAllPlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249ECE2C767A3500A6A1E6 /* ScoutingHistoryAllPlayersView.swift */; };
@@ -39,6 +39,8 @@
 		80582EC42C8A02A50056C421 /* ScoutingHistoryByShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80582EC32C8A02A50056C421 /* ScoutingHistoryByShopView.swift */; };
 		80582EC62C8A30A00056C421 /* DecksInStoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80582EC52C8A30A00056C421 /* DecksInStoreView.swift */; };
 		80582EC82C8A31710056C421 /* ScoutingHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80582EC72C8A31710056C421 /* ScoutingHistoryView.swift */; };
+		80582ED32C8B68FB0056C421 /* DeckStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80582ED22C8B68FB0056C421 /* DeckStatsView.swift */; };
+		80582ED52C8B83A90056C421 /* ScoutingHistoryByPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80582ED42C8B83A90056C421 /* ScoutingHistoryByPlayerView.swift */; };
 		8064DF842C8381700017B088 /* EventHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064DF832C8381700017B088 /* EventHeaderView.swift */; };
 		8064DF862C8387830017B088 /* PendingNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064DF852C8387830017B088 /* PendingNotificationsView.swift */; };
 		806843142C383AE000264D1A /* NetworkLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843132C383AE000264D1A /* NetworkLogsView.swift */; };
@@ -404,7 +406,7 @@
 		800DB1822C862CCC008F1FDC /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
 		800DB1842C862F4E008F1FDC /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
 		800DB18C2C8630DB008F1FDC /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		800DB1902C87A119008F1FDC /* createFakeEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createFakeEvent.swift; sourceTree = "<group>"; };
+		800DB1902C87A119008F1FDC /* CreateFakeEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFakeEventView.swift; sourceTree = "<group>"; };
 		80249EC82C7675B400A6A1E6 /* RoundTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundTimerView.swift; sourceTree = "<group>"; };
 		80249ECA2C76789900A6A1E6 /* ScoutingResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingResult.swift; sourceTree = "<group>"; };
 		80249ECE2C767A3500A6A1E6 /* ScoutingHistoryAllPlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingHistoryAllPlayersView.swift; sourceTree = "<group>"; };
@@ -434,6 +436,8 @@
 		80582EC32C8A02A50056C421 /* ScoutingHistoryByShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingHistoryByShopView.swift; sourceTree = "<group>"; };
 		80582EC52C8A30A00056C421 /* DecksInStoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksInStoreView.swift; sourceTree = "<group>"; };
 		80582EC72C8A31710056C421 /* ScoutingHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingHistoryView.swift; sourceTree = "<group>"; };
+		80582ED22C8B68FB0056C421 /* DeckStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckStatsView.swift; sourceTree = "<group>"; };
+		80582ED42C8B83A90056C421 /* ScoutingHistoryByPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingHistoryByPlayerView.swift; sourceTree = "<group>"; };
 		8064DF832C8381700017B088 /* EventHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHeaderView.swift; sourceTree = "<group>"; };
 		8064DF852C8387830017B088 /* PendingNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNotificationsView.swift; sourceTree = "<group>"; };
 		806843132C383AE000264D1A /* NetworkLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogsView.swift; sourceTree = "<group>"; };
@@ -684,7 +688,7 @@
 				8051C3FE2C84FF2B0039E257 /* FakePaywalledView.swift */,
 				80CCA5512C7D4E7200B90BF5 /* NotificationPermissionsView.swift */,
 				8064DF852C8387830017B088 /* PendingNotificationsView.swift */,
-				800DB1902C87A119008F1FDC /* createFakeEvent.swift */,
+				800DB1902C87A119008F1FDC /* CreateFakeEventView.swift */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -706,7 +710,9 @@
 				80249ECE2C767A3500A6A1E6 /* ScoutingHistoryAllPlayersView.swift */,
 				80582EC32C8A02A50056C421 /* ScoutingHistoryByShopView.swift */,
 				80582EC52C8A30A00056C421 /* DecksInStoreView.swift */,
+				80582ED22C8B68FB0056C421 /* DeckStatsView.swift */,
 				80CCA5432C7BB24A00B90BF5 /* ScoutingHistoryCollapsableView.swift */,
+				80582ED42C8B83A90056C421 /* ScoutingHistoryByPlayerView.swift */,
 				80ED1C942C7A5A0300E83B2D /* ScoutingHistoryByFormatView.swift */,
 				80CCA5452C7BB29600B90BF5 /* ScoutingResultsForTeamView.swift */,
 				80249ED62C768A4500A6A1E6 /* CreateScoutingResultView.swift */,
@@ -1369,6 +1375,7 @@
 				80FFBED02C4025A2005E958D /* EventHostV2.graphql.swift in Sources */,
 				80FFBED12C4025A2005E958D /* JoinTeamMutation.graphql.swift in Sources */,
 				80FFBED22C4025A2005E958D /* GameStateV2Host.graphql.swift in Sources */,
+				80582ED32C8B68FB0056C421 /* DeckStatsView.swift in Sources */,
 				80FFBED32C4025A2005E958D /* SeatV2.graphql.swift in Sources */,
 				80CCA5462C7BB29600B90BF5 /* ScoutingResultsForTeamView.swift in Sources */,
 				80249EC92C7675B400A6A1E6 /* RoundTimerView.swift in Sources */,
@@ -1393,7 +1400,7 @@
 				80FFBEDF2C4025A2005E958D /* PlayerRegisteredSubscription.graphql.swift in Sources */,
 				80FFBEE02C4025A2005E958D /* EventFormatDetails.graphql.swift in Sources */,
 				80FFBEE12C4025A2005E958D /* SchemaConfiguration.swift in Sources */,
-				800DB1912C87A119008F1FDC /* createFakeEvent.swift in Sources */,
+				800DB1912C87A119008F1FDC /* CreateFakeEventView.swift in Sources */,
 				80D37EC22C48338600997C6D /* Standing.swift in Sources */,
 				8051C4052C861DF50039E257 /* AboutView.swift in Sources */,
 				80FFBEE22C4025A2005E958D /* PodV2.graphql.swift in Sources */,
@@ -1424,6 +1431,7 @@
 				80FFBEF32C4025A2005E958D /* TeamDetails.graphql.swift in Sources */,
 				80FFBEF42C4025A2005E958D /* SearchEventsQuery.graphql.swift in Sources */,
 				80FFBEF52C4025A2005E958D /* UnRegisterPlayerMutation.graphql.swift in Sources */,
+				80582ED52C8B83A90056C421 /* ScoutingHistoryByPlayerView.swift in Sources */,
 				80FFBEF62C4025A2005E958D /* GetEventStatusQuery.graphql.swift in Sources */,
 				80FFBEF72C4025A2005E958D /* GetEventTitleQuery.graphql.swift in Sources */,
 				80FFBEF82C4025A2005E958D /* RoundDetailsV2.graphql.swift in Sources */,

@@ -45,9 +45,9 @@ struct DecksInStoreView: View {
     }
     
     var body: some View {
-        List(deckCounts, id: \.deckName) { deck in
-            DisclosureGroup {
-                InnerLoop(players: deck.players, format: format)
+        ForEach(deckCounts, id: \.deckName) { deck in
+            NavigationLink {
+                DeckStatsView(deckName: deck.deckName, format: format)
             } label: {
                 HStack {
                     Text(deck.deckName)
@@ -57,10 +57,24 @@ struct DecksInStoreView: View {
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
-                .padding(.vertical, 5)
             }
         }
-        .navigationTitle("Decks in Store")
+//        List(deckCounts, id: \.deckName) { deck in
+//            DisclosureGroup {
+//                InnerLoop(players: deck.players, format: format)
+//            } label: {
+//                HStack {
+//                    Text(deck.deckName)
+//                        .font(.headline)
+//                    Spacer()
+//                    Text("\(deck.count)")
+//                        .font(.subheadline)
+//                        .foregroundColor(.secondary)
+//                }
+//                .padding(.vertical, 5)
+//            }
+//        }
+//        .navigationTitle("Decks in Store")
     }
     
     struct InnerLoop: View {

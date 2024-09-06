@@ -64,8 +64,16 @@ struct DeveloperMenuView: View {
             }
             #endif
             
+            Section {
+                NavigationLink {
+                    CreateFakeEventView()
+                } label: {
+                    Text("Create Mock Data")
+                }
+            }
+            
             Section("Actions") {
-                Button("Create fake event") { createFakeEvent() }
+//                Button("Create fake event") { createFakeEvent() }
                 Button("Crash!") { showCrashConfirmation = true }
                     .confirmationDialog(
                         "Crash car into a bridge",

@@ -25,12 +25,11 @@ struct ScoutingHistoryByShopView: View {
                 ForEach(shops, id: \.personaId) { shop in
                     DisclosureGroup {
                         ForEach(shop.formatsPlayed, id: \.self) { format in
-                            NavigationLink {
-                                DecksInStoreView(storePersonaId: shop.personaId, format: format)
+                            DisclosureGroup {
+                                DecksInStoreView(storePersonaId: shop.personaId,format: format)
                             } label: {
                                 Text(format)
                             }
-                            .padding(.vertical, 2)
                         }
                     } label: {
                         Text(shop.userGivenName ?? shop.personaId)
