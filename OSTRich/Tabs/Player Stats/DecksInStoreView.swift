@@ -59,41 +59,5 @@ struct DecksInStoreView: View {
                 }
             }
         }
-//        List(deckCounts, id: \.deckName) { deck in
-//            DisclosureGroup {
-//                InnerLoop(players: deck.players, format: format)
-//            } label: {
-//                HStack {
-//                    Text(deck.deckName)
-//                        .font(.headline)
-//                    Spacer()
-//                    Text("\(deck.count)")
-//                        .font(.subheadline)
-//                        .foregroundColor(.secondary)
-//                }
-//                .padding(.vertical, 5)
-//            }
-//        }
-//        .navigationTitle("Decks in Store")
     }
-    
-//    struct InnerLoop: View {
-//        // if this inner loop is combined with the above view, something goes into an infinite loop and crashes
-//        @State var players: [LocalPlayer]
-//        var format: String
-//        
-//        var body: some View {
-//            ForEach(players) { player in
-//                NavigationLink {
-//                    List {
-//                        ScoutingHistoryByFormatView(player: player, format: format)
-//                    }
-//                } label: {
-//                    Text(player.safeName)
-//                        .font(.body)
-//                }
-//                .padding(.vertical, 2)
-//            }
-//        }
-//    }
 }
