@@ -31,7 +31,10 @@ struct DeckStatsView: View {
                 .max(by: { $0.date < $1.date })?.date
             return (player: player, lastPlayed: lastPlayedDate ?? Date.distantPast)
         }
-        .sorted { $0.player.safeName < $1.player.safeName }
+        .sorted {
+            $0.lastPlayed > $1.lastPlayed &&
+            $0.player.safeName < $1.player.safeName
+        }
     }
 
     var filteredStats: [ScoutingResult] {
