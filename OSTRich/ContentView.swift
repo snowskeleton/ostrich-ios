@@ -18,11 +18,11 @@ struct ContentView: View {
         TabView {
             AllEventsView()
                 .tabItem {
-                    Label("Events", systemImage: "bus.doubledecker")
+                    Label("Events", systemImage: "person.line.dotted.person.fill")
                 }
             ScoutingHistoryView()
                 .tabItem {
-                    Label("Player Stats", systemImage: "person.2")
+                    Label("Metagame", systemImage: "chart.bar.xaxis")
                 }
             SettingsView()
                 .tabItem {
