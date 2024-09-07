@@ -30,7 +30,7 @@ struct ScoutingHistoryByFormatView: View {
         }
         var descriptor = FetchDescriptor<ScoutingResult>(
             predicate: predicate,
-            sortBy: [SortDescriptor(\.date)]
+            sortBy: [SortDescriptor(\.date, order: .reverse)]
         )
         descriptor.fetchLimit = fetchLimit
         _playerStats = Query(descriptor)
