@@ -77,23 +77,23 @@ struct DecksInStoreView: View {
 //        .navigationTitle("Decks in Store")
     }
     
-    struct InnerLoop: View {
-        // if this inner loop is combined with the above view, something goes into an infinite loop and crashes
-        @State var players: [LocalPlayer]
-        var format: String
-        
-        var body: some View {
-            ForEach(players) { player in
-                NavigationLink {
-                    List {
-                        ScoutingHistoryByFormatView(player: player, format: format)
-                    }
-                } label: {
-                    Text(player.safeName)
-                        .font(.body)
-                }
-                .padding(.vertical, 2)
-            }
-        }
-    }
+//    struct InnerLoop: View {
+//        // if this inner loop is combined with the above view, something goes into an infinite loop and crashes
+//        @State var players: [LocalPlayer]
+//        var format: String
+//        
+//        var body: some View {
+//            ForEach(players) { player in
+//                NavigationLink {
+//                    List {
+//                        ScoutingHistoryByFormatView(player: player, format: format)
+//                    }
+//                } label: {
+//                    Text(player.safeName)
+//                        .font(.body)
+//                }
+//                .padding(.vertical, 2)
+//            }
+//        }
+//    }
 }

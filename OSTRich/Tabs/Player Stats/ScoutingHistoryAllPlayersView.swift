@@ -9,43 +9,24 @@ import SwiftUI
 import SwiftData
 
 struct ScoutingHistoryAllPlayersView: View {
-    @Environment(\.modelContext) private var context
-    @Query var players: [LocalPlayer]
-    
     @State private var isPresented: Bool = true
-    @State private var searchText: String = ""
     
-    var searchablePlayers: [LocalPlayer] {
-        if searchText.isEmpty {
-            return players
-        } else {
-            return players.filter {
-                $0.safeName.lowercased().contains(searchText.lowercased()) ||
-                $0.stats.contains {
-                    $0.deckName.lowercased().contains(searchText.lowercased())
+    var stats: [ScoutingResult]
+    
+    private var players: [LocalPlayer] {
+        let uniquePlayers = Array(Set(stats.compactMap { $0.player }))
+        return uniquePlayers.sorted { $0.safeName < $1.safeName }
+    }
+    var body: some View {
+        List {
+            ForEach(players, id: \.personaId) { player in
+                Section(player.safeName) {
+                    ScoutingHistoryCollapsableView(player: player)
                 }
             }
         }
-    }
-
-    init() {
-        let predicate = #Predicate<LocalPlayer> { !$0.stats.isEmpty }
-        let descriptor = FetchDescriptor<LocalPlayer>(
-            predicate: predicate,
-            sortBy: [SortDescriptor(\.firstName)]
-        )
-        _players = Query(descriptor)
-    }
-
-    var body: some View {
-        NavigationStack {
-            List {
-                ForEach(searchablePlayers, id: \.personaId) { player in
-                    Section(player.safeName) {
-                        ScoutingHistoryCollapsableView(player: player)
-                    }
-                }
-            }
+        .onAppear {
+            Analytics.track(.openedScoutingHistoryAllPlayersView)
         }
     }
 }

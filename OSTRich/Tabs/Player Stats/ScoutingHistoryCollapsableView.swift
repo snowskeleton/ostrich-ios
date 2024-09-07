@@ -10,7 +10,7 @@ import SwiftUI
 import SwiftData
 
 struct ScoutingHistoryCollapsableView: View {
-    @Environment(\.modelContext) var context
+    @AppStorage("preferredFormat") var preferredFormat: String?
     
     @State private var expandedSections: [String: Bool] = [:]
     @State var player: LocalPlayer
@@ -28,13 +28,19 @@ struct ScoutingHistoryCollapsableView: View {
     
     var body: some View {
         ForEach(player.formatsPlayed, id: \.self) { format in
-            DisclosureGroup(isExpanded: Binding(
-                get: { expandedSections[format] ?? false },
-                set: { expandedSections[format] = $0 }
-            )) {
-                ScoutingHistoryByFormatView(player: player, format: format)
-            } label: {
-                Text(format)
+            if let preferredFormat = preferredFormat, !preferredFormat.isEmpty {
+                if format == preferredFormat {
+                    ScoutingHistoryByFormatView(player: player, format: format)
+                }
+            } else {
+                DisclosureGroup(isExpanded: Binding(
+                    get: { expandedSections[format] ?? false },
+                    set: { expandedSections[format] = $0 }
+                )) {
+                    ScoutingHistoryByFormatView(player: player, format: format)
+                } label: {
+                    Text(format)
+                }
             }
         }
     }

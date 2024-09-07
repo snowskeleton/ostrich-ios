@@ -11,28 +11,54 @@ import RevenueCat
 import RevenueCatUI
 
 struct ScoutingHistoryByShopView: View {
-    @Environment(\.modelContext) private var context
+    @AppStorage("preferredFormat") var preferredFormat: String?
+    
     @Query(sort: \GameStore.userGivenName) var shops: [GameStore]
     
     @State private var isPresented: Bool = false
     @State private var searchText: String = ""
     
-    @State private var format: String = "Modern"
+    var stats: [ScoutingResult]
     
+    private var sortedGroupedByStore: [(key: GameStore, value: [ScoutingResult])] {
+        var storeDict: [GameStore: [ScoutingResult]] = [:]
+        
+        for result in stats {
+            if let store = result.gameStore {
+                if storeDict[store] != nil {
+                    storeDict[store]?.append(result)
+                } else {
+                    storeDict[store] = [result]
+                }
+            }
+        }
+        
+        return storeDict.sorted {
+            ($0.key.userGivenName ?? "") < ($1.key.userGivenName ?? "")
+        }
+    }
+
+
     var body: some View {
         NavigationStack {
             List {
-                ForEach(shops, id: \.personaId) { shop in
+                ForEach(sortedGroupedByStore, id: \.key.personaId) { (store, results) in
                     DisclosureGroup {
-                        ForEach(shop.formatsPlayed, id: \.self) { format in
-                            DisclosureGroup {
-                                DecksInStoreView(storePersonaId: shop.personaId,format: format)
-                            } label: {
-                                Text(format)
+                        ForEach(Array(Set(results.map { $0.format })).sorted(), id: \.self) { format in
+                            if let preferredFormat = preferredFormat, !preferredFormat.isEmpty {
+                                if format == preferredFormat {
+                                    DecksInStoreView(storePersonaId: store.personaId, format: format)
+                                }
+                            } else {
+                                DisclosureGroup {
+                                    DecksInStoreView(storePersonaId: store.personaId, format: format)
+                                } label: {
+                                    Text(format)
+                                }
                             }
                         }
                     } label: {
-                        Text(shop.userGivenName ?? shop.personaId)
+                        Text(store.userGivenName ?? store.personaId)
                             .font(.headline)
                     }
                     .padding(.vertical, 5)

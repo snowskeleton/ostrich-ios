@@ -6,11 +6,24 @@
 //
 
 import SwiftUI
+import SwiftData
 import RevenueCat
 import RevenueCatUI
 
 struct ScoutingHistoryView: View {
+    @AppStorage("preferredFormat") var preferredFormat: String = ""
+    
+    @Query var scoutingResults: [ScoutingResult]
+    
+    var filteredStats: [ScoutingResult] {
+        if !preferredFormat.isEmpty {
+            return scoutingResults.filter { $0.format == preferredFormat }
+        }
+        return scoutingResults
+    }
+    
     @State private var selection: String = "Shop"
+    @State private var selectedFormat: String = "Modern"
     
     //paywall
     @State private var showScoutingResults: Bool = true
@@ -21,14 +34,33 @@ struct ScoutingHistoryView: View {
         NavigationStack {
             if showScoutingResults {
                 VStack {
-                    Picker(selection: $selection, label: Text("")) {
-                        Text("Shop").tag("Shop")
-                        Text("Players").tag("Players")
-                    }//.pickerStyle(SegmentedPickerStyle())
+                    HStack {
+                        Picker("Show...", selection: $selection) {
+                            Text("Shop").tag("Shop")
+                            Text("Players").tag("Players")
+                        }
+                        
+                        Picker("Format", selection: $selectedFormat) {
+                            Text("All Formats").tag("All Formats")
+                            ForEach(formatNames, id: \.self) {
+                                Text($0).tag($0)
+                            }
+                        }
+                        .onChange(of: selectedFormat) {
+                            preferredFormat = selectedFormat == "All Formats" ? "" : selectedFormat
+                        }
+                        .onAppear {
+                            if !preferredFormat.isEmpty {
+                                selectedFormat = preferredFormat
+                            } else {
+                                // set the most common format among ScoutingResults
+                            }
+                        }
+                    }
 
                     TabView(selection: $selection) {
-                        ScoutingHistoryByShopView().tag("Shop")
-                        ScoutingHistoryAllPlayersView().tag("Players")
+                        ScoutingHistoryByShopView(stats: filteredStats).tag("Shop")
+                        ScoutingHistoryAllPlayersView(stats: filteredStats).tag("Players")
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))
                 }
