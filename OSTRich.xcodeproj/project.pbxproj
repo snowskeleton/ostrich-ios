@@ -42,6 +42,7 @@
 		80582ED32C8B68FB0056C421 /* DeckStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80582ED22C8B68FB0056C421 /* DeckStatsView.swift */; };
 		80582ED72C8D29760056C421 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80582ED62C8D29760056C421 /* LineChartView.swift */; };
 		80582ED92C8D29800056C421 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80582ED82C8D29800056C421 /* BarChartView.swift */; };
+		80582EDB2C8D328D0056C421 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80582EDA2C8D328D0056C421 /* Config.swift */; };
 		8064DF842C8381700017B088 /* EventHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064DF832C8381700017B088 /* EventHeaderView.swift */; };
 		8064DF862C8387830017B088 /* PendingNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8064DF852C8387830017B088 /* PendingNotificationsView.swift */; };
 		806843142C383AE000264D1A /* NetworkLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806843132C383AE000264D1A /* NetworkLogsView.swift */; };
@@ -440,6 +441,7 @@
 		80582ED22C8B68FB0056C421 /* DeckStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckStatsView.swift; sourceTree = "<group>"; };
 		80582ED62C8D29760056C421 /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
 		80582ED82C8D29800056C421 /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
+		80582EDA2C8D328D0056C421 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		8064DF832C8381700017B088 /* EventHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHeaderView.swift; sourceTree = "<group>"; };
 		8064DF852C8387830017B088 /* PendingNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNotificationsView.swift; sourceTree = "<group>"; };
 		806843132C383AE000264D1A /* NetworkLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogsView.swift; sourceTree = "<group>"; };
@@ -764,6 +766,7 @@
 				800DB1822C862CCC008F1FDC /* BundleExtension.swift */,
 				80CCA54F2C7D4A2500B90BF5 /* Notifications.swift */,
 				8053FE5B2C7FB4F0005A10BD /* Analytics.swift */,
+				80582EDA2C8D328D0056C421 /* Config.swift */,
 				80FFBDEB2C4020D0005E958D /* GameState.graphql */,
 				80FFBDE62C401FA8005E958D /* gamestateschema.json */,
 				803D6BE02BFE416F00CEB9F2 /* Notifications */,
@@ -1348,6 +1351,7 @@
 				80FFBF0D2C402E79005E958D /* NetworkInterceptorProvider.swift in Sources */,
 				80FFBEB82C4025A2005E958D /* DraftV2.graphql.swift in Sources */,
 				80FFBEB92C4025A2005E958D /* Team.graphql.swift in Sources */,
+				80582EDB2C8D328D0056C421 /* Config.swift in Sources */,
 				80FFBEBA2C4025A2005E958D /* GameStateV2.graphql.swift in Sources */,
 				80FFBEBB2C4025A2005E958D /* TimerDetails.graphql.swift in Sources */,
 				80D37EAE2C4832F000997C6D /* Top8Draft.swift in Sources */,

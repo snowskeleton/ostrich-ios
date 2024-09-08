@@ -114,17 +114,18 @@ struct SettingsView: View {
                     }
                 }
                 
-                Section {
-                    NavigationLink {
-                        DeveloperMenuView()
-                    } label: {
-                        HStack {
-                            Image(systemName: "hammer")
-                            Text("Developer Menu")
+                if Config.appConfiguration != .AppStore {
+                    Section {
+                        NavigationLink {
+                            DeveloperMenuView()
+                        } label: {
+                            HStack {
+                                Image(systemName: "hammer")
+                                Text("Developer Menu")
+                            }
                         }
                     }
                 }
-                
             }
         }
         .onAppear {
