@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import Charts
 import RevenueCat
 import RevenueCatUI
 
@@ -16,14 +17,60 @@ struct ScoutingHistoryView: View {
     @Query var scoutingResults: [ScoutingResult]
     
     var filteredStats: [ScoutingResult] {
-        if !preferredFormat.isEmpty {
-            return scoutingResults.filter { $0.format == preferredFormat }
+        var filteredResults: [ScoutingResult] = searchedStats
+        if shopSelection != "All" {
+            filteredResults = filteredResults.filter { ($0.gameStore?.safeName ?? "") == shopSelection }
         }
-        return scoutingResults
+        if preferredFormat != "All" {
+            filteredResults = filteredResults.filter { $0.format == preferredFormat }
+        }
+        return filteredResults
     }
     
-    @State private var selection: String = "Shop"
-    @State private var selectedFormat: String = "Modern"
+    var searchedStats: [ScoutingResult] {
+        if searchText.isEmpty {
+            return scoutingResults
+        } else {
+            if tabSelection == "Players" {
+                return scoutingResults.filter {
+                    ($0.player?.safeName.lowercased().contains(searchText.lowercased()) ?? false) ||
+                    $0.deckName.lowercased().contains(searchText.lowercased())
+                }
+            } else if tabSelection == "Shop" {
+                return scoutingResults.filter {
+                    $0.deckName.lowercased().contains(searchText.lowercased())
+                }
+            }
+            
+            return scoutingResults
+        }
+    }
+    
+    var shops: [GameStore] {
+        let storeSet = Set(scoutingResults.compactMap { $0.gameStore })
+        return Array(storeSet).sorted { $0.safeName < $1.safeName }
+    }
+    
+    @State private var searchText: String = ""
+    @State private var tabSelection: String = "Shop"
+    @State private var shopSelection: String = "All"
+
+    @State private var selectedFormat: String = "All"
+    var defaultFormat: String {
+        // default to the format with the highest representation
+        let formatCounts = scoutingResults
+            .map { $0.format }
+            .reduce(into: [String: Int]()) { counts, format in
+                counts[format, default: 0] += 1
+            }
+        
+        if let mostCommonFormat = formatCounts.max(by: { $0.value < $1.value })?.key {
+            return mostCommonFormat
+        } else {
+            return "All"
+        }
+
+    }
     
     //paywall
     @State private var showScoutingResults: Bool = true
@@ -34,31 +81,42 @@ struct ScoutingHistoryView: View {
         NavigationStack {
             if showScoutingResults {
                 VStack {
-                    HStack {
-                        Picker("Show...", selection: $selection) {
-                            Text("Shop").tag("Shop")
-                            Text("Players").tag("Players")
+                    BarChartView(stats: filteredStats)
+                    
+                    VStack {
+                        HStack {
+                            Picker("Shops", selection: $shopSelection) {
+                                Text("All Shops").tag("All")
+                                ForEach(shops, id: \.safeName) { shop in
+                                    Text(shop.safeName).tag(shop.safeName)
+                                }
+                            }
+                            
+                            Picker("Format", selection: $selectedFormat) {
+                                Text("All Formats").tag("All")
+                                ForEach(formatNames, id: \.self) {
+                                    Text($0).tag($0)
+                                }
+                            }
+                            .onChange(of: selectedFormat) {
+                                preferredFormat = selectedFormat
+                            }
+                            .onAppear {
+                                if !preferredFormat.isEmpty {
+                                    selectedFormat = preferredFormat
+                                } else {
+                                    selectedFormat = defaultFormat
+                                }
+                            }
                         }
                         
-                        Picker("Format", selection: $selectedFormat) {
-                            Text("All Formats").tag("All Formats")
-                            ForEach(formatNames, id: \.self) {
-                                Text($0).tag($0)
-                            }
-                        }
-                        .onChange(of: selectedFormat) {
-                            preferredFormat = selectedFormat == "All Formats" ? "" : selectedFormat
-                        }
-                        .onAppear {
-                            if !preferredFormat.isEmpty {
-                                selectedFormat = preferredFormat
-                            } else {
-                                // set the most common format among ScoutingResults
-                            }
-                        }
+                        Picker("Show...", selection: $tabSelection) {
+                            Text("Shop").tag("Shop")
+                            Text("Players").tag("Players")
+                        }.pickerStyle(SegmentedPickerStyle())
                     }
 
-                    TabView(selection: $selection) {
+                    TabView(selection: $tabSelection) {
                         ScoutingHistoryByShopView(stats: filteredStats).tag("Shop")
                         ScoutingHistoryAllPlayersView(stats: filteredStats).tag("Players")
                     }
@@ -82,6 +140,7 @@ struct ScoutingHistoryView: View {
                 }
             }
         }
+        .searchable(text: $searchText)
         .onAppear {
             calculatePaywall()
             startPaywallTimer()
@@ -136,6 +195,4 @@ struct ScoutingHistoryView: View {
 
 }
 
-#Preview {
-    ScoutingHistoryView()
-}
+

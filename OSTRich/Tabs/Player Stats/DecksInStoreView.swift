@@ -12,7 +12,7 @@ import RevenueCat
 import RevenueCatUI
 
 struct DecksInStoreView: View {
-    @Query var stats: [ScoutingResult]
+    var stats: [ScoutingResult]
     var format: String
     
     private var deckCounts: [(deckName: String, count: Int, players: [LocalPlayer])] {
@@ -29,19 +29,6 @@ struct DecksInStoreView: View {
                 }
             }
             .map { (deckName: $0.key, count: $0.value.count, players: $0.value.players) }
-    }
-    
-    init(storePersonaId: String, format: String) {
-        self.format = format
-        let predicate = #Predicate<ScoutingResult> {
-            $0.createdBy == storePersonaId &&
-            $0.format == format
-        }
-        let descriptor = FetchDescriptor<ScoutingResult>(
-            predicate: predicate,
-            sortBy: [SortDescriptor(\.deckName)]
-        )
-        _stats = Query(descriptor)
     }
     
     var body: some View {

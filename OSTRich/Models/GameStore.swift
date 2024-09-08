@@ -17,6 +17,14 @@ class GameStore {
     @Relationship(inverse: \ScoutingResult.player)
     var stats: [ScoutingResult] = []
     
+    var safeName: String {
+        if let name = userGivenName {
+            return name
+        } else {
+            return personaId
+        }
+    }
+    
     init(personaId: String) {
         self.personaId = personaId
     }
@@ -42,55 +50,3 @@ class GameStore {
         return Array(Set(stats.map { $0.format })).sorted()
     }
 }
-
-//@MainActor
-//func nameFromPersona(_ personaId: String) -> String? {
-//    let predicate = #Predicate<GameStore> { $0.personaId == personaId }
-//    let fetchDescriptor = FetchDescriptor<GameStore>(predicate: predicate, sortBy: [SortDescriptor(\.personaId)])
-//    
-//    do {
-//        let names = try SwiftDataManager.shared.container.mainContext.fetch(fetchDescriptor)
-//        if let name = names.first?.userGivenName {
-//            return name
-//        }
-//    } catch {
-//        return nil
-//    }
-//    return nil
-//}
-
-//@MainActor
-//func nameOverride(_ player: Player) -> String {
-//    if let name = nameFromPersona(player.personaId ?? "") {
-//        return name
-//    } else {
-//        return player.safeName
-//    }
-//}
-//
-//@MainActor
-//func nameOverride(_ player: Registration) -> String {
-//    if let name = nameFromPersona(player.personaId ?? "") {
-//        return name
-//    } else {
-//        return player.safeName
-//    }
-//}
-//
-//@MainActor
-//func nameOverride(_ player: LocalPlayer) -> String {
-//    if let name = nameFromPersona(player.personaId ?? "") {
-//        return name
-//    } else {
-//        return player.safeName
-//    }
-//}
-//
-//@MainActor
-//func nameOverride(_ player: Reservation) -> String {
-//    if let name = nameFromPersona(player.personaId ?? "") {
-//        return name
-//    } else {
-//        return player.safeName
-//    }
-//}

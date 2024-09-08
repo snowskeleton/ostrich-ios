@@ -28,7 +28,7 @@ struct ScoutingHistoryCollapsableView: View {
     
     var body: some View {
         ForEach(player.formatsPlayed, id: \.self) { format in
-            if let preferredFormat = preferredFormat, !preferredFormat.isEmpty {
+            if let preferredFormat = preferredFormat, preferredFormat != "All" {
                 if format == preferredFormat {
                     ScoutingHistoryByFormatView(player: player, format: format)
                 }

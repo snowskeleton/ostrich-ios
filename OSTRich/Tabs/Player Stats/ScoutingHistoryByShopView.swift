@@ -13,8 +13,6 @@ import RevenueCatUI
 struct ScoutingHistoryByShopView: View {
     @AppStorage("preferredFormat") var preferredFormat: String?
     
-    @Query(sort: \GameStore.userGivenName) var shops: [GameStore]
-    
     @State private var isPresented: Bool = false
     @State private var searchText: String = ""
     
@@ -34,7 +32,7 @@ struct ScoutingHistoryByShopView: View {
         }
         
         return storeDict.sorted {
-            ($0.key.userGivenName ?? "") < ($1.key.userGivenName ?? "")
+            $0.key.safeName < $1.key.safeName
         }
     }
 
@@ -43,25 +41,21 @@ struct ScoutingHistoryByShopView: View {
         NavigationStack {
             List {
                 ForEach(sortedGroupedByStore, id: \.key.personaId) { (store, results) in
-                    DisclosureGroup {
+                    Section(store.safeName) {
                         ForEach(Array(Set(results.map { $0.format })).sorted(), id: \.self) { format in
-                            if let preferredFormat = preferredFormat, !preferredFormat.isEmpty {
+                            if let preferredFormat = preferredFormat, preferredFormat != "All" {
                                 if format == preferredFormat {
-                                    DecksInStoreView(storePersonaId: store.personaId, format: format)
+                                    DecksInStoreView(stats: results, format: format)
                                 }
                             } else {
                                 DisclosureGroup {
-                                    DecksInStoreView(storePersonaId: store.personaId, format: format)
+                                    DecksInStoreView(stats: results, format: format)
                                 } label: {
                                     Text(format)
                                 }
                             }
                         }
-                    } label: {
-                        Text(store.userGivenName ?? store.personaId)
-                            .font(.headline)
                     }
-                    .padding(.vertical, 5)
                 }
             }
         }

@@ -41,7 +41,7 @@ struct DeckStatsView: View {
         if let player = selectedPlayer {
             return stats.filter { $0.player == player }
         }
-        return stats
+        return stats.sorted { $0.deckName > $1.deckName }
     }
 
     init(deckName: String, format: String) {
@@ -56,34 +56,9 @@ struct DeckStatsView: View {
     
     var body: some View {
         VStack {
-            let groupedStats = Dictionary(grouping: filteredStats) { result in
-                Calendar.current.startOfDay(for: result.date)
-            }
-            
-            let sortedStats = groupedStats.keys.sorted().map { date in
-                (date, groupedStats[date]?.count ?? 0)
-            }
-            
             Text(chartTitle)
             
-            Chart(sortedStats, id: \.0) { date, count in
-                LineMark(
-                    x: .value("Date", date, unit: .day),
-                    y: .value("Decks Played", count)
-                )
-            }
-            .chartXAxis {
-                AxisMarks(values: .stride(by: .day, count: 7)) { value in
-                    AxisValueLabel(format: .dateTime.month(.abbreviated).day())
-                }
-            }
-            .chartYAxis {
-                AxisMarks(values: .automatic) { value in
-                    AxisGridLine()
-                    AxisValueLabel()
-                }
-            }
-            .padding()
+            LineChartView(stats: filteredStats)
             
             List(players, id: \.player) { player, lastPlayed in
                 HStack {
@@ -105,3 +80,5 @@ struct DeckStatsView: View {
         }
     }
 }
+
+
