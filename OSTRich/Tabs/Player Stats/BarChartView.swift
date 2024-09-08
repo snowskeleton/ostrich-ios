@@ -22,7 +22,7 @@ struct BarChartView: View {
     }
     
     private var chartData: [(name: String, count: Int)] {
-        data.map { ($0.key, $0.value) }
+        data.map { ($0.key, $0.value) }.sorted { $0.name > $1.name }
     }
     
     var body: some View {

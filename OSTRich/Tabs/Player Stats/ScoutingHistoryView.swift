@@ -44,7 +44,10 @@ struct ScoutingHistoryView: View {
         if preferredFormat != "All" {
             filteredResults = filteredResults.filter { $0.format == preferredFormat }
         }
-        filteredResults = filteredResults.sorted { $0.deckName > $1.deckName }
+        filteredResults = filteredResults.sorted {
+            $0.format > $1.format &&
+            $0.deckName > $1.deckName
+        }
         return filteredResults
     }
     
