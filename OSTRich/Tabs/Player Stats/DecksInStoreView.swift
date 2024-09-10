@@ -19,7 +19,13 @@ struct DecksInStoreView: View {
         Dictionary(grouping: stats, by: \.deckName)
             .mapValues { results in
                 let players = results.compactMap { $0.player }
-                return (count: results.count, players: Array(Set(players)))
+                // Deduplicate players by comparing their id (or another unique property)
+                let uniquePlayers = players.reduce(into: [LocalPlayer]()) { unique, player in
+                    if !unique.contains(where: { $0.personaId == player.personaId }) {
+                        unique.append(player)
+                    }
+                }
+                return (count: results.count, players: uniquePlayers)
             }
             .sorted {
                 if $0.value.count == $1.value.count {
