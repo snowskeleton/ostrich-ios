@@ -16,6 +16,9 @@ struct CreateFakeEventView: View {
     @State private var requiredTeamSize: Int = 1
     @State private var scheduledStartTime: Date = Date()
     
+    @State private var showCreatedFakeEvent: Bool = false
+    @State private var showCreatedFakeSeries: Bool = false
+
     var body: some View {
         Form {
             Section(header: Text("Event Details")) {
@@ -40,9 +43,32 @@ struct CreateFakeEventView: View {
                     requiredTeamSize: requiredTeamSize,
                     scheduledStartTime: scheduledStartTime
                 )
+                showCreatedFakeEvent = true
             }
+            .alert("Event created!", isPresented: $showCreatedFakeEvent) {
+                Button("OK", role: .cancel) { }
+            }
+            
+            Button("Create Fake Series") {
+                for i in 0..<7 {
+                    let newStartTime = Calendar.current.date(byAdding: .day, value: i * 7, to: scheduledStartTime) ?? scheduledStartTime
+                    
+                    createFakeEvent(
+                        eventName: eventName,
+                        eventFormat: eventFormat,
+                        pairingType: pairingType,
+                        minRounds: minRounds,
+                        requiredTeamSize: requiredTeamSize,
+                        scheduledStartTime: newStartTime
+                    )
+                }
+                showCreatedFakeSeries = true
+            }
+            .alert("Created 7 weekly events!", isPresented: $showCreatedFakeSeries) {
+                Button("OK", role: .cancel) { }
+            }
+            
         }
-        .padding()
     }
     
 }
@@ -58,7 +84,7 @@ func createFakeEvent(
     
 ) {
     let creatorPersonaId = "OSTRichTester"
-    let playerNames:  [[String: String]] = [
+    var playerNames:  [[String: String]] = [
         [
             "firstName": "Todd",
             "lastName": "Anderson",
@@ -97,6 +123,7 @@ func createFakeEvent(
         ]
         // show myself in this list
     ]
+    playerNames = playerNames.shuffled()
     
     let testDecks: [String] = [
         "Merfolk",
@@ -198,7 +225,7 @@ func createFakeEvent(
             isFinalRound: roundNumber == minRounds,
             gameState: gameState
         )
-        let matches = stride(from: 0, to: teams.count, by: 2).map { index in
+        var matches = stride(from: 0, to: teams.count - (teams.count % 2), by: 2).map { index in
             let team1 = teams[index]
             let team2 = teams[index + 1]
             
@@ -236,6 +263,34 @@ func createFakeEvent(
             match.results = [matchResult1, matchResult2]
             return match
         }
+        
+        // Handle the odd team (if any) by giving them a Bye
+        if teams.count % 2 != 0 {
+            let byeTeam = teams.last!
+            
+            let byeMatch = Match(
+                matchId: "byeMatch_\(roundNumber)_\(matches.count + 1)",
+                isBye: true,
+                teamIds: [byeTeam.teamId],
+                tableNumber: nil,  // No table number for a Bye
+                round: round
+            )
+            
+            let byeResult = MatchResult(
+                matchId: byeMatch.matchId,
+                submitter: byeTeam.teamId,
+                isBye: true,
+                wins: 2,
+                losses: 0,
+                draws: 0,
+                teamId: byeTeam.teamId,
+                match: byeMatch
+            )
+            
+            byeMatch.results = [byeResult]
+            matches.append(byeMatch)
+        }
+        
         round.matches = matches
         return round
     }
