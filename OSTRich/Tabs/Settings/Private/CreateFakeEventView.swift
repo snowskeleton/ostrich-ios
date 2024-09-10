@@ -15,7 +15,8 @@ struct CreateFakeEventView: View {
     @State private var minRounds: Int = 3
     @State private var requiredTeamSize: Int = 1
     @State private var scheduledStartTime: Date = Date()
-    
+    @State private var eventSeriesLength: Int = 7
+
     @State private var showCreatedFakeEvent: Bool = false
     @State private var showCreatedFakeSeries: Bool = false
 
@@ -49,23 +50,28 @@ struct CreateFakeEventView: View {
                 Button("OK", role: .cancel) { }
             }
             
-            Button("Create Fake Series") {
-                for i in 0..<7 {
-                    let newStartTime = Calendar.current.date(byAdding: .day, value: i * 7, to: scheduledStartTime) ?? scheduledStartTime
-                    
-                    createFakeEvent(
-                        eventName: eventName,
-                        eventFormat: eventFormat,
-                        pairingType: pairingType,
-                        minRounds: minRounds,
-                        requiredTeamSize: requiredTeamSize,
-                        scheduledStartTime: newStartTime
-                    )
+            Section {
+                Stepper(value: $eventSeriesLength) {
+                    Text("How many events? \(eventSeriesLength)")
                 }
-                showCreatedFakeSeries = true
-            }
-            .alert("Created 7 weekly events!", isPresented: $showCreatedFakeSeries) {
-                Button("OK", role: .cancel) { }
+                Button("Create Fake Series") {
+                    for i in 0..<eventSeriesLength {
+                        let newStartTime = Calendar.current.date(byAdding: .day, value: i * 7, to: scheduledStartTime) ?? scheduledStartTime
+                        
+                        createFakeEvent(
+                            eventName: eventName,
+                            eventFormat: eventFormat,
+                            pairingType: pairingType,
+                            minRounds: minRounds,
+                            requiredTeamSize: requiredTeamSize,
+                            scheduledStartTime: newStartTime
+                        )
+                    }
+                    showCreatedFakeSeries = true
+                }
+                .alert("Created \(eventSeriesLength) weekly events!", isPresented: $showCreatedFakeSeries) {
+                    Button("OK", role: .cancel) { }
+                }
             }
             
         }
