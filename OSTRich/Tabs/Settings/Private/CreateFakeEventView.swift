@@ -34,16 +34,17 @@ struct CreateFakeEventView: View {
             Button("Create Fake Event") {
                 createFakeEvent(
                     eventName: eventName,
-                    eventFormat: pairingType,
+                    eventFormat: eventFormat,
+                    pairingType: pairingType,
                     minRounds: minRounds,
                     requiredTeamSize: requiredTeamSize,
                     scheduledStartTime: scheduledStartTime
                 )
             }
             
-            Button("Create event series with scouting results") {
-                // do that
-            }
+//            Button("Create event series with scouting results") {
+//                // do that
+//            }
         }
         .padding()
     }
@@ -60,6 +61,7 @@ func createFakeEvent(
     scheduledStartTime: Date = Date()
     
 ) {
+    let creatorPersonaId = "OSTRichTester"
     let playerNames:  [[String: String]] = [
         [
             "firstName": "Todd",
@@ -99,6 +101,17 @@ func createFakeEvent(
         ]
     ]
     
+    let testDecks: [String] = [
+        "Merfolk",
+        "Mono B Control",
+        "Rakdos Scam",
+        "Tron",
+        "Nadu",
+        "Domain Zoo",
+        "Jeskai Control",
+        "Storm"
+    ]
+    
     
     let players = playerNames.map {
         Player(
@@ -108,7 +121,9 @@ func createFakeEvent(
             lastName: $0["lastName"]!
         )
     }
-    
+    let _ = players.map {
+        SwiftDataManager.shared.container.mainContext.insert($0)
+    }
     let registeredPlayers = playerNames.map {
         Registration(
             id: $0["persona"]!,
@@ -119,7 +134,10 @@ func createFakeEvent(
             lastName: $0["lastName"]!
         )
     }
-    
+    let _ = registeredPlayers.map {
+        SwiftDataManager.shared.container.mainContext.insert($0)
+    }
+
     let teams = players.map { player in
         let team = Team(
             teamId: "\(player.firstName!)\(player.lastName!)",
@@ -128,6 +146,9 @@ func createFakeEvent(
         )
         player.team = team
         return team
+    }
+    let _ = teams.map {
+        SwiftDataManager.shared.container.mainContext.insert($0)
     }
     
     let eventFormat = EventFormat(
@@ -141,7 +162,7 @@ func createFakeEvent(
         pairingType: pairingType,
         status: "ROUNDACTIVE",
         isOnline: false,
-        createdBy: "OSTRichTester",
+        createdBy: creatorPersonaId,
         requiredTeamSize: requiredTeamSize,
         eventFormat: eventFormat,
         teams: teams,
@@ -217,6 +238,26 @@ func createFakeEvent(
     gameState.event = event
     event.explicitDoNotUpdate = true
     SwiftDataManager.shared.container.mainContext.insert(event)
+    
+    players.forEach { player in
+        let newPlayer = LocalPlayer.createOrUpdate(from: player)
+        
+        let scoutingResult = ScoutingResult(
+            deckName: testDecks.randomElement()!,
+            eventName: eventName,
+            eventId: event.id,
+            createdBy: creatorPersonaId,
+            format: eventFormat.name,
+            player: newPlayer,
+            date: scheduledStartTime
+        )
+        
+        let gameStore = GameStore.createOrUpdate(from: creatorPersonaId)
+        scoutingResult.gameStore = gameStore
+        
+        SwiftDataManager.shared.container.mainContext.insert(scoutingResult)
+    }
+
 }
 
 extension Date {
