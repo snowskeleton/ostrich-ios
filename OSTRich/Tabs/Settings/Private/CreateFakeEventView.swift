@@ -121,10 +121,18 @@ func createFakeEvent(
             "persona": "SamuelBlack",
             "displayName": "sblack"
         ]
-        // show myself in this list
     ]
-    playerNames = playerNames.shuffled()
-    
+    if let userPersonaId = UserManager.shared.currentUser?.personaId! {
+        playerNames.append(
+            [
+                "firstName": "You,",
+                "lastName": "You Beautiful Animal",
+                "persona": userPersonaId,
+                "displayName": "beautifulAnimal"
+            ]
+        )
+    }
+
     let testDecks: [String] = [
         "Merfolk",
         "Mono B Control",
@@ -137,22 +145,12 @@ func createFakeEvent(
     ]
     
     
-    var players = playerNames.map {
+    let players = playerNames.map {
         Player(
             personaId: $0["persona"]!,
             displayName: $0["displayName"]!,
             firstName: $0["firstName"]!,
             lastName: $0["lastName"]!
-        )
-    }
-    if let userPersonaId = UserManager.shared.currentUser?.personaId! {
-        players.append(
-            Player(
-                personaId: userPersonaId,
-                displayName: "testUser",
-                firstName: "You,",
-                lastName: "You Beautiful Animal"
-            )
         )
     }
     let _ = players.map {
