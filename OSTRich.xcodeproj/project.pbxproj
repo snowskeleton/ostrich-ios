@@ -767,6 +767,7 @@
 				80CCA54F2C7D4A2500B90BF5 /* Notifications.swift */,
 				8053FE5B2C7FB4F0005A10BD /* Analytics.swift */,
 				80582EDA2C8D328D0056C421 /* Config.swift */,
+				80CCA54C2C7BC99900B90BF5 /* UserManager.swift */,
 				80FFBDEB2C4020D0005E958D /* GameState.graphql */,
 				80FFBDE62C401FA8005E958D /* gamestateschema.json */,
 				803D6BE02BFE416F00CEB9F2 /* Notifications */,
@@ -892,7 +893,6 @@
 				80D37EC12C48338600997C6D /* Standing.swift */,
 				80D37EAD2C4832F000997C6D /* Top8Draft.swift */,
 				80D37EB32C48331C00997C6D /* Team.swift */,
-				80CCA54C2C7BC99900B90BF5 /* UserManager.swift */,
 				80D37EC52C48340300997C6D /* convenience functions.swift */,
 				806843182C38656400264D1A /* NetworkLog.swift */,
 			);
