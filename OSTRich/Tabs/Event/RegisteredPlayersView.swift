@@ -29,6 +29,7 @@ struct RegisteredPlayersView: View {
         let statsDescriptor = FetchDescriptor(predicate: statsPredicate)
         _playerStats = Query(statsDescriptor)
     }
+    
     var body: some View {
         List {
             Section("Players: \(players.count)") {
