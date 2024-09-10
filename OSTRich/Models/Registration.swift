@@ -11,6 +11,7 @@ import SwiftData
 @Model
 class Registration: Identifiable {
     @Attribute(.unique)
+    var localId: String = UUID().uuidString
     var id: String?
     var status: String?
     var personaId: String?
