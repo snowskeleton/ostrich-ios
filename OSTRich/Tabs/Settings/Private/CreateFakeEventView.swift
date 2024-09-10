@@ -41,10 +41,6 @@ struct CreateFakeEventView: View {
                     scheduledStartTime: scheduledStartTime
                 )
             }
-            
-//            Button("Create event series with scouting results") {
-//                // do that
-//            }
         }
         .padding()
     }
@@ -99,6 +95,7 @@ func createFakeEvent(
             "persona": "SamuelBlack",
             "displayName": "sblack"
         ]
+        // show myself in this list
     ]
     
     let testDecks: [String] = [
@@ -113,12 +110,22 @@ func createFakeEvent(
     ]
     
     
-    let players = playerNames.map {
+    var players = playerNames.map {
         Player(
             personaId: $0["persona"]!,
             displayName: $0["displayName"]!,
             firstName: $0["firstName"]!,
             lastName: $0["lastName"]!
+        )
+    }
+    if let userPersonaId = UserManager.shared.currentUser?.personaId! {
+        players.append(
+            Player(
+                personaId: userPersonaId,
+                displayName: "testUser",
+                firstName: "You,",
+                lastName: "You Beautiful Animal"
+            )
         )
     }
     let _ = players.map {
