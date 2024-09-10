@@ -32,8 +32,11 @@ struct DeckStatsView: View {
             return (player: player, lastPlayed: lastPlayedDate ?? Date.distantPast)
         }
         .sorted {
-            $0.lastPlayed > $1.lastPlayed &&
-            $0.player.safeName < $1.player.safeName
+            if $0.lastPlayed != $1.lastPlayed {
+                return $0.lastPlayed > $1.lastPlayed
+            } else {
+                return $0.player.safeName < $1.player.safeName
+            }
         }
     }
 

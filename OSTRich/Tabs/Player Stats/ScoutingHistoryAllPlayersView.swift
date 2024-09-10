@@ -17,6 +17,7 @@ struct ScoutingHistoryAllPlayersView: View {
         let uniquePlayers = Array(Set(stats.compactMap { $0.player }))
         return uniquePlayers.sorted { $0.safeName < $1.safeName }
     }
+    
     var body: some View {
         List {
             ForEach(players, id: \.personaId) { player in
