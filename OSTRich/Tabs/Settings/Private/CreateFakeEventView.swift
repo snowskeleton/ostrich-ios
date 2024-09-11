@@ -16,6 +16,7 @@ struct CreateFakeEventView: View {
     @State private var requiredTeamSize: Int = 1
     @State private var scheduledStartTime: Date = Date()
     @State private var eventSeriesLength: Int = 7
+    @State private var gameStoreName: String = ""
 
     @State private var showCreatedFakeEvent: Bool = false
     @State private var showCreatedFakeSeries: Bool = false
@@ -27,6 +28,7 @@ struct CreateFakeEventView: View {
                 TextField("Event Name", text: $eventName)
                 TextField("Event Format", text: $eventFormat)
                 TextField("Pairing Type", text: $pairingType)
+                TextField("Game Store Name", text: $gameStoreName)
                 Stepper(value: $minRounds, in: 1...10) {
                     Text("Minimum Rounds: \(minRounds)")
                 }
@@ -43,7 +45,8 @@ struct CreateFakeEventView: View {
                     pairingType: pairingType,
                     minRounds: minRounds,
                     requiredTeamSize: requiredTeamSize,
-                    scheduledStartTime: scheduledStartTime
+                    scheduledStartTime: scheduledStartTime,
+                    gameStoreName: gameStoreName
                 )
                 showCreatedFakeEvent = true
             }
@@ -65,7 +68,8 @@ struct CreateFakeEventView: View {
                             pairingType: pairingType,
                             minRounds: minRounds,
                             requiredTeamSize: requiredTeamSize,
-                            scheduledStartTime: newStartTime
+                            scheduledStartTime: newStartTime,
+                            gameStoreName: gameStoreName
                         )
                     }
                     showCreatedFakeSeries = true
@@ -103,7 +107,8 @@ struct CreateFakeEventView: View {
                             minRounds: minRounds,
                             requiredTeamSize: requiredTeamSize,
                             scheduledStartTime: newStartTime,
-                            testDecks: standardDecks
+                            testDecks: standardDecks,
+                            gameStoreName: "Channel Fireball"
                         )
                     }
                         // Wednesday Pauper
@@ -127,7 +132,8 @@ struct CreateFakeEventView: View {
                             minRounds: minRounds,
                             requiredTeamSize: requiredTeamSize,
                             scheduledStartTime: newStartTime,
-                            testDecks: pauperDecks
+                            testDecks: pauperDecks,
+                            gameStoreName: "Joe's Kitchen"
                         )
                     }
                     // Thursday Commander
@@ -151,7 +157,8 @@ struct CreateFakeEventView: View {
                             minRounds: minRounds,
                             requiredTeamSize: requiredTeamSize,
                             scheduledStartTime: newStartTime,
-                            testDecks: edhDecks
+                            testDecks: edhDecks,
+                            gameStoreName: "The Gathering Place"
                         )
                     }
 
@@ -176,7 +183,8 @@ struct CreateFakeEventView: View {
                             minRounds: minRounds,
                             requiredTeamSize: requiredTeamSize,
                             scheduledStartTime: newStartTime,
-                            testDecks: modernDecks
+                            testDecks: modernDecks,
+                            gameStoreName: "Face to Face Games"
                         )
                     }
                     showCreatedScreenshotsData = true
@@ -200,10 +208,11 @@ func createFakeEvent(
     minRounds: Int = 3,
     requiredTeamSize: Int = 1,
     scheduledStartTime: Date = Date(),
-    testDecks: [String] = modernDecks
+    testDecks: [String] = modernDecks,
+    gameStoreName: String
     
 ) {
-    let creatorPersonaId = "OSTRichTester"
+    let creatorPersonaId = gameStoreName + "-persona"
     var playerNames:  [[String: String]] = [
         [
             "firstName": "Todd",
@@ -423,6 +432,7 @@ func createFakeEvent(
         )
         
         let gameStore = GameStore.createOrUpdate(from: creatorPersonaId)
+        gameStore.userGivenName = gameStoreName
         scoutingResult.gameStore = gameStore
         
         SwiftDataManager.shared.container.mainContext.insert(scoutingResult)
