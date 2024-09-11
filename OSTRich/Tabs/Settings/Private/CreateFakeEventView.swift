@@ -377,7 +377,7 @@ func createFakeEvent(
             let byeTeam = teams.last!
             
             let byeMatch = Match(
-                matchId: "byeMatch_\(roundNumber)_\(matches.count + 1)",
+                matchId: "testMatchId_\(roundNumber)_\(matches.count + 1)",
                 isBye: true,
                 teamIds: [byeTeam.teamId],
                 tableNumber: nil,  // No table number for a Bye
