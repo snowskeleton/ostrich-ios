@@ -1,5 +1,0 @@
-mutation dropSelf($eventId: ID!) {
-  dropSelf(eventId: $eventId) {
-    id
-  }
-}

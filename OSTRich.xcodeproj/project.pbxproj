@@ -16,7 +16,6 @@
 		80249ECF2C767A3500A6A1E6 /* ScoutingHistoryAllPlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249ECE2C767A3500A6A1E6 /* ScoutingHistoryAllPlayersView.swift */; };
 		80249ED32C76880C00A6A1E6 /* AllEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249ED22C76880C00A6A1E6 /* AllEventsView.swift */; };
 		80249ED72C768A4500A6A1E6 /* CreateScoutingResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80249ED62C768A4500A6A1E6 /* CreateScoutingResultView.swift */; };
-		802BCBDA2AC215D300E1501F /* submitMatch.query in Resources */ = {isa = PBXBuildFile; fileRef = 802BCBD92AC215D300E1501F /* submitMatch.query */; };
 		8030DC692AC7613600F775B6 /* HTTPQueryTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */; };
 		80330D732C74FE1300D19CAB /* RoundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80330D722C74FE1300D19CAB /* RoundTimer.swift */; };
 		803AECF02AA26B2200CF03EB /* OSTRichApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803AECEF2AA26B2200CF03EB /* OSTRichApp.swift */; };
@@ -191,13 +190,7 @@
 		80A152352C86233900D60561 /* PRIVACY_POLICY.md in Resources */ = {isa = PBXBuildFile; fileRef = 80A152342C86233900D60561 /* PRIVACY_POLICY.md */; };
 		80A152382C86284500D60561 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 80A152372C86284500D60561 /* MarkdownUI */; };
 		80A5722F2BE2C78E00D8D888 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A5722E2BE2C78E00D8D888 /* SettingsView.swift */; };
-		80A572312BE5985B00D8D888 /* getTimer.query in Resources */ = {isa = PBXBuildFile; fileRef = 80A572302BE5985B00D8D888 /* getTimer.query */; };
-		80B8E1302AB66E3300845ECC /* joinEventWithShortCode.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E12F2AB66E3300845ECC /* joinEventWithShortCode.query */; };
-		80B8E1312AB6AC1A00845ECC /* myActiveEvents.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E12D2AB6680E00845ECC /* myActiveEvents.query */; };
-		80B8E1352AB7EA1500845ECC /* loadEvent.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E1342AB7EA1500845ECC /* loadEvent.query */; };
 		80B8E1372AB7EF0700845ECC /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1362AB7EF0700845ECC /* EventView.swift */; };
-		80B8E13D2AB8C24300845ECC /* dropSelf.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E13C2AB8C24300845ECC /* dropSelf.query */; };
-		80B8E13F2AB8C5D300845ECC /* dropTeamV2.query in Resources */ = {isa = PBXBuildFile; fileRef = 80B8E13E2AB8C5D300845ECC /* dropTeamV2.query */; };
 		80B8E1412ABA23F000845ECC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B8E1402ABA23F000845ECC /* LoginView.swift */; };
 		80C5D4BB2C09263100503FD9 /* ExampleSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C5D4BA2C09263100503FD9 /* ExampleSecrets.swift */; };
 		80C5D4BD2C0926B800503FD9 /* StandingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C5D4BC2C0926B800503FD9 /* StandingsView.swift */; };
@@ -234,7 +227,6 @@
 		80ED1C972C7A786F00E83B2D /* LocalPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ED1C962C7A786F00E83B2D /* LocalPlayer.swift */; };
 		80ED1C9B2C7A7CC500E83B2D /* SwiftDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ED1C9A2C7A7CC500E83B2D /* SwiftDataManager.swift */; };
 		80EFCB9A2C02621C004FEF9F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFCB992C02621C004FEF9F /* Secrets.swift */; };
-		80FFBDE32C38A1E4005E958D /* getGameStateV2AtRound.query in Resources */ = {isa = PBXBuildFile; fileRef = 80FFBDE22C38A1E4005E958D /* getGameStateV2AtRound.query */; };
 		80FFBDE72C401FA8005E958D /* gamestateschema.json in Resources */ = {isa = PBXBuildFile; fileRef = 80FFBDE62C401FA8005E958D /* gamestateschema.json */; };
 		80FFBDEA2C4020C9005E958D /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 80FFBDE92C4020C9005E958D /* Apollo */; };
 		80FFBDEC2C4020D0005E958D /* GameState.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 80FFBDEB2C4020D0005E958D /* GameState.graphql */; };
@@ -414,7 +406,6 @@
 		80249ECE2C767A3500A6A1E6 /* ScoutingHistoryAllPlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingHistoryAllPlayersView.swift; sourceTree = "<group>"; };
 		80249ED22C76880C00A6A1E6 /* AllEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEventsView.swift; sourceTree = "<group>"; };
 		80249ED62C768A4500A6A1E6 /* CreateScoutingResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScoutingResultView.swift; sourceTree = "<group>"; };
-		802BCBD92AC215D300E1501F /* submitMatch.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = submitMatch.query; sourceTree = "<group>"; };
 		8030DC682AC7613600F775B6 /* HTTPQueryTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPQueryTypes.swift; sourceTree = "<group>"; };
 		80330D722C74FE1300D19CAB /* RoundTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundTimer.swift; sourceTree = "<group>"; };
 		803AECEC2AA26B2200CF03EB /* OSTRich.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSTRich.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -454,14 +445,8 @@
 		80A152322C86231600D60561 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		80A152342C86233900D60561 /* PRIVACY_POLICY.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PRIVACY_POLICY.md; sourceTree = "<group>"; };
 		80A5722E2BE2C78E00D8D888 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		80A572302BE5985B00D8D888 /* getTimer.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = getTimer.query; sourceTree = "<group>"; };
 		80B8E11C2AAA31BB00845ECC /* GameState.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GameState.graphql; path = ../../../../../../Applications/Companion.app/Wrapper/HTO.app/GameState.graphql; sourceTree = "<group>"; };
-		80B8E12D2AB6680E00845ECC /* myActiveEvents.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = myActiveEvents.query; sourceTree = "<group>"; };
-		80B8E12F2AB66E3300845ECC /* joinEventWithShortCode.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = joinEventWithShortCode.query; sourceTree = "<group>"; };
-		80B8E1342AB7EA1500845ECC /* loadEvent.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = loadEvent.query; sourceTree = "<group>"; };
 		80B8E1362AB7EF0700845ECC /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
-		80B8E13C2AB8C24300845ECC /* dropSelf.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = dropSelf.query; sourceTree = "<group>"; };
-		80B8E13E2AB8C5D300845ECC /* dropTeamV2.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = dropTeamV2.query; sourceTree = "<group>"; };
 		80B8E1402ABA23F000845ECC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		80C5D4BA2C09263100503FD9 /* ExampleSecrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSecrets.swift; sourceTree = "<group>"; };
 		80C5D4BC2C0926B800503FD9 /* StandingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsView.swift; sourceTree = "<group>"; };
@@ -497,7 +482,6 @@
 		80ED1C962C7A786F00E83B2D /* LocalPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPlayer.swift; sourceTree = "<group>"; };
 		80ED1C9A2C7A7CC500E83B2D /* SwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManager.swift; sourceTree = "<group>"; };
 		80EFCB992C02621C004FEF9F /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
-		80FFBDE22C38A1E4005E958D /* getGameStateV2AtRound.query */ = {isa = PBXFileReference; lastKnownFileType = text; path = getGameStateV2AtRound.query; sourceTree = "<group>"; };
 		80FFBDE62C401FA8005E958D /* gamestateschema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = gamestateschema.json; sourceTree = "<group>"; };
 		80FFBDEB2C4020D0005E958D /* GameState.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GameState.graphql; sourceTree = "<group>"; };
 		80FFBDED2C4025A2005E958D /* DeckConstructionDetails.graphql.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckConstructionDetails.graphql.swift; sourceTree = "<group>"; };
@@ -734,7 +718,6 @@
 				800DB18C2C8630DB008F1FDC /* LICENSE */,
 				80A152322C86231600D60561 /* README.md */,
 				80A152342C86233900D60561 /* PRIVACY_POLICY.md */,
-				80B8E12A2AB665B400845ECC /* queries */,
 				803AECEE2AA26B2200CF03EB /* OSTRich */,
 				8080F1F82C80D34D00A86C14 /* OSTRichTests */,
 				8051C3FB2C84FA540039E257 /* Frameworks */,
@@ -832,21 +815,6 @@
 				80FFBF102C416DB9005E958D /* EventDetail.swift */,
 			);
 			path = Event;
-			sourceTree = "<group>";
-		};
-		80B8E12A2AB665B400845ECC /* queries */ = {
-			isa = PBXGroup;
-			children = (
-				80B8E12D2AB6680E00845ECC /* myActiveEvents.query */,
-				80A572302BE5985B00D8D888 /* getTimer.query */,
-				80B8E12F2AB66E3300845ECC /* joinEventWithShortCode.query */,
-				80FFBDE22C38A1E4005E958D /* getGameStateV2AtRound.query */,
-				80B8E1342AB7EA1500845ECC /* loadEvent.query */,
-				802BCBD92AC215D300E1501F /* submitMatch.query */,
-				80B8E13C2AB8C24300845ECC /* dropSelf.query */,
-				80B8E13E2AB8C5D300845ECC /* dropTeamV2.query */,
-			);
-			path = queries;
 			sourceTree = "<group>";
 		};
 		80CCA5472C7BBD2F00B90BF5 /* Interceptors */ = {
@@ -1222,20 +1190,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80B8E1302AB66E3300845ECC /* joinEventWithShortCode.query in Resources */,
-				80B8E1312AB6AC1A00845ECC /* myActiveEvents.query in Resources */,
-				80B8E1352AB7EA1500845ECC /* loadEvent.query in Resources */,
 				80FFBDEC2C4020D0005E958D /* GameState.graphql in Resources */,
 				80A152332C86231B00D60561 /* README.md in Resources */,
 				80A152352C86233900D60561 /* PRIVACY_POLICY.md in Resources */,
-				80B8E13D2AB8C24300845ECC /* dropSelf.query in Resources */,
 				80FFBDE72C401FA8005E958D /* gamestateschema.json in Resources */,
-				802BCBDA2AC215D300E1501F /* submitMatch.query in Resources */,
 				800DB18D2C8630DB008F1FDC /* LICENSE in Resources */,
 				803AECF72AA26B2300CF03EB /* Preview Assets.xcassets in Resources */,
-				80B8E13F2AB8C5D300845ECC /* dropTeamV2.query in Resources */,
-				80FFBDE32C38A1E4005E958D /* getGameStateV2AtRound.query in Resources */,
-				80A572312BE5985B00D8D888 /* getTimer.query in Resources */,
 				803AECF42AA26B2300CF03EB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

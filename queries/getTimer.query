@@ -1,6 +1,0 @@
-query getTimer($id: ID!) {
-    myActiveEvents {
-        __typename
-        ...TimerDetails
-    }
-}
