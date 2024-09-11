@@ -59,7 +59,12 @@ struct DeckStatsView: View {
     
     var body: some View {
         VStack {
-            Text(chartTitle)
+            VStack {
+                Text(deckName)
+                    .font(.title3)
+                Text(chartTitle)
+                    .font(.body)
+            }
             
             LineChartView(stats: filteredStats)
             
