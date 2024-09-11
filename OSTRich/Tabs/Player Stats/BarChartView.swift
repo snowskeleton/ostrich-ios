@@ -26,22 +26,23 @@ struct BarChartView: View {
     }
     
     var body: some View {
-        VStack {
+        ScrollView(.vertical) {
             Chart {
                 ForEach(chartData, id: \.name) { item in
                     BarMark(
-                        x: .value("Deck Name", item.name),
-                        y: .value("Count", item.count)
+                        x: .value("Count", item.count),
+                        y: .value("Deck Name", item.name)
                     )
                     .foregroundStyle(Color.blue)
                 }
             }
+            .chartXAxis {
+                AxisMarks(position: .top)
+            }
             .chartYAxis {
                 AxisMarks(position: .leading)
             }
-            .chartXAxis {
-                AxisMarks(position: .bottom)
-            }
+            .frame(height: CGFloat(chartData.count * 40))
             .padding()
         }
     }
