@@ -19,6 +19,7 @@ struct CreateFakeEventView: View {
 
     @State private var showCreatedFakeEvent: Bool = false
     @State private var showCreatedFakeSeries: Bool = false
+    @State private var showCreatedScreenshotsData: Bool = false
 
     var body: some View {
         Form {
@@ -72,6 +73,118 @@ struct CreateFakeEventView: View {
                 .alert("Created \(eventSeriesLength) weekly events!", isPresented: $showCreatedFakeSeries) {
                     Button("OK", role: .cancel) { }
                 }
+                
+                Button("Create Screenshots Data") {
+                    //                        let newStartTime = Calendar.current.date(byAdding: .day, value: i * 7, to: scheduledStartTime) ?? scheduledStartTime
+                    
+                    // Sunday Standard
+                    var newStartTime = Calendar.current.date(
+                        bySetting: .weekday,
+                        value: 1,
+                        of: scheduledStartTime
+                    ) ?? scheduledStartTime
+                    newStartTime = Calendar.current
+                        .date(
+                            bySetting: .hour,
+                            value: 15,
+                            of: newStartTime
+                        ) ?? newStartTime
+
+                    for i in 0..<eventSeriesLength {
+                        let newStartTime = Calendar.current.date(
+                            byAdding: .day,
+                            value: i * 7,
+                            to: newStartTime
+                        ) ?? newStartTime
+                        createFakeEvent(
+                            eventName: "Sunday Standard",
+                            eventFormat: "Standard",
+                            pairingType: pairingType,
+                            minRounds: minRounds,
+                            requiredTeamSize: requiredTeamSize,
+                            scheduledStartTime: newStartTime,
+                            testDecks: standardDecks
+                        )
+                    }
+                        // Wednesday Pauper
+                    newStartTime = Calendar.current.date(bySetting: .weekday, value: 4, of: newStartTime) ?? newStartTime
+                    newStartTime = Calendar.current
+                        .date(
+                            bySetting: .hour,
+                            value: 19,
+                            of: newStartTime
+                        ) ?? newStartTime
+                    for i in 0..<eventSeriesLength {
+                        let newStartTime = Calendar.current.date(
+                            byAdding: .day,
+                            value: i * 7,
+                            to: newStartTime
+                        ) ?? newStartTime
+                        createFakeEvent(
+                            eventName: "Wednesday Pauper",
+                            eventFormat: "Pauper",
+                            pairingType: pairingType,
+                            minRounds: minRounds,
+                            requiredTeamSize: requiredTeamSize,
+                            scheduledStartTime: newStartTime,
+                            testDecks: pauperDecks
+                        )
+                    }
+                    // Thursday Commander
+                    newStartTime = Calendar.current.date(bySetting: .weekday, value: 5, of: newStartTime) ?? newStartTime
+                    newStartTime = Calendar.current
+                        .date(
+                            bySetting: .hour,
+                            value: 18,
+                            of: newStartTime
+                        ) ?? newStartTime
+                    for i in 0..<eventSeriesLength {
+                        let newStartTime = Calendar.current.date(
+                            byAdding: .day,
+                            value: i * 7,
+                            to: newStartTime
+                        ) ?? newStartTime
+                        createFakeEvent(
+                            eventName: "Thursday Commander",
+                            eventFormat: "EDH",
+                            pairingType: pairingType,
+                            minRounds: minRounds,
+                            requiredTeamSize: requiredTeamSize,
+                            scheduledStartTime: newStartTime,
+                            testDecks: edhDecks
+                        )
+                    }
+
+                        // Modern FNM
+                    newStartTime = Calendar.current.date(bySetting: .weekday, value: 6, of: newStartTime) ?? newStartTime
+                    newStartTime = Calendar.current
+                        .date(
+                            bySetting: .hour,
+                            value: 19,
+                            of: newStartTime
+                        ) ?? newStartTime
+                    for i in 0..<eventSeriesLength {
+                        let newStartTime = Calendar.current.date(
+                            byAdding: .day,
+                            value: i * 7,
+                            to: newStartTime
+                        ) ?? newStartTime
+                        createFakeEvent(
+                            eventName: "Modern FNM",
+                            eventFormat: "Modern",
+                            pairingType: pairingType,
+                            minRounds: minRounds,
+                            requiredTeamSize: requiredTeamSize,
+                            scheduledStartTime: newStartTime,
+                            testDecks: modernDecks
+                        )
+                    }
+                    showCreatedScreenshotsData = true
+                }
+                .alert("Created screenshots data", isPresented: $showCreatedScreenshotsData) {
+                    Button("OK", role: .cancel) { }
+                }
+                
             }
             
         }
@@ -86,7 +199,8 @@ func createFakeEvent(
     pairingType: String = "Swiss",
     minRounds: Int = 3,
     requiredTeamSize: Int = 1,
-    scheduledStartTime: Date = Date()
+    scheduledStartTime: Date = Date(),
+    testDecks: [String] = modernDecks
     
 ) {
     let creatorPersonaId = "OSTRichTester"
@@ -138,18 +252,8 @@ func createFakeEvent(
             ]
         )
     }
-
-    let testDecks: [String] = [
-        "Merfolk",
-        "Mono B Control",
-        "Rakdos Scam",
-        "Tron",
-        "Nadu",
-        "Domain Zoo",
-        "Jeskai Control",
-        "Storm"
-    ]
     
+    playerNames = playerNames.shuffled()
     
     let players = playerNames.map {
         Player(
@@ -331,3 +435,49 @@ extension Date {
         return ISO8601DateFormatter().string(from: self)
     }
 }
+
+fileprivate var modernDecks: [String] = [
+    "Merfolk",
+    "Mono B Control",
+    "Rakdos Scam",
+    "Tron",
+    "Nadu",
+    "Domain Zoo",
+    "Jeskai Control",
+    "Storm"
+]
+
+fileprivate var standardDecks: [String] = [
+    "Gruul Prowess",
+    "Dimir Midrange",
+    "Domain",
+    "Rakdos Lizards",
+    "Golgari Midrange",
+    "Domain Boros Mice",
+    "Graveyard Beans",
+    "Rakdos Fling"
+]
+
+fileprivate var pauperDecks: [String] = [
+    "Grixis Affinity",
+    "Broodscale",
+    "Mono Red",
+    "Gruul Ramp",
+    "Mono White Aggro",
+    "Bogles",
+    "Jeskai Ephemerate",
+    "Familiars",
+    "Elves"
+]
+
+fileprivate var edhDecks: [String] = [
+    "The Locust God",
+    "Odric",
+    "Flubs, the Fool",
+    "The Ur-Dragon",
+    "Krenko, Mob Boss",
+    "Atraxa",
+    "Chatterfang",
+    "Edgar Markov",
+    "Niv-Mizzet"
+]
