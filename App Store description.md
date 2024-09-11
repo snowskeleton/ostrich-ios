@@ -11,4 +11,7 @@ OSTRich requires a Wizards of the Coast account. See their privacy policy here:
 https://company.wizards.com/en/legal/wizards-coasts-privacy-policy
 
 OSTRich is not affiliated with Wizards of the Coast or Magic: the Gathering. This app is allowed under their Fan Content policy as outlined here:
+https://company.wizards.com/en/legal/fancontentpolicy
+
+In-App Purchase required for Metagame tracking and access.
 
