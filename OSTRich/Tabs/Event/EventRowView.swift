@@ -72,13 +72,13 @@ struct EventRowView: View {
                     .font(.title2)
                     .fontWeight(.bold)
 
-                if let status = event.status {
-                    Text(status)
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .padding(4)
-                        .foregroundColor(statusColor)
-                }
+//                if let status = event.status {
+//                    Text(status)
+//                        .font(.subheadline)
+//                        .fontWeight(.semibold)
+//                        .padding(4)
+//                        .foregroundColor(statusColor)
+//                }
             }
         }
     }
