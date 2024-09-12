@@ -3,6 +3,7 @@
 //  OSTRich
 //
 //  Created by snow on 9/3/24.
+// https://stackoverflow.com/questions/77992023/swiftui-stepper-exc-bad-access-crash-on-mac-designed-for-iphone-works-ok-in-io
 //
 
 import SwiftUI
@@ -29,11 +30,13 @@ struct CreateFakeEventView: View {
                 TextField("Event Format", text: $eventFormat)
                 TextField("Pairing Type", text: $pairingType)
                 TextField("Game Store Name", text: $gameStoreName)
-                Stepper(value: $minRounds, in: 1...10) {
-                    Text("Minimum Rounds: \(minRounds)")
-                }
-                Stepper(value: $requiredTeamSize, in: 1...10) {
-                    Text("Required Team Size: \(requiredTeamSize)")
+                if !ProcessInfo.processInfo.isiOSAppOnMac {
+                    Stepper(value: $minRounds, in: 1...10) {
+                        Text("Minimum Rounds: \(minRounds)")
+                    }
+                    Stepper(value: $requiredTeamSize, in: 1...10) {
+                        Text("Required Team Size: \(requiredTeamSize)")
+                    }
                 }
                 DatePicker("Scheduled Start Time", selection: $scheduledStartTime, displayedComponents: .date)
             }
@@ -55,8 +58,10 @@ struct CreateFakeEventView: View {
             }
             
             Section {
-                Stepper(value: $eventSeriesLength) {
-                    Text("How many events? \(eventSeriesLength)")
+                if !ProcessInfo.processInfo.isiOSAppOnMac {
+                    Stepper(value: $eventSeriesLength) {
+                        Text("How many events? \(eventSeriesLength)")
+                    }
                 }
                 Button("Create Fake Series") {
                     for i in 0..<eventSeriesLength {
@@ -79,114 +84,7 @@ struct CreateFakeEventView: View {
                 }
                 
                 Button("Create Screenshots Data") {
-                    //                        let newStartTime = Calendar.current.date(byAdding: .day, value: i * 7, to: scheduledStartTime) ?? scheduledStartTime
-                    
-                    // Sunday Standard
-                    var newStartTime = Calendar.current.date(
-                        bySetting: .weekday,
-                        value: 1,
-                        of: scheduledStartTime
-                    ) ?? scheduledStartTime
-                    newStartTime = Calendar.current
-                        .date(
-                            bySetting: .hour,
-                            value: 15,
-                            of: newStartTime
-                        ) ?? newStartTime
-
-                    for i in 0..<eventSeriesLength {
-                        let newStartTime = Calendar.current.date(
-                            byAdding: .day,
-                            value: i * 7,
-                            to: newStartTime
-                        ) ?? newStartTime
-                        createFakeEvent(
-                            eventName: "Sunday Standard",
-                            eventFormat: "Standard",
-                            pairingType: pairingType,
-                            minRounds: minRounds,
-                            requiredTeamSize: requiredTeamSize,
-                            scheduledStartTime: newStartTime,
-                            testDecks: standardDecks,
-                            gameStoreName: "Channel Fireball"
-                        )
-                    }
-                        // Wednesday Pauper
-                    newStartTime = Calendar.current.date(bySetting: .weekday, value: 4, of: newStartTime) ?? newStartTime
-                    newStartTime = Calendar.current
-                        .date(
-                            bySetting: .hour,
-                            value: 19,
-                            of: newStartTime
-                        ) ?? newStartTime
-                    for i in 0..<eventSeriesLength {
-                        let newStartTime = Calendar.current.date(
-                            byAdding: .day,
-                            value: i * 7,
-                            to: newStartTime
-                        ) ?? newStartTime
-                        createFakeEvent(
-                            eventName: "Wednesday Pauper",
-                            eventFormat: "Pauper",
-                            pairingType: pairingType,
-                            minRounds: minRounds,
-                            requiredTeamSize: requiredTeamSize,
-                            scheduledStartTime: newStartTime,
-                            testDecks: pauperDecks,
-                            gameStoreName: "Joe's Kitchen"
-                        )
-                    }
-                    // Thursday Commander
-                    newStartTime = Calendar.current.date(bySetting: .weekday, value: 5, of: newStartTime) ?? newStartTime
-                    newStartTime = Calendar.current
-                        .date(
-                            bySetting: .hour,
-                            value: 18,
-                            of: newStartTime
-                        ) ?? newStartTime
-                    for i in 0..<eventSeriesLength {
-                        let newStartTime = Calendar.current.date(
-                            byAdding: .day,
-                            value: i * 7,
-                            to: newStartTime
-                        ) ?? newStartTime
-                        createFakeEvent(
-                            eventName: "Thursday Commander",
-                            eventFormat: "EDH",
-                            pairingType: pairingType,
-                            minRounds: minRounds,
-                            requiredTeamSize: requiredTeamSize,
-                            scheduledStartTime: newStartTime,
-                            testDecks: edhDecks,
-                            gameStoreName: "The Gathering Place"
-                        )
-                    }
-
-                        // Modern FNM
-                    newStartTime = Calendar.current.date(bySetting: .weekday, value: 6, of: newStartTime) ?? newStartTime
-                    newStartTime = Calendar.current
-                        .date(
-                            bySetting: .hour,
-                            value: 19,
-                            of: newStartTime
-                        ) ?? newStartTime
-                    for i in 0..<eventSeriesLength {
-                        let newStartTime = Calendar.current.date(
-                            byAdding: .day,
-                            value: i * 7,
-                            to: newStartTime
-                        ) ?? newStartTime
-                        createFakeEvent(
-                            eventName: "Modern FNM",
-                            eventFormat: "Modern",
-                            pairingType: pairingType,
-                            minRounds: minRounds,
-                            requiredTeamSize: requiredTeamSize,
-                            scheduledStartTime: newStartTime,
-                            testDecks: modernDecks,
-                            gameStoreName: "Face to Face Games"
-                        )
-                    }
+                    createScreenshotSeries()
                     showCreatedScreenshotsData = true
                 }
                 .alert("Created screenshots data", isPresented: $showCreatedScreenshotsData) {
@@ -198,6 +96,116 @@ struct CreateFakeEventView: View {
         }
     }
     
+    fileprivate func createScreenshotSeries() {
+        // Sunday Standard
+        var newStartTime = Calendar.current.date(
+            bySetting: .weekday,
+            value: 1,
+            of: scheduledStartTime
+        ) ?? scheduledStartTime
+        newStartTime = Calendar.current
+            .date(
+                bySetting: .hour,
+                value: 15,
+                of: newStartTime
+            ) ?? newStartTime
+        
+        for i in 0..<eventSeriesLength {
+            let newStartTime = Calendar.current.date(
+                byAdding: .day,
+                value: i * 7,
+                to: newStartTime
+            ) ?? newStartTime
+            createFakeEvent(
+                eventName: "Sunday Standard",
+                eventFormat: "Standard",
+                pairingType: pairingType,
+                minRounds: minRounds,
+                requiredTeamSize: requiredTeamSize,
+                scheduledStartTime: newStartTime,
+                testDecks: standardDecks,
+                gameStoreName: "Channel Fireball"
+            )
+        }
+        
+        // Wednesday Pauper
+        newStartTime = Calendar.current.date(bySetting: .weekday, value: 4, of: newStartTime) ?? newStartTime
+        newStartTime = Calendar.current
+            .date(
+                bySetting: .hour,
+                value: 19,
+                of: newStartTime
+            ) ?? newStartTime
+        for i in 0..<eventSeriesLength {
+            let newStartTime = Calendar.current.date(
+                byAdding: .day,
+                value: i * 7,
+                to: newStartTime
+            ) ?? newStartTime
+            createFakeEvent(
+                eventName: "Wednesday Pauper",
+                eventFormat: "Pauper",
+                pairingType: pairingType,
+                minRounds: minRounds,
+                requiredTeamSize: requiredTeamSize,
+                scheduledStartTime: newStartTime,
+                testDecks: pauperDecks,
+                gameStoreName: "Joe's Kitchen"
+            )
+        }
+        
+        // Thursday Commander
+        newStartTime = Calendar.current.date(bySetting: .weekday, value: 5, of: newStartTime) ?? newStartTime
+        newStartTime = Calendar.current
+            .date(
+                bySetting: .hour,
+                value: 18,
+                of: newStartTime
+            ) ?? newStartTime
+        for i in 0..<eventSeriesLength {
+            let newStartTime = Calendar.current.date(
+                byAdding: .day,
+                value: i * 7,
+                to: newStartTime
+            ) ?? newStartTime
+            createFakeEvent(
+                eventName: "Thursday Commander",
+                eventFormat: "EDH",
+                pairingType: pairingType,
+                minRounds: minRounds,
+                requiredTeamSize: requiredTeamSize,
+                scheduledStartTime: newStartTime,
+                testDecks: edhDecks,
+                gameStoreName: "The Gathering Place"
+            )
+        }
+        
+        // Modern FNM
+        newStartTime = Calendar.current.date(bySetting: .weekday, value: 6, of: newStartTime) ?? newStartTime
+        newStartTime = Calendar.current
+            .date(
+                bySetting: .hour,
+                value: 19,
+                of: newStartTime
+            ) ?? newStartTime
+        for i in 0..<eventSeriesLength {
+            let newStartTime = Calendar.current.date(
+                byAdding: .day,
+                value: i * 7,
+                to: newStartTime
+            ) ?? newStartTime
+            createFakeEvent(
+                eventName: "Modern FNM",
+                eventFormat: "Modern",
+                pairingType: pairingType,
+                minRounds: minRounds,
+                requiredTeamSize: requiredTeamSize,
+                scheduledStartTime: newStartTime,
+                testDecks: modernDecks,
+                gameStoreName: "Face to Face Games"
+            )
+        }
+    }
 }
 
 @MainActor
@@ -437,7 +445,6 @@ func createFakeEvent(
         
         SwiftDataManager.shared.container.mainContext.insert(scoutingResult)
     }
-
 }
 
 extension Date {
@@ -491,3 +498,4 @@ fileprivate var edhDecks: [String] = [
     "Edgar Markov",
     "Niv-Mizzet"
 ]
+

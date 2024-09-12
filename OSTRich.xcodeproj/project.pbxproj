@@ -659,11 +659,11 @@
 			isa = PBXGroup;
 			children = (
 				8051C4042C861DF50039E257 /* AboutView.swift */,
-				800DB1842C862F4E008F1FDC /* LicenseView.swift */,
-				80A152302C8620DE00D60561 /* PrivacyPolicyView.swift */,
 				806BF5FA2C80F02700306B79 /* AnalyticsView.swift */,
-				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				80CCA5552C7E240300B90BF5 /* ChangeNameView.swift */,
+				800DB1842C862F4E008F1FDC /* LicenseView.swift */,
+				80B8E1402ABA23F000845ECC /* LoginView.swift */,
+				80A152302C8620DE00D60561 /* PrivacyPolicyView.swift */,
 			);
 			path = Public;
 			sourceTree = "<group>";
