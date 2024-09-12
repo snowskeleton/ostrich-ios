@@ -82,7 +82,9 @@ struct CreateFakeEventView: View {
                 .alert("Created \(eventSeriesLength) weekly events!", isPresented: $showCreatedFakeSeries) {
                     Button("OK", role: .cancel) { }
                 }
-                
+            }
+            
+            Section {
                 Button("Create Screenshots Data") {
                     createScreenshotSeries()
                     showCreatedScreenshotsData = true

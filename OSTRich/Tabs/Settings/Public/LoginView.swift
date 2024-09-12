@@ -87,6 +87,16 @@ struct LoginView: View {
                     if someStatus != nil { someStatus }
                 }
             }
+             
+            Section {
+                if email.lowercased() == "appstoretesting" {
+                    NavigationLink {
+                        CreateFakeEventView()
+                    } label: {
+                        Text("Create data for testing")
+                    }
+                }
+            }
 //            Button("Register for Notifications") { NotificationHandler.shared.getNotificationSettings() }
         }
     }
