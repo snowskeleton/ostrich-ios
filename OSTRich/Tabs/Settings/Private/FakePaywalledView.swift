@@ -12,6 +12,14 @@ import RevenueCatUI
 #if DEBUG
 struct FakePaywalledView: View {
     @State private var showDebugOverlay = false
+    @State private var firstOpen = Date()
+    
+    init() {
+        if let firstOpen = UserDefaults.standard.object(forKey: "FirstOpen") as? Date {
+            _firstOpen = .init(initialValue: firstOpen)
+        }
+
+    }
     
     var body: some View {
         List {
@@ -32,6 +40,12 @@ struct FakePaywalledView: View {
                         print("Purchases restored: \(customerInfo.entitlements)")
                     }
                 )
+            Section {
+                DatePicker("First Open", selection: $firstOpen)
+                    .onChange(of: firstOpen) { _, newValue in
+                        UserDefaults.standard.set(newValue, forKey: "FirstOpen")
+                    }
+            }
         }
         .debugRevenueCatOverlay(isPresented: $showDebugOverlay)
     }

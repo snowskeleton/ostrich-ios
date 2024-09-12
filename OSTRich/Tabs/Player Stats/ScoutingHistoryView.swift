@@ -81,10 +81,17 @@ struct ScoutingHistoryView: View {
     //paywall
     @State private var showScoutingResults: Bool = true
     @State private var showPaywall: Bool = false
+    @State private var showPaywallSheet: Bool = false
     @State private var timer: Timer?
+    @State private var freeTimeLeft: Int = 15
+    @State private var showFreeTimeLeft: Bool = false
 
     var body: some View {
         NavigationStack {
+            if showFreeTimeLeft {
+                Text("\(freeTimeLeft) trial day\(freeTimeLeft > 1 ? "s" : "") remaining")
+            }
+            
             if showScoutingResults {
                 VStack {
                     BarChartView(stats: filteredStats)
@@ -130,7 +137,7 @@ struct ScoutingHistoryView: View {
                 }
             } else {
                 Button {
-                    showPaywall = true
+                    showPaywallSheet = true
                 } label: {
                     Text("Subscribe to Pro")
                         .font(.headline)
@@ -141,7 +148,7 @@ struct ScoutingHistoryView: View {
                         .cornerRadius(10)
                 }
                 .padding(.top, 20)
-                .sheet(isPresented: $showPaywall) {
+                .sheet(isPresented: $showPaywallSheet) {
                     PaywallView()
                 }
             }
@@ -156,8 +163,7 @@ struct ScoutingHistoryView: View {
             stopPaywallTimer()
         }
         .presentPaywallIfNeeded { customerInfo in
-            if UserDefaults.standard.bool(forKey: "disableInAppPurchasePaywall") { return false }
-            return customerInfo.entitlements.active.keys.contains("pro")
+            return showPaywall
             //            return true
         } purchaseCompleted: { customerInfo in
             print("Purchase completed: \(customerInfo.entitlements)")
@@ -173,12 +179,45 @@ struct ScoutingHistoryView: View {
             do {
                 if UserDefaults.standard.bool(forKey: "disableInAppPurchasePaywall") {
                     self.showScoutingResults = true
+                    self.showPaywall = false
+                    self.showFreeTimeLeft = false
                     return
                 }
+                
+                if let firstOpen = UserDefaults.standard.object(forKey: "FirstOpen") as? Date {
+                    let calendar = Calendar.current
+                    let now = Date()
+                    let daysSinceFirstOpen = calendar.dateComponents([.day], from: firstOpen, to: now).day ?? 0
+                    
+                    if daysSinceFirstOpen <= 15 {
+                        // Show scouting results and trial period if within the trial window
+                        self.showScoutingResults = true
+                        self.showPaywall = true
+                        self.showFreeTimeLeft = true
+                        self.freeTimeLeft = 15 - daysSinceFirstOpen
+                    } else {
+                        // Trial expired, show paywall with freeTimeLeft as 0
+                        self.showScoutingResults = false
+                        self.showPaywall = true
+                        self.showFreeTimeLeft = true
+                        self.freeTimeLeft = 0
+                    }
+                }
+                
                 let customerInfo = try await Purchases.shared.customerInfo()
-                self.showScoutingResults = customerInfo.entitlements["pro"]?.isActive == true ? true : false
+                let userHasPro = customerInfo.entitlements["pro"]?.isActive == true
+                
+                if userHasPro {
+                    // User has a pro license, hide paywall and trial period, show scouting results
+                    self.showScoutingResults = true
+                    self.showPaywall = false
+                    self.showFreeTimeLeft = false
+                } else {
+                    // User does not have pro, keep paywall and trial information visible
+                    self.showPaywall = true
+                }
             } catch {
-                print("\(error)")
+                print("Failed to fetch customer info: \(error)")
             }
         }
     }
