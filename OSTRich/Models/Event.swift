@@ -34,7 +34,7 @@ class Event: Identifiable {
     var showOnMainView: Bool = true
     var explicitDoNotUpdate: Bool = false
     var doNotUpdate: Bool {
-        explicitDoNotUpdate || status == "ENDED" || status == "EXPIRED"
+        explicitDoNotUpdate || status == "EXPIRED"
     }
 
     init(
