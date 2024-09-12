@@ -22,22 +22,22 @@ struct LoginView: View {
     
     init() {
         if UserDefaults.standard.bool(forKey: "saveLoginCreds") {
-            _email = State(initialValue: UserDefaults.standard.string(forKey: "email") ?? "" )
-            _password = State(initialValue: UserDefaults.standard.string(forKey: "password") ?? "")
+            _email = State(initialValue: UserManager.shared.currentUser?.email ?? "" )
+            _password = State(initialValue: UserManager.shared.currentUser?.password ?? "")
         } else {
             _email = State(initialValue: "")
             _password = State(initialValue: "")
         }
         
-        _firstName = State(initialValue: UserDefaults.standard.string(forKey: "firstName") ?? "")
-        _lastName = State(initialValue: UserDefaults.standard.string(forKey: "lastName") ?? "")
-        var someDisplayName = UserDefaults.standard.string(forKey: "displayName") ?? ""
+        _firstName = State(initialValue: UserManager.shared.currentUser?.firstName ?? "")
+        _lastName = State(initialValue: UserManager.shared.currentUser?.lastName ?? "")
+        var someDisplayName = UserManager.shared.currentUser?.displayName ?? ""
         someDisplayName = someDisplayName.components(separatedBy: ("#"))[0]
         _displayName = State(initialValue: someDisplayName)
     }
     
     var body: some View {
-        if let displayName = UserDefaults.standard.string(forKey: "displayName") {
+        if let displayName = UserManager.shared.currentUser?.displayName {
             Text("Magic Companion login")
             Text("Logged in as \(displayName)")
         }

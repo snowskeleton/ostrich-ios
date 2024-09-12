@@ -16,8 +16,8 @@ struct ChangeNameView: View {
     @State private var lastName: String
     
     init() {
-        _firstName = State(initialValue: UserDefaults.standard.string(forKey: "firstName") ?? "")
-        _lastName = State(initialValue: UserDefaults.standard.string(forKey: "lastName") ?? "")
+        _firstName = State(initialValue: UserManager.shared.currentUser?.firstName ?? "")
+        _lastName = State(initialValue: UserManager.shared.currentUser?.lastName ?? "")
     }
     
     var body: some View {
