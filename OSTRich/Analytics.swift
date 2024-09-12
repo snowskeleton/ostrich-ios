@@ -10,7 +10,8 @@ import Aptabase
 
 enum AnalyticEvent: String {
     case appLaunch
-    
+    case appLaunchFirstTime
+
     case manuallyRefreshedEventView
     case noTimerForEvent
     case playerDroppedFromEvent

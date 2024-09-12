@@ -28,17 +28,27 @@ struct OSTRichApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear {
+                    trackAppLaunch()
+                }
                 .onChange(of: scenePhase) { _, newPhase in
                     switch newPhase {
                     case .inactive:
                         UserDefaults.standard.setValue(0, forKey: "timesLaunchedWithoutSafeClose")
-                    case .active:
-                        Analytics.track(.appLaunch)
                     default:
                         break
                     }
                 }
         }
         .modelContainer(SwiftDataManager.shared.container)
+    }
+    
+    fileprivate func trackAppLaunch() {
+        if let _ = UserDefaults.standard.object(forKey: "FirstOpen") as? Date {
+            Analytics.track(.appLaunch)
+        } else {
+            Analytics.track(.appLaunchFirstTime)
+            UserDefaults.standard.set(Date(), forKey: "FirstOpen")
+        }
     }
 }
