@@ -75,7 +75,7 @@ struct SettingsView: View {
                     }
                     
                     NavigationLink {
-                        PrivacyPolicyView()
+                        MarkdownView(markdownFile: "PRIVACY_POLICY.md")
                     } label: {
                         HStack {
                             Image(systemName: "checkmark.shield")

@@ -185,7 +185,7 @@
 		8080F2892C80D70D00A86C14 /* SubmitResultsAndCertifyRoundV2Mutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE202C4025A2005E958D /* SubmitResultsAndCertifyRoundV2Mutation.graphql.swift */; };
 		8080F28A2C80D70D00A86C14 /* UnlockTeamMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE212C4025A2005E958D /* UnlockTeamMutation.graphql.swift */; };
 		8080F28B2C80D70D00A86C14 /* UnRegisterPlayerMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBE222C4025A2005E958D /* UnRegisterPlayerMutation.graphql.swift */; };
-		80A152312C8620DE00D60561 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A152302C8620DE00D60561 /* PrivacyPolicyView.swift */; };
+		80A152312C8620DE00D60561 /* Markdownview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A152302C8620DE00D60561 /* Markdownview.swift */; };
 		80A152332C86231B00D60561 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 80A152322C86231600D60561 /* README.md */; };
 		80A152352C86233900D60561 /* PRIVACY_POLICY.md in Resources */ = {isa = PBXBuildFile; fileRef = 80A152342C86233900D60561 /* PRIVACY_POLICY.md */; };
 		80A152382C86284500D60561 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 80A152372C86284500D60561 /* MarkdownUI */; };
@@ -441,7 +441,7 @@
 		807A56412C650BA000302836 /* PairingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingsView.swift; sourceTree = "<group>"; };
 		807A56432C650BB500302836 /* RegisteredPlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredPlayersView.swift; sourceTree = "<group>"; };
 		8080F1F72C80D34D00A86C14 /* OSTRichTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OSTRichTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		80A152302C8620DE00D60561 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
+		80A152302C8620DE00D60561 /* Markdownview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markdownview.swift; sourceTree = "<group>"; };
 		80A152322C86231600D60561 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		80A152342C86233900D60561 /* PRIVACY_POLICY.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PRIVACY_POLICY.md; sourceTree = "<group>"; };
 		80A5722E2BE2C78E00D8D888 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -663,7 +663,7 @@
 				80CCA5552C7E240300B90BF5 /* ChangeNameView.swift */,
 				800DB1842C862F4E008F1FDC /* LicenseView.swift */,
 				80B8E1402ABA23F000845ECC /* LoginView.swift */,
-				80A152302C8620DE00D60561 /* PrivacyPolicyView.swift */,
+				80A152302C8620DE00D60561 /* Markdownview.swift */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -1264,7 +1264,7 @@
 				80FFBE982C4025A2005E958D /* OrganizationDetails.graphql.swift in Sources */,
 				80FFBE992C4025A2005E958D /* RegistrationDetails.graphql.swift in Sources */,
 				80ED1C952C7A5A0300E83B2D /* ScoutingHistoryByFormatView.swift in Sources */,
-				80A152312C8620DE00D60561 /* PrivacyPolicyView.swift in Sources */,
+				80A152312C8620DE00D60561 /* Markdownview.swift in Sources */,
 				80582EC22C87FE830056C421 /* GameStore.swift in Sources */,
 				80ED1C9B2C7A7CC500E83B2D /* SwiftDataManager.swift in Sources */,
 				807A56442C650BB500302836 /* RegisteredPlayersView.swift in Sources */,
