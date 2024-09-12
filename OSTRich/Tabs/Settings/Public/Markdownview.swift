@@ -1,5 +1,5 @@
 //
-//  PrivacyPolicyView.swift
+//  MarkdownView.swift
 //  OSTRich
 //
 //  Created by snow on 9/2/24.
