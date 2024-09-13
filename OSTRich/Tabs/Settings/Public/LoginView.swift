@@ -91,7 +91,7 @@ struct LoginView: View {
             }
              
             Section {
-                if email.lowercased() == "appstoretesting" {
+                if email.lowercased() == AppStoreTesting.testString {
                     NavigationLink {
                         CreateFakeEventView()
                     } label: {

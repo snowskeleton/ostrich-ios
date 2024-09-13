@@ -17,3 +17,7 @@
 //struct RevenueCatSecrets {
 //    static let apiKey = ""
 //}
+
+//struct AppStoreTesting {
+//    static let testString = ""
+//}
