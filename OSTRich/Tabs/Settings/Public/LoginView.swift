@@ -10,7 +10,9 @@ import SwiftUI
 
 struct LoginView: View {
 //    @Environment(\.modelContext) private var context
-    @Environment(\.dismiss) private var dismiss
+    //https://stackoverflow.com/a/78982717/13919791
+    @Environment(\.presentationMode) var mode
+    
     @State private var email: String
     @State private var password: String
     @State private var firstName: String
@@ -127,7 +129,7 @@ struct LoginView: View {
                     switch ostrichAuthTokens {
                     case .success(let ostrichCreds):
                         await UserManager.shared.updateOSTRichToken(ostrichCreds)
-                        dismiss()
+                        mode.wrappedValue.dismiss()
                     case .failure(let error):
                         print("Ostrich login failed:", error)
                     }
@@ -168,7 +170,7 @@ struct LoginView: View {
                 case .success(let creds):
                     UserManager.shared.updateToken(creds)
                     await UserManager.shared.refreshProfile()
-                    dismiss()
+                    mode.wrappedValue.dismiss()
                 case .failure(let error):
                     print(error)
                 }
@@ -179,7 +181,7 @@ struct LoginView: View {
                     case .success(let creds):
                         UserManager.shared.updateToken(creds.tokens)
                         await UserManager.shared.refreshProfile()
-                        dismiss()
+                        mode.wrappedValue.dismiss()
                     case .failure(let error):
                         print("Couldn't create account")
                         print(error)
