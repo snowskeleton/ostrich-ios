@@ -9,7 +9,6 @@ import SwiftUI
 import RevenueCat
 import RevenueCatUI
 
-#if DEBUG
 struct FakePaywalledView: View {
     @AppStorage("disableInAppPurchasePaywall") var disableInAppPurchasePaywall = false
     @AppStorage("enableInAppPurchasePaywall") var enableInAppPurchasePaywall = false
@@ -74,4 +73,3 @@ struct FakePaywalledView: View {
         }
     }
 }
-#endif
