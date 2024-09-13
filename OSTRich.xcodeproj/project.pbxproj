@@ -27,6 +27,8 @@
 		803D6BE32BFE416F00CEB9F2 /* View+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D6BDF2BFE416F00CEB9F2 /* View+Notifications.swift */; };
 		803D6BE52BFE41EA00CEB9F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */; };
 		8046EA492AA64E8B00578539 /* HTTP Network Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046EA482AA64E8B00578539 /* HTTP Network Manager.swift */; };
+		8051229C2C936A63000356E4 /* PaywallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8051229B2C936A63000356E4 /* PaywallViewModel.swift */; };
+		8051229F2C9380A4000356E4 /* PaywallButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8051229E2C9380A4000356E4 /* PaywallButtonView.swift */; };
 		8051C3F82C84FA1D0039E257 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 8051C3F72C84FA1D0039E257 /* RevenueCat */; };
 		8051C3FA2C84FA1D0039E257 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8051C3F92C84FA1D0039E257 /* RevenueCatUI */; };
 		8051C3FD2C84FA540039E257 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8051C3FC2C84FA540039E257 /* StoreKit.framework */; };
@@ -419,6 +421,8 @@
 		803D6BE42BFE41EA00CEB9F2 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		803D6BE62BFE497600CEB9F2 /* OSTRich.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OSTRich.entitlements; sourceTree = "<group>"; };
 		8046EA482AA64E8B00578539 /* HTTP Network Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTP Network Manager.swift"; sourceTree = "<group>"; };
+		8051229B2C936A63000356E4 /* PaywallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallViewModel.swift; sourceTree = "<group>"; };
+		8051229E2C9380A4000356E4 /* PaywallButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallButtonView.swift; sourceTree = "<group>"; };
 		8051C3FC2C84FA540039E257 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		8051C3FE2C84FF2B0039E257 /* FakePaywalledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakePaywalledView.swift; sourceTree = "<group>"; };
 		8051C4042C861DF50039E257 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -746,6 +750,7 @@
 				80D37EA02C48322F00997C6D /* Models */,
 				806843162C38653D00264D1A /* Network */,
 				80FFBF0A2C402D41005E958D /* KeychainSwiftDistrib.swift */,
+				8051229D2C938098000356E4 /* Paywall */,
 				800DB1822C862CCC008F1FDC /* BundleExtension.swift */,
 				80CCA54F2C7D4A2500B90BF5 /* Notifications.swift */,
 				8053FE5B2C7FB4F0005A10BD /* Analytics.swift */,
@@ -777,6 +782,15 @@
 				803D6BDF2BFE416F00CEB9F2 /* View+Notifications.swift */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		8051229D2C938098000356E4 /* Paywall */ = {
+			isa = PBXGroup;
+			children = (
+				8051229B2C936A63000356E4 /* PaywallViewModel.swift */,
+				8051229E2C9380A4000356E4 /* PaywallButtonView.swift */,
+			);
+			path = Paywall;
 			sourceTree = "<group>";
 		};
 		8051C3FB2C84FA540039E257 /* Frameworks */ = {
@@ -1237,9 +1251,11 @@
 				80D37EBC2C48335C00997C6D /* Match.swift in Sources */,
 				80FFBE812C4025A2005E958D /* GetTimerQuery.graphql.swift in Sources */,
 				80FFBE822C4025A2005E958D /* DropSelfV2Mutation.graphql.swift in Sources */,
+				8051229C2C936A63000356E4 /* PaywallViewModel.swift in Sources */,
 				80FFBE832C4025A2005E958D /* GetEventCreatedByQuery.graphql.swift in Sources */,
 				80FFBE842C4025A2005E958D /* PodPairingTypeV2.graphql.swift in Sources */,
 				8053FE5C2C7FB4F0005A10BD /* Analytics.swift in Sources */,
+				8051229F2C9380A4000356E4 /* PaywallButtonView.swift in Sources */,
 				80FFBE852C4025A2005E958D /* EventSearchSortField.graphql.swift in Sources */,
 				80FFBE862C4025A2005E958D /* PairingType.graphql.swift in Sources */,
 				80FFBE872C4025A2005E958D /* TeamResultV2.graphql.swift in Sources */,

@@ -12,6 +12,8 @@ import RevenueCat
 import RevenueCatUI
 
 struct ScoutingHistoryView: View {
+    @StateObject private var paywallViewModel = PaywallViewModel()
+
     @AppStorage("preferredFormat") var preferredFormat: String = ""
     
     @Query var scoutingResults: [ScoutingResult]
@@ -78,21 +80,15 @@ struct ScoutingHistoryView: View {
         return Array(Set(scoutingResults.map { $0.format })).sorted { $0 > $1 }
     }
     
-    //paywall
-    @State private var showScoutingResults: Bool = true
-    @State private var showPaywall: Bool = false
     @State private var showPaywallSheet: Bool = false
-    @State private var timer: Timer?
-    @State private var freeTimeLeft: Int = 15
-    @State private var showFreeTimeLeft: Bool = false
 
     var body: some View {
         NavigationStack {
-            if showFreeTimeLeft {
-                Text("\(freeTimeLeft) trial day\(freeTimeLeft > 1 ? "s" : "") remaining")
+            if paywallViewModel.showFreeTimeLeft {
+                Text("\(paywallViewModel.freeTimeLeft) trial day\(paywallViewModel.freeTimeLeft > 1 ? "s" : "") remaining")
             }
             
-            if showScoutingResults {
+            if paywallViewModel.showScoutingResults {
                 VStack {
                     BarChartView(stats: filteredStats)
                     
@@ -136,35 +132,20 @@ struct ScoutingHistoryView: View {
                     .tabViewStyle(.page(indexDisplayMode: .never))
                 }
             } else {
-                Button {
-                    showPaywallSheet = true
-                } label: {
-                    Text("Subscribe to Pro")
-                        .font(.headline)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .padding(.top, 20)
-                .sheet(isPresented: $showPaywallSheet) {
-                    PaywallView()
-                }
+                PaywallButtonView()
             }
         }
         .searchable(text: $searchText)
         .onAppear {
-            calculatePaywall()
-            startPaywallTimer()
+            paywallViewModel.calculatePaywall()
+            paywallViewModel.startPaywallTimer()
             Analytics.track(.openedScoutingHistoryAllPlayersView)
         }
         .onDisappear {
-            stopPaywallTimer()
+            paywallViewModel.stopPaywallTimer()
         }
         .presentPaywallIfNeeded { customerInfo in
-            return showPaywall
-            //            return true
+            return paywallViewModel.showPaywall
         } purchaseCompleted: { customerInfo in
             print("Purchase completed: \(customerInfo.entitlements)")
         } restoreCompleted: { customerInfo in
@@ -173,71 +154,6 @@ struct ScoutingHistoryView: View {
         }
         .navigationTitle("Scouting History")
     }
-    
-    fileprivate func calculatePaywall() {
-        Task {
-            do {
-                if UserDefaults.standard.bool(forKey: "disableInAppPurchasePaywall") {
-                    self.showScoutingResults = true
-                    self.showPaywall = false
-                    self.showFreeTimeLeft = false
-                    return
-                }
-                
-                if let firstOpen = UserDefaults.standard.object(forKey: "FirstOpen") as? Date {
-                    let calendar = Calendar.current
-                    let now = Date()
-                    let daysSinceFirstOpen = calendar.dateComponents([.day], from: firstOpen, to: now).day ?? 0
-                    
-                    if daysSinceFirstOpen <= 15 {
-                        // Show scouting results and trial period if within the trial window
-                        self.showScoutingResults = true
-                        self.showPaywall = true
-                        self.showFreeTimeLeft = true
-                        self.freeTimeLeft = 15 - daysSinceFirstOpen
-                    } else {
-                        // Trial expired, show paywall with freeTimeLeft as 0
-                        self.showScoutingResults = false
-                        self.showPaywall = true
-                        self.showFreeTimeLeft = true
-                        self.freeTimeLeft = 0
-                    }
-                }
-                
-                let customerInfo = try await Purchases.shared.customerInfo()
-                let userHasPro = customerInfo.entitlements["pro"]?.isActive == true
-                
-                if userHasPro {
-                    // User has a pro license, hide paywall and trial period, show scouting results
-                    self.showScoutingResults = true
-                    self.showPaywall = false
-                    self.showFreeTimeLeft = false
-                } else {
-                    // User does not have pro, keep paywall and trial information visible
-                    self.showPaywall = true
-                }
-            } catch {
-                print("Failed to fetch customer info: \(error)")
-            }
-        }
-    }
-    
-    private func startPaywallTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
-            if !showScoutingResults {
-                calculatePaywall()
-            } else {
-                stopPaywallTimer()
-            }
-        }
-    }
-    
-    private func stopPaywallTimer() {
-        timer?.invalidate()
-        timer = nil
-    }
-    
-
 }
 
 

@@ -26,8 +26,6 @@ enum AnalyticEvent: String {
     case disabledUseLaunchProtection
     case enabledDisableRoundTimerNotifications
     case disabledDisableRoundTimerNotifications
-    case enabledDisableInAppPurchasePaywall
-    case disabledDisableInAppPurchasePaywall  
 
     case joinEvent
     case matchSubmittedWithError

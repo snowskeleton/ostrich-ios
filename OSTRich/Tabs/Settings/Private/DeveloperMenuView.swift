@@ -15,7 +15,6 @@ struct DeveloperMenuView: View {
     @AppStorage("useLaunchCrashProtection") var useLaunchProtection = true
     @AppStorage("showDebugValues") var showDebugValues = false
     @AppStorage("disableRoundTimerNotifications") var disableRoundTimerNotifications = false
-    @AppStorage("disableInAppPurchasePaywall") var disableInAppPurchasePaywall = false
 
     var body: some View {
         List {
@@ -29,12 +28,6 @@ struct DeveloperMenuView: View {
                         Analytics.track(
                             disableRoundTimerNotifications ? .enabledDisableRoundTimerNotifications : .disabledDisableRoundTimerNotifications
                             )
-                    }
-                Toggle("Disable in-app purchase paywall", isOn: $disableInAppPurchasePaywall)
-                    .onChange(of: disableInAppPurchasePaywall) {
-                        Analytics.track(
-                            disableInAppPurchasePaywall ? .enabledDisableInAppPurchasePaywall  : .disabledDisableInAppPurchasePaywall  
-                        )
                     }
             }
             Section("Troubleshooting") {
@@ -54,7 +47,6 @@ struct DeveloperMenuView: View {
                 NavigationLink(destination: PendingNotificationsView()) { Text("Pending Notifications") }
             }
             
-            #if DEBUG
             Section("In-App Purchases") {
                 NavigationLink {
                     FakePaywalledView()
@@ -62,7 +54,6 @@ struct DeveloperMenuView: View {
                     Text("Some Paywall")
                 }
             }
-            #endif
             
             Section {
                 NavigationLink {

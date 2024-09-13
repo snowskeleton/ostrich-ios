@@ -19,9 +19,7 @@ struct SubmitMatchView: View {
     
     @State private var teamWins: [String: Int] = [:]
     
-    @State private var showScoutingResults: Bool = true
-    @State private var showPaywall: Bool = false
-    @State private var timer: Timer?
+    @StateObject private var paywallViewModel = PaywallViewModel()
     
     private var ableToSubmitMatch: Bool {
         // if we're the TO, we can submit any match regardless of whether or not it's already been submitted
@@ -89,33 +87,17 @@ struct SubmitMatchView: View {
                     }
                 }
                 
-                if showScoutingResults {
+                if paywallViewModel.showFreeTimeLeft {
+                    Text("\(paywallViewModel.freeTimeLeft) trial day\(paywallViewModel.freeTimeLeft > 1 ? "s" : "") remaining")
+                }
+                if !paywallViewModel.hasProAccess {
+                    PaywallButtonView()
+//                        .padding()
+                }
+                if paywallViewModel.showScoutingResults {
                     ForEach(match.teams.sorted(by: { $0.teamId < $1.teamId }), id: \.teamId) { team in
                         ScoutingResultsForTeamView(team: team)
                     }
-                } else {
-                    VStack {
-                        Text("Scouting results are only available to Pro users.")
-                            .multilineTextAlignment(.center)
-                            .padding()
-                        
-                        Button {
-                            showPaywall = true
-                        } label: {
-                            Text("Subscribe to Pro")
-                                .font(.headline)
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                        }
-                        .padding(.top, 20)
-                        .sheet(isPresented: $showPaywall) {
-                            PaywallView()
-                        }
-                    }
-                    .padding()
                 }
             }
             .navigationTitle("Submit Match Result")
@@ -130,8 +112,11 @@ struct SubmitMatchView: View {
             }
         }
         .onAppear {
-            calculatePaywall()
-            startPaywallTimer()
+            paywallViewModel.calculatePaywall()
+            paywallViewModel.startPaywallTimer()
+        }
+        .onDisappear {
+            paywallViewModel.stopPaywallTimer()
         }
     }
     
@@ -181,37 +166,4 @@ struct SubmitMatchView: View {
             print("Couldn't resolve eventId")
         }
     }
-    
-    fileprivate func calculatePaywall() {
-        Task {
-            do {
-                if UserDefaults.standard.bool(forKey: "disableInAppPurchasePaywall") {
-                    self.showScoutingResults = true
-                    return
-                }
-                let customerInfo = try await Purchases.shared.customerInfo()
-                self.showScoutingResults = customerInfo.entitlements["pro"]?.isActive == true ? true : false
-            } catch {
-                print("\(error)")
-            }
-        }
-    }
-    
-    private func startPaywallTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
-            if !showScoutingResults {
-                calculatePaywall()
-            } else {
-                stopPaywallTimer()
-            }
-        }
-    }
-    
-    private func stopPaywallTimer() {
-        timer?.invalidate()
-        timer = nil
-    }
-
 }
-
-
