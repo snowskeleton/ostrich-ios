@@ -24,6 +24,17 @@ struct SettingsView: View {
             List {
                 Section {
                     NavigationLink {
+                        AboutView()
+                    } label: {
+                        HStack {
+                            Image(systemName: "list.clipboard")
+                            Text("About")
+                        }
+                    }
+                }
+                
+                Section {
+                    NavigationLink {
                         LoginView()
                     } label: {
                         HStack {
@@ -50,36 +61,9 @@ struct SettingsView: View {
                                 Text("Logout")
                             }
                         }
-                    }
-                }
-                
-                Section {
-                    NavigationLink {
-                        AnalyticsView()
-                    } label: {
-                        HStack {
-                            Image(systemName: "chart.bar")
-                            Text("Analytics")
-                        }
-                    }
-                }
-                
-                Section {
-                    NavigationLink {
-                        AboutView()
-                    } label: {
-                        HStack {
-                            Image(systemName: "list.clipboard")
-                            Text("About")
-                        }
-                    }
-                    
-                    NavigationLink {
-                        MarkdownView(markdownFile: "PRIVACY_POLICY.md")
-                    } label: {
-                        HStack {
-                            Image(systemName: "checkmark.shield")
-                            Text("Privacy Policy")
+                        
+                        Link(destination: URL(string: "https://magic-support.wizards.com/hc/en-us/requests/new?ticket_form_id=4413121329940")!) {
+                            Text("Delete Account")
                         }
                     }
                 }
@@ -99,17 +83,19 @@ struct SettingsView: View {
                                     .resizable()
                                     .frame(width: 24, height: 24) // Adjust the size to fit your design
                                 
-                                Text("View on GitHub")
+                                Text("GitHub")
                             }
                         }
                     }
-                    
+                }
+                
+                Section {
                     NavigationLink {
-                        LicenseView()
+                        AnalyticsView()
                     } label: {
                         HStack {
-                            Image(systemName: "doc.text")
-                            Text("Licenses & Libraries")
+                            Image(systemName: "chart.bar")
+                            Text("Analytics")
                         }
                     }
                 }
@@ -121,7 +107,7 @@ struct SettingsView: View {
                         } label: {
                             HStack {
                                 Image(systemName: "hammer")
-                                Text("Developer Menu")
+                                Text("Developer")
                             }
                         }
                     }
