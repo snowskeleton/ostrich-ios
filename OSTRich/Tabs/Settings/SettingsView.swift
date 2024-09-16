@@ -35,43 +35,28 @@ struct SettingsView: View {
                 
                 Section {
                     NavigationLink {
-                        LoginView()
+                        AccountView()
                     } label: {
                         HStack {
                             Image(systemName: "person.crop.circle")
-                            Text("Login")
-                        }
-                    }
-                    
-                    if loggedIn {
-                        NavigationLink {
-                            ChangeNameView()
-                        } label: {
-                            HStack {
-                                Image(systemName: "pencil")
-                                Text("Change Name")
-                            }
-                        }
-                        
-                        Button(action: {
-                            logout()
-                        }) {
-                            HStack {
-                                Image(systemName: "arrow.left.circle")
-                                Text("Logout")
-                            }
-                        }
-                        
-                        Link(destination: URL(string: "https://magic-support.wizards.com/hc/en-us/requests/new?ticket_form_id=4413121329940")!) {
-                            Text("Delete Account")
+                            Text("Account")
                         }
                     }
                 }
                 
                 Section {
-                    Link(destination: supportEmailURL()) {
+                    Link(destination: URL(string: "https://discord.gg/SGrHWdYNWN")!) {
                         HStack {
-                            Image(systemName: "envelope")
+                            Image(colorScheme == .dark ? "discord-white" : "discord-black")
+                                .resizable()
+                                .frame(width: 25, height: 20)
+                            Text("Discord")
+                        }
+                    }
+
+                    HStack {
+                        Image(systemName: "envelope.fill")
+                        Link(destination: supportEmailURL()) {
                             Text("Support")
                         }
                     }
@@ -81,7 +66,7 @@ struct SettingsView: View {
                             HStack {
                                 Image(colorScheme == .dark ? "github-mark-white" : "github-mark")
                                     .resizable()
-                                    .frame(width: 24, height: 24) // Adjust the size to fit your design
+                                    .frame(width: 24, height: 24)
                                 
                                 Text("GitHub")
                             }
@@ -117,10 +102,6 @@ struct SettingsView: View {
         .onAppear {
             Analytics.track(.openedSettingsView)
         }
-    }
-    
-    private func logout() {
-        UserManager.shared.logout()
     }
     
     func supportEmailURL() -> URL {
