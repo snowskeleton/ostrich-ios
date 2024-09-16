@@ -275,12 +275,13 @@ func createFakeEvent(
             "displayName": "sblack"
         ]
     ]
-    if let userPersonaId = UserManager.shared.currentUser?.personaId! {
+    if let user = UserManager.shared.currentUser,
+       let personaId = user.personaId {
         playerNames.append(
             [
                 "firstName": "You,",
                 "lastName": "You Beautiful Animal",
-                "persona": userPersonaId,
+                "persona": personaId,
                 "displayName": "beautifulAnimal"
             ]
         )

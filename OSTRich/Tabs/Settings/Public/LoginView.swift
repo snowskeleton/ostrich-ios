@@ -121,7 +121,7 @@ struct LoginView: View {
                     .opacity(0.5)
             }
         }
-        .navigationTitle(showRegistration ? "Register" : "Login")
+        .navigationBarTitle(showRegistration ? "Register" : "Login", displayMode: .inline)
     }
     
     fileprivate func relogin() {

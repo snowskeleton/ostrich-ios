@@ -9,6 +9,7 @@ import SwiftUI
 import Foundation
 
 struct ContentView: View {
+    @AppStorage("showLoginAtLaunch") var forceShowLogin: Bool?
     @State private var loggedIn = false
     
     @ObservedObject var userManager = UserManager.shared
@@ -29,7 +30,9 @@ struct ContentView: View {
                 }
         }
         .sheet(isPresented: $loggedIn) {
-            LoginView()
+            NavigationStack {
+                LoginView()
+            }
         }
         .onAppear {
             loggedIn = !(userManager.currentUser?.loggedIn ?? true)

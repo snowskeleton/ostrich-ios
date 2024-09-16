@@ -20,15 +20,7 @@ struct DeveloperMenuView: View {
         List {
             Section("Convenience") {
                 Toggle("Save email and password to login", isOn: $saveLoginCreds)
-                    .onChange(of: saveLoginCreds) {
-                        Analytics.track(saveLoginCreds ? .enabledSaveLoginCreds : .disabledSaveLoginCreds)
-                    }
                 Toggle("Disable Round Timer Notifications", isOn: $disableRoundTimerNotifications)
-                    .onChange(of: disableRoundTimerNotifications) {
-                        Analytics.track(
-                            disableRoundTimerNotifications ? .enabledDisableRoundTimerNotifications : .disabledDisableRoundTimerNotifications
-                            )
-                    }
             }
             Section("Troubleshooting") {
                 Toggle("Show debug values in various locations throughout the app", isOn: $showDebugValues)
