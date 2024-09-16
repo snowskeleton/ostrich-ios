@@ -56,5 +56,6 @@ struct AnalyticsView: View {
         .onAppear {
             Analytics.track(.openedAnalyticsView)
         }
+        .navigationTitle("Analytics")
     }
 }

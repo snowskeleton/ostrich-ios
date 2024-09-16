@@ -10,8 +10,10 @@ import MarkdownUI
 
 struct MarkdownView: View {
     var markdownText: String
+    var title: String
     
-    init(markdownFile: String) {
+    init(markdownFile: String, title: String?) {
+        self.title = title ?? ""
         let fileParts = markdownFile.split(separator: ".").map(String.init)
         let fileName: String
         var fileExtension: String = ""
@@ -39,6 +41,7 @@ struct MarkdownView: View {
                 Markdown(markdownText)
                     .padding(10)
             }
+            .navigationTitle(title)
         }
     }
 }

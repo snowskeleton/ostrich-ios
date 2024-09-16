@@ -52,6 +52,7 @@ struct ChangeNameView: View {
                     .opacity(0.5)
             }
         }
+        .navigationTitle("Change Name")
     }
     
     fileprivate func changeName() {

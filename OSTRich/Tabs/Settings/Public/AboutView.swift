@@ -18,7 +18,7 @@ struct AboutView: View {
             Text(Bundle.main.copyright)
             List {
                 NavigationLink {
-                    MarkdownView(markdownFile: "PRIVACY_POLICY.md")
+                    MarkdownView(markdownFile: "PRIVACY_POLICY.md", title: "Privacy Policy")
                 } label: {
                     HStack {
                         Image(systemName: "checkmark.shield")
@@ -41,6 +41,7 @@ struct AboutView: View {
                 }
             }
         }
+        .navigationTitle("About")
     }
 }
 

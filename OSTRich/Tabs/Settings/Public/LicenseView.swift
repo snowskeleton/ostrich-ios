@@ -12,7 +12,7 @@ struct LicenseView: View {
         List {
             Section("Apache 2.0") {
                 NavigationLink {
-                    MarkdownView(markdownFile: "LICENSE")
+                    MarkdownView(markdownFile: "LICENSE", title: "License")
                 } label: {
                     Text("OSTRich")
                 }
@@ -44,6 +44,7 @@ struct LicenseView: View {
                 
             }
         }
+        .navigationTitle("Licenses")
     }
 }
 

@@ -82,6 +82,7 @@ struct DeveloperMenuView: View {
         .onAppear {
             Analytics.track(.openedDeveloperMenu)
         }
+        .navigationTitle("Developer")
     }
     
     private func deleteAll() {
