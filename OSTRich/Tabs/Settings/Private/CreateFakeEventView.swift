@@ -16,14 +16,14 @@ struct CreateFakeEventView: View {
     @State private var minRounds: Int = 3
     @State private var requiredTeamSize: Int = 1
     @State private var scheduledStartTime: Date = Date()
-    @State private var eventSeriesLength: Int = 7
+    @State private var eventSeriesLength: Int = 3
     @State private var gameStoreName: String = ""
     
     @State private var showProgressView: Bool = false
 
     @State private var showCreatedFakeEvent: Bool = false
     @State private var showCreatedFakeSeries: Bool = false
-    @State private var showCreatedScreenshotsData: Bool = false
+    @State private var showCreatedScreenshotsDataAlert: Bool = false
 
     var body: some View {
         Form {
@@ -43,23 +43,23 @@ struct CreateFakeEventView: View {
                 DatePicker("Scheduled Start Time", selection: $scheduledStartTime, displayedComponents: .date)
             }
             
-            Button("Create Fake Event") {
-                createFakeEvent(
-                    eventName: eventName,
-                    eventFormat: eventFormat,
-                    pairingType: pairingType,
-                    minRounds: minRounds,
-                    requiredTeamSize: requiredTeamSize,
-                    scheduledStartTime: scheduledStartTime,
-                    gameStoreName: gameStoreName
-                )
-                showCreatedFakeEvent = true
-            }
-            .alert("Event created!", isPresented: $showCreatedFakeEvent) {
-                Button("OK", role: .cancel) { }
-            }
-            
             Section {
+                Button("Create Fake Event") {
+                    createFakeEvent(
+                        eventName: eventName,
+                        eventFormat: eventFormat,
+                        pairingType: pairingType,
+                        minRounds: minRounds,
+                        requiredTeamSize: requiredTeamSize,
+                        scheduledStartTime: scheduledStartTime,
+                        gameStoreName: gameStoreName
+                    )
+                    showCreatedFakeEvent = true
+                }
+                .alert("Event created!", isPresented: $showCreatedFakeEvent) {
+                    Button("OK", role: .cancel) { }
+                }
+                
                 if !ProcessInfo.processInfo.isiOSAppOnMac {
                     Stepper(value: $eventSeriesLength) {
                         Text("How many events? \(eventSeriesLength)")
@@ -84,133 +84,143 @@ struct CreateFakeEventView: View {
                 .alert("Created \(eventSeriesLength) weekly events!", isPresented: $showCreatedFakeSeries) {
                     Button("OK", role: .cancel) { }
                 }
-            }
-            
-            Section {
+                
                 Button("Create Screenshots Data") {
                     showProgressView = true
-                    createScreenshotSeries()
-                    showProgressView = false
-                    showCreatedScreenshotsData = true
+                    
+                    // Delay the execution of the heavy task slightly to allow the UI to update first
+                    DispatchQueue.main.async {
+                        createScreenshotSeries() // Heavy task running on the main thread
+                        showProgressView = false
+                        showCreatedScreenshotsDataAlert = true
+                    }
                 }
-                .alert("Created screenshots data", isPresented: $showCreatedScreenshotsData) {
+                .alert("Created screenshots data", isPresented: $showCreatedScreenshotsDataAlert) {
                     Button("OK", role: .cancel) { }
                 }
-                
             }
-            
+        }
+        .overlay {
+            if showProgressView {
+                ProgressView()
+                    .controlSize(.large)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity) // 1
+                    .background(Color.gray)
+                    .opacity(0.5)
+            }
         }
     }
     
     fileprivate func createScreenshotSeries() {
-        // Sunday Standard
-        var newStartTime = Calendar.current.date(
-            bySetting: .weekday,
-            value: 1,
-            of: scheduledStartTime
-        ) ?? scheduledStartTime
-        newStartTime = Calendar.current
-            .date(
-                bySetting: .hour,
-                value: 15,
-                of: newStartTime
-            ) ?? newStartTime
-        
-        for i in 0..<eventSeriesLength {
-            let newStartTime = Calendar.current.date(
-                byAdding: .day,
-                value: i * 7,
-                to: newStartTime
-            ) ?? newStartTime
-            createFakeEvent(
-                eventName: "Sunday Standard",
-                eventFormat: "Standard",
-                pairingType: pairingType,
-                minRounds: minRounds,
-                requiredTeamSize: requiredTeamSize,
-                scheduledStartTime: newStartTime,
-                testDecks: standardDecks,
-                gameStoreName: "Channel Fireball"
-            )
-        }
-        
-        // Wednesday Pauper
-        newStartTime = Calendar.current.date(bySetting: .weekday, value: 4, of: newStartTime) ?? newStartTime
-        newStartTime = Calendar.current
-            .date(
-                bySetting: .hour,
-                value: 19,
-                of: newStartTime
-            ) ?? newStartTime
-        for i in 0..<eventSeriesLength {
-            let newStartTime = Calendar.current.date(
-                byAdding: .day,
-                value: i * 7,
-                to: newStartTime
-            ) ?? newStartTime
-            createFakeEvent(
-                eventName: "Wednesday Pauper",
-                eventFormat: "Pauper",
-                pairingType: pairingType,
-                minRounds: minRounds,
-                requiredTeamSize: requiredTeamSize,
-                scheduledStartTime: newStartTime,
-                testDecks: pauperDecks,
-                gameStoreName: "Joe's Kitchen"
-            )
-        }
-        
-        // Thursday Commander
-        newStartTime = Calendar.current.date(bySetting: .weekday, value: 5, of: newStartTime) ?? newStartTime
-        newStartTime = Calendar.current
-            .date(
-                bySetting: .hour,
-                value: 18,
-                of: newStartTime
-            ) ?? newStartTime
-        for i in 0..<eventSeriesLength {
-            let newStartTime = Calendar.current.date(
-                byAdding: .day,
-                value: i * 7,
-                to: newStartTime
-            ) ?? newStartTime
-            createFakeEvent(
-                eventName: "Thursday Commander",
-                eventFormat: "EDH",
-                pairingType: pairingType,
-                minRounds: minRounds,
-                requiredTeamSize: requiredTeamSize,
-                scheduledStartTime: newStartTime,
-                testDecks: edhDecks,
-                gameStoreName: "The Gathering Place"
-            )
-        }
-        
-        // Modern FNM
-        newStartTime = Calendar.current.date(bySetting: .weekday, value: 6, of: newStartTime) ?? newStartTime
-        newStartTime = Calendar.current
-            .date(
-                bySetting: .hour,
-                value: 19,
-                of: newStartTime
-            ) ?? newStartTime
-        for i in 0..<eventSeriesLength {
-            let newStartTime = Calendar.current.date(
-                byAdding: .day,
-                value: i * 7,
-                to: newStartTime
-            ) ?? newStartTime
-            createFakeEvent(
-                eventName: "Modern FNM",
-                eventFormat: "Modern",
-                pairingType: pairingType,
-                minRounds: minRounds,
-                requiredTeamSize: requiredTeamSize,
-                scheduledStartTime: newStartTime,
-                testDecks: modernDecks,
-                gameStoreName: "Face to Face Games"
-            )
-        }
+            showProgressView = true
+            // Sunday Standard
+            var newStartTime = Calendar.current.date(
+                bySetting: .weekday,
+                value: 1,
+                of: scheduledStartTime
+            ) ?? scheduledStartTime
+            newStartTime = Calendar.current
+                .date(
+                    bySetting: .hour,
+                    value: 15,
+                    of: newStartTime
+                ) ?? newStartTime
+            
+            for i in 0..<eventSeriesLength {
+                let newStartTime = Calendar.current.date(
+                    byAdding: .day,
+                    value: i * 7,
+                    to: newStartTime
+                ) ?? newStartTime
+                createFakeEvent(
+                    eventName: "Sunday Standard",
+                    eventFormat: "Standard",
+                    pairingType: pairingType,
+                    minRounds: minRounds,
+                    requiredTeamSize: requiredTeamSize,
+                    scheduledStartTime: newStartTime,
+                    testDecks: standardDecks,
+                    gameStoreName: "Channel Fireball"
+                )
+            }
+            
+            // Wednesday Pauper
+            newStartTime = Calendar.current.date(bySetting: .weekday, value: 4, of: newStartTime) ?? newStartTime
+            newStartTime = Calendar.current
+                .date(
+                    bySetting: .hour,
+                    value: 19,
+                    of: newStartTime
+                ) ?? newStartTime
+            for i in 0..<eventSeriesLength {
+                let newStartTime = Calendar.current.date(
+                    byAdding: .day,
+                    value: i * 7,
+                    to: newStartTime
+                ) ?? newStartTime
+                createFakeEvent(
+                    eventName: "Wednesday Pauper",
+                    eventFormat: "Pauper",
+                    pairingType: pairingType,
+                    minRounds: minRounds,
+                    requiredTeamSize: requiredTeamSize,
+                    scheduledStartTime: newStartTime,
+                    testDecks: pauperDecks,
+                    gameStoreName: "Joe's Kitchen"
+                )
+            }
+            
+            // Thursday Commander
+            newStartTime = Calendar.current.date(bySetting: .weekday, value: 5, of: newStartTime) ?? newStartTime
+            newStartTime = Calendar.current
+                .date(
+                    bySetting: .hour,
+                    value: 18,
+                    of: newStartTime
+                ) ?? newStartTime
+            for i in 0..<eventSeriesLength {
+                let newStartTime = Calendar.current.date(
+                    byAdding: .day,
+                    value: i * 7,
+                    to: newStartTime
+                ) ?? newStartTime
+                createFakeEvent(
+                    eventName: "Thursday Commander",
+                    eventFormat: "EDH",
+                    pairingType: pairingType,
+                    minRounds: minRounds,
+                    requiredTeamSize: requiredTeamSize,
+                    scheduledStartTime: newStartTime,
+                    testDecks: edhDecks,
+                    gameStoreName: "The Gathering Place"
+                )
+            }
+            
+            // Modern FNM
+            newStartTime = Calendar.current.date(bySetting: .weekday, value: 6, of: newStartTime) ?? newStartTime
+            newStartTime = Calendar.current
+                .date(
+                    bySetting: .hour,
+                    value: 19,
+                    of: newStartTime
+                ) ?? newStartTime
+            for i in 0..<eventSeriesLength {
+                let newStartTime = Calendar.current.date(
+                    byAdding: .day,
+                    value: i * 7,
+                    to: newStartTime
+                ) ?? newStartTime
+                createFakeEvent(
+                    eventName: "Modern FNM",
+                    eventFormat: "Modern",
+                    pairingType: pairingType,
+                    minRounds: minRounds,
+                    requiredTeamSize: requiredTeamSize,
+                    scheduledStartTime: newStartTime,
+                    testDecks: modernDecks,
+                    gameStoreName: "Face to Face Games"
+                )
+            }
     }
 }
 
