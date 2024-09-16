@@ -14,4 +14,6 @@ OSTRich is not affiliated with Wizards of the Coast or Magic: the Gathering. Thi
 https://company.wizards.com/en/legal/fancontentpolicy
 
 In-App Purchase required for Metagame tracking and access.
+See Terms of Use here:
+https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
 
