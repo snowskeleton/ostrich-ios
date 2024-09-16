@@ -9,7 +9,6 @@ import SwiftUI
 
 
 struct LoginView: View {
-//    @Environment(\.modelContext) private var context
     //https://stackoverflow.com/a/78982717/13919791
     @Environment(\.presentationMode) var mode
     
@@ -25,6 +24,8 @@ struct LoginView: View {
     @State private var alertErrorTitle: String = "Default error title"
     @State private var alertErrorMessage: String = "Default error message"
     @State private var showAlert: Bool = false
+    
+    @State private var showProgressView: Bool = false
     
     init() {
         if UserDefaults.standard.bool(forKey: "saveLoginCreds") {
@@ -111,10 +112,20 @@ struct LoginView: View {
             }
 //            Button("Register for Notifications") { NotificationHandler.shared.getNotificationSettings() }
         }
+        .overlay {
+            if showProgressView {
+                ProgressView()
+                    .controlSize(.large)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity) // 1
+                    .background(Color.gray)
+                    .opacity(0.5)
+            }
+        }
     }
     
     fileprivate func relogin() {
         Task {
+            showProgressView = true
             someStatus = Image(systemName: "circle.dotted")
             await UserManager.shared.refresh()
             if
@@ -126,6 +137,7 @@ struct LoginView: View {
             } else {
                 someStatus = Image(systemName: "circle.slash")
             }
+            showProgressView = false
         }
     }
     
@@ -174,6 +186,7 @@ struct LoginView: View {
     
     fileprivate func login() {
         Task {
+            showProgressView = true
             if !showRegistration && ![email, password].contains("") {
                 let authTokens = await HTOService().login(email, password)
                 switch authTokens {
@@ -213,6 +226,7 @@ struct LoginView: View {
                     user.password = ""
                 }
             }
+            showProgressView = false
         }
     }
 //    private func deleteAll() {

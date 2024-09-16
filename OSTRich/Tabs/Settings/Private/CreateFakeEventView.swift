@@ -18,6 +18,8 @@ struct CreateFakeEventView: View {
     @State private var scheduledStartTime: Date = Date()
     @State private var eventSeriesLength: Int = 7
     @State private var gameStoreName: String = ""
+    
+    @State private var showProgressView: Bool = false
 
     @State private var showCreatedFakeEvent: Bool = false
     @State private var showCreatedFakeSeries: Bool = false
@@ -86,7 +88,9 @@ struct CreateFakeEventView: View {
             
             Section {
                 Button("Create Screenshots Data") {
+                    showProgressView = true
                     createScreenshotSeries()
+                    showProgressView = false
                     showCreatedScreenshotsData = true
                 }
                 .alert("Created screenshots data", isPresented: $showCreatedScreenshotsData) {
