@@ -12,11 +12,11 @@ struct LoginView: View {
     //https://stackoverflow.com/a/78982717/13919791
     @Environment(\.presentationMode) var mode
     
-    @State private var email: String
-    @State private var password: String
-    @State private var firstName: String
-    @State private var lastName: String
-    @State private var displayName: String
+    @State private var email: String = UserManager.shared.currentUser?.email ?? ""
+    @State private var password: String = UserManager.shared.currentUser?.password ?? ""
+    @State private var firstName: String = ""
+    @State private var lastName: String = ""
+    @State private var displayName: String = ""
     @State private var showRegistration: Bool = false
     @State private var birthday = Date()
     @State private var someStatus: Image?
@@ -28,19 +28,23 @@ struct LoginView: View {
     @State private var showProgressView: Bool = false
     
     init() {
-        if UserDefaults.standard.bool(forKey: "saveLoginCreds") {
-            _email = State(initialValue: UserManager.shared.currentUser?.email ?? "" )
-            _password = State(initialValue: UserManager.shared.currentUser?.password ?? "")
-        } else {
-            _email = State(initialValue: "")
-            _password = State(initialValue: "")
+        if let date18YearsAgo = Calendar.current.date(byAdding: .year, value: -18, to: Date()),
+           let finalDate = Calendar.current.date(byAdding: .day, value: -1, to: date18YearsAgo) {
+            _birthday = State(initialValue: finalDate)
         }
+//        if UserDefaults.standard.bool(forKey: "saveLoginCreds") {
+//            _email = State(initialValue: UserManager.shared.currentUser?.email ?? "" )
+//            _password = State(initialValue: UserManager.shared.currentUser?.password ?? "")
+//        } else {
+//            _email = State(initialValue: "")
+//            _password = State(initialValue: "")
+//        }
         
-        _firstName = State(initialValue: UserManager.shared.currentUser?.firstName ?? "")
-        _lastName = State(initialValue: UserManager.shared.currentUser?.lastName ?? "")
-        var someDisplayName = UserManager.shared.currentUser?.displayName ?? ""
-        someDisplayName = someDisplayName.components(separatedBy: ("#"))[0]
-        _displayName = State(initialValue: someDisplayName)
+//        _firstName = State(initialValue: UserManager.shared.currentUser?.firstName ?? "")
+//        _lastName = State(initialValue: UserManager.shared.currentUser?.lastName ?? "")
+//        var someDisplayName = UserManager.shared.currentUser?.displayName ?? ""
+//        someDisplayName = someDisplayName.components(separatedBy: ("#"))[0]
+//        _displayName = State(initialValue: someDisplayName)
     }
     
     var body: some View {
@@ -59,21 +63,35 @@ struct LoginView: View {
             }
 
             if showRegistration {
-                Section("Username") {
+                Section {
                     TextField("Display Name", text: $displayName)
+                } header: {
+                    Text("Username")
+                } footer: {
+                    Text("Warning: you can't change this later")
                 }
-                Section("First Name") {
-                    TextField("First Name", text: $firstName)
+                
+                Section {
+                    TextField("First", text: $firstName)
+                    TextField("Last", text: $lastName)
+                } header: {
+                    Text("Full name")
+                } footer: {
+                    Text("Change anytime from Settings")
                 }
-                Section("Last Name") {
-                    TextField("Last Name", text: $lastName)
-                }
-                Section("Birthday") {
+                
+                
+                Section{
                     DatePicker("Birth Date", selection: $birthday, displayedComponents: .date)
+                } header: {
+                    Text("Birthday")
+                } footer: {
+                    Text("You must be 18 years or older to create an account")
                 }
+                
                 Section("Privacy Policy") {
                     Text(
-                        "By creating an account with Wizards of the Coast, you agree to abide by their [Terms and Conditions](https://company.wizards.com/en/legal/terms), [Code of Conduct](https://company.wizards.com/en/legal/code-conduct), and [Privacy Policy](https://company.wizards.com/en/legal/wizards-coasts-privacy-policy)."
+                        "Account created with Wizards of the Coast, not OSTRich. Information collected during this process is not stored or processed by OSTRich. By creating an account with Wizards of the Coast, you agree to abide by their [Terms and Conditions](https://company.wizards.com/en/legal/terms), [Code of Conduct](https://company.wizards.com/en/legal/code-conduct), and [Privacy Policy](https://company.wizards.com/en/legal/wizards-coasts-privacy-policy). You can alternatively create an account on their website [here](https://myaccounts.wizards.com/register)"
                     )
                 }
             }
