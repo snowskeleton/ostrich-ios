@@ -41,6 +41,8 @@ enum RequestError: Error {
     case invalidURL
     case noResponse
     case unauthorized
+    case invalidClientCredentials
+    case invalidAccountCredentials
     case unexpectedStatusCode
     case unknown
     case badGateway
@@ -65,8 +67,20 @@ enum RequestError: Error {
             return "Decode error"
         case .unauthorized:
             return "Session expired"
+        case .invalidAccountCredentials:
+            return "Invalid account credentials. Please check your username and password and try again."
+        case .invalidClientCredentials:
+            return "Invalid client credentials. Please contact the developer."
+        case .badGateway, .gatewayTimeout:
+            return "Bad gateway. WotC server is down."
+        case .tooManyRequests:
+            return "Too many requests. Please try again later."
+        case .ageRestriction:
+            return "You must be at least 18 years old to create an account. This result is cached, so you may need to wait 15 minutes before trying again."
+        case .emailInUse:
+            return "This email is already in use."
         default:
-            return "Unknown error"
+            return "Unknown error: \(self)"
         }
     }
 }
@@ -126,8 +140,41 @@ extension HTTPClient {
                     print("Error decoding response: \(serverError)")
                     return .failure(.decode)
                 }
-            case 400: return .failure(.badRequest)
-            case 401: return .failure(.unauthorized)
+            case 400:
+                do {
+                    let error =  try JSONDecoder().decode(HTTPError.self, from: data)
+                    switch error.error {
+                    case "EMAIL ADDRESS IN USE":
+                        return .failure(.emailInUse)
+                    case "AGE REQUIREMENT":
+                        return .failure(.ageRestriction)
+                    case "INVALID CLIENT CREDENTIALS":
+                        return .failure(.invalidClientCredentials)
+                    case "UNAUTHENTICATED":
+                        UserDefaults.standard.set(false, forKey: "netowrkAuthorized")
+                        return .failure(.unauthorized)
+                    default:
+                        print("Unknown 400 error: \(error)")
+                        return .failure(.badRequest)
+                    }
+                } catch {
+                    print(error)
+                    let serverError = try JSONSerialization.jsonObject(with: data, options: [])
+                    print("Error decoding 400 error: \(serverError)")
+                    return .failure(.badRequest)
+                }
+            case 401:
+                do {
+                    let error =  try JSONDecoder().decode(HTTPError.self, from: data)
+                    switch error.error {
+                    case "INVALID ACCOUNT CREDENTIALS":
+                        return .failure(.invalidAccountCredentials)
+                    default:
+                        return .failure(.unauthorized)
+                    }
+                } catch {
+                    return .failure(.unauthorized)
+                }
             case 403: return .failure(.forbidden)
             case 404: return .failure(.notFound)
             case 405: return .failure(.methodNotAllowed)
@@ -139,28 +186,9 @@ extension HTTPClient {
             case 503: return .failure(.serviceUnavailable)
             case 504: return .failure(.gatewayTimeout)
             default:
-                do {
-                    let error =  try JSONDecoder().decode(HTTPError.self, from: data)
-                    switch error.error {
-                    case "EMAIL ADDRESS IN USE":
-                        return .failure(.emailInUse)
-                    case "AGE REQUIREMENT":
-                        return .failure(.ageRestriction)
-                    case "INVALID CLIENT CREDENTIALS":
-                        return .failure(.unauthorized)
-                    case "UNAUTHENTICATED":
-                        UserDefaults.standard.set(false, forKey: "netowrkAuthorized")
-                        return .failure(.unauthorized)
-                    default:
-                        print("Unknown error case: \(error)")
-                        return .failure(.unknown)
-                    }
-                } catch {
-                    print(error)
-                    let serverError = try JSONSerialization.jsonObject(with: data, options: [])
-                    print("Error decoding error: \(serverError)")
-                    return .failure(.unknown)
-                }
+                let serverError = try JSONSerialization.jsonObject(with: data, options: [])
+                print("Default server error: \(serverError)")
+                return .failure(.unknown)
             }
         } catch {
             print(String(describing: error))

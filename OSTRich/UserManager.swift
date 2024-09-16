@@ -58,25 +58,27 @@ actor AsyncUserManager {
 
 }
 
-class UserManager {
+class UserManager: ObservableObject {
     static let shared = UserManager()
      let userDefaultsKey = "user"
 
-    private(set) var currentUser: User?
+    @Published private(set) var currentUser: User?
 
     private init() {
         loadUser()
     }
 
     func loadUser() {
+        DispatchQueue.main.async {
         guard
-            let userData = UserDefaults.standard.data(forKey: userDefaultsKey),
+            let userData = UserDefaults.standard.data(forKey: self.userDefaultsKey),
             let user = try? JSONDecoder().decode(User.self, from: userData)
         else {
             self.currentUser = User()
             return
         }
         self.currentUser = user
+        }
     }
 
     func saveUser() {
@@ -86,9 +88,11 @@ class UserManager {
     }
     
     func saveUser(_ user: User) {
+        DispatchQueue.main.async {
         guard let userData = try? JSONEncoder().encode(user) else { return }
-        UserDefaults.standard.set(userData, forKey: userDefaultsKey)
+        UserDefaults.standard.set(userData, forKey: self.userDefaultsKey)
         self.currentUser = user
+        }
     }
     
     func refresh() async {

@@ -12,12 +12,7 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.colorScheme) var colorScheme
 
-    @State private var loggedIn = false
     @AppStorage("showDeveloperMenu") var showDeveloperMenu = false
-
-    init() {
-        _loggedIn = .init(initialValue: UserManager.shared.currentUser?.loggedIn ?? false)
-    }
 
     var body: some View {
         NavigationStack {

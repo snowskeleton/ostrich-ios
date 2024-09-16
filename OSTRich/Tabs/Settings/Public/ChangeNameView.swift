@@ -9,7 +9,6 @@ import SwiftUI
 
 
 struct ChangeNameView: View {
-//    @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     
     @State private var firstName: String

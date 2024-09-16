@@ -11,9 +11,8 @@ import Foundation
 struct ContentView: View {
     @State private var loggedIn = false
     
-    init() {
-        _loggedIn = .init(initialValue: !(UserManager.shared.currentUser?.loggedIn ?? false))
-    }
+    @ObservedObject var userManager = UserManager.shared
+
     var body: some View {
         TabView {
             AllEventsView()
@@ -31,6 +30,12 @@ struct ContentView: View {
         }
         .sheet(isPresented: $loggedIn) {
             LoginView()
+        }
+        .onAppear {
+            loggedIn = !(userManager.currentUser?.loggedIn ?? true)
+        }
+        .onReceive(userManager.$currentUser) { newValue in
+            loggedIn = !(newValue?.loggedIn ?? true)
         }
         // this is needed to make the tabs show up properly on the iPad version for macOS
         .environment(\.horizontalSizeClass, .compact)

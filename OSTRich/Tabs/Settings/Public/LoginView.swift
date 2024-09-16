@@ -22,6 +22,10 @@ struct LoginView: View {
     @State private var birthday = Date()
     @State private var someStatus: Image?
     
+    @State private var alertErrorTitle: String = "Default error title"
+    @State private var alertErrorMessage: String = "Default error message"
+    @State private var showAlert: Bool = false
+    
     init() {
         if UserDefaults.standard.bool(forKey: "saveLoginCreds") {
             _email = State(initialValue: UserManager.shared.currentUser?.email ?? "" )
@@ -81,6 +85,12 @@ struct LoginView: View {
             
             Section {
                 Button(showRegistration ? "Create" : "Login") { login() }
+                    .alert(isPresented: $showAlert) {
+                        Alert(
+                            title: Text(alertErrorTitle),
+                            message: Text(alertErrorMessage)
+                        )
+                    }
             }
 //            Button("Login Server") { loginServer() }
             if UserDefaults.standard.bool(forKey: "showDebugValues") {
@@ -173,6 +183,9 @@ struct LoginView: View {
                     mode.wrappedValue.dismiss()
                 case .failure(let error):
                     print(error)
+                    alertErrorTitle = "Login Failed"
+                    alertErrorMessage = error.customMessage
+                    showAlert = true
                 }
             } else if ![displayName, firstName, lastName, email, password].contains("") {
                 if showRegistration {
@@ -183,8 +196,10 @@ struct LoginView: View {
                         await UserManager.shared.refreshProfile()
                         mode.wrappedValue.dismiss()
                     case .failure(let error):
-                        print("Couldn't create account")
                         print(error)
+                        alertErrorTitle = "Create Account Failed"
+                        alertErrorMessage = error.customMessage
+                        showAlert = true
                     }
                 }
             }

@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct AccountView: View {
+    @Environment(\.presentationMode) var mode
     @State private var loggedIn = false
+    @State private var showLogoutSuccessful = false
     
-    init() {
-        _loggedIn = .init(initialValue: UserManager.shared.currentUser?.loggedIn ?? false)
-    }
+    @ObservedObject private var userManager = UserManager.shared
 
     var body: some View {
         List {
@@ -25,7 +25,7 @@ struct AccountView: View {
                 }
             }
             
-            if loggedIn {
+            if userManager.currentUser?.loggedIn == true {
                 NavigationLink {
                     ChangeNameView()
                 } label: {
@@ -43,16 +43,28 @@ struct AccountView: View {
                         Text("Logout")
                     }
                 }
+                .alert(isPresented: $showLogoutSuccessful) {
+                    Alert(
+                        title: Text("Logout Successful!"),
+                        message: Text("Please login to continue using this app")
+                    )
+                }
                 
                 Link(destination: URL(string: "https://magic-support.wizards.com/hc/en-us/requests/new?ticket_form_id=4413121329940")!) {
                     Text("Delete Account")
                 }
             }
         }
+        .onAppear {
+            UserManager.shared.loadUser()
+        }
+        .navigationTitle("Account")
     }
     
     private func logout() {
         UserManager.shared.logout()
+        showLogoutSuccessful = true
+        mode.wrappedValue.dismiss()
     }
 }
 
