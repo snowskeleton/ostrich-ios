@@ -30,16 +30,16 @@ struct AccountView: View {
                     ChangeNameView()
                 } label: {
                     HStack {
-                        Image(systemName: "pencil")
+                        Image(systemName: "pencil.circle")
                         Text("Change Name")
                     }
                 }
                 
                 HStack {
                     Image(systemName: "arrow.left.circle")
-                Button(action: {
-                    logout()
-                }) {
+                    Button(action: {
+                        logout()
+                    }) {
                         Text("Logout")
                     }
                 }
@@ -50,8 +50,11 @@ struct AccountView: View {
                     )
                 }
                 
-                Link(destination: URL(string: "https://magic-support.wizards.com/hc/en-us/requests/new?ticket_form_id=4413121329940")!) {
-                    Text("Delete Account")
+                HStack {
+                    Image(systemName: "person.fill.xmark")
+                    Link(destination: URL(string: "https://magic-support.wizards.com/hc/en-us/requests/new?ticket_form_id=4413121329940")!) {
+                        Text("Delete Account")
+                    }
                 }
             }
         }
