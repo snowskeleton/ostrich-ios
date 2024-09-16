@@ -80,7 +80,6 @@ struct LoginView: View {
                     Text("Change anytime from Settings")
                 }
                 
-                
                 Section{
                     DatePicker("Birth Date", selection: $birthday, displayedComponents: .date)
                 } header: {
