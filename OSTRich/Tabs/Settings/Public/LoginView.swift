@@ -90,7 +90,7 @@ struct LoginView: View {
                 
                 Section("Privacy Policy") {
                     Text(
-                        "Account created with Wizards of the Coast, not OSTRich. Information collected during this process is not stored or processed by OSTRich. By creating an account with Wizards of the Coast, you agree to abide by their [Terms and Conditions](https://company.wizards.com/en/legal/terms), [Code of Conduct](https://company.wizards.com/en/legal/code-conduct), and [Privacy Policy](https://company.wizards.com/en/legal/wizards-coasts-privacy-policy). You can alternatively create an account on their website [here](https://myaccounts.wizards.com/register)"
+                        "Account created with Wizards of the Coast, not OSTRich. Information collected during this process is not stored or processed by OSTRich, but may be stored or processed by Wizards of the Coast. By creating an account with Wizards of the Coast, you agree to abide by their [Terms and Conditions](https://company.wizards.com/en/legal/terms), [Code of Conduct](https://company.wizards.com/en/legal/code-conduct), and [Privacy Policy](https://company.wizards.com/en/legal/wizards-coasts-privacy-policy). You can alternatively create an account on their website [here](https://myaccounts.wizards.com/register)"
                     )
                 }
             }
