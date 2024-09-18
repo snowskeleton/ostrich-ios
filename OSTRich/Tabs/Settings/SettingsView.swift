@@ -40,6 +40,17 @@ struct SettingsView: View {
                 }
                 
                 Section {
+                    NavigationLink {
+                        SubscriptionView()
+                    } label: {
+                        HStack {
+                            Image(systemName: "star.circle.fill")
+                            Text("OSTRich Pro")
+                        }
+                    }
+                }
+                
+                Section {
                     Link(destination: URL(string: "https://discord.gg/SGrHWdYNWN")!) {
                         HStack {
                             Image(colorScheme == .dark ? "discord-white" : "discord-black")

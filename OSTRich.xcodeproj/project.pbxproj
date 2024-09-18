@@ -52,6 +52,7 @@
 		806BF5FB2C80F02700306B79 /* AnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806BF5FA2C80F02700306B79 /* AnalyticsView.swift */; };
 		807A56422C650BA000302836 /* PairingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A56412C650BA000302836 /* PairingsView.swift */; };
 		807A56442C650BB500302836 /* RegisteredPlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A56432C650BB500302836 /* RegisteredPlayersView.swift */; };
+		807E8A9E2C9B46D900BB8398 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807E8A9D2C9B46D900BB8398 /* SubscriptionView.swift */; };
 		8080F2042C80D68900A86C14 /* DeckConstructionDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDED2C4025A2005E958D /* DeckConstructionDetails.graphql.swift */; };
 		8080F2052C80D68900A86C14 /* DraftPod.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDEE2C4025A2005E958D /* DraftPod.graphql.swift */; };
 		8080F2062C80D68900A86C14 /* DropDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FFBDEF2C4025A2005E958D /* DropDetails.graphql.swift */; };
@@ -446,6 +447,7 @@
 		806BF5FA2C80F02700306B79 /* AnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsView.swift; sourceTree = "<group>"; };
 		807A56412C650BA000302836 /* PairingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingsView.swift; sourceTree = "<group>"; };
 		807A56432C650BB500302836 /* RegisteredPlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredPlayersView.swift; sourceTree = "<group>"; };
+		807E8A9D2C9B46D900BB8398 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
 		8080F1F72C80D34D00A86C14 /* OSTRichTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OSTRichTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		80A152302C8620DE00D60561 /* Markdownview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markdownview.swift; sourceTree = "<group>"; };
 		80A152322C86231600D60561 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -665,6 +667,7 @@
 			isa = PBXGroup;
 			children = (
 				801D30D72C988C9F005B756A /* AccountView.swift */,
+				807E8A9D2C9B46D900BB8398 /* SubscriptionView.swift */,
 				80CCA5552C7E240300B90BF5 /* ChangeNameView.swift */,
 				80B8E1402ABA23F000845ECC /* LoginView.swift */,
 				8051C4042C861DF50039E257 /* AboutView.swift */,
@@ -1353,6 +1356,7 @@
 				80FFBEC92C4025A2005E958D /* TeamResultInputV2.graphql.swift in Sources */,
 				80FFBECA2C4025A2005E958D /* Event.graphql.swift in Sources */,
 				80FFBECB2C4025A2005E958D /* PodDetailsV2.graphql.swift in Sources */,
+				807E8A9E2C9B46D900BB8398 /* SubscriptionView.swift in Sources */,
 				80FFBECC2C4025A2005E958D /* Void.swift in Sources */,
 				80FFBECD2C4025A2005E958D /* StorePage.graphql.swift in Sources */,
 				80D37EC62C48340300997C6D /* convenience functions.swift in Sources */,
