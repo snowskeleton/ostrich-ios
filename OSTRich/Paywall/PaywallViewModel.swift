@@ -9,6 +9,7 @@ import Foundation
 import RevenueCat
 import Combine
 
+@MainActor
 class PaywallViewModel: ObservableObject {
     // show features to the user
     @Published var showScoutingResults: Bool = true
@@ -23,7 +24,6 @@ class PaywallViewModel: ObservableObject {
     
     private var timerSubscription: Cancellable?
 
-    @MainActor
     func calculatePaywall() {
         Task {
             do {
@@ -83,9 +83,7 @@ class PaywallViewModel: ObservableObject {
         timerSubscription = Timer.publish(every: 0.5, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
-                Task {
-                    await self?.calculatePaywall()
-                }
+                self?.calculatePaywall()
             }
     }
 
