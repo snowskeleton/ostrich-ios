@@ -18,6 +18,7 @@ struct PaywallButtonView: View {
         VStack {
             Text("Scouting results are only available to Pro users.")
                 .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity, alignment: .center)
             
             Button {
                 showSheet = true

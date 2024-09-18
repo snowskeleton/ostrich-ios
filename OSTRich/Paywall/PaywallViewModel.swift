@@ -82,6 +82,7 @@ class PaywallViewModel: ObservableObject {
                 
                 if userHasPro {
                     // User has a pro license, hide paywall and trial period, show scouting results
+                    self.showPaywall = false
                     self.hasProAccess = true
                     self.showScoutingResults = true
                     self.showFreeTimeLeft = false

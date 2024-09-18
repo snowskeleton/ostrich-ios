@@ -31,28 +31,25 @@ struct SubscriptionView: View {
                         }
                     }
                     
-                    Button("Manage subscription") {
+                    Button {
                         showSubscriptionSheet = true
+                    } label: {
+                        Text("Manage Subscription")
+                            .frame(maxWidth: .infinity, alignment: .center)
                     }
                     .disabled(ProcessInfo.processInfo.isiOSAppOnMac )
                     .manageSubscriptionsSheet(isPresented: $showSubscriptionSheet)
                 }
                 
-                if viewModel.showPaywall {
-                    Text("Subscribe to access premium features")
-                        .font(.headline)
-                        .padding()
+                Section("Features") {
+                    Text("Track players across events and view deck history. Record scouted results and see most recently played decks in Event History.")
+                }
+                
+                if viewModel.showFreeTimeLeft {
                     
-                    PaywallButtonView()
-                    
-                } else if viewModel.hasProAccess {
-                    Text("You have Pro access!")
-                        .font(.headline)
-                        .padding()
-                } else {
-                    Text("Scouting results are available.")
-                        .font(.headline)
-                        .padding()
+                    Section {
+                        PaywallButtonView()
+                    }
                 }
             }
         }
