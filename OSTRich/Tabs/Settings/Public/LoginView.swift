@@ -18,7 +18,8 @@ struct LoginView: View {
     @State private var lastName: String = ""
     @State private var displayName: String = ""
     @State private var showRegistration: Bool = false
-    @State private var birthday = Date()
+    @State private var isOver18: Bool = false
+    @State private var agreeToTerms: Bool = false
     @State private var someStatus: Image?
     
     @State private var alertErrorTitle: String = "Default error title"
@@ -27,24 +28,20 @@ struct LoginView: View {
     
     @State private var showProgressView: Bool = false
     
-    init() {
-        if let date18YearsAgo = Calendar.current.date(byAdding: .year, value: -18, to: Date()),
-           let finalDate = Calendar.current.date(byAdding: .day, value: -1, to: date18YearsAgo) {
-            _birthday = State(initialValue: finalDate)
+    
+    var requiredFieldsEmpty: Bool {
+        if showRegistration {
+            return email.isEmpty ||
+            password.isEmpty ||
+            firstName.isEmpty ||
+            lastName.isEmpty ||
+            displayName.isEmpty ||
+            !isOver18 ||
+            !agreeToTerms
+        } else {
+            return email.isEmpty ||
+            password.isEmpty
         }
-//        if UserDefaults.standard.bool(forKey: "saveLoginCreds") {
-//            _email = State(initialValue: UserManager.shared.currentUser?.email ?? "" )
-//            _password = State(initialValue: UserManager.shared.currentUser?.password ?? "")
-//        } else {
-//            _email = State(initialValue: "")
-//            _password = State(initialValue: "")
-//        }
-        
-//        _firstName = State(initialValue: UserManager.shared.currentUser?.firstName ?? "")
-//        _lastName = State(initialValue: UserManager.shared.currentUser?.lastName ?? "")
-//        var someDisplayName = UserManager.shared.currentUser?.displayName ?? ""
-//        someDisplayName = someDisplayName.components(separatedBy: ("#"))[0]
-//        _displayName = State(initialValue: someDisplayName)
     }
     
     var body: some View {
@@ -61,6 +58,13 @@ struct LoginView: View {
             } footer: {
                 Text("Magic Companion login")
             }
+            
+            Section {
+                Toggle(isOn: $showRegistration) {
+                    Text("Create New Account")
+                }
+            }
+            
 
             if showRegistration {
                 Section {
@@ -80,29 +84,21 @@ struct LoginView: View {
                     Text("Change anytime from Settings")
                 }
                 
-                Section{
-                    DatePicker("Birth Date", selection: $birthday, displayedComponents: .date)
-                } header: {
-                    Text("Birthday")
-                } footer: {
-                    Text("You must be 18 years or older to create an account")
-                }
-                
-                Section("Privacy Policy") {
+                Section("Terms of Use") {
+                    Toggle(isOn: $isOver18) {
+                        Text("I am over 18 years of age")
+                    }
+                    Toggle(isOn: $agreeToTerms) { Text("Agree") }
                     Text(
                         "Account created with Wizards of the Coast, not OSTRich. Information collected during this process is not stored or processed by OSTRich, but may be stored or processed by Wizards of the Coast. By creating an account with Wizards of the Coast, you agree to abide by their [Terms and Conditions](https://company.wizards.com/en/legal/terms), [Code of Conduct](https://company.wizards.com/en/legal/code-conduct), and [Privacy Policy](https://company.wizards.com/en/legal/wizards-coasts-privacy-policy). You can alternatively create an account on their website [here](https://myaccounts.wizards.com/register)"
                     )
-                }
-            }
-            
-            Section {
-                Toggle(isOn: $showRegistration) {
-                    Text("Create New Account")
+                    .font(.caption)
                 }
             }
             
             Section {
                 Button(showRegistration ? "Create" : "Login") { login() }
+                    .disabled(requiredFieldsEmpty)
                     .alert(isPresented: $showAlert) {
                         Alert(
                             title: Text(alertErrorTitle),
@@ -180,28 +176,6 @@ struct LoginView: View {
         }
     }
     
-//
-//    fileprivate func loginServer() {
-//        Task {
-//            if !showRegistration && ![email, password].contains("") {
-//                let authTokens = await HTOService().login(email, password)
-//                switch authTokens {
-//                case .success(let creds):
-//                    let ostrichAuthTokens = await HTOService().ostrichLogin(creds.refresh_token)
-//                    switch ostrichAuthTokens {
-//                    case .success(let ostrichCreds):
-//                        await pickleOSTRichAuthentication(ostrichCreds)
-//                        dismiss()
-//                    case .failure(let error):
-//                        print(error)
-//                }
-//                case .failure(let error):
-//                    print(error)
-//                }
-//            }
-//        }
-//    }
-    
     fileprivate func login() {
         Task {
             showProgressView = true
@@ -220,7 +194,21 @@ struct LoginView: View {
                 }
             } else if ![displayName, firstName, lastName, email, password].contains("") {
                 if showRegistration {
-                    let newAccount = await HTOService().register(displayName: displayName, firstName: firstName, lastName: lastName, email: email, password: password, birthday: birthday)
+                    // app review doesn't want me asking for user's birthday, so we're making one up
+                    let date19YearsAgo = Calendar.current.date(
+                        byAdding: .year,
+                        value: -19,
+                        to: Date()
+                    )!
+                                
+                    let newAccount = await HTOService().register(
+                        displayName: displayName,
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        password: password,
+                        birthday: date19YearsAgo
+                    )
                     switch newAccount {
                     case .success(let creds):
                         UserManager.shared.updateToken(creds.tokens)
