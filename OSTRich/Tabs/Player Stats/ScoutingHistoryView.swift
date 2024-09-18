@@ -12,7 +12,7 @@ import RevenueCat
 import RevenueCatUI
 
 struct ScoutingHistoryView: View {
-    @StateObject private var paywallViewModel = PaywallViewModel()
+    @StateObject private var viewModel = PaywallViewModel()
 
     @AppStorage("preferredFormat") var preferredFormat: String = ""
     
@@ -80,15 +80,13 @@ struct ScoutingHistoryView: View {
         return Array(Set(scoutingResults.map { $0.format })).sorted { $0 > $1 }
     }
     
-    @State private var showPaywallSheet: Bool = false
-
     var body: some View {
         NavigationStack {
-            if paywallViewModel.showFreeTimeLeft {
-                Text("\(paywallViewModel.freeTimeLeft) trial day\(paywallViewModel.freeTimeLeft > 1 ? "s" : "") remaining")
+            if viewModel.showFreeTimeLeft {
+                Text("\(viewModel.freeTimeLeft) trial day\(viewModel.freeTimeLeft > 1 ? "s" : "") remaining")
             }
             
-            if paywallViewModel.showScoutingResults {
+            if viewModel.showScoutingResults {
                 VStack {
                     BarChartView(stats: filteredStats)
                     
@@ -137,15 +135,16 @@ struct ScoutingHistoryView: View {
         }
         .searchable(text: $searchText)
         .onAppear {
-            paywallViewModel.calculatePaywall()
-            paywallViewModel.startPaywallTimer()
+            viewModel.calculatePaywall()
+            viewModel.startPaywallTimer()
             Analytics.track(.openedScoutingHistoryAllPlayersView)
         }
         .onDisappear {
-            paywallViewModel.stopPaywallTimer()
+            viewModel.stopPaywallTimer()
         }
         .presentPaywallIfNeeded { customerInfo in
-            return paywallViewModel.showPaywall
+            viewModel.calculatePaywall()
+            return viewModel.showPaywall
         } purchaseCompleted: { customerInfo in
             print("Purchase completed: \(customerInfo.entitlements)")
         } restoreCompleted: { customerInfo in
