@@ -30,7 +30,7 @@ struct PaywallButtonView: View {
                     .cornerRadius(10)
             }
             .sheet(isPresented: $showSheet) {
-                PaywallView()
+                PaywallView(displayCloseButton: true)
             }
         }
     }

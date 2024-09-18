@@ -57,22 +57,13 @@ struct SubscriptionView: View {
             }
         }
         .onAppear {
-            print("appears")
-            viewModel.calculatePaywall()
             viewModel.startPaywallTimer()
         }
         .onDisappear {
-            print("disappear (ouch, NO!)")
             viewModel.stopPaywallTimer()
         }
-        .presentPaywallIfNeeded { customerInfo in
-            viewModel.calculatePaywall()
-            return viewModel.showPaywall
-        } purchaseCompleted: { customerInfo in
-            print("Purchase completed: \(customerInfo.entitlements)")
-        } restoreCompleted: { customerInfo in
-            // Paywall will be dismissed automatically if "pro" is now active.
-            print("Purchases restored: \(customerInfo.entitlements)")
+        .sheet(isPresented: $viewModel.showPaywall) {
+            PaywallView(displayCloseButton: true)
         }
     }
 }

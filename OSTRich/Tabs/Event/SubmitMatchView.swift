@@ -112,7 +112,6 @@ struct SubmitMatchView: View {
             }
         }
         .onAppear {
-            paywallViewModel.calculatePaywall()
             paywallViewModel.startPaywallTimer()
         }
         .onDisappear {

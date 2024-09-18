@@ -135,21 +135,14 @@ struct ScoutingHistoryView: View {
         }
         .searchable(text: $searchText)
         .onAppear {
-            viewModel.calculatePaywall()
             viewModel.startPaywallTimer()
             Analytics.track(.openedScoutingHistoryAllPlayersView)
         }
         .onDisappear {
             viewModel.stopPaywallTimer()
         }
-        .presentPaywallIfNeeded { customerInfo in
-            viewModel.calculatePaywall()
-            return viewModel.showPaywall
-        } purchaseCompleted: { customerInfo in
-            print("Purchase completed: \(customerInfo.entitlements)")
-        } restoreCompleted: { customerInfo in
-            // Paywall will be dismissed automatically if "pro" is now active.
-            print("Purchases restored: \(customerInfo.entitlements)")
+        .sheet(isPresented: $viewModel.showPaywall) {
+            PaywallView(displayCloseButton: true)
         }
         .navigationTitle("Scouting History")
     }
